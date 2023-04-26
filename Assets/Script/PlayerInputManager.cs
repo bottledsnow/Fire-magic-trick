@@ -8,7 +8,9 @@ public class PlayerInputManager : MonoBehaviour
     public float Horizontal;
     [Header("Vertical")]
     public float Vertical;
-
+    [Header("Mouse")]
+    public float MouseX;
+    public float MouseY;
     private void Update()
     {
         GetPlayerInput();
@@ -18,5 +20,7 @@ public class PlayerInputManager : MonoBehaviour
     {
         Horizontal = Input.GetAxis("Horizontal");
         Vertical = Input.GetAxis("Vertical");
+        MouseX = Input.GetAxis("Mouse X");
+        MouseY = Input.GetAxis("Mouse Y");
     }
 }
