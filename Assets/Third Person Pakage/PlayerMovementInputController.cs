@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(PlayerInput))]
 [RequireComponent(typeof(NavMeshAgent))]
 public class PlayerMovementInputController : MonoBehaviour
 {
@@ -26,7 +28,6 @@ public class PlayerMovementInputController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
     }
 
-    /*
     public void OnMove(InputValue value)
     {
         _move = value.Get<Vector2>();
@@ -46,7 +47,7 @@ public class PlayerMovementInputController : MonoBehaviour
     {
         fireValue = value.Get<float>();
     }
-    */
+
     public GameObject followTransform;
 
     private void Update()
