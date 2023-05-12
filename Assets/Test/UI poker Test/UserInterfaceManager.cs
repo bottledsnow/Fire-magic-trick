@@ -12,6 +12,15 @@ public class UserInterfaceManager : MonoBehaviour
     private Animator PokerArea;
     [SerializeField]
     private Image Poker_mid;
+    [Header("Position")]
+    [SerializeField]
+    private RectTransform Position_Up;
+    [SerializeField]
+    private RectTransform Position_Down;
+    [SerializeField]
+    private RectTransform Position_Left;
+    [SerializeField]
+    private RectTransform Position_Right;
     [Header("Now")]
     [SerializeField]
     private Image Poker_up;
@@ -57,6 +66,10 @@ public class UserInterfaceManager : MonoBehaviour
         Debug.Log("PokerArea has " + PokerArea.transform.childCount + " children");
         Poker_up.gameObject.transform.SetSiblingIndex(PokerArea.transform.childCount);
         PokerArea.Play("UpToMid");
+        if(PokerArea.GetCurrentAnimatorStateInfo(0).IsName("Over"))
+        {
+            Poker_mid.rectTransform.anchoredPosition = Position_Up.anchoredPosition;
+        }
     }
     private void CrossKeyDown(InputAction.CallbackContext ctx)
     {
