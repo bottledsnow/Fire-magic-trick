@@ -357,7 +357,7 @@ Transform:
   m_Children:
   - {fileID: 404929438}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &91759690
 GameObject:
@@ -3276,7 +3276,7 @@ Transform:
   - {fileID: 228064425}
   - {fileID: 1937556697}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1780337570
 GameObject:
@@ -3554,7 +3554,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1824558961}
   - component: {fileID: 1824558962}
-  - component: {fileID: 1824558963}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -3598,31 +3597,6 @@ MonoBehaviour:
   Vertical: 0
   MouseX: 0
   MouseY: 0
---- !u!114 &1824558963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1824558960}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a81292604309bf4aae6ed1f674f5590, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _move: {x: 0, y: 0}
-  _look: {x: 0, y: 0}
-  aimValue: 0
-  fireValue: 0
-  nextPosition: {x: 0, y: 0, z: 0}
-  nextRotation: {x: 0, y: 0, z: 0, w: 0}
-  rotationPower: 3
-  rotationLerp: 0.5
-  speed: 1
-  camera: {fileID: 188231979}
-  maxAngle: 80
-  minAngle: 340
-  followTransform: {fileID: 159202142}
 --- !u!1 &1937556696
 GameObject:
   m_ObjectHideFlags: 0
