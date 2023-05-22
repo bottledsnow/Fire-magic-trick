@@ -10,6 +10,8 @@ public class ThirdPersonShooterController : MonoBehaviour
     [SerializeField] private float normalSensitivity;
     [SerializeField] private float aimSensitivity;
     [SerializeField] private float blendTime;
+    [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
+    [SerializeField] private Transform debugTransform;
 
     private StarterAssetsInputs starterAssetsInputs;
     private ThirdPersonController thirdPersonController;
@@ -22,10 +24,11 @@ public class ThirdPersonShooterController : MonoBehaviour
 
     private void Update()
     {
-        AimTrigger();
+        aimTrigger();
+        shootingPoint();
     }
 
-    private void AimTrigger()
+    private void aimTrigger()
     {
         if(starterAssetsInputs.aim)
         {
@@ -36,6 +39,16 @@ public class ThirdPersonShooterController : MonoBehaviour
         {
             aimVirtualCamera.gameObject.SetActive(false);
             thirdPersonController.SetSensitivity(normalSensitivity);
+        }
+    }
+    private void shootingPoint()
+    {
+        Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
+        
+        if(Physics.Raycast(ray,out RaycastHit raycastHit,999f,aimColliderLayerMask))
+        {
+            debugTransform.position = raycastHit.point;
         }
     }
 }
