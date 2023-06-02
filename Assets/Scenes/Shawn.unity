@@ -1697,7 +1697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1532266200}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.008, y: 1.263, z: 0.388}
+  m_LocalPosition: {x: 0, y: 1.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7798,6 +7798,7 @@ GameObject:
   - component: {fileID: 9058027541592116607}
   - component: {fileID: 9058027541592116606}
   - component: {fileID: 9058027541592116608}
+  - component: {fileID: 9058027541592116609}
   m_Layer: 0
   m_Name: Anping_Cube
   m_TagString: Enemy
@@ -8037,14 +8038,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be4ef091fd33ac740b8f11dc3579c606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  moveSpeed: 0
+  health: 100
+  moveSpeed: 5
   meleeRange: 2.5
   laserRange: 5.5
   meleePreference: 3.5
   attackDamage: 10
   attackCooldown: 1
-  bulletPrefab: {fileID: 517489123595439157, guid: aa5980162efb9d74096b137cb4be1fd6, type: 3}
+  bulletPrefab: {fileID: 7454493389440352582, guid: 4528a3e8a4bb3cb41be194da80e934d4, type: 3}
   bulletSpawnPoint: {fileID: 1702757706}
   distanceToPlayer: 0
 --- !u!54 &9058027541592116608
@@ -8063,3 +8064,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &9058027541592116609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2814365726828296494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8733839801275c24ead835c0ec794377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
