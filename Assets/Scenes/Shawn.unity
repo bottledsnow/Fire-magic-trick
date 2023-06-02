@@ -7996,7 +7996,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2814365726828296494}
   m_LocalRotation: {x: -0, y: -0.97332007, z: -0, w: -0.22945184}
-  m_LocalPosition: {x: -5.69, y: 0.44, z: 9.49}
+  m_LocalPosition: {x: -5.7, y: 0.44, z: 9.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8047,7 +8047,13 @@ MonoBehaviour:
   attackCooldown: 1
   bulletPrefab: {fileID: 7454493389440352582, guid: 4528a3e8a4bb3cb41be194da80e934d4, type: 3}
   bulletSpawnPoint: {fileID: 1702757706}
+  playerTransform: {fileID: 0}
+  lastAttackTime: 0
+  laserFiredTime: 0
+  rb: {fileID: 0}
   distanceToPlayer: 0
+  currentState: 0
+  fov: {fileID: 0}
 --- !u!54 &9058027541592116608
 Rigidbody:
   m_ObjectHideFlags: 0

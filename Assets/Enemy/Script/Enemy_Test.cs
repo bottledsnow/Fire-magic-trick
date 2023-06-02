@@ -14,7 +14,7 @@ public class Enemy_Test : MonoBehaviour,IHealth
     public void TakeDamage(int Damage)
     {
         _health -= Damage;
-        Debug.Log("Enemy_Test get damage¡G" + Damage);
-        Debug.Log("Enemy_Test health¡G" + _health);
+        Debug.Log("Enemy_Test get damageï¿½G" + Damage);
+        Debug.Log("Enemy_Test healthï¿½G" + _health);
     }
 }
