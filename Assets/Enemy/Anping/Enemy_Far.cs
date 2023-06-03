@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Near : MonoBehaviour, IHealth
+public class Enemy_Far : MonoBehaviour, IHealth
 {
     [SerializeField]
     private int _health;
@@ -12,10 +12,13 @@ public class Enemy_Near : MonoBehaviour, IHealth
     public float attackRange = 1f;
     public float attackDamage = 10f;
     public float attackCooldown = 1f;
+    public GameObject bulletPrefab;
+    public Transform bulletSpawnPoint;
 
     private Transform playerTransform;
     private Rigidbody rb;
     private float distanceToPlayer;
+    private float lastAttackTime;
 
     private enum EnemyState
     {
@@ -40,7 +43,7 @@ public class Enemy_Near : MonoBehaviour, IHealth
         switch (currentState)
         {
             case EnemyState.Idle:
-                // 閒置狀態，等待發現玩家，根據距離選擇攻擊方式
+                // 閒置狀態，等待發現玩家
                 if (fov.canSeePlayer)
                 {
                     currentState = EnemyState.Attack;
@@ -48,13 +51,15 @@ public class Enemy_Near : MonoBehaviour, IHealth
                 break;
 
             case EnemyState.Attack:
-                // 近戰腳腳攻擊
-                if (distanceToPlayer < attackRange)
+                // 遠程雷射攻擊
+                if(distanceToPlayer < attackRange)
                 {
                     transform.LookAt(playerTransform);
-
-                    // 近戰攻擊邏輯運算
-                    print("腳腳怪使出近戰攻擊!");
+                    if (Time.time - lastAttackTime >= attackCooldown)
+                    {
+                        lastAttackTime = Time.time;
+                        LaserShoot();
+                    }
                 }
                 else
                 {
@@ -69,6 +74,14 @@ public class Enemy_Near : MonoBehaviour, IHealth
         transform.LookAt(playerTransform);
         Vector3 direction = (playerTransform.position - transform.position).normalized;
         rb.AddForce(direction * moveSpeed);
+    }
+
+     void LaserShoot()
+    {
+        // 向玩家發射雷射
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * 20f;
+        Destroy(bullet, 2f);
     }
 
     public int Health
