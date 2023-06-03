@@ -4,17 +4,35 @@ using UnityEngine;
 
 public class Enemy_Test : MonoBehaviour,IHealth
 {
-    [SerializeField]
-    private int _health;
+    [SerializeField] private int _health;
+    private Rigidbody rb;
+    private Collider boxCollider;
     public int Health
     {
         get { return _health; }
         set { _health = value; }
     }
+
+    private void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+        boxCollider = GetComponent<Collider>();
+    }
     public void TakeDamage(int Damage)
     {
         _health -= Damage;
-        Debug.Log("Enemy_Test get damage�G" + Damage);
-        Debug.Log("Enemy_Test health�G" + _health);
+        Debug.Log("Enemy_Test get damage" + Damage);
+        Debug.Log("Enemy_Test health" + _health);
+
+        if(_health <=0)
+        {
+            EnemyDeath();
+        }
+    }
+    private void EnemyDeath()
+    {
+        rb.drag = 10;
+        boxCollider.enabled = false;
+        Destroy(gameObject, 1.5f);
     }
 }
