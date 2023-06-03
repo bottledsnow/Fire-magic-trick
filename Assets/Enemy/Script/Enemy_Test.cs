@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy_Test : MonoBehaviour,IHealth
 {
+    [SerializeField] private Transform VFX_Soul;
     [SerializeField] private int _health;
     private Rigidbody rb;
     private Collider boxCollider;
@@ -31,6 +32,7 @@ public class Enemy_Test : MonoBehaviour,IHealth
     }
     private void EnemyDeath()
     {
+        Instantiate(VFX_Soul,transform.position,VFX_Soul.rotation);
         rb.drag = 10;
         boxCollider.enabled = false;
         Destroy(gameObject, 1.5f);

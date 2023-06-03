@@ -13,6 +13,7 @@ public class soul : MonoBehaviour,VFX_Trigger
 
     private void Start()
     {
+        TargetPoint = GameObject.Find("SoulTarget").transform;
         triggerSoul();
     }
     private void FixedUpdate()
@@ -22,7 +23,7 @@ public class soul : MonoBehaviour,VFX_Trigger
     private void MoveToTarget()
     {
         if(canfly)
-        transform.position = Vector3.MoveTowards(transform.position, TargetPoint.transform.position, speed);
+        transform.position = Vector3.MoveTowards(transform.position, TargetPoint.position, speed);
     }
     private async void triggerSoul()
     {
@@ -35,6 +36,6 @@ public class soul : MonoBehaviour,VFX_Trigger
     public void Trigger_VFX()
     {
         VFX_Soul[1].Stop();
-        VFX_Soul[3].Play();
+        VFX_Soul[2].Play();
     }
 }
