@@ -2,23 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Far : MonoBehaviour, IHealth
+public class Enemy_Near : MonoBehaviour
 {
-    [SerializeField]
-    private int _health;
     [SerializeField]
     private float moveSpeed;
     [Header("Attack")]
     public float attackRange = 1f;
     public float attackDamage = 10f;
     public float attackCooldown = 1f;
-    public GameObject bulletPrefab;
-    public Transform bulletSpawnPoint;
 
     private Transform playerTransform;
     private Rigidbody rb;
     private float distanceToPlayer;
-    private float lastAttackTime;
 
     private enum EnemyState
     {
@@ -51,15 +46,13 @@ public class Enemy_Far : MonoBehaviour, IHealth
                 break;
 
             case EnemyState.Attack:
-                // 遠程雷射攻擊
-                if(distanceToPlayer < attackRange)
+                // 近戰腳腳攻擊
+                if (distanceToPlayer < attackRange)
                 {
                     transform.LookAt(playerTransform);
-                    if (Time.time - lastAttackTime >= attackCooldown)
-                    {
-                        lastAttackTime = Time.time;
-                        LaserShoot();
-                    }
+
+                    // 近戰攻擊邏輯運算
+                    print("腳腳怪使出近戰攻擊!");
                 }
                 else
                 {
@@ -74,29 +67,5 @@ public class Enemy_Far : MonoBehaviour, IHealth
         transform.LookAt(playerTransform);
         Vector3 direction = (playerTransform.position - transform.position).normalized;
         rb.AddForce(direction * moveSpeed);
-    }
-
-     void LaserShoot()
-    {
-        // 向玩家發射雷射
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = transform.forward * 20f;
-        Destroy(bullet, 2f);
-    }
-
-    public int Health
-    {
-        get { return _health; }
-        set { _health = value; }
-    }
-    public void TakeDamage(int Damage)
-    {
-        _health -= Damage;
-        Debug.Log("Enemy_Test get damage " + Damage);
-        Debug.Log("Enemy_Test health " + _health);
-        if (_health <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 }
