@@ -28,7 +28,10 @@ public class BlackWall : MonoBehaviour
         {
             VFX_Trigger vfx = other.GetComponent<VFX_Trigger>();
             vfx.Trigger_VFX();
-            VFX_Wall[absorbNumber].Play();
+            if(absorbNumber<VFX_Wall.Length)
+            {
+                VFX_Wall[absorbNumber].Play();
+            }
             absorbNumber++;
         }
 

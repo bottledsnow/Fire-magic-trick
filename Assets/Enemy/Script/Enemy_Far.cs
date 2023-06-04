@@ -78,7 +78,8 @@ public class Enemy_Far : MonoBehaviour
     {
         // 向玩家發射雷射
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = transform.forward * 20f;
-        Destroy(bullet, 2f);
+        //子彈本身也會帶射速，所以先註解掉。
+        //bullet.GetComponent<Rigidbody>().velocity = transform.forward * 20f;
+        //Destroy(bullet, 2f);
     }
 }

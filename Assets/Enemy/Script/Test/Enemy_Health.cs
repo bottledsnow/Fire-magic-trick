@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Test : MonoBehaviour,IHealth
+public class Enemy_Health : MonoBehaviour,IHealth
 {
     [SerializeField] private Transform VFX_Soul;
     [SerializeField] private int _health;
     private Rigidbody rb;
-    private Collider boxCollider;
+    private Collider[] Colliders;
     public int Health
     {
         get { return _health; }
@@ -17,7 +17,7 @@ public class Enemy_Test : MonoBehaviour,IHealth
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        boxCollider = GetComponent<Collider>();
+        Colliders = GetComponentsInChildren<Collider>();
     }
     public void TakeDamage(int Damage)
     {
@@ -34,7 +34,15 @@ public class Enemy_Test : MonoBehaviour,IHealth
     {
         Instantiate(VFX_Soul,transform.position,VFX_Soul.rotation);
         rb.drag = 10;
-        boxCollider.enabled = false;
+        CloseCollider();
         Destroy(gameObject, 1.5f);
+    }
+
+    private void CloseCollider()
+    {
+        foreach (Collider collider in Colliders)
+        {
+            collider.enabled = false;
+        }
     }
 }

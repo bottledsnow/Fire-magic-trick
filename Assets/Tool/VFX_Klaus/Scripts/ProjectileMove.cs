@@ -30,14 +30,7 @@ public class ProjectileMove : MonoBehaviour
 
     void Update()
     {
-        if (speed != 0)
-        {
-            transform.position += transform.forward * (speed * Time.deltaTime);
-        }
-        else
-        {
-            Debug.Log("No Speed");
-        }
+        GiveSpeed();
     }
 
     void OnCollisionEnter (Collision co)
@@ -63,5 +56,17 @@ public class ProjectileMove : MonoBehaviour
             }
         }
         Destroy(gameObject);
+    }
+
+    private void GiveSpeed()
+    {
+        if (speed != 0)
+        {
+            transform.position += transform.forward * (speed * Time.deltaTime);
+        }
+        else
+        {
+            Debug.Log("No Speed");
+        }
     }
 }
