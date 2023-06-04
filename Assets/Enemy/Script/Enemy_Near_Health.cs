@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_Near_Health : MonoBehaviour,IHealth
 {
-    private int _health;
+    [SerializeField] private int _health;
     public int Health
     {
         get { return _health; }

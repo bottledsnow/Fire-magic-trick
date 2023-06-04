@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy_Far_Shawn : MonoBehaviour
+public class Enemy_Far : MonoBehaviour
 {
     [SerializeField]
     private float moveSpeed;
@@ -81,6 +81,4 @@ public class Enemy_Far_Shawn : MonoBehaviour
         bullet.GetComponent<Rigidbody>().velocity = transform.forward * 20f;
         Destroy(bullet, 2f);
     }
-
-    
 }
