@@ -27,7 +27,6 @@ public class ThirdPersonShooterController : MonoBehaviour
     private void Update()
     {
         aimTrigger();
-        shootSystem();
     }
 
     private void aimTrigger()
@@ -68,9 +67,5 @@ public class ThirdPersonShooterController : MonoBehaviour
             Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
             starterAssetsInputs.shoot = false;
         }
-    }
-    private void shootSystem()
-    {
-        
     }
 }
