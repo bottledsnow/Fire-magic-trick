@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 public class DemoEnd : MonoBehaviour
 {
     [SerializeField] private int waitTime;
-    [SerializeField] private GameObject EndImage;
-    [SerializeField] private ParticleSystem EndParticle;
+    [SerializeField] private GameObject FogWall;
     private async void OnTriggerEnter(Collider other)
     {
         await Task.Delay(waitTime * 1000);
-        EndImage.SetActive(true);
-        EndParticle.Play();
+        FogWall.SetActive(false);
     }
 }
