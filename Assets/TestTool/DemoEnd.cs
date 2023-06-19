@@ -12,13 +12,13 @@ public class DemoEnd : MonoBehaviour
     [SerializeField] private Animator KabalaAnimator;
     private async void OnTriggerEnter(Collider other)
     {
-        if(!trigger)
+        if(!trigger && other.tag =="Player")
         {
             KabalaAnimator.Play("DemoEndCamera");
             await Task.Delay(waitTime * 1000);
             FogWall.SetActive(false);
             DemoEndAnimator.Play("DemoEnd");
-            trigger=true;
+            trigger=true;   
         }
     }
 }
