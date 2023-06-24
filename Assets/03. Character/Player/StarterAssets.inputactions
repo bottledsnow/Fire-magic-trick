@@ -202,6 +202,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Controller_Stick_Left",
+                    "type": "Value",
+                    "id": "19d9699d-4625-4a03-9b89-78eae0491f7e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Controller_Stick_Right",
+                    "type": "Value",
+                    "id": "3c463001-cbb5-4e08-a50e-b4d29c2ddc21",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -598,6 +616,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Controller_Window",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6832093f-f965-4cfa-98ad-31e5b9cfa9e1",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertX=false,invertY=false),StickDeadzone,ScaleVector2",
+                    "groups": "Gamepad",
+                    "action": "Controller_Stick_Left",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b1268f57-e9db-48e6-8525-3d7d751dd351",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "InvertVector2(invertX=false,invertY=false),StickDeadzone,ScaleVector2",
+                    "groups": "Gamepad",
+                    "action": "Controller_Stick_Right",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class ControllerInput : MonoBehaviour
 {
+    [Header("Stick")]
+    public Vector2 LeftStick;
+    public Vector2 RightStick;
+
     [Header("Controller Input Buttons")]
     public bool ButtonY;
     public bool ButtonX;
@@ -31,6 +35,14 @@ public class ControllerInput : MonoBehaviour
     public bool Window;
 
     #region InputSystem_Input
+    public void OnController_Stick_Left(InputValue value)
+    {
+        LeftStick = value.Get<Vector2>();
+    }
+    public void OnController_Stick_Right(InputValue value)
+    {
+        RightStick = value.Get<Vector2>();
+    }
     public void OnController_Button_A(InputValue value)
     {
         Input_Button_A(value.isPressed);
