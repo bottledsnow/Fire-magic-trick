@@ -3,7 +3,7 @@ using StarterAssets;
 using UnityEngine.UI;
 using UnityEditor.PackageManager.UI;
 
-public class ControllerTest : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private StarterAssetsInputs _Inputs;
     [SerializeField] private ControllerInput _ControllerInput;
