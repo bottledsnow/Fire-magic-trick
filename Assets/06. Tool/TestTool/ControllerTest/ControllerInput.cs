@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 
 public class ControllerInput : MonoBehaviour
 {
+    [Header("Game")]
+    public bool SprintMode;
+    private bool TurnOn = false;
+    private bool trigger = false;
     [Header("Stick")]
     public Vector2 LeftStick;
     public Vector2 RightStick;
@@ -174,4 +178,38 @@ public class ControllerInput : MonoBehaviour
         Window = newButtonState;
     }
     #endregion
+
+    private void Update()
+    {
+        SwitchLSB();
+        TriggerLSB();
+        StopSrint();
+    }
+    private void SwitchLSB()
+    {
+        if(LSB && !trigger)
+        {
+            trigger = true;
+            if(TurnOn)
+            {
+                TurnOn = false;
+                SprintMode = false;
+            }else
+            {
+                TurnOn = true;
+                SprintMode = true;
+            }
+        }
+    }
+    private void TriggerLSB()
+    {
+        if(!LSB) trigger = false;
+    }
+    private void StopSrint()
+    {
+        if(LeftStick.x == 0 && LeftStick.y == 0)
+        {
+            SprintMode = false;
+        }
+    }
 }

@@ -66,7 +66,6 @@ public class PlayerController : MonoBehaviour
         OnOption();
         OnWindow();
     }
-
     private void getOriginStickPoint()
     {
         originLeftStickPoint = LSB_transform.anchoredPosition;
@@ -91,7 +90,8 @@ public class PlayerController : MonoBehaviour
     private void OnRightStickButton() => RSB.color = _ControllerInput.RSB ? Color.blue : Color.white;
     private void OnLeftTrigger() => LT.color = _ControllerInput.LT ? Color.blue : Color.white;
     private void OnLeftButton() => LB.color = _ControllerInput.LB ? Color.blue : Color.white;
-    private void OnLeftStickButton() => LSB.color = _ControllerInput.LSB ? Color.blue : Color.white;
+    //private void OnLeftStickButton() => LSB.color = _ControllerInput.LSB ? Color.blue : Color.white;
+    private void OnLeftStickButton() => LSB.color = _ControllerInput.SprintMode ? Color.blue : Color.white;
     private void OnOption() => Option.color = _ControllerInput.Window ? Color.blue : Color.white;
     private void OnWindow() => Window.color = _ControllerInput.Option ? Color.blue : Color.white;
 }
