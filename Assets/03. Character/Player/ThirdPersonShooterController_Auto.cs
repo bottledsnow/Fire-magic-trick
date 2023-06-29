@@ -4,7 +4,7 @@ using StarterAssets;
 using System.Threading.Tasks;
 using UnityEngine.ProBuilder;
 
-public class ThirdPersonShooterController : MonoBehaviour
+public class ThirdPersonShooterController_Auto : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
     [SerializeField] private float normalSensitivity;
@@ -21,7 +21,6 @@ public class ThirdPersonShooterController : MonoBehaviour
     [Header("Shooting Setting")]
     [SerializeField] private float shootCooldown;
     private bool shooting;
-    private bool pistolrate;
 
     //encapsulation
     private Vector3 mouseWorldPosition = Vector3.zero;
@@ -38,7 +37,6 @@ public class ThirdPersonShooterController : MonoBehaviour
         ShootRay();
         Shooting();
         Aim();
-        pistol();
     }
     #region Shoot
     private void ShootRay()
@@ -54,10 +52,9 @@ public class ThirdPersonShooterController : MonoBehaviour
     }
     private void Shooting()
     {
-        if (_Input.RT && !shooting && !pistolrate)
+        if (_Input.RT && !shooting)
         {
             ShootCooldown(shootCooldown);
-            pistolrate = true;
             shoot();
         }
     }
@@ -65,10 +62,6 @@ public class ThirdPersonShooterController : MonoBehaviour
     {
         Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
         Instantiate(pfBulletProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
-    }
-    private void pistol()
-    {
-        if (!_Input.RT) pistolrate = false;
     }
     private async void ShootCooldown(float shootCooldown)
     {

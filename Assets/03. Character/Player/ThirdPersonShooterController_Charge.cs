@@ -4,7 +4,7 @@ using StarterAssets;
 using System.Threading.Tasks;
 using UnityEngine.ProBuilder;
 
-public class ThirdPersonShooterController : MonoBehaviour
+public class ThirdPersonShooterController_Charge : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
     [SerializeField] private float normalSensitivity;
@@ -22,6 +22,16 @@ public class ThirdPersonShooterController : MonoBehaviour
     [SerializeField] private float shootCooldown;
     private bool shooting;
     private bool pistolrate;
+    //Charge
+    [Header("ChargePreferb")]
+    [SerializeField] private Transform pfChargeProjectile;
+    [SerializeField] private ParticleSystem ChargePartical;
+    private bool triggerParticle;
+    private bool Charge;
+    private bool CanCharge;
+    private float chargePower;
+
+    [SerializeField] private float MaxChargePower;
 
     //encapsulation
     private Vector3 mouseWorldPosition = Vector3.zero;
@@ -37,9 +47,62 @@ public class ThirdPersonShooterController : MonoBehaviour
         TurnToShoot();
         ShootRay();
         Shooting();
+        ChargeSystem();
         Aim();
         pistol();
     }
+    #region Charge
+    private void ChargeSystem()
+    {
+       ChargeInput();
+       ChargePower();
+       ChargeRelease();
+    }
+    private void ChargeRelease()
+    {
+        if(!_Input.RT)
+        {
+            if(CanCharge)
+            {
+                ChargeShoot();
+                CanCharge = false;
+            }
+            Debug.Log("¼¯²»‰ò¶àšâ");
+        }
+    }
+    private void ChargeShoot()
+    {
+        Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
+        Instantiate(pfChargeProjectile, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+    }
+    private void ChargeInput()
+    {
+        if (_Input.RT) Charge = true;
+        if (!_Input.RT) Charge = false;
+    }
+
+    private void ChargePower()
+    {
+        if(Charge)
+        {
+            if(!triggerParticle)
+            {
+                triggerParticle = true;
+                ChargePartical.Play();
+            }
+            chargePower += Time.deltaTime;
+            if(chargePower > MaxChargePower) CanCharge = true;
+        } else
+        {
+            chargePower = 0;
+            if(triggerParticle)
+            {
+                ChargePartical.Stop();
+                triggerParticle = false;
+            }
+        }
+    }
+    #endregion
     #region Shoot
     private void ShootRay()
     {
