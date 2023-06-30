@@ -4,9 +4,12 @@ using Cinemachine;
 
 public class ShootingSystem : MonoBehaviour
 {
+
     [Header("Shoot Setting")]
     [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform spawnBulletPosition;
+    [SerializeField] private float shootingEnergyCost;
+    [SerializeField] private float FireEnergyCost;
 
     [Header("Aim Setting")]
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
@@ -16,17 +19,22 @@ public class ShootingSystem : MonoBehaviour
 
     private ControllerInput _Input;
     private ThirdPersonController thirdPersonController;
+    private EnergySystem energySystem;
     private Vector3 mouseWorldPosition = Vector3.zero;
     private void Start()
     {
         _Input = GetComponent<ControllerInput>();
         thirdPersonController = GetComponent<ThirdPersonController>();
+        energySystem = GetComponent<EnergySystem>();
     }
     private void Update()
     {
         ShootRay();
         TurnToShoot();
     }
+    #region ShootEnergy
+    
+    #endregion
     #region Shoot
     private void ShootRay()
     {
@@ -44,7 +52,14 @@ public class ShootingSystem : MonoBehaviour
         Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
         Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
     }
-    
+    public void shoot(Transform preferb,EnergySystem.EnergyMode mode)
+    {
+        Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
+        Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+        if (mode == EnergySystem.EnergyMode.Fire) energySystem.TakeFireEnergy(FireEnergyCost);
+        if (mode == EnergySystem.EnergyMode.Shooting) energySystem.TakeShootingEnergy(shootingEnergyCost);
+    }
+
     private void TurnToShoot()
     {
         if (_Input.RT)

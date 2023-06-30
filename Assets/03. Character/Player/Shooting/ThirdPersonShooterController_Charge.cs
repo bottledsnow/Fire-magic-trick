@@ -45,7 +45,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
         {
             if(CanCharge)
             {
-                shootingSystem.shoot(pfChargeProjectile);
+                shootingSystem.shoot(pfChargeProjectile, EnergySystem.EnergyMode.Fire);
                 CanCharge = false;
             }
         }
