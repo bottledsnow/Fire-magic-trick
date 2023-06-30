@@ -1,12 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
 public class GameManager : MonoBehaviour
 {
-    public static GameManager GM;
+    public static GameManager singleton = null;
+    public ControllerInput _input;
     private void Awake()
     {
-        GM = this;
+        if(singleton == null)
+        {
+            singleton = this;
+        }
     }
 }
