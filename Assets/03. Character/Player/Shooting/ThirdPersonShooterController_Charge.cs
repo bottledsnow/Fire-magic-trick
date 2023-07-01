@@ -82,7 +82,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
         {
             ShootCooldown(shootCooldown);
             pistolrate = true;
-            shootingSystem.shoot(pfBulletProjectile);
+            shootingSystem.shoot(pfBulletProjectile,EnergySystem.EnergyMode.Shooting);
         }
     }
     private void pistol()

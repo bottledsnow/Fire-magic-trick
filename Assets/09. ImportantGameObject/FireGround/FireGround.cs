@@ -12,7 +12,7 @@ public class FireGround : MonoBehaviour
     [SerializeField] private float RecoverEnergy;
     private EmissionModule emissionModule;
     private EnergySystem energySystem;
-    private FireGroundAbsorb fireGroundAbsorb;
+    private FireAbsorb fireGroundAbsorb;
     private bool isRecover;
     private void OnTriggerEnter(Collider other)
     {
@@ -37,7 +37,7 @@ public class FireGround : MonoBehaviour
 
     private void Start()
     {
-        fireGroundAbsorb = GetComponent<FireGroundAbsorb>();
+        fireGroundAbsorb = GetComponent<FireAbsorb>();
         emissionModule = FireGroundParticle.emission;
     }
     private void Update()

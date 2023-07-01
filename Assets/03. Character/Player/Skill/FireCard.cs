@@ -10,7 +10,7 @@ public class FireCard : MonoBehaviour
     public float fireRate;
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
-
+    public GameObject FireAsh;
     void Start()
     {
         ShootMuzzle();
@@ -82,5 +82,6 @@ public class FireCard : MonoBehaviour
     {
         await Task.Delay((int)(1000 * LifeTime));
         hitTarget(this.transform.position,Quaternion.identity);
+        Instantiate(FireAsh, this.transform.position, Quaternion.identity);
     }
 }
