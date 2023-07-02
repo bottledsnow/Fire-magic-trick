@@ -1,12 +1,19 @@
 using StarterAssets;
 using UnityEngine;
 using System.Threading.Tasks;
+using Cinemachine;
 
 public class Fire_Teleport : MonoBehaviour
 {
+    [SerializeField] private CinemachineVirtualCamera playerCamera;
+    [SerializeField] private float TeleportCost;
+    [SerializeField] private float TeleporCameraDamping;
+    [SerializeField] private int OutControll_ms;
+    private EnergySystem energySystem;
     private ControllerInput _input;
-    private ThirdPersonController _Player;
+    private ThirdPersonController _PlayerControl;
     private FireCheck_Easy fireCheck;
+    private Vector3 oldCameraDamping;
 
     private void Update()
     {
@@ -14,8 +21,10 @@ public class Fire_Teleport : MonoBehaviour
     }
     private void Start()
     {
+        energySystem = GetComponent<EnergySystem>();
+        oldCameraDamping = playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping;
         _input = GameManager.singleton._input;
-        _Player = GetComponent<ThirdPersonController>();
+        _PlayerControl = GetComponent<ThirdPersonController>();
         fireCheck = Camera.main.GetComponent<FireCheck_Easy>();
     }
     private void ignit()
@@ -33,10 +42,25 @@ public class Fire_Teleport : MonoBehaviour
     }
     private async void FireTeleprot()
     {
-        _Player.enabled = false;
-        //transform.position = fireCheck.gameObject.transform.position;
+        SetTeleportCameraDamping();
+        _PlayerControl.enabled = false;
         transform.position = fireCheck.FirePoint.position;
-        await Task.Delay(100);
-        _Player.enabled = true;
+        CostEnergy();
+        await Task.Delay(OutControll_ms);
+        _PlayerControl.enabled = true;
+        revertTeleportCameraDamping();
+    }
+    private void SetTeleportCameraDamping()
+    {
+        Vector3 newCameraDamping = new Vector3(TeleporCameraDamping, TeleporCameraDamping, TeleporCameraDamping);
+        playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping = newCameraDamping;
+    }
+    private void revertTeleportCameraDamping()
+    {
+        playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping = oldCameraDamping;
+    }
+    private void CostEnergy()
+    {
+        energySystem.TakeFireEnergy(TeleportCost);
     }
 }
