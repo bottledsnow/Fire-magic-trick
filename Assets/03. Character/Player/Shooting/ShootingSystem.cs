@@ -4,7 +4,7 @@ using Cinemachine;
 
 public class ShootingSystem : MonoBehaviour
 {
-
+    [SerializeField] private SoundEffectTest soundEffectTest;
     [Header("Shoot Setting")]
     [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform spawnBulletPosition;
@@ -51,6 +51,8 @@ public class ShootingSystem : MonoBehaviour
     {
         Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
         Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+        if(soundEffectTest != null)
+            soundEffectTest.PlaySoundEffect();
     }
     public void shoot(Transform preferb,EnergySystem.EnergyMode mode)
     {
@@ -58,6 +60,8 @@ public class ShootingSystem : MonoBehaviour
         Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
         if (mode == EnergySystem.EnergyMode.Fire) energySystem.TakeFireEnergy(FireEnergyCost);
         if (mode == EnergySystem.EnergyMode.Shooting) energySystem.TakeShootingEnergy(shootingEnergyCost);
+        if (soundEffectTest != null)
+            soundEffectTest.PlaySoundEffect();
     }
 
     private void TurnToShoot()
