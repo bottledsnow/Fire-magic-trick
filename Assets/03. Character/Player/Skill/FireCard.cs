@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using static UnityEditor.PlayerSettings;
 using static UnityEngine.Rendering.DebugUI.Table;
+using Unity.VisualScripting;
 
 public class FireCard : MonoBehaviour
 {
@@ -11,8 +12,11 @@ public class FireCard : MonoBehaviour
     public GameObject muzzlePrefab;
     public GameObject hitPrefab;
     public GameObject FireAsh;
+    private Vector3 Hitposition;
+    [SerializeField] private FireCard mCard;
     void Start()
     {
+        mCard = this.GetComponent<FireCard>();
         ShootMuzzle();
         explode();
     }
@@ -27,7 +31,9 @@ public class FireCard : MonoBehaviour
         ContactPoint contact = co.contacts[0];
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Vector3 pos = contact.point;
+        Hitposition = pos;
         hitTarget(pos, rot);
+        explodeByHit();
     }
     private void ShootMuzzle()
     {
@@ -81,7 +87,25 @@ public class FireCard : MonoBehaviour
     private async void explode()
     {
         await Task.Delay((int)(1000 * LifeTime));
-        hitTarget(this.transform.position,Quaternion.identity);
-        Instantiate(FireAsh, this.transform.position, Quaternion.identity);
+        if(mCard != null )
+        {
+            hitTarget(this.transform.position, Quaternion.identity);
+            Instantiate(FireAsh, this.transform.position, Quaternion.identity);
+        }else
+        {
+            Debug.Log("No Card");
+        }
+    }
+    private void explodeByHit()
+    {
+        if (mCard != null)
+        {
+            hitTarget(this.transform.position, Quaternion.identity);
+            Instantiate(FireAsh, this.transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Debug.Log("No Card");
+        }
     }
 }

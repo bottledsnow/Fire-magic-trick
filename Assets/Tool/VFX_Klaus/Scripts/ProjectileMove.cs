@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using MoreMountains.Feedbacks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ProjectileMove : MonoBehaviour
 {
+    public MMFeedbacks HitFeedback;
     public float speed;
     public float fireRate;
     public GameObject muzzlePrefab;
@@ -55,6 +57,7 @@ public class ProjectileMove : MonoBehaviour
                 Destroy(hitVFX, psChild.main.duration);
             }
         }
+        HitFeedback?.PlayFeedbacks();
         Destroy(gameObject);
     }
 

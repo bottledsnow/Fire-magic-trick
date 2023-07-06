@@ -2,9 +2,11 @@ using StarterAssets;
 using UnityEngine;
 using System.Threading.Tasks;
 using Cinemachine;
+using MoreMountains.Feedbacks;
 
 public class Fire_Teleport : MonoBehaviour
 {
+    [SerializeField] MMFeedbacks TeleportFeedback;
     [SerializeField] private CinemachineVirtualCamera playerCamera;
     [SerializeField] private float TeleportCost;
     [SerializeField] private float TeleporCameraDamping;
@@ -34,6 +36,7 @@ public class Fire_Teleport : MonoBehaviour
             if(fireCheck.isChooseFirePoint)
             {
                 FireTeleprot();
+                TeleportFeedback.PlayFeedbacks();
                 fireCheck.isChooseFirePoint = false;
                 fireCheck.AbsorbFire();
                 fireCheck.DestroyFirePoint();

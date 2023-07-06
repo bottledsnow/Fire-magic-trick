@@ -3,20 +3,17 @@ using Cinemachine;
 using StarterAssets;
 using System.Threading.Tasks;
 using UnityEngine.ProBuilder;
+using MoreMountains.Feedbacks;
 
 public class ThirdPersonShooterController_Charge : MonoBehaviour
 {
-    
-    [SerializeField] private Transform pfBulletProjectile;
+    [SerializeField] private MMFeedbacks _ChargeFeedback;
     [SerializeField] private Transform pfChargeProjectile;
     [SerializeField] private ParticleSystem ChargePartical;
-    [SerializeField] private float shootCooldown;
     [SerializeField] private float MaxChargePower;
 
     private ShootingSystem shootingSystem;
     private ControllerInput _Input;
-    private bool shooting;
-    private bool pistolrate;
     private bool triggerParticle;
     private bool Charge;
     private bool CanCharge;
@@ -29,9 +26,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
     }
     private void Update()
     {
-        Shooting();
         ChargeSystem();
-        pistol();
     }
     private void ChargeSystem()
     {
@@ -45,6 +40,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
         {
             if(CanCharge)
             {
+                _ChargeFeedback.PlayFeedbacks();
                 shootingSystem.shoot(pfChargeProjectile, EnergySystem.EnergyMode.Fire);
                 CanCharge = false;
             }
@@ -75,24 +71,5 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
                 triggerParticle = false;
             }
         }
-    }
-    private void Shooting()
-    {
-        if (_Input.RT && !shooting && !pistolrate)
-        {
-            ShootCooldown(shootCooldown);
-            pistolrate = true;
-            shootingSystem.shoot(pfBulletProjectile,EnergySystem.EnergyMode.Shooting);
-        }
-    }
-    private void pistol()
-    {
-        if (!_Input.RT) pistolrate = false;
-    }
-    private async void ShootCooldown(float shootCooldown)
-    {
-        shooting = true;
-        await Task.Delay((int)(shootCooldown *1000));
-        shooting = false;
     }
 }
