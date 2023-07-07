@@ -13,12 +13,12 @@ public class FireCard : MonoBehaviour
     public GameObject hitPrefab;
     public GameObject FireAsh;
     private Vector3 Hitposition;
-    [SerializeField] private FireCard mCard;
+    private FireCard mCard;
     void Start()
     {
         mCard = this.GetComponent<FireCard>();
         ShootMuzzle();
-        explode();
+        explodeSystem();
     }
 
     void Update()
@@ -33,7 +33,7 @@ public class FireCard : MonoBehaviour
         Vector3 pos = contact.point;
         Hitposition = pos;
         hitTarget(pos, rot);
-        explodeByHit();
+        explode();
     }
     private void ShootMuzzle()
     {
@@ -76,27 +76,16 @@ public class FireCard : MonoBehaviour
     private void GiveSpeed()
     {
         if (speed != 0)
-        {
             transform.position += transform.forward * (speed * Time.deltaTime);
-        }
         else
-        {
             Debug.Log("No Speed");
-        }
     }
-    private async void explode()
+    private async void explodeSystem()
     {
         await Task.Delay((int)(1000 * LifeTime));
-        if(mCard != null )
-        {
-            hitTarget(this.transform.position, Quaternion.identity);
-            Instantiate(FireAsh, this.transform.position, Quaternion.identity);
-        }else
-        {
-            Debug.Log("No Card");
-        }
+        explode();
     }
-    private void explodeByHit()
+    private void explode()
     {
         if (mCard != null)
         {

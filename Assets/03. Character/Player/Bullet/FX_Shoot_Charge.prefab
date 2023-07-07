@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 1610863136020940736}
   - component: {fileID: 1266389341105036634}
   - component: {fileID: -1746076998686614690}
+  - component: {fileID: 4286004649459109629}
   m_Layer: 0
-  m_Name: FX_Charge_Shoot
+  m_Name: FX_Shoot_Charge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -82,6 +83,19 @@ MonoBehaviour:
   muzzlePrefab: {fileID: 1525029902450385054, guid: ec6a25ce5fca7304dadca68d8fcdbbe3, type: 3}
   hitPrefab: {fileID: 5588441662099315291, guid: ba1db4d75839fbe44a90defe8afc414d, type: 3}
   FireAsh: {fileID: 4517193681152231777, guid: 78de9cacf31437341b568f1fef4d539a, type: 3}
+--- !u!114 &4286004649459109629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1610863136020940743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c237c8049a998174cb8a749d379228f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 50
 --- !u!1001 &1032492219473866384
 PrefabInstance:
   m_ObjectHideFlags: 0

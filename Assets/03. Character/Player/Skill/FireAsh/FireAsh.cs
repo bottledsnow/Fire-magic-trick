@@ -12,7 +12,8 @@ public class FireAsh : MonoBehaviour,IFirePoint
     private void Start()
     {
         Destroy(gameObject, lifeTime);
-        AshFeedback.PlayFeedbacks();
+        AshFeedback?.Initialization(this.gameObject);
+        AshFeedback?.PlayFeedbacks();
     }
 
     public void PlayerChoosePoint()

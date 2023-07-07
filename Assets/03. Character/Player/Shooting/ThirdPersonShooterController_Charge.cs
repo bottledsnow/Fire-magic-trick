@@ -10,8 +10,10 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
     [SerializeField] private MMFeedbacks _ChargeFeedback;
     [SerializeField] private Transform pfChargeProjectile;
     [SerializeField] private ParticleSystem ChargePartical;
-    [SerializeField] private float MaxChargePower;
+    [SerializeField] private ParticleSystem ReadyChageParticle;
+    [SerializeField] private float chargeTime;
 
+    private ParticleSystem.MainModule ChargeParticleMain;
     private ShootingSystem shootingSystem;
     private ControllerInput _Input;
     private bool triggerParticle;
@@ -21,6 +23,8 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
 
     private void Start()
     {
+        ChargeParticleMain = ChargePartical.main;
+        ChargeParticleMain.duration = chargeTime;
         _Input = GameManager.singleton._input;
         shootingSystem = GetComponent<ShootingSystem>();
     }
@@ -43,6 +47,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
                 _ChargeFeedback.PlayFeedbacks();
                 shootingSystem.shoot(pfChargeProjectile, EnergySystem.EnergyMode.Fire);
                 CanCharge = false;
+                ReadyChageParticle.Stop();
             }
         }
     }
@@ -61,7 +66,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
                 ChargePartical.Play();
             }
             chargePower += Time.deltaTime;
-            if(chargePower > MaxChargePower) CanCharge = true;
+            if(chargePower > chargeTime) ReadyCharge();
         } else
         {
             chargePower = 0;
@@ -71,5 +76,11 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
                 triggerParticle = false;
             }
         }
+    }
+    private void ReadyCharge()
+    {
+        CanCharge = true;
+        ChargePartical.Stop();
+        ReadyChageParticle.Play();
     }
 }

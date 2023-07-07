@@ -1,10 +1,11 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour,IHealth
 {
-    [SerializeField] private Transform VFX_Soul;
+    [SerializeField] private MMFeedbacks DeathFeedbacks;
     [SerializeField] private int _health;
     private Rigidbody rb;
     private Collider[] Colliders;
@@ -32,7 +33,7 @@ public class Enemy_Health : MonoBehaviour,IHealth
     }
     private void EnemyDeath()
     {
-        Instantiate(VFX_Soul,transform.position,VFX_Soul.rotation);
+        DeathFeedbacks.PlayFeedbacks();
         rb.drag = 10;
         CloseCollider();
         Destroy(gameObject, 1.5f);
