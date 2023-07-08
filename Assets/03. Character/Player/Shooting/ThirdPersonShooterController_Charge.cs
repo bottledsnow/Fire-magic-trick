@@ -7,6 +7,10 @@ using MoreMountains.Feedbacks;
 
 public class ThirdPersonShooterController_Charge : MonoBehaviour
 {
+    [SerializeField] private MMFeedbacks ReadyChargeFeedback;
+    [SerializeField] private MMFeedbacks ReadyChargeCloseFeedback;
+    [SerializeField] private MMFeedbacks OnChargeFeedback;
+    [SerializeField] private MMFeedbacks OnChargeCloseFeedback;
     [SerializeField] private MMFeedbacks _ChargeFeedback;
     [SerializeField] private Transform pfChargeProjectile;
     [SerializeField] private ParticleSystem ChargePartical;
@@ -19,6 +23,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
     private bool triggerParticle;
     private bool Charge;
     private bool CanCharge;
+    private bool readyCharge;
     private float chargePower;
 
     private void Start()
@@ -44,6 +49,8 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
         {
             if(CanCharge)
             {
+                readyCharge = false;
+                ReadyChargeCloseFeedback.PlayFeedbacks();
                 _ChargeFeedback.PlayFeedbacks();
                 shootingSystem.shoot(pfChargeProjectile, EnergySystem.EnergyMode.Fire);
                 CanCharge = false;
@@ -60,18 +67,25 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
     {
         if(Charge)
         {
-            if(!triggerParticle)
+            if (!triggerParticle)
             {
                 triggerParticle = true;
                 ChargePartical.Play();
+                OnChargeFeedback.PlayFeedbacks();
             }
             chargePower += Time.deltaTime;
-            if(chargePower > chargeTime) ReadyCharge();
+            if (chargePower > chargeTime)
+            {
+                ReadyCharge();
+                Debug.Log("A-0");
+
+            }
         } else
         {
             chargePower = 0;
             if(triggerParticle)
             {
+                OnChargeCloseFeedback.PlayFeedbacks();
                 ChargePartical.Stop();
                 triggerParticle = false;
             }
@@ -79,8 +93,15 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
     }
     private void ReadyCharge()
     {
-        CanCharge = true;
-        ChargePartical.Stop();
-        ReadyChageParticle.Play();
+        if(!readyCharge)
+        {
+            readyCharge = true;
+            Debug.Log("A-1");
+            ReadyChargeFeedback.PlayFeedbacks();
+            OnChargeCloseFeedback.PlayFeedbacks();
+            CanCharge = true;
+            ChargePartical.Stop();
+            ReadyChageParticle.Play();
+        }
     }
 }
