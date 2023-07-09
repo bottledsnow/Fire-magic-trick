@@ -33,13 +33,14 @@ public class Fire_Teleport : MonoBehaviour
     {
         if(_input.RB )
         {
-            if(fireCheck.isChooseFirePoint)
+            if(fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
             {
-                FireTeleprot();
-                TeleportFeedback.PlayFeedbacks();
                 fireCheck.isChooseFirePoint = false;
+                TeleportFeedback.PlayFeedbacks();
+                FireTeleprot();
                 fireCheck.AbsorbFire();
                 fireCheck.DestroyFirePoint();
+
             }
         }
     }

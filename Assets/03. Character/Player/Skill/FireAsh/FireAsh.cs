@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class FireAsh : MonoBehaviour,IFirePoint
 {
+    [SerializeField] private SphereCollider FireCollider;
     [SerializeField] MMFeedbacks AshFeedback;
     [SerializeField] private FireAbsorb Absorb;
     [SerializeField] private float lifeTime;

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FireCheck_Easy : MonoBehaviour
 {
+    public LayerMask mask;
     public Transform testposition;
     public Transform FirePoint;
     public float rayDistance = 10f; // Éä¾€µÄéL¶È
@@ -11,6 +12,7 @@ public class FireCheck_Easy : MonoBehaviour
     private IFirePoint firePoint;
 
     private bool isHit = false;
+    
     private void Update()
     {
         Check();
@@ -19,7 +21,7 @@ public class FireCheck_Easy : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        if (Physics.Raycast(ray, out hit, rayDistance, mask))
         {
             if (!isHit)
             {
@@ -41,7 +43,7 @@ public class FireCheck_Easy : MonoBehaviour
                 isChooseFirePoint = false;
                 if (firePoint != null )
                     firePoint.PlayerNotChoosePoint();
-                //FirePoint = null;
+                FirePoint = null;
             }
         }
     }
