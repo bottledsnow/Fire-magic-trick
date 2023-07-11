@@ -52,7 +52,7 @@ public class FireGround : MonoBehaviour
             if(!energySystem.FireEnergyFull)
             {
                 fireGroundAbsorb.enabled = true;
-                energySystem.GiveFireEnergy(RecoverEnergy);
+                energySystem.ReplenishFireEnergy(RecoverEnergy);
                 ALLFirePower -= RecoverEnergy;
                 UpdateEmissionRate();
             }

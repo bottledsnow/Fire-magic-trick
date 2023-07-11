@@ -16,6 +16,7 @@ public class Fire_Teleport : MonoBehaviour
     private ThirdPersonController _PlayerControl;
     private FireCheck_Easy fireCheck;
     private Vector3 oldCameraDamping;
+    private bool canTeleport;
 
     private void Update()
     {
@@ -35,12 +36,18 @@ public class Fire_Teleport : MonoBehaviour
         {
             if(fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
             {
-                fireCheck.isChooseFirePoint = false;
-                TeleportFeedback.PlayFeedbacks();
-                FireTeleprot();
-                fireCheck.AbsorbFire();
-                fireCheck.DestroyFirePoint();
-
+                energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
+                if(canTeleport)
+                {
+                    fireCheck.isChooseFirePoint = false;
+                    TeleportFeedback.PlayFeedbacks();
+                    FireTeleprot();
+                    fireCheck.AbsorbFire();
+                    fireCheck.DestroyFirePoint();
+                }else
+                {
+                    Debug.Log("Not enough Fire Energy");
+                }
             }
         }
     }
@@ -49,7 +56,6 @@ public class Fire_Teleport : MonoBehaviour
         SetTeleportCameraDamping();
         _PlayerControl.enabled = false;
         transform.position = fireCheck.FirePoint.position;
-        CostEnergy();
         await Task.Delay(OutControll_ms);
         _PlayerControl.enabled = true;
         revertTeleportCameraDamping();
@@ -63,8 +69,5 @@ public class Fire_Teleport : MonoBehaviour
     {
         playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping = oldCameraDamping;
     }
-    private void CostEnergy()
-    {
-        energySystem.TakeFireEnergy(TeleportCost);
-    }
+    
 }

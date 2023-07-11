@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireCheck_Easy : MonoBehaviour
@@ -23,28 +21,11 @@ public class FireCheck_Easy : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayDistance, mask))
         {
-            if (!isHit)
-            {
-                isHit = true;
-                if(hit.collider.gameObject.tag == "FirePoint")
-                {
-                    FirePoint = hit.collider.gameObject.transform;
-                    isChooseFirePoint = true;
-                    firePoint = hit.collider.GetComponent<IFirePoint>();
-                    firePoint.PlayerChoosePoint();
-                }
-            }
+            ChoosePoint(hit);
         }
         else
         {
-            if (isHit)
-            {
-                isHit = false;
-                isChooseFirePoint = false;
-                if (firePoint != null )
-                    firePoint.PlayerNotChoosePoint();
-                FirePoint = null;
-            }
+            NotChoosePoint();
         }
     }
     public void DestroyFirePoint()
@@ -66,5 +47,30 @@ public class FireCheck_Easy : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawRay(transform.position, transform.forward * rayDistance);
+    }
+    private void ChoosePoint(RaycastHit hit)
+    {
+        if (!isHit)
+        {
+            isHit = true;
+            if (hit.collider.gameObject.tag == "FirePoint")
+            {
+                FirePoint = hit.collider.gameObject.transform;
+                isChooseFirePoint = true;
+                firePoint = hit.collider.GetComponent<IFirePoint>();
+                firePoint.PlayerChoosePoint();
+            }
+        }
+    }
+    private void NotChoosePoint()
+    {
+        if (isHit)
+        {
+            isHit = false;
+            isChooseFirePoint = false;
+            if (firePoint != null)
+                firePoint.PlayerNotChoosePoint();
+            FirePoint = null;
+        }
     }
 }

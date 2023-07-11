@@ -19,7 +19,6 @@ public class FireAsh : MonoBehaviour,IFirePoint
 
     public void PlayerChoosePoint()
     {
-        Debug.Log("Hit Point");
         if(FirePoint != null )
             FirePoint.SetActive(true);
     }

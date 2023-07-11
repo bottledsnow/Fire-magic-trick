@@ -53,14 +53,35 @@ public class ShootingSystem : MonoBehaviour
         Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
         Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
     }
-    public void shoot(Transform preferb,EnergySystem.EnergyMode mode)
+    public void Shoot_Normal(Transform preferb)
     {
-        Vector3 aimDir = (mouseWorldPosition - spawnBulletPosition.position).normalized;
-        Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
-        if (mode == EnergySystem.EnergyMode.Fire) energySystem.TakeFireEnergy(FireEnergyCost);
-        if (mode == EnergySystem.EnergyMode.Shooting) energySystem.TakeShootingEnergy(shootingEnergyCost);
-    }   
+        bool canShoot = false;
+        energySystem.CunsumeShootingEnergy(shootingEnergyCost,out canShoot);
 
+        if(canShoot)
+        {
+            shoot(preferb);
+        }else
+        {
+            Debug.Log("not enough shooting energy");
+        }
+    }
+    public void Shoot_Fire(Transform preferb)
+    {
+        bool canShoot_Fire;
+
+        energySystem.ConsumeFireEnergy(FireEnergyCost,out canShoot_Fire);
+
+        if (canShoot_Fire)
+        {
+            shoot(preferb);
+            Debug.Log("PlayerShootFire");
+        }
+        else
+        {
+            Debug.Log("not enough Fire energy");
+        }
+    }
     private void TurnToShoot()
     {
         if (_Input.RT)

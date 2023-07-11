@@ -29,7 +29,7 @@ public class ThirdPersonShooterController_Final : MonoBehaviour
         {
             ShootCooldown(shootCooldown);
             pistolrate = true;
-            shootingSystem.shoot(pfBulletProjectile, EnergySystem.EnergyMode.Shooting);
+            shootingSystem.Shoot_Normal(pfBulletProjectile);
             ThrowFeedback.PlayFeedbacks();
         }
     }

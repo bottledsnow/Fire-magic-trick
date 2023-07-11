@@ -52,7 +52,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
                 readyCharge = false;
                 ReadyChargeCloseFeedback.PlayFeedbacks();
                 _ChargeFeedback.PlayFeedbacks();
-                shootingSystem.shoot(pfChargeProjectile, EnergySystem.EnergyMode.Fire);
+                shootingSystem.Shoot_Fire(pfChargeProjectile);
                 CanCharge = false;
                 ReadyChageParticle.Stop();
             }
@@ -77,8 +77,6 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
             if (chargePower > chargeTime)
             {
                 ReadyCharge();
-                Debug.Log("A-0");
-
             }
         } else
         {
@@ -96,7 +94,6 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
         if(!readyCharge)
         {
             readyCharge = true;
-            Debug.Log("A-1");
             ReadyChargeFeedback.PlayFeedbacks();
             OnChargeCloseFeedback.PlayFeedbacks();
             CanCharge = true;

@@ -56,22 +56,38 @@ public class EnergySystem : MonoBehaviour
         while (isRecover)
         {
             await Task.Delay((int)(shootingEnergyRecoverCD * 1000));
-            GiveShootingEnergy(shootingEnergyRecover);
+            ReplenishShootingEnergy(shootingEnergyRecover);
         }
     }
-    public void TakeFireEnergy(float Energy)
+    public void ConsumeFireEnergy(float cost,out bool canCostEnergy)
     {
-        FireEnergy -= Energy;
+        if(FireEnergy > cost)
+        {
+            canCostEnergy = true;
+            FireEnergy -= cost;
+        }else
+        {
+            canCostEnergy = false;
+            Debug.Log("Not enough FireEnergy");
+        }
     }
-    public void GiveFireEnergy(float Energy)
+    public void ReplenishFireEnergy(float Energy)
     {
         FireEnergy += Energy;
     }
-    public void TakeShootingEnergy(float Energy)
+    public void CunsumeShootingEnergy(float cost, out bool canuseEnergy)
     {
-        ShootingEnergy -= Energy;
+        if(ShootingEnergy > cost)
+        {
+            canuseEnergy = true;
+            ShootingEnergy -= cost;
+        }else
+        {
+            canuseEnergy= false;
+            Debug.Log("Not enough ShootingEnergy");
+        }
     }
-    public void GiveShootingEnergy(float Energy)
+    public void ReplenishShootingEnergy(float Energy)
     {
         ShootingEnergy += Energy;
     }
