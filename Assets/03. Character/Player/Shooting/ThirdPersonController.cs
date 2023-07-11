@@ -17,6 +17,7 @@ namespace StarterAssets
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
+        public float PlayerRotation;
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
@@ -263,6 +264,7 @@ namespace StarterAssets
                                   _mainCamera.transform.eulerAngles.y;
                 float rotation = Mathf.SmoothDampAngle(transform.eulerAngles.y, _targetRotation, ref _rotationVelocity,
                     RotationSmoothTime);
+                getRotation(rotation);
 
                 if(_rotateOnMove)
                 {
@@ -404,5 +406,10 @@ namespace StarterAssets
         {
             _rotateOnMove = newRotateOnMove;
         }
+        private void getRotation(float rotation)
+        {
+            PlayerRotation = rotation;
+        }
+
     }
 }

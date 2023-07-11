@@ -19016,6 +19016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 4.5
+  PlayerRotation: 0
   SprintSpeed: 5.335
   RotationSmoothTime: 0.201
   SpeedChangeRate: 10
@@ -26919,6 +26920,7 @@ GameObject:
   - component: {fileID: 919132148370363455}
   - component: {fileID: 919132148370363460}
   - component: {fileID: 919132148370363458}
+  - component: {fileID: 919132148370363463}
   - component: {fileID: 919132148370363454}
   - component: {fileID: 919132148370363461}
   m_Layer: 6
@@ -27096,6 +27098,20 @@ MonoBehaviour:
   ThrowFeedback: {fileID: 392298882}
   pfBulletProjectile: {fileID: 1706274480334191768, guid: 4fd745b4030369149ae781f3e6ab4fa2, type: 3}
   shootCooldown: 0.5
+--- !u!114 &919132148370363463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148370363453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d65fcedde917e24bb48218936558635, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashSpeed: 15
+  dashTime: 0.25
 --- !u!4 &933169762038237106
 Transform:
   m_ObjectHideFlags: 0
