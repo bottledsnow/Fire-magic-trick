@@ -1,7 +1,8 @@
 ﻿using MoreMountains.Feedbacks;
-using System.Collections;
-using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Experimental.VFX;
+using UnityEngine.VFX;
 
 public class ProjectileMove : MonoBehaviour
 {
@@ -45,17 +46,8 @@ public class ProjectileMove : MonoBehaviour
 
         if(hitPrefab != null)
         {
-            var hitVFX = Instantiate(hitPrefab, pos, rot);
-            var psHit = hitVFX.GetComponent<ParticleSystem>();
-            if (psHit != null) 
-            {
-                Destroy(hitVFX, psHit.main.duration);
-            }
-            else
-            {
-                var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-                Destroy(hitVFX, psChild.main.duration);
-            }
+            //oldHit(pos, rot);
+            newHit(pos,rot);
         }
         HitFeedback?.PlayFeedbacks();
         Destroy(gameObject);
@@ -70,6 +62,31 @@ public class ProjectileMove : MonoBehaviour
         else
         {
             Debug.Log("No Speed");
+        }
+    }
+    private void newHit(Vector3 pos, quaternion rot)
+    {
+        var hitVFX = Instantiate(hitPrefab, pos, rot);
+        var psHit = hitVFX.GetComponent<VisualEffect>();
+        if (psHit != null)
+        {
+            Destroy(hitVFX, psHit.playRate);
+            // playRate need to change to duration;
+        }
+        
+    }
+    private void oldHit(Vector3 pos,quaternion rot)
+    {
+        var hitVFX = Instantiate(hitPrefab, pos, rot);
+        var psHit = hitVFX.GetComponent<ParticleSystem>();
+        if (psHit != null)
+        {
+            Destroy(hitVFX, psHit.main.duration);
+        }
+        else
+        {
+            var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
+            Destroy(hitVFX, psChild.main.duration);
         }
     }
 }
