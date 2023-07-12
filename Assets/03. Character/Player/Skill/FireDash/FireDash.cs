@@ -2,15 +2,20 @@ using UnityEngine;
 using System.Threading.Tasks;
 using StarterAssets;
 using System.Collections;
+using MoreMountains.Feedbacks;
 
 public class FireDash : MonoBehaviour
 {
+    
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashTime;
+    [SerializeField] private MMF_Player MM_player;
+    [SerializeField] private MMF_Player MM_keepEnd;
+
     private ThirdPersonController _playerController;
     private ControllerInput _input;
     private CharacterController _characterController;
     private bool dashedButton = false;
-    [SerializeField] private float dashSpeed;
-    [SerializeField] private float dashTime;
     private void Start()
     {
         _playerController = GetComponent<ThirdPersonController>();
@@ -28,13 +33,16 @@ public class FireDash : MonoBehaviour
         triggerDash();
         triggerLimit();
     }
-    private void triggerDash()
+    private async void triggerDash()
     {
         if (_input.ButtonB && !dashedButton)
         {
             dashedButton = true;
             //When press Button,triiger once
             StartCoroutine(Dash());
+            MM_player.PlayFeedbacks();
+            await Task.Delay((int)(dashTime*1000));
+            MM_keepEnd.PlayFeedbacks();
         }
     }
     private void triggerLimit()
@@ -55,7 +63,6 @@ public class FireDash : MonoBehaviour
             Vector3 Dir = Quaternion.Euler(0, _playerController.PlayerRotation, 0) * Vector3.forward;
             _characterController.Move(Dir * dashSpeed * Time.deltaTime);
             yield return null;
-
         }
     }
 }
