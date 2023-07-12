@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour,IHealth
 {
+    [SerializeField] private MMFeedbacks HitFeedbacks;
     [SerializeField] private MMFeedbacks DeathFeedbacks;
     [SerializeField] private int _health;
     private Rigidbody rb;
@@ -23,17 +24,23 @@ public class Enemy_Health : MonoBehaviour,IHealth
     public void TakeDamage(int Damage)
     {
         _health -= Damage;
+
         Debug.Log("Enemy_Test get damage" + Damage);
         Debug.Log("Enemy_Test health" + _health);
 
         if(_health <=0)
         {
             EnemyDeath();
+            DeathFeedbacks.PlayFeedbacks();
+
+        }
+        else
+        {
+            HitFeedbacks.PlayFeedbacks();
         }
     }
     private void EnemyDeath()
     {
-        DeathFeedbacks.PlayFeedbacks();
         rb.drag = 10;
         CloseCollider();
         Destroy(gameObject, 1.5f);

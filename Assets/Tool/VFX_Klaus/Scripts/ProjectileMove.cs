@@ -6,7 +6,6 @@ using UnityEngine.VFX;
 
 public class ProjectileMove : MonoBehaviour
 {
-    public MMFeedbacks HitFeedback;
     public float speed;
     public float fireRate;
     public GameObject muzzlePrefab;
@@ -46,10 +45,8 @@ public class ProjectileMove : MonoBehaviour
 
         if(hitPrefab != null)
         {
-            //oldHit(pos, rot);
             newHit(pos,rot);
         }
-        HitFeedback?.PlayFeedbacks();
         Destroy(gameObject);
     }
 
@@ -74,19 +71,5 @@ public class ProjectileMove : MonoBehaviour
             // playRate need to change to duration;
         }
         
-    }
-    private void oldHit(Vector3 pos,quaternion rot)
-    {
-        var hitVFX = Instantiate(hitPrefab, pos, rot);
-        var psHit = hitVFX.GetComponent<ParticleSystem>();
-        if (psHit != null)
-        {
-            Destroy(hitVFX, psHit.main.duration);
-        }
-        else
-        {
-            var psChild = hitVFX.transform.GetChild(0).GetComponent<ParticleSystem>();
-            Destroy(hitVFX, psChild.main.duration);
-        }
     }
 }

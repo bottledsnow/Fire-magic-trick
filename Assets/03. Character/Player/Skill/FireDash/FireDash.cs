@@ -9,6 +9,7 @@ public class FireDash : MonoBehaviour
     
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashTime;
+    [SerializeField] private float CdTime;
     [SerializeField] private MMF_Player MM_player;
     [SerializeField] private MMF_Player MM_keepEnd;
 
@@ -16,6 +17,7 @@ public class FireDash : MonoBehaviour
     private ControllerInput _input;
     private CharacterController _characterController;
     private bool dashedButton = false;
+    private bool dashOnCD;
     private void Start()
     {
         _playerController = GetComponent<ThirdPersonController>();
@@ -35,23 +37,32 @@ public class FireDash : MonoBehaviour
     }
     private async void triggerDash()
     {
-        if (_input.ButtonB && !dashedButton)
+        if (_input.ButtonB && !dashedButton && _input.LeftStick != Vector2.zero)
         {
-            dashedButton = true;
-            //When press Button,triiger once
-            StartCoroutine(Dash());
-            MM_player.PlayFeedbacks();
-            await Task.Delay((int)(dashTime*1000));
-            MM_keepEnd.PlayFeedbacks();
+            if(!dashOnCD)
+            {
+                dashedButton = true;
+                //When press Button,triiger once
+                StartCoroutine(Dash());
+                DashCD(CdTime);
+                MM_player.PlayFeedbacks();
+                await Task.Delay((int)(dashTime * 1000));
+                MM_keepEnd.PlayFeedbacks();
+            }
         }
     }
     private void triggerLimit()
     {
         if(!_input.ButtonB)
         {
-            
             dashedButton = false;
         }
+    }
+    private async void DashCD(float CDtime)
+    {
+        dashOnCD = true;
+        await Task.Delay((int)(CDtime * 1000));
+        dashOnCD = false;
     }
     #endregion 
     IEnumerator Dash()

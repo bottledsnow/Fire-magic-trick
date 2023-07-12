@@ -6,6 +6,7 @@ using MoreMountains.Feedbacks;
 
 public class Fire_Teleport : MonoBehaviour
 {
+    public int TeleportDamage;
     [SerializeField] MMFeedbacks TeleportFeedback;
     [SerializeField] private CinemachineVirtualCamera playerCamera;
     [SerializeField] private float TeleportCost;
