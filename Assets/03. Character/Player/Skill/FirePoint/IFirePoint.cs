@@ -7,5 +7,5 @@ public interface IFirePoint
     void PlayerNotChoosePoint();
 
     //Some FirePoint without particle ex. fire plant
-    //void AbsorbFire();
+    void AbsorbFire();
 }
