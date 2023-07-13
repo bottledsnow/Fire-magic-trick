@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class FirePoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject firePoint;
+    public void PlayerChoosePoint()
     {
-        
+        if (firePoint != null)
+            firePoint.SetActive(true);
     }
-
-    // Update is called once per frame
-    void Update()
+    public void PlayerNotChoosePoint()
     {
-        
+        Debug.Log("Leave Point");
+        if (firePoint != null)
+            firePoint.SetActive(false);
+    }
+    public void DestroyChoosePoint()
+    {
+        Destroy(this.gameObject);
     }
 }

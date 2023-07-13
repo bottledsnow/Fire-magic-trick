@@ -7,11 +7,11 @@ public class FireCheck_Easy : MonoBehaviour
     public Transform FirePoint;
     public float rayDistance = 10f; // Éä¾€µÄéL¶È
     public bool isChooseFirePoint;
-    private IFirePoint firePoint;
+    private FirePoint firePoint;
 
     private bool isHit = false;
     
-    private void Update()
+    private void FixedUpdate()
     {
         Check();
     }
@@ -40,7 +40,8 @@ public class FireCheck_Easy : MonoBehaviour
     {
         if ( firePoint != null )
         {
-            firePoint.AbsorbFire();
+            FireAbsorb fireAbsorb= firePoint.GetComponent<FireAbsorb>();
+            fireAbsorb.enabled = true;
         }
     }
     private void OnDrawGizmos()
@@ -57,7 +58,7 @@ public class FireCheck_Easy : MonoBehaviour
             {
                 FirePoint = hit.collider.gameObject.transform;
                 isChooseFirePoint = true;
-                firePoint = hit.collider.GetComponent<IFirePoint>();
+                firePoint = hit.collider.GetComponent<FirePoint>();
                 firePoint.PlayerChoosePoint();
             }
         }

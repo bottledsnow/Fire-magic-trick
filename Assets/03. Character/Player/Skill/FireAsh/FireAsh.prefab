@@ -14578,6 +14578,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8458301892469232600}
   - component: {fileID: 8458301892469232602}
+  - component: {fileID: 8106631488178815929}
   - component: {fileID: 8458301892469232601}
   - component: {fileID: 3318663125679650095}
   - component: {fileID: 5918931634573827864}
@@ -14621,6 +14622,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 3
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8106631488178815929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517193681152231777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6361d677d714e148ab80185dffba9cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 3886938403989089099}
 --- !u!114 &8458301892469232601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14633,11 +14647,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07ce1385318ef7a458759cc47fb60365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireCollider: {fileID: 0}
+  lifeTime: 5
   AshFeedback: {fileID: -5952850553453818142}
   Absorb: {fileID: 3318663125679650095}
-  lifeTime: 5
-  FirePoint: {fileID: 3886938403989089099}
 --- !u!114 &3318663125679650095
 MonoBehaviour:
   m_ObjectHideFlags: 0

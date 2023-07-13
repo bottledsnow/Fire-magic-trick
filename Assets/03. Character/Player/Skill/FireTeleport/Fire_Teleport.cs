@@ -55,10 +55,10 @@ public class Fire_Teleport : MonoBehaviour
     private async void FireTeleprot()
     {
         SetTeleportCameraDamping();
-        _PlayerControl.enabled = false;
+        _PlayerControl.outControl = true;
         transform.position = fireCheck.FirePoint.position;
         await Task.Delay(OutControll_ms);
-        _PlayerControl.enabled = true;
+        _PlayerControl.outControl = false;
         revertTeleportCameraDamping();
     }
     private void SetTeleportCameraDamping()

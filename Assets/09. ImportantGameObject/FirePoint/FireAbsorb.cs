@@ -12,12 +12,14 @@ public class FireAbsorb : MonoBehaviour
 
     private void Start()
     {
-        particles = new ParticleSystem.Particle[_particleSystem.main.maxParticles];
+        if (_particleSystem != null)
+            particles = new ParticleSystem.Particle[_particleSystem.main.maxParticles];
     }
 
     private void Update()
     {
-        Absorb();
+        if (_particleSystem != null)
+            Absorb();
         target = GameManager.singleton._input.transform.position;
     }
 
