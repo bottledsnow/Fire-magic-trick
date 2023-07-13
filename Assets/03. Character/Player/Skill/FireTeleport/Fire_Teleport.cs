@@ -33,7 +33,7 @@ public class Fire_Teleport : MonoBehaviour
     }
     private void ignit()
     {
-        if(_input.RB )
+        if(_input.LB )
         {
             if(fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
             {
@@ -55,7 +55,7 @@ public class Fire_Teleport : MonoBehaviour
     private async void FireTeleprot()
     {
         SetTeleportCameraDamping();
-        _PlayerControl.enabled = false;
+        //_PlayerControl.enabled = false;
         transform.position = fireCheck.FirePoint.position;
         await Task.Delay(OutControll_ms);
         _PlayerControl.enabled = true;

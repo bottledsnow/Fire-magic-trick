@@ -7,6 +7,7 @@ using MoreMountains.Feedbacks;
 
 public class ThirdPersonShooterController_Charge : MonoBehaviour
 {
+    public int explodeDamage;
     [SerializeField] private MMFeedbacks ReadyChargeFeedback;
     [SerializeField] private MMFeedbacks ReadyChargeCloseFeedback;
     [SerializeField] private MMFeedbacks OnChargeFeedback;

@@ -25,8 +25,8 @@ public class FireAsh : MonoBehaviour,IFirePoint
     public void PlayerNotChoosePoint()
     {
         Debug.Log("Leave Point");
-        if(FirePoint != null )
-        FirePoint.SetActive(false);
+        if (FirePoint != null)
+            FirePoint.SetActive(false);
     }
     public void DestroyChoosePoint()
     {
