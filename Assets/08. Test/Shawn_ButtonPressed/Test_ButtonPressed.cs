@@ -6,7 +6,6 @@ public class Test_ButtonPressed : MonoBehaviour
     public ControllerInput _Input;
     //copy
     public float PressedTime = 0;
-    public float FinalPressedTime = 0;
     public bool Pressed = false;
     public bool KeepPressed;
     private void Update()
