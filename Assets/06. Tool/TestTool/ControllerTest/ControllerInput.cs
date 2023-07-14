@@ -6,6 +6,7 @@ public class ControllerInput : MonoBehaviour
 {
     [Header("Game")]
     public bool SprintMode;
+    public float PressedSensitivity;
     private bool TurnOn = false;
     private bool trigger = false;
     [Header("Stick")]

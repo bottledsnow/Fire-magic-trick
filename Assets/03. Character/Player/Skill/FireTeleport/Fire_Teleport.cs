@@ -35,24 +35,29 @@ public class Fire_Teleport : MonoBehaviour
     {
         if(_input.LB )
         {
-            if(fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
+            FireTeleport();
+        }
+    }
+    private void FireTeleport()
+    {
+        if (fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
+        {
+            energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
+            if (canTeleport)
             {
-                energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
-                if(canTeleport)
-                {
-                    fireCheck.isChooseFirePoint = false;
-                    TeleportFeedback.PlayFeedbacks();
-                    FireTeleprot();
-                    fireCheck.AbsorbFire();
-                    fireCheck.DestroyFirePoint();
-                }else
-                {
-                    Debug.Log("Not enough Fire Energy");
-                }
+                fireCheck.isChooseFirePoint = false;
+                TeleportFeedback.PlayFeedbacks();
+                TranstatePlayer();
+                fireCheck.AbsorbFire();
+                fireCheck.DestroyFirePoint();
+            }
+            else
+            {
+                Debug.Log("Not enough Fire Energy");
             }
         }
     }
-    private async void FireTeleprot()
+    private async void TranstatePlayer()
     {
         SetTeleportCameraDamping();
         _PlayerControl.outControl = true;
