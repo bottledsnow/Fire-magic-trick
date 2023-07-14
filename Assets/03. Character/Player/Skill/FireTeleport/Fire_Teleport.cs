@@ -19,6 +19,11 @@ public class Fire_Teleport : MonoBehaviour
     private Vector3 oldCameraDamping;
     private bool canTeleport;
 
+    //Button System
+    private float PressedTime = 0;
+    private bool Pressed = false;
+    private bool KeepPressed;
+
     private void Update()
     {
         ignit();
@@ -31,6 +36,7 @@ public class Fire_Teleport : MonoBehaviour
         _PlayerControl = GetComponent<ThirdPersonController>();
         fireCheck = Camera.main.GetComponent<FireCheck_Easy>();
     }
+    #region Button System
     private void ignit()
     {
         if(_input.LB )
@@ -38,6 +44,7 @@ public class Fire_Teleport : MonoBehaviour
             FireTeleport();
         }
     }
+    #endregion
     private void FireTeleport()
     {
         if (fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
