@@ -25,11 +25,10 @@ public class Fire_Teleport : MonoBehaviour
     private ThirdPersonController _PlayerControl;
     private FireCheck_Easy fireCheck;
     private ParticleSystem.EmissionModule emissionModule;
-    private ParticleSystem.MainModule mainModule;
-    private InAirCheck airCheck;
     private Vector3 oldCameraDamping;
     private bool canTeleport;
 
+    [HideInInspector] public bool isTeleporting;
     //Button System
     private float PressedTime = 0;
     private bool Pressed = false;
@@ -47,35 +46,8 @@ public class Fire_Teleport : MonoBehaviour
         _PlayerControl = GetComponent<ThirdPersonController>();
         fireCheck = Camera.main.GetComponent<FireCheck_Easy>();
         emissionModule = InAirEffect.emission;
-        mainModule = InAirEffect.main;
-        airCheck = GetComponent<InAirCheck>();
     }
-    private void FireTeleport()
-    {
-        if (fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
-        {
-            energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
-            if (canTeleport)
-            {
-                fireCheck.isChooseFirePoint = false;
-                TranslateSystem();
-                ToDamageAround();
-                fireCheck.AbsorbFire();
-                fireCheck.DestroyFirePoint();
-            }
-            else
-            {
-                Debug.Log("Not enough Fire Energy");
-            }
-        }
-    }
-    private void ToDamageAround()
-    {
-        if(!airCheck.InAir)
-        {
-            TeleportFeedback.PlayFeedbacks();
-        }
-    }
+    
     #region Button System
     private void ButtonSystem()
     {
@@ -145,11 +117,36 @@ public class Fire_Teleport : MonoBehaviour
 
     private void ButtonInitialization()
     {
+        isTeleporting = false;
         Pressed = false;
         KeepPressed = false;
         PressedTime = 0;
     }
     #endregion
+    private void FireTeleport()
+    {
+        if (fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
+        {
+            energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
+            if (canTeleport)
+            {
+                isTeleporting = true;
+                fireCheck.isChooseFirePoint = false;
+                TranslateSystem();
+                ToDamageAround();
+                fireCheck.AbsorbFire();
+                fireCheck.DestroyFirePoint();
+            }
+            else
+            {
+                Debug.Log("Not enough Fire Energy");
+            }
+        }
+    }
+    private void ToDamageAround()
+    {
+        TeleportFeedback.PlayFeedbacks();
+    }
     #region TranslateSystem
     private void TranslateSystem()
     {

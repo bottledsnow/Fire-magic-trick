@@ -13,6 +13,7 @@ public class FireDash : MonoBehaviour
     [SerializeField] private MMF_Player MM_player;
     [SerializeField] private MMF_Player MM_keepEnd;
 
+    private Fire_Teleport _Teleport;
     private ThirdPersonController _playerController;
     private ControllerInput _input;
     private CharacterController _characterController;
@@ -23,6 +24,7 @@ public class FireDash : MonoBehaviour
         _playerController = GetComponent<ThirdPersonController>();
         _input = GetComponent<ControllerInput>();
         _characterController = GetComponent<CharacterController>();
+        _Teleport = GetComponent<Fire_Teleport>();
     }
 
     private void Update()
@@ -32,8 +34,11 @@ public class FireDash : MonoBehaviour
     #region Dash Systsem
     private void DashSystem()
     {
-        triggerDash();
-        triggerLimit();
+        if(!_Teleport.isTeleporting) 
+        {
+            triggerDash();
+            triggerLimit();
+        }
     }
     private async void triggerDash()
     {
