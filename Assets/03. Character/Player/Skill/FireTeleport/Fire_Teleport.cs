@@ -24,8 +24,9 @@ public class Fire_Teleport : MonoBehaviour
     private ControllerInput _Input;
     private ThirdPersonController _PlayerControl;
     private FireCheck_Easy fireCheck;
-    private ParticleSystem.VelocityOverLifetimeModule velocityOverLifetimeModule;
     private ParticleSystem.EmissionModule emissionModule;
+    private ParticleSystem.MainModule mainModule;
+    private InAirCheck airCheck;
     private Vector3 oldCameraDamping;
     private bool canTeleport;
 
@@ -45,8 +46,9 @@ public class Fire_Teleport : MonoBehaviour
         _Input = GameManager.singleton._input;
         _PlayerControl = GetComponent<ThirdPersonController>();
         fireCheck = Camera.main.GetComponent<FireCheck_Easy>();
-        velocityOverLifetimeModule = InAirEffect.velocityOverLifetime;
         emissionModule = InAirEffect.emission;
+        mainModule = InAirEffect.main;
+        airCheck = GetComponent<InAirCheck>();
     }
     private void FireTeleport()
     {
@@ -56,8 +58,8 @@ public class Fire_Teleport : MonoBehaviour
             if (canTeleport)
             {
                 fireCheck.isChooseFirePoint = false;
-                TeleportFeedback.PlayFeedbacks();
                 TranslateSystem();
+                ToDamageAround();
                 fireCheck.AbsorbFire();
                 fireCheck.DestroyFirePoint();
             }
@@ -65,6 +67,13 @@ public class Fire_Teleport : MonoBehaviour
             {
                 Debug.Log("Not enough Fire Energy");
             }
+        }
+    }
+    private void ToDamageAround()
+    {
+        if(!airCheck.InAir)
+        {
+            TeleportFeedback.PlayFeedbacks();
         }
     }
     #region Button System
@@ -160,8 +169,7 @@ public class Fire_Teleport : MonoBehaviour
         {
             await Task.Delay(100);
             time_ms += 100;
-            velocityOverLifetimeModule.radialMultiplier +=0.5f;
-            emissionModule.rateOverTimeMultiplier += 50;
+            emissionModule.rateOverTimeMultiplier += 100;
             if (time_ms > OutControll_ms || time_ms > 10000)
             {
                 TranslateEnd();
@@ -171,7 +179,6 @@ public class Fire_Teleport : MonoBehaviour
     }
     private void TranslateEnd()
     {
-        velocityOverLifetimeModule.radialMultiplier = 0;
         emissionModule.rateOverTimeMultiplier = 0;
         _PlayerControl.outControl = false;
         revertTeleportCameraDamping();
