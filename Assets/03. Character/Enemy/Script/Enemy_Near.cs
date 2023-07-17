@@ -16,11 +16,13 @@ public class Enemy_Near : MonoBehaviour
     private Rigidbody rb;
     private float distanceToPlayer;
     private bool isMoveToPlayer;
+    private int playerDetection;
     private float normalAttack_FireTimer;
+    private float normalAttack_DurationTimer;
 
     private enum EnemyState
     {
-        Idle, Attack, 
+        Idle, Chase, Attack, 
     }
 
     private EnemyState currentState = EnemyState.Idle;
@@ -33,6 +35,7 @@ public class Enemy_Near : MonoBehaviour
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody>();
         normalAttack_FireTimer = 0;
+        normalAttack_DurationTimer = 0;
     }
 
     void Update()
@@ -46,22 +49,43 @@ public class Enemy_Near : MonoBehaviour
                 // 閒置狀態，等待發現玩家
                 isMoveToPlayer = false;
                 if (fov.canSeePlayer)
+                {   
+                    if(distanceToPlayer > normalAttack_Range)
+                    {
+                        currentState = EnemyState.Chase;
+                    }
+                    else
+                    {
+                        currentState = EnemyState.Attack;
+                    }
+                }
+                break;
+
+            case EnemyState.Chase:
+                //追逐玩家
+                isMoveToPlayer = true;
+                if(distanceToPlayer < normalAttack_Range)
                 {
                     currentState = EnemyState.Attack;
+                }
+                if(!fov.canSeePlayer)
+                {
+                    currentState = EnemyState.Idle;
+                    normalAttack_DurationTimer = Time.time + normalAttack_Duration;
                 }
                 break;
 
             case EnemyState.Attack:
-                // 近戰腳腳攻擊
-                if (distanceToPlayer < normalAttack_Range && normalAttack_FireTimer >= normalAttack_Cooldown)
+                // 近戰攻擊
+                isMoveToPlayer = false;
+                if(Time.time >= normalAttack_FireTimer)
                 {
-                    normalAttack_FireTimer = 0;
-                    StartCoroutine(NormalAttack());
+                    normalAttack_FireTimer = Time.time + normalAttack_Cooldown;
+                    NormalAttack();
                 }
-                else
-                {
-                    transform.LookAt(new Vector3(playerTransform.position.x,transform.position.y,playerTransform.position.z));
-                    isMoveToPlayer = true;
+                if(distanceToPlayer > normalAttack_Range && Time.time > normalAttack_DurationTimer)
+                {   
+                    currentState = EnemyState.Chase;
                 }
                 break;
         }
@@ -73,8 +97,6 @@ public class Enemy_Near : MonoBehaviour
         {
             MoveToPlayer();
         }
-
-        normalAttack_FireTimer += 0.2f;
     }
 
     void MoveToPlayer()
@@ -93,9 +115,8 @@ public class Enemy_Near : MonoBehaviour
             rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
         }
     }
-    IEnumerator NormalAttack()
+    void NormalAttack()
     {
-        isMoveToPlayer = false;
-        yield return new WaitForSeconds(normalAttack_Duration);
+        print("普通攻擊");
     }
 }
