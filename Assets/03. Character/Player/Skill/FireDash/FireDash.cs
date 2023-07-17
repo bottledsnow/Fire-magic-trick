@@ -6,18 +6,22 @@ using MoreMountains.Feedbacks;
 
 public class FireDash : MonoBehaviour
 {
+    [Header("Dash")]
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashTime_Max;
     [SerializeField] private float CdTime;
     [Header("Special Dash")]
     [SerializeField] private ParticleSystem DashEffect_Explode_End;
-    [SerializeField] private Vector3 Dash_Bad;
-    [SerializeField] private Vector3 Dash_Normal;
     [SerializeField] private Vector3 Dash_Good;
     [SerializeField] private float Reaction_time;
-    public  float PressedTime = 0;
-    public  bool Pressed = false;
-    public  bool KeepPressed;
+    [Header("FeedBacks")]
+    [SerializeField] private MMF_Player Feedbacks_Dash_CD;
+    [SerializeField] private MMF_Player Feedbacks_Dash_Start;
+    [SerializeField] private MMF_Player Feedbacks_Dash_End;
+    private Vector3 Dash_Normal;
+    private float PressedTime = 0;
+    private bool Pressed = false;
+    private bool KeepPressed;
     private bool dashedButton = false;
     private bool dashOnCD;
     private bool IsDash;
@@ -25,16 +29,14 @@ public class FireDash : MonoBehaviour
     private ThirdPersonController _playerController;
     private ControllerInput _Input;
     private CharacterController _characterController;
-    [Header("FeedBacks")]
-    [SerializeField] private MMF_Player Feedbacks_Dash_CD;
-    [SerializeField] private MMF_Player Feedbacks_Dash_Start;
-    [SerializeField] private MMF_Player Feedbacks_Dash_End;
+    
     private void Start()
     {
         _playerController = GetComponent<ThirdPersonController>();
         _Input = GetComponent<ControllerInput>();
         _characterController = GetComponent<CharacterController>();
         _Teleport = GetComponent<Fire_Teleport>();
+        Dash_Normal = DashEffect_Explode_End.gameObject.transform.localScale;
     }
 
     private void Update()
@@ -108,9 +110,6 @@ public class FireDash : MonoBehaviour
             if (time_Start < PressedTime && PressedTime < time_End)
             {
                 SetDashScale(Dash_Good);
-            }else
-            {
-                SetDashScale(Dash_Bad);
             }
         }
     }
