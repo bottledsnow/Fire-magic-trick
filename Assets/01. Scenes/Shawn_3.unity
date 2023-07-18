@@ -12788,6 +12788,7 @@ GameObject:
   - component: {fileID: 462702301}
   - component: {fileID: 462702304}
   - component: {fileID: 462702303}
+  - component: {fileID: 462702305}
   m_Layer: 6
   m_Name: TeleportFeedbacks
   m_TagString: Untagged
@@ -12831,6 +12832,7 @@ MonoBehaviour:
   - {fileID: 462702301}
   - {fileID: 462702304}
   - {fileID: 462702303}
+  - {fileID: 462702305}
   InitializationMode: 2
   SafeMode: 3
   Direction: 0
@@ -13111,6 +13113,48 @@ MonoBehaviour:
   DebugActive: 0
   TargetCollider: {fileID: 1346755052}
   Mode: 0
+--- !u!114 &462702305
+MonoBehaviour:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 462702297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65811966b3e48ad4a9362cb8b1c4b83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Camera Zoom
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Channel: 1
+  ZoomMode: 0
+  ZoomFieldOfView: 60
+  ZoomTransitionDuration: 0.5
+  ZoomDuration: 0.5
+  RelativeFieldOfView: 0
 --- !u!1 &468020342
 GameObject:
   m_ObjectHideFlags: 0
@@ -57070,6 +57114,7 @@ GameObject:
   - component: {fileID: 1950569432}
   - component: {fileID: 1950569434}
   - component: {fileID: 1950569433}
+  - component: {fileID: 1950569435}
   m_Layer: 0
   m_Name: PlayerFollowCamera_50
   m_TagString: Untagged
@@ -57154,6 +57199,50 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 873657019}
+--- !u!114 &1950569435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950569431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51662a222e352d74a8ad12e5843f7501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChannelMode: 0
+  Channel: 1
+  MMChannelDefinition: {fileID: 11400000, guid: 6ba165fd91edb434aa2f1cd6f6b05885, type: 2}
+  ZoomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  TestMode: 0
+  TestFieldOfView: 60
+  TestTransitionDuration: 0.5
+  TestDuration: 0.05
+  TestZoomButton: 0
 --- !u!1001 &1958984214
 PrefabInstance:
   m_ObjectHideFlags: 0
