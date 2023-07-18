@@ -16,6 +16,7 @@ public class Fire_Teleport : MonoBehaviour
     [SerializeField] private int OutControll_ms_max;
     [SerializeField] private int OutControll_ms;
     [Header("Feedbacks")]
+    [SerializeField] private SpeedCameraSystem speedCameraSystem;
     [SerializeField] private ParticleSystem InAirEffect;
     [SerializeField] private MMF_Player InAirFeedbacks_Start;
     [SerializeField] private MMF_Player InAirFeedbacks_Stop;
@@ -68,7 +69,6 @@ public class Fire_Teleport : MonoBehaviour
         if (!Pressed)
         {
             Pressed = true;
-            OutControll_ms = OutControll_ms_normal;
             FireTeleport();
             Debug.Log("Button");
         }
@@ -79,10 +79,8 @@ public class Fire_Teleport : MonoBehaviour
         {
             if (!KeepPressed)
             {
-                InAirFeedbacks_Start.PlayFeedbacks();
                 KeepPressed = true;
-                Debug.Log("Button Pressed Start");
-                OutControll_ms = OutControll_ms_max;
+                FireInAir();
             }
             Debug.Log("Keep Update");
         }
@@ -111,6 +109,7 @@ public class Fire_Teleport : MonoBehaviour
             Debug.Log("Button Pressed End");
             InAirFeedbacks_Stop.PlayFeedbacks();
             OutControll_ms = OutControll_ms_normal;
+            speedCameraSystem.CloseParticle();
         }
     }
 
@@ -129,6 +128,8 @@ public class Fire_Teleport : MonoBehaviour
             energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
             if (canTeleport)
             {
+                OutControll_ms = OutControll_ms_normal;
+                speedCameraSystem.OpenParticle();
                 isTeleporting = true;
                 fireCheck.isChooseFirePoint = false;
                 TranslateSystem();
@@ -145,6 +146,15 @@ public class Fire_Teleport : MonoBehaviour
     private void ToDamageAround()
     {
         TeleportFeedback.PlayFeedbacks();
+    }
+    private void FireInAir()
+    {
+        if (isTeleporting)
+        {
+            InAirFeedbacks_Start.PlayFeedbacks();
+            Debug.Log("Button Pressed Start");
+            OutControll_ms = OutControll_ms_max;
+        }
     }
     #region TranslateSystem
     private void TranslateSystem()
