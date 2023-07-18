@@ -47,5 +47,4 @@ public class CombustiblesObj : MonoBehaviour
         Feedbacks_Burning_Start.StopFeedbacks();
         burning = false;
     }
-    
 }
