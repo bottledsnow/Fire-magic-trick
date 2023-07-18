@@ -3,7 +3,6 @@ using UnityEngine;
 using System.Threading.Tasks;
 using Cinemachine;
 using MoreMountains.Feedbacks;
-using UnityEngine.ProBuilder.MeshOperations;
 
 public class Fire_Teleport : MonoBehaviour
 {
@@ -190,6 +189,4 @@ public class Fire_Teleport : MonoBehaviour
         playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping = oldCameraDamping;
     }
     #endregion
-
-
 }
