@@ -20,7 +20,7 @@ public class BulletProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<BulletTarget>() != null)
+        if (collision.gameObject.GetComponent<Card_Rotate>() != null)
         {
             //Hit Target
             Instantiate(vfxHitBlue, transform.position, Quaternion.identity);

@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1706274480334191768}
-  - component: {fileID: 1706274480334191769}
+  - component: {fileID: -8226573869431572035}
+  - component: {fileID: 4476827988618672302}
   - component: {fileID: 7286252282512798199}
   - component: {fileID: 1706274480334191770}
   - component: {fileID: 1706274480334191771}
@@ -38,7 +39,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1706274480334191769
+--- !u!114 &-8226573869431572035
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,14 +48,31 @@ MonoBehaviour:
   m_GameObject: {fileID: 1706274480334191748}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f8b9d85d920bc042a7f4ad66be17a7a, type: 3}
+  m_Script: {fileID: 11500000, guid: b1baf91f5f48d274e90fa686a7b77daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitFeedback: {fileID: -5705056598207554329}
   speed: 10
   fireRate: 10
   muzzlePrefab: {fileID: 6076308697013177144, guid: 992cd27b27c5e16439428e8659217e0f, type: 3}
   hitPrefab: {fileID: 6557820281351849792, guid: a94166e0a249ee04fa45b1f7a679dfe2, type: 3}
+--- !u!114 &4476827988618672302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706274480334191748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43ba17b1f42dfb14296390d22792b8c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  angleSpeed: 0.05
+  rayDistance: 10
+  mask:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!114 &7286252282512798199
 MonoBehaviour:
   m_ObjectHideFlags: 0
