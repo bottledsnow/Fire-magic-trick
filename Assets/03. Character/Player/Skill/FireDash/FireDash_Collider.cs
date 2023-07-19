@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class FireDash_Collider : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
