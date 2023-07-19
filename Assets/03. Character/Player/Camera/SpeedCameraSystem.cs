@@ -1,7 +1,6 @@
 using MoreMountains.Feedbacks;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class SpeedCameraSystem : MonoBehaviour
 {
@@ -13,8 +12,18 @@ public class SpeedCameraSystem : MonoBehaviour
     {
         Feedbacks_Start.PlayFeedbacks();
     }
+    public async void OpenParticle(int Delay)
+    {
+        await Task.Delay(Delay);
+        Feedbacks_Start.PlayFeedbacks();
+    }
     public void CloseParticle() 
     {
+        Feedbacks_End.PlayFeedbacks();
+    }
+    public async void CloseParticle(int Delay)
+    {
+        await Task.Delay(Delay);
         Feedbacks_End.PlayFeedbacks();
     }
 }

@@ -111,7 +111,7 @@ public class Fire_Teleport : MonoBehaviour
             Debug.Log("Button Pressed End");
             InAirFeedbacks_Stop.PlayFeedbacks();
             OutControll_ms = OutControll_ms_normal;
-            speedCameraSystem.CloseParticle();
+            
         }
     }
 
@@ -132,6 +132,7 @@ public class Fire_Teleport : MonoBehaviour
             {
                 OutControll_ms = OutControll_ms_normal;
                 speedCameraSystem.OpenParticle();
+                speedCameraSystem.CloseParticle(500);
                 isTeleporting = true;
                 fireCheck.isChooseFirePoint = false;
                 TranslateSystem();
