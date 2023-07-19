@@ -6,7 +6,8 @@ using Unity.VisualScripting;
 public class CombustiblesObj : MonoBehaviour
 {
     private BurningSystem burningSystem;
-    private bool burning = false;
+    [Header("public")]
+    public bool burning = false;
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player Feedbacks_Burning_Start;
     [SerializeField] private MMF_Player Feedbacks_Burning_Keep;
