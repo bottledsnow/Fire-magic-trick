@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,9 +45,9 @@ public class Card_Rotate : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, rayDistance, mask))
         {
-            if(hit.collider.CompareTag("CombustiblesObj"))
+            if(hit.collider.CompareTag("CombustiblesTarget"))
             {
-                Target = hit.collider.transform;
+                Target = hit.collider.transform.Find("Center");
             }
         }
     }

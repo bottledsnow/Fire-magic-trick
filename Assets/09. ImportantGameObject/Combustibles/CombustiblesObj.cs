@@ -40,12 +40,16 @@ public class CombustiblesObj : MonoBehaviour
     }
     private void Burning_Keep()
     {
-        Feedbacks_Burning_Keep.PlayFeedbacks();
+        if (Feedbacks_Burning_Keep != null)
+            Feedbacks_Burning_Keep.PlayFeedbacks();
     }
     private void Burning_End()
     {
-        Feedbacks_Burning_End.PlayFeedbacks();
-        Feedbacks_Burning_Start.StopFeedbacks();
-        burning = false;
+        if(Feedbacks_Burning_End != null)
+        {
+            Feedbacks_Burning_End.PlayFeedbacks();
+            Feedbacks_Burning_Start.StopFeedbacks();
+            burning = false;
+        }
     }
 }
