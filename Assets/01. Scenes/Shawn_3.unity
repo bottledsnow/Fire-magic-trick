@@ -5381,7 +5381,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2868016361664997917, guid: 0e67515843bbd3442ba529e1e49e2189, type: 3}
       propertyPath: _health
-      value: 30
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3930321046957663993, guid: 0e67515843bbd3442ba529e1e49e2189, type: 3}
       propertyPath: m_RootOrder
@@ -43942,7 +43942,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1491275907}
   - component: {fileID: 1491275910}
-  - component: {fileID: 1491275909}
   - component: {fileID: 1491275908}
   m_Layer: 0
   m_Name: Camera_Speed Particle
@@ -43999,14 +43998,6 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
---- !u!81 &1491275909
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1491275906}
-  m_Enabled: 1
 --- !u!20 &1491275910
 Camera:
   m_ObjectHideFlags: 0
@@ -62360,13 +62351,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 208265624}
     m_Modifications:
+    - target: {fileID: 2868016361664997917, guid: 0e67515843bbd3442ba529e1e49e2189, type: 3}
+      propertyPath: _health
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 3930321046957663993, guid: 0e67515843bbd3442ba529e1e49e2189, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3930321046957663993, guid: 0e67515843bbd3442ba529e1e49e2189, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.992433
+      value: 12.42
       objectReference: {fileID: 0}
     - target: {fileID: 3930321046957663993, guid: 0e67515843bbd3442ba529e1e49e2189, type: 3}
       propertyPath: m_LocalPosition.y
@@ -62374,7 +62369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3930321046957663993, guid: 0e67515843bbd3442ba529e1e49e2189, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.5231476
+      value: -14.79
       objectReference: {fileID: 0}
     - target: {fileID: 3930321046957663993, guid: 0e67515843bbd3442ba529e1e49e2189, type: 3}
       propertyPath: m_LocalRotation.w
