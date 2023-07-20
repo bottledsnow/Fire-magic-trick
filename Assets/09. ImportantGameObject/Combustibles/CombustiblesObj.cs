@@ -19,7 +19,7 @@ public class CombustiblesObj : MonoBehaviour
         
         burningSystem = GameManager.singleton._input.GetComponent<BurningSystem>();
     }
-    public void Burning_Start()
+    public void StartBurning()
     {
         if(!burning)
         {

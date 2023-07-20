@@ -3,8 +3,6 @@ using UnityEngine;
 using System.Threading.Tasks;
 using Cinemachine;
 using MoreMountains.Feedbacks;
-using MoreMountains.Tools;
-using MoreMountains.FeedbacksForThirdParty;
 
 public class Fire_Teleport : MonoBehaviour
 {

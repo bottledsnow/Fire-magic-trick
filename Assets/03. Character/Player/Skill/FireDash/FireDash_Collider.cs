@@ -6,7 +6,7 @@ public class FireDash_Collider : MonoBehaviour
         if(other.gameObject.CompareTag("CombustiblesObj"))
         {
             CombustiblesObj Combustibles = other.gameObject.GetComponent<CombustiblesObj>();
-            Combustibles.Burning_Start();
+            Combustibles.StartBurning();
         }
     }
 }

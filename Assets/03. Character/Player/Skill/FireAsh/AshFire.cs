@@ -1,18 +1,16 @@
 using MoreMountains.Feedbacks;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class FireAsh : MonoBehaviour
+public class AshFire : MonoBehaviour
 {
     [SerializeField] private float lifeTime;
-    [SerializeField] private MMFeedbacks AshFeedback;
+    [SerializeField] private MMF_Player AshFeedback;
     [SerializeField] private FireAbsorb Absorb;
     private void Start()
     {
-        Destroy(gameObject, lifeTime);
         AshFeedback?.Initialization(this.gameObject);
         AshFeedback?.PlayFeedbacks();
+        Destroy(gameObject, lifeTime);
     }
     public void AbsorbFire()
     {
