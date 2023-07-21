@@ -11,6 +11,7 @@ public class ShootingSystem : MonoBehaviour
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private float shootingEnergyCost;
     [SerializeField] private float FireEnergyCost;
+    [SerializeField] private float MaxShootDistance;
 
     [Header("Aim Setting")]
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
@@ -42,10 +43,19 @@ public class ShootingSystem : MonoBehaviour
         Vector2 screenCenterPoint = new Vector2(Screen.width / 2f, Screen.height / 2f);
         Ray ray = Camera.main.ScreenPointToRay(screenCenterPoint);
 
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, 999f, aimColliderLayerMask))
+        RaycastHit hit;
+        bool raycastHit = Physics.Raycast(ray, out hit, 999f, aimColliderLayerMask);
+
+        if (raycastHit)
         {
-            debugTransform.position = raycastHit.point;
-            mouseWorldPosition = raycastHit.point;
+            debugTransform.position = hit.point;
+            mouseWorldPosition = hit.point;
+        }
+        else
+        {
+            // 射線未命中時，根據射線方向和距離設置 debugTransform 的位置
+            debugTransform.position = ray.origin + ray.direction * MaxShootDistance;
+            mouseWorldPosition = debugTransform.position;
         }
     }
     public void shoot(Transform preferb)
