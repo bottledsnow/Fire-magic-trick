@@ -23,7 +23,7 @@ public class Fire_Teleport : MonoBehaviour
     private EnergySystem energySystem;
     private ControllerInput _Input;
     private ThirdPersonController _PlayerControl;
-    private FireCheck_Easy fireCheck;
+    private FireCheck fireCheck;
     private ParticleSystem.EmissionModule emissionModule;
     private Vector3 oldCameraDamping;
     private bool canTeleport;
@@ -44,7 +44,7 @@ public class Fire_Teleport : MonoBehaviour
         oldCameraDamping = playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping;
         _Input = GameManager.singleton._input;
         _PlayerControl = GetComponent<ThirdPersonController>();
-        fireCheck = Camera.main.GetComponent<FireCheck_Easy>();
+        fireCheck = Camera.main.GetComponent<FireCheck>();
         emissionModule = InAirEffect.emission;
     }
     
@@ -123,7 +123,7 @@ public class Fire_Teleport : MonoBehaviour
     #endregion
     private void FireTeleport()
     {
-        if (fireCheck.isChooseFirePoint && fireCheck.FirePoint != null)
+        if (fireCheck.isChoosePoint && fireCheck.FirePoint != null)
         {
             energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
             if (canTeleport)
@@ -132,7 +132,7 @@ public class Fire_Teleport : MonoBehaviour
                 speedCameraSystem.OpenParticle();
                 speedCameraSystem.CloseParticle(500);
                 isTeleporting = true;
-                fireCheck.isChooseFirePoint = false;
+                fireCheck.isChoosePoint = false;
                 TranslateSystem();
                 ToDamageAround();
                 fireCheck.AbsorbFire();
