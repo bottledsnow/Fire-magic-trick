@@ -67,7 +67,7 @@ public class FireCheck : MonoBehaviour
     {
         if (_firePoint != null)
         {
-            _firePoint.DestroyChoosePoint();
+            _firePoint.DestroyFirePoint();
             _firePoint = null;
         }
     }
