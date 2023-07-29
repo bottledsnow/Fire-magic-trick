@@ -31,6 +31,7 @@ public class ShootingSystem : MonoBehaviour
     }
     private void Update()
     {
+        Aim();
         ShootRay();
         TurnToShoot();
     }

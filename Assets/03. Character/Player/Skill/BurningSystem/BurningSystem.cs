@@ -11,4 +11,5 @@ public class BurningSystem : MonoBehaviour
         DamageCount = BurningDuration / (BurningInterval_ms / 1000);
 
     }
+
 }
