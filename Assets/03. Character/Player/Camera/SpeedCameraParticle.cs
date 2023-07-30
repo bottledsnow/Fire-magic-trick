@@ -2,7 +2,7 @@ using MoreMountains.Feedbacks;
 using UnityEngine;
 using System.Threading.Tasks;
 
-public class SpeedCameraSystem : MonoBehaviour
+public class SpeedCameraParticle : MonoBehaviour
 {
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player Feedbacks_Start;

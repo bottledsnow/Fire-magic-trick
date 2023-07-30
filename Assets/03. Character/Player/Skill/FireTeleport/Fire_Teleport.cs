@@ -16,11 +16,12 @@ public class Fire_Teleport : MonoBehaviour
     [SerializeField] private int OutControll_ms_max;
     private int OutControll_ms;
     [Header("Feedbacks")]
-    [SerializeField] private SpeedCameraSystem speedCameraSystem;
+    [SerializeField] private SpeedCameraParticle speedCameraParticle;
     [SerializeField] private ParticleSystem InAirEffect;
     [SerializeField] private MMF_Player InAirFeedbacks_Start;
     [SerializeField] private MMF_Player InAirFeedbacks_Stop;
     private EnergySystem energySystem;
+    private CameraSystem cameraSystem;
     private ControllerInput _Input;
     private ThirdPersonController _PlayerControl;
     private FireCheck fireCheck;
@@ -41,6 +42,7 @@ public class Fire_Teleport : MonoBehaviour
     private void Start()
     {
         energySystem = GetComponent<EnergySystem>();
+        cameraSystem = GetComponent<CameraSystem>();
         oldCameraDamping = playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping;
         _Input = GameManager.singleton._input;
         _PlayerControl = GetComponent<ThirdPersonController>();
@@ -128,9 +130,8 @@ public class Fire_Teleport : MonoBehaviour
             energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
             if (canTeleport)
             {
-                OutControll_ms = OutControll_ms_normal;
-                speedCameraSystem.OpenParticle();
-                speedCameraSystem.CloseParticle(500);
+                SetOutControll(OutControll_ms_normal);
+                SetSpeedParticle();
                 isTeleporting = true;
                 fireCheck.isChoosePoint = false;
                 TranslateSystem();
@@ -143,6 +144,15 @@ public class Fire_Teleport : MonoBehaviour
                 Debug.Log("Not enough Fire Energy");
             }
         }
+    }
+    private void SetOutControll(int ms)
+    {
+        OutControll_ms = ms;
+    }
+    private void SetSpeedParticle()
+    {
+        speedCameraParticle.OpenParticle();
+        speedCameraParticle.CloseParticle(500);
     }
     private void ToDamageAround()
     {
@@ -170,7 +180,7 @@ public class Fire_Teleport : MonoBehaviour
     }
     private void TranslateStart()
     {
-        SetTeleportCameraDamping();
+        cameraSystem.ToTeleportCamera();
         _PlayerControl.outControl = true;
         transform.position = fireCheck.FirePoint.position;
     }
@@ -193,7 +203,6 @@ public class Fire_Teleport : MonoBehaviour
     {
         emissionModule.rateOverTimeMultiplier = 0;
         _PlayerControl.outControl = false;
-        revertTeleportCameraDamping();
     }
     private void SetTeleportCameraDamping()
     {

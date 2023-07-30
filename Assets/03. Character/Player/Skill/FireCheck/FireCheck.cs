@@ -6,7 +6,7 @@ public class FireCheck : MonoBehaviour
     [Header("CheckRay")]
     [SerializeField] private bool isHit = false;
     [SerializeField] private LayerMask mask;
-    [SerializeField] private float rayDistance = 10f; // 射線的長度
+    [SerializeField] private float rayDistance = 10f; // 射?的長度
 
     [HideInInspector] public Transform FirePoint;
     [HideInInspector] public bool isChoosePoint = false;
