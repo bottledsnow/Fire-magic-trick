@@ -14,7 +14,7 @@ public class Fire_Teleport : MonoBehaviour
     [Header("OutControll")]
     [SerializeField] private int OutControll_ms_normal;
     [SerializeField] private int OutControll_ms_max;
-    [SerializeField] private int OutControll_ms;
+    private int OutControll_ms;
     [Header("Feedbacks")]
     [SerializeField] private SpeedCameraSystem speedCameraSystem;
     [SerializeField] private ParticleSystem InAirEffect;
@@ -107,9 +107,9 @@ public class Fire_Teleport : MonoBehaviour
         if (PressedTime > _Input.PressedSensitivity)
         {
             Debug.Log("Button Pressed End");
+            PlayerJump();
             InAirFeedbacks_Stop.PlayFeedbacks();
             OutControll_ms = OutControll_ms_normal;
-            
         }
     }
 
@@ -156,6 +156,11 @@ public class Fire_Teleport : MonoBehaviour
             Debug.Log("Button Pressed Start");
             OutControll_ms = OutControll_ms_max;
         }
+    }
+    private void PlayerJump()
+    {
+        Debug.Log("Player Jump");
+        _PlayerControl.Jump();
     }
     #region TranslateSystem
     private void TranslateSystem()
