@@ -19,7 +19,7 @@ public class Enemy_BehaviorTreeTest : MonoBehaviour
         // 建立行為樹
         root = new SelectorNode(
             new SequenceNode(
-                new DistanceToPlayerConditionNode(blackboard),
+                new DistanceToPlayerConditionNode(blackboard, 0, 5),
                 new SequenceNode(attackNode)
             ),
             new SequenceNode(patrolNode)

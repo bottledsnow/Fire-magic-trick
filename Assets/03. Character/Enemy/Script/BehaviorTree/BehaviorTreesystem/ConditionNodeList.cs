@@ -6,15 +6,19 @@ using UnityEngine;
 public class DistanceToPlayerConditionNode : BehaviorTreeNode
 {
     private BehaviorTreeBlackboard behaviorTreeBlackboard;
+    private float min;
+    private float max;
 
-    public DistanceToPlayerConditionNode(BehaviorTreeBlackboard behaviorTreeBlackboard)
+    public DistanceToPlayerConditionNode(BehaviorTreeBlackboard behaviorTreeBlackboard, float min, float max)
     {
         this.behaviorTreeBlackboard = behaviorTreeBlackboard;
+        this.min = min;
+        this.max = max;
     }
 
     public override BehaviorTreeNodeState Execute()
     {
-        if(behaviorTreeBlackboard.distanceToPlayer <= 5)
+        if (max >= behaviorTreeBlackboard.distanceToPlayer && behaviorTreeBlackboard.distanceToPlayer >= min)
         {
             return BehaviorTreeNodeState.Success;
         }
