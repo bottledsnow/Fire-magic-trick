@@ -3,12 +3,14 @@ using UnityEngine;
 public class AshExplode : MonoBehaviour
 {
     private int ExplodeDamage;
+    private ShootingSystem shootingSystem;
     private ThirdPersonShooterController_Charge ChargeSystem;
     private bool ToDamage = false;
 
     private void Start()
     {
-        ChargeSystem = GameManager.singleton._input.GetComponent<ThirdPersonShooterController_Charge>();
+        shootingSystem = GameManager.singleton._input.GetComponent<ShootingSystem>();
+        ChargeSystem = shootingSystem._ShootingCharge;
         ExplodeDamage = ChargeSystem.explodeDamage;
     }
     private void OnTriggerEnter(Collider other)

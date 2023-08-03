@@ -6,8 +6,8 @@ using MoreMountains.Feedbacks;
 public class ShootingSystem : MonoBehaviour
 {
     [Header("Shooting System Component")]
-    [SerializeField] private ThirdPersonShooterController_Final _Shooting;
-    [SerializeField] private ThirdPersonShooterController_Charge _ShootingCharge;
+    public ThirdPersonShooterController_Final _Shooting;
+    public ThirdPersonShooterController_Charge _ShootingCharge;
     [Header("Shoot Setting")]
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
     [SerializeField] private Transform debugTransform;
