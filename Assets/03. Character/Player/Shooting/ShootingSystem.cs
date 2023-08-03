@@ -5,7 +5,9 @@ using MoreMountains.Feedbacks;
 
 public class ShootingSystem : MonoBehaviour
 {
-    [SerializeField] private SoundEffectTest soundEffectTest;
+    [Header("Shooting System Component")]
+    [SerializeField] private ThirdPersonShooterController_Final _Shooting;
+    [SerializeField] private ThirdPersonShooterController_Charge _ShootingCharge;
     [Header("Shoot Setting")]
     [SerializeField] private Transform debugTransform;
     [SerializeField] private Transform spawnBulletPosition;
@@ -54,7 +56,7 @@ public class ShootingSystem : MonoBehaviour
         }
         else
         {
-            // 射線未命中時，根據射線方向和距離設置 debugTransform 的位置
+            // 射?未命中時，根據射?方向和距離設置 debugTransform 的位置
             debugTransform.position = ray.origin + ray.direction * MaxShootDistance;
             mouseWorldPosition = debugTransform.position;
         }

@@ -20,14 +20,15 @@ public class Fire_Teleport : MonoBehaviour
     [SerializeField] private ParticleSystem InAirEffect;
     [SerializeField] private MMF_Player InAirFeedbacks_Start;
     [SerializeField] private MMF_Player InAirFeedbacks_Stop;
-    private EnergySystem energySystem;
-    private CameraSystem cameraSystem;
+    private EnergySystem _energySystem;
+    private CameraSystem _cameraSystem;
     private ControllerInput _Input;
     private ThirdPersonController _PlayerControl;
-    private FireCheck fireCheck;
+    private FireCheck _fireCheck;
     private ParticleSystem.EmissionModule emissionModule;
     private Vector3 oldCameraDamping;
     private bool canTeleport;
+    private Transform player;
 
     [HideInInspector] public bool isTeleporting;
     //Button System
@@ -41,12 +42,13 @@ public class Fire_Teleport : MonoBehaviour
     }
     private void Start()
     {
-        energySystem = GetComponent<EnergySystem>();
-        cameraSystem = GetComponent<CameraSystem>();
-        oldCameraDamping = playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping;
         _Input = GameManager.singleton._input;
-        _PlayerControl = GetComponent<ThirdPersonController>();
-        fireCheck = Camera.main.GetComponent<FireCheck>();
+        _energySystem = _Input.GetComponent<EnergySystem>();
+        _cameraSystem = _Input.GetComponent<CameraSystem>();
+        _PlayerControl = _Input.GetComponent<ThirdPersonController>();
+        _fireCheck = Camera.main.GetComponent<FireCheck>();
+        player = _Input.transform;
+        oldCameraDamping = playerCamera.GetCinemachineComponent<Cinemachine3rdPersonFollow>().Damping;
         emissionModule = InAirEffect.emission;
     }
     
@@ -125,19 +127,19 @@ public class Fire_Teleport : MonoBehaviour
     #endregion
     private void FireTeleport()
     {
-        if (fireCheck.isChoosePoint && fireCheck.FirePoint != null)
+        if (_fireCheck.isChoosePoint && _fireCheck.FirePoint != null)
         {
-            energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
+            _energySystem.ConsumeFireEnergy(TeleportCost, out canTeleport);
             if (canTeleport)
             {
                 SetOutControll(OutControll_ms_normal);
                 SetSpeedParticle();
                 isTeleporting = true;
-                fireCheck.isChoosePoint = false;
+                _fireCheck.isChoosePoint = false;
                 TranslateSystem();
                 ToDamageAround();
-                fireCheck.AbsorbFire();
-                fireCheck.DestroyFirePoint();
+                _fireCheck.AbsorbFire();
+                _fireCheck.DestroyFirePoint();
             }
             else
             {
@@ -180,9 +182,10 @@ public class Fire_Teleport : MonoBehaviour
     }
     private void TranslateStart()
     {
-        cameraSystem.ToTeleportCamera();
+        //_cameraSystem.ToTeleportCamera();
+        SetTeleportCameraDamping();
         _PlayerControl.outControl = true;
-        transform.position = fireCheck.FirePoint.position;
+        player.transform.position = _fireCheck.FirePoint.position;
     }
     private async void TranslateWaiting()
     {
@@ -201,6 +204,7 @@ public class Fire_Teleport : MonoBehaviour
     }
     private void TranslateEnd()
     {
+        revertTeleportCameraDamping();
         emissionModule.rateOverTimeMultiplier = 0;
         _PlayerControl.outControl = false;
     }

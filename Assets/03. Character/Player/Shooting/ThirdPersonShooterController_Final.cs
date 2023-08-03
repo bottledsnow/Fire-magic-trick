@@ -16,7 +16,7 @@ public class ThirdPersonShooterController_Final : MonoBehaviour
     private void Start()
     {
         _Input = GameManager.singleton._input;
-        shootingSystem = GetComponent<ShootingSystem>();
+        shootingSystem = _Input.GetComponent<ShootingSystem>();
     }
     private void Update()
     {

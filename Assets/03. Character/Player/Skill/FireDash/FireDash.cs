@@ -32,9 +32,9 @@ public class FireDash : MonoBehaviour
     
     private void Start()
     {
-        _playerController = GetComponent<ThirdPersonController>();
-        _Input = GetComponent<ControllerInput>();
-        _characterController = GetComponent<CharacterController>();
+        _Input = GameManager.singleton._input;
+        _playerController = _Input.GetComponent<ThirdPersonController>();
+        _characterController = _Input.GetComponent<CharacterController>();
         _Teleport = GetComponent<Fire_Teleport>();
         Dash_Normal = DashEffect_Explode_End.gameObject.transform.localScale;
     }

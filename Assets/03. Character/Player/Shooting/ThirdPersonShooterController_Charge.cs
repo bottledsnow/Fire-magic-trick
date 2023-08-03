@@ -32,7 +32,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
         ChargeParticleMain = ChargePartical.main;
         ChargeParticleMain.duration = chargeTime;
         _Input = GameManager.singleton._input;
-        shootingSystem = GetComponent<ShootingSystem>();
+        shootingSystem = _Input.GetComponent<ShootingSystem>();
     }
     private void Update()
     {

@@ -10,6 +10,10 @@ public class EnergySystem : MonoBehaviour
         Fire,
     }
     #endregion
+    [Header("Energy System Component")]
+    [SerializeField] private FireDash _fireDash;
+    [SerializeField] private Fire_Teleport _fireTeleport;
+    [Header("State")]
     [Range(0, 100)]
     [SerializeField] private float fireEnergy;
     [Range(0, 100)]
