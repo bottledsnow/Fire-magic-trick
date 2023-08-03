@@ -1,11 +1,7 @@
 using UnityEngine;
-using Cinemachine;
-using StarterAssets;
-using System.Threading.Tasks;
-using UnityEngine.ProBuilder;
 using MoreMountains.Feedbacks;
 
-public class ThirdPersonShooterController_Charge : MonoBehaviour
+public class Shooting_Charge : MonoBehaviour
 {
     public int explodeDamage;
     [SerializeField] private MMFeedbacks ReadyChargeFeedback;
@@ -19,6 +15,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
     [SerializeField] private float chargeTime;
 
     private ParticleSystem.MainModule ChargeParticleMain;
+    private Shooting _shooting;
     private ShootingSystem shootingSystem;
     private ControllerInput _Input;
     private bool triggerParticle;
@@ -32,6 +29,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
         ChargeParticleMain = ChargePartical.main;
         ChargeParticleMain.duration = chargeTime;
         _Input = GameManager.singleton._input;
+        _shooting = GetComponent<Shooting>();
         shootingSystem = _Input.GetComponent<ShootingSystem>();
     }
     private void Update()
@@ -53,7 +51,7 @@ public class ThirdPersonShooterController_Charge : MonoBehaviour
                 readyCharge = false;
                 ReadyChargeCloseFeedback.PlayFeedbacks();
                 _ChargeFeedback.PlayFeedbacks();
-                shootingSystem.Shoot_Fire(pfChargeProjectile);
+                _shooting.Shoot_Fire(pfChargeProjectile);
                 CanCharge = false;
                 ReadyChageParticle.Stop();
             }

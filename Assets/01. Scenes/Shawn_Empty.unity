@@ -53653,9 +53653,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1125012332}
-  - component: {fileID: 1125012334}
-  - component: {fileID: 1125012333}
+  - component: {fileID: 1125012336}
+  - component: {fileID: 1125012337}
   - component: {fileID: 1125012335}
+  - component: {fileID: 1125012333}
+  - component: {fileID: 1125012334}
   m_Layer: 6
   m_Name: ShootingSystem
   m_TagString: Untagged
@@ -53685,9 +53687,9 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1125012331}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcb265c5c996f3d4190260d763b7d3cf, type: 3}
+  m_Script: {fileID: 11500000, guid: e5d2ad409a8e3d2498f7f7f8b87efdb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ThrowFeedback: {fileID: 392298882}
@@ -53730,6 +53732,39 @@ MonoBehaviour:
   aimVirtualCamera: {fileID: 229835415}
   normalSensitivity: 1
   aimSensitivity: 0.2
+--- !u!114 &1125012336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125012331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4feaccdc3a550459f4ce50d7376cf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnBulletPosition: {fileID: 1863062611}
+  shootingEnergyCost: 10
+  FireEnergyCost: 10
+--- !u!114 &1125012337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125012331}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2617d535004d01047aa66c601d74e3d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  aimColliderLayerMask:
+    serializedVersion: 2
+    m_Bits: 1015
+  debugTransform: {fileID: 1118444871}
+  MaxShootDistance: 20
+  mouseWorldPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1134544714
 GameObject:
   m_ObjectHideFlags: 0
@@ -117115,16 +117150,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d045fa738d0fbb4498dbcaf9045ee35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Shooting: {fileID: 1125012333}
+  _Shooting: {fileID: 0}
+  _ShootingCheck: {fileID: 0}
+  _ShootingAim: {fileID: 0}
+  _ShootingNormal: {fileID: 0}
   _ShootingCharge: {fileID: 1125012334}
-  aimColliderLayerMask:
-    serializedVersion: 2
-    m_Bits: 1015
-  debugTransform: {fileID: 1118444871}
-  spawnBulletPosition: {fileID: 1863062611}
-  shootingEnergyCost: 20
-  FireEnergyCost: 20
-  MaxShootDistance: 20
 --- !u!114 &919132148370363460
 MonoBehaviour:
   m_ObjectHideFlags: 0

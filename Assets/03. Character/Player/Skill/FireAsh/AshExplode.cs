@@ -4,7 +4,7 @@ public class AshExplode : MonoBehaviour
 {
     private int ExplodeDamage;
     private ShootingSystem shootingSystem;
-    private ThirdPersonShooterController_Charge ChargeSystem;
+    private Shooting_Charge ChargeSystem;
     private bool ToDamage = false;
 
     private void Start()
