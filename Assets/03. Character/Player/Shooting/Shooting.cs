@@ -7,7 +7,7 @@ public class Shooting : MonoBehaviour
     private ControllerInput _Input;
     private EnergySystem energySystem;
     private Shooting_Check _shooting_check;
-
+    private Shooting_Magazing _magazing;
     [Header("Shoot Setting")]
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private float shootingEnergyCost;
@@ -17,6 +17,7 @@ public class Shooting : MonoBehaviour
         _Input = GameManager.singleton._input;
         _shooting_check = GetComponent<Shooting_Check>();
         energySystem = _Input.GetComponent<EnergySystem>();
+        _magazing = GetComponent<Shooting_Magazing>();
     }
     private void Update()
     {
