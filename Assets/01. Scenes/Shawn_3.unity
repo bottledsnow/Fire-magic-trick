@@ -6616,13 +6616,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edde9c6442a37c044af47a5b291593fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mask:
-    serializedVersion: 2
-    m_Bits: 1024
-  testposition: {fileID: 0}
-  FirePoint: {fileID: 0}
-  rayDistance: 20
-  isChooseFirePoint: 0
 --- !u!1 &336778516
 GameObject:
   m_ObjectHideFlags: 0
@@ -18998,6 +18991,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffa7f1ff887119b4d83d4a1ab7b75cfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _magazing: {fileID: 0}
+  Magazing: {fileID: 0}
+  TestNumber: 0
   ShootingEnergy: {fileID: 1827933412}
   FullEnergy: {r: 1, g: 1, b: 1, a: 1}
   NullEnergy: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0.23529412}
@@ -49831,17 +49827,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7801078747778744324, guid: 455c955d4fab0bb499794edbd045a042, type: 3}
   m_PrefabInstance: {fileID: 7801078749362808030}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1655563484 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7801078747778744322, guid: 455c955d4fab0bb499794edbd045a042, type: 3}
-  m_PrefabInstance: {fileID: 7801078749362808030}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 041e878b13043bf4181a58400ec5de51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1661133584 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 429195723172035685, guid: c1e757b56976323488d4d731ee88de40, type: 3}
@@ -49926,6 +49911,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 919132148370363455}
+  _fireCheck: {fileID: 0}
+  Player: {fileID: 0}
 --- !u!1 &1677057313
 GameObject:
   m_ObjectHideFlags: 3
@@ -63361,8 +63348,7 @@ MonoBehaviour:
   TeleporCameraDamping: 0.6
   OutControll_ms_normal: 500
   OutControll_ms_max: 5000
-  OutControll_ms: 0
-  speedCameraSystem: {fileID: 1044607203}
+  speedCameraParticle: {fileID: 0}
   InAirEffect: {fileID: 440980153}
   InAirFeedbacks_Start: {fileID: 1224302264}
   InAirFeedbacks_Stop: {fileID: 892232149}
@@ -63379,17 +63365,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d045fa738d0fbb4498dbcaf9045ee35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffectTest: {fileID: 1655563484}
-  debugTransform: {fileID: 1118444871}
-  spawnBulletPosition: {fileID: 1863062611}
-  shootingEnergyCost: 20
-  FireEnergyCost: 20
-  aimColliderLayerMask:
-    serializedVersion: 2
-    m_Bits: 1015
-  aimVirtualCamera: {fileID: 229835415}
-  normalSensitivity: 1
-  aimSensitivity: 0.2
+  _Shooting: {fileID: 0}
+  _ShootingCheck: {fileID: 0}
+  _ShootingAim: {fileID: 0}
+  _ShootingNormal: {fileID: 0}
+  _ShootingCharge: {fileID: 0}
+  _ShootingModeUI: {fileID: 0}
 --- !u!114 &919132148370363460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63402,6 +63383,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e6718f8d5c88ce4ea81cef1f8a7a7c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fireDash: {fileID: 0}
+  _fireTeleport: {fileID: 0}
   fireEnergy: 50
   shootingEnergy: 70
   shootingEnergyRecover: 1
@@ -63433,9 +63416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcb265c5c996f3d4190260d763b7d3cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ThrowFeedback: {fileID: 392298882}
-  pfBulletProjectile: {fileID: 1706274480334191768, guid: 4fd745b4030369149ae781f3e6ab4fa2, type: 3}
-  shootCooldown: 0.5
 --- !u!114 &919132148370363463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63486,6 +63466,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 0}
+  TeleportCamera: {fileID: 0}
+  Distance: 0
+  cameraHight: 0
 --- !u!4 &933169762038237106
 Transform:
   m_ObjectHideFlags: 0

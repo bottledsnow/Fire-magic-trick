@@ -7,22 +7,14 @@ public class AimControll : MonoBehaviour
     public GameObject Camera;
     public GameObject AimCamera;
     public bool Aim;
-
-    private void Update()
+    public void Camera_normal()
     {
-        Switch();
+        Camera.SetActive(true);
+        AimCamera.SetActive(false);
     }
-
-    private void Switch()
+    public void Camera_Aim()
     {
-        if(Aim)
-        {
-            Camera.SetActive(false);
-            AimCamera.SetActive(true);
-        }else
-        {
-            Camera.SetActive(true);
-            AimCamera.SetActive(false);
-        }
+        Camera.SetActive(false);
+        AimCamera.SetActive(true);
     }
 }
