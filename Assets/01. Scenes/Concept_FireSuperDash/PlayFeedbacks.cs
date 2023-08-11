@@ -7,12 +7,9 @@ public class PlayFeedbacks : MonoBehaviour
 {
     [SerializeField] private MMF_Player Feedbacks;
 
-    private void Start()
-    {
-        PlayFeedback();
-    }
     public void PlayFeedback()
     {
+        Feedbacks.Initialization();
         Feedbacks.PlayFeedbacks();
     }
 }
