@@ -14,7 +14,8 @@ public class LookAtTarget : Action
 
     public override TaskStatus OnUpdate()
     {
-        transform.LookAt(new Vector3(targetTransform.Value.position.x, transform.position.y, targetTransform.Value.position.z));
+        Quaternion rotation = Quaternion.LookRotation(new Vector3(targetTransform.Value.position.x, transform.position.y, targetTransform.Value.position.z) - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
         return TaskStatus.Success;
     }
 }
