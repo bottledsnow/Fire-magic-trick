@@ -5,7 +5,7 @@ using BehaviorDesigner.Runtime.Tasks;
 public class MoveToTarget : Action
 {
    public float moveSpeed = 850;
-   public SharedTransform targetTransform;
+   public SharedGameObject targetObject;
 
    Rigidbody rb;
 
@@ -21,7 +21,7 @@ public class MoveToTarget : Action
    }
    void Movement()
    {
-      Vector3 direction = (targetTransform.Value.position - transform.position).normalized;
+      Vector3 direction = (targetObject.Value.transform.position - transform.position).normalized;
       rb.AddForce(direction * moveSpeed * Time.deltaTime);
    }
    void SpeedControl()
