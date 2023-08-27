@@ -30,7 +30,7 @@ public class ShootingSystem : MonoBehaviour
     }
     private void Update()
     {
-        ChooseMode();
+        //ChooseMode();
     }
     private void ChooseMode()
     {
