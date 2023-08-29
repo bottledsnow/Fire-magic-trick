@@ -35,7 +35,7 @@ public class Shooting_Aim : MonoBehaviour
         {
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity);
-            thirdPersonController.SetRotateOnMove(false);
+            //thirdPersonController.SetRotateOnMove(false);
 
             Vector3 worldAimTarget = mouseWorldPosition;
             worldAimTarget.y = transform.position.y;
