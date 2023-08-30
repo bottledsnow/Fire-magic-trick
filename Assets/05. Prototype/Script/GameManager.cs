@@ -3,6 +3,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager singleton = null;
     public ControllerInput _input;
+    public PlayerState _playerState;
     public FireCheck _fireCheck;
     [HideInInspector] public Transform Player;
     private void Awake()

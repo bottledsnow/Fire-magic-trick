@@ -25927,6 +25927,7 @@ GameObject:
   - component: {fileID: 8215764558493665793}
   - component: {fileID: 8215764558493665795}
   - component: {fileID: 8215764558493665792}
+  - component: {fileID: 1659067553}
   m_Layer: 6
   m_Name: EnergySystem
   m_TagString: Untagged
@@ -25956,7 +25957,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8215764558493665854}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34ae6896d4d6d5f48b24e1429886894c, type: 3}
   m_Name: 
@@ -25994,6 +25995,46 @@ MonoBehaviour:
   Feedbacks_Dash_CD: {fileID: 8215764558501968833}
   Feedbacks_Dash_Start: {fileID: 8215764557917144857}
   Feedbacks_Dash_End: {fileID: 8215764559104087887}
+--- !u!114 &1659067553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8215764558493665854}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f414b2d3e3b8f948af4a0173cc62f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  superDashIncreaseSpeed:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: -0.01009162
+      outSlope: -0.01009162
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.23370785
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.2104776
+      outSlope: 3.2104776
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.038202286
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  superDashMaxSpeed: 25
+  SuperDashTime: 0.66
+  isSuperDash: 0
 --- !u!1 &8215764558501968895
 GameObject:
   m_ObjectHideFlags: 0
@@ -32541,6 +32582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _input: {fileID: 9134755280307927262}
+  _playerState: {fileID: 7782881839447578176}
   _fireCheck: {fileID: 8215764558063809410}
   Player: {fileID: 0}
 --- !u!1 &8215764558994127815
@@ -55054,6 +55096,7 @@ GameObject:
   - component: {fileID: 8215764559192753551}
   - component: {fileID: 8215764559192753555}
   - component: {fileID: 8215764559192753552}
+  - component: {fileID: 7782881839447578176}
   - component: {fileID: 9134755280307927209}
   - component: {fileID: 9134755280307927208}
   - component: {fileID: 9134755280307927202}
@@ -55182,6 +55225,19 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
+--- !u!114 &7782881839447578176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9134755280307927260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd960bf95f3dd0c4989304e3f8edc008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
 --- !u!114 &9134755280307927209
 MonoBehaviour:
   m_ObjectHideFlags: 0
