@@ -25,7 +25,6 @@ public class FireDash : MonoBehaviour
     private bool dashedButton = false;
     private bool dashOnCD;
     private bool IsDash;
-    private Fire_Teleport _Teleport;
     private ThirdPersonController _playerController;
     private ControllerInput _Input;
     private CharacterController _characterController;
@@ -35,7 +34,6 @@ public class FireDash : MonoBehaviour
         _Input = GameManager.singleton._input;
         _playerController = _Input.GetComponent<ThirdPersonController>();
         _characterController = _Input.GetComponent<CharacterController>();
-        _Teleport = GetComponent<Fire_Teleport>();
         Dash_Normal = DashEffect_Explode_End.gameObject.transform.localScale;
     }
 
@@ -132,7 +130,7 @@ public class FireDash : MonoBehaviour
     {
         if (!dashedButton && _Input.LeftStick != Vector2.zero)
         {
-            if (!dashOnCD && !_Teleport.isTeleporting)
+            if (!dashOnCD )
             {
                 dashedButton = true;
                 StartCoroutine(DashMove());
