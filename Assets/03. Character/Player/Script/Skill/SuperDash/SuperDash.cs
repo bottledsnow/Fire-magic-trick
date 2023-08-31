@@ -1,12 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using StarterAssets;
 
 public class SuperDash : MonoBehaviour
 {
     [SerializeField] private GameObject Target;
     [SerializeField] private AnimationCurve superDashIncreaseSpeed;
+    [SerializeField] private AnimationCurve superDashReduceSpeed;
     [SerializeField] private float superDashMaxSpeed;
-    [SerializeField] private float SuperDashTime;
+    [SerializeField] private float SuperDashTimeNormal;
+    [SerializeField] private float SuperDashTimeFall;
     private SuperDashCameraCheck _superDashCameraCheck;
     private CharacterController _characterController;
     private ControllerInput _input;
@@ -14,9 +17,11 @@ public class SuperDash : MonoBehaviour
     private PlayerState _playerState;
     private GameObject player;
 
+    private Vector3 direction;
     private float superDashSpeed = 0;
     private float superDashTimer = 0;
     private bool isSuperDash;
+    private bool isSuperDashThrough;
 
     private void Start()
     {
@@ -32,35 +37,25 @@ public class SuperDash : MonoBehaviour
         GetTarget();
         superDashStart();
         superDash();
-        superDashStop();
+        superDashHit();
+        superDashThrough();
     }
-    
+
     private void GetTarget()
     {
         Target = _superDashCameraCheck.Target;
     }
     private void superDashStart()
     {
-        if (_input.LB)
+        if(_input.LB && Target != null)
         {
-            Debug.Log("LB");
-            if(!isSuperDash)
+            if(!isSuperDash && !isSuperDashThrough)
             {
-                Debug.Log("!isSuperDash");
-                if(Target!=null)
-                {
-                    isSuperDash = true;
-                    Debug.Log("SuperDash");
-                }
+                isSuperDash = true;
+                _playerState.SetGravityToFire();
+                Debug.Log("SuperDash");
             }
         }
-        /*
-        if(_input.RB && !isSuperDash && Target != null)
-        {
-            isSuperDash = true;
-            Debug.Log("SuperDash");
-        }
-        */
     }
     private void superDash()
     {   
@@ -68,47 +63,87 @@ public class SuperDash : MonoBehaviour
         {   
             _playerState.OutControl();
             speedIncrease();
+            calaulateDirection();
             move();
         }
     }
-
     private void move()
     {
-        Vector3 Direction = CalculateDirection(player.transform.position, Target.transform.position).normalized;
-        _characterController.Move(Direction * superDashSpeed * Time.deltaTime);
+        _characterController.Move(direction * superDashSpeed * Time.deltaTime);
     }
-    private Vector3 CalculateDirection(Vector3 start, Vector3 end)
+    private void calaulateDirection()
+    {
+        direction = calculateDirection(player.transform.position, Target.transform.position).normalized;
+    }
+    private Vector3 calculateDirection(Vector3 start, Vector3 end)
     {
         return end - start;
     }
     private void speedIncrease()
     {
-       superDashTimer = speedTimer(superDashTimer);
-        superDashSpeed = superDashIncreaseSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
+       superDashTimer = speedTimer(superDashTimer,SuperDashTimeNormal);
+       superDashSpeed = superDashIncreaseSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
     }
-    private float speedTimer(float timer)
+    private float speedTimer(float timer,float dashtime)
     {
         if (timer <= 1f)
         {
-            timer += Time.deltaTime/SuperDashTime;
+            timer += Time.deltaTime/ dashtime;
         }else
         {
             timer = 1;
         }
         return timer;
     }
-    private void superDashStop()
+    private void superDashHit()
     {
-        if( isSuperDash)
+        if(isSuperDash && _playerCollider.hit !=null)
         {
             if (_playerCollider.hit.collider.tag == "Enemy")
             {
                 _playerState.TakeControl();
                 isSuperDash = false;
-                superDashSpeed = 0;
                 superDashTimer = 0;
-                Target = null;
+
+                if (_playerState.isGround)
+                {
+                    superDashStop();
+                } else
+                {
+                    superDashToThrough();
+                }
             }
         }
     }
+    private void superDashStop()
+    {
+        _playerState.SetGravityToNormal();
+        superDashSpeed = 0;
+        Target = null;
+    }
+    private void superDashToThrough()
+    {
+        _playerCollider.hit.collider.gameObject.SetActive(false);
+        isSuperDashThrough = true;
+        superDashSpeed = superDashMaxSpeed;
+    }
+    private void superDashThrough()
+    {
+        if (isSuperDashThrough)
+        {
+            speedReduce();
+            move();
+        }
+        if(_playerState.isGround && isSuperDashThrough)
+        {
+            isSuperDashThrough = false;
+            superDashStop();
+        }
+    }
+    private void speedReduce()
+    {
+        superDashTimer = speedTimer(superDashTimer, SuperDashTimeFall);
+        superDashSpeed = superDashReduceSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
+    }
+    
 }

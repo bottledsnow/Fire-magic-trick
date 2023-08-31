@@ -78,7 +78,10 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         [Header("FireMagic")]
-        public bool outControl;
+        public bool useGravity;
+        public bool useMove;
+
+        private Vector3 _moveOffset;
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -163,12 +166,10 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            if(!outControl)
-            {
-                JumpAndGravity();
-                GroundedCheck();
-                Move();
-            }
+            if(useGravity) JumpAndGravity();
+            if(useMove) Move();
+            GroundedCheck();
+            
         }
 
         private void LateUpdate()
@@ -283,8 +284,8 @@ namespace StarterAssets
 
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime + _moveOffset);
+             
             // update animator if using character
             if (_hasAnimator)
             {
@@ -418,6 +419,10 @@ namespace StarterAssets
         private void getRotation(float rotation)
         {
             PlayerRotation = rotation;
+        }
+        public void AddMoveOffset(Vector3 moveOffset)
+        {
+            _moveOffset = moveOffset;
         }
 
     }
