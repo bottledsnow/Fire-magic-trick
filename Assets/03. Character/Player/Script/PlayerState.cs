@@ -1,30 +1,31 @@
 using StarterAssets;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerState : MonoBehaviour
 {
-    private ThirdPersonController controller;
-    public bool nearGround;
-    public bool isGround;
+    private ThirdPersonController _controller;
+    
     [SerializeField] private LayerMask mask;
     [SerializeField] private float rayDistance = 1f;
 
     [Header("Gravity")]
     [SerializeField] private float gravityFire;
+    [SerializeField] private float gravityFloat;
     private float gravityNormal;
 
+    public bool nearGround;
+    public bool isGround;
+    public bool canFloat;
 
     private void Start()
     {
-        controller = GetComponent<ThirdPersonController>();
-        gravityNormal = controller.Gravity;
+        _controller = GetComponent<ThirdPersonController>();
+        gravityNormal = _controller.Gravity;
     }
     private void Update()
     {
         CheckGround();
+        CheckFloat();
         getIsGround();  
     }
     private void CheckGround()
@@ -37,23 +38,33 @@ public class PlayerState : MonoBehaviour
     {
         nearGround = Physics.Raycast(ray, out hit, rayDistance, mask);
     }
+    private void CheckFloat()
+    {
+        if(_controller._verticalVelocity < _controller.Gravity * _controller.FallTimeout)
+        {
+            canFloat = true;
+        } else
+        {
+            canFloat = false;
+        }
+    }
     public void TakeControl()
     {
-        controller.useGravity = true;
-        controller.useMove = true;
+        _controller.useGravity = true;
+        _controller.useMove = true;
     }
     public void OutControl()
     {
-        controller.useGravity = false;
-        controller.useMove = false;
+        _controller.useGravity = false;
+        _controller.useMove = false;
     }
     public void SetGravityActive(bool active)
     {
-        controller.useGravity = active;
+        _controller.useGravity = active;
     }
     public void SetMoveActive(bool active)
     {
-        controller.useMove = active;
+        _controller.useMove = active;
     }   
     private void OnDrawGizmos()
     {
@@ -62,14 +73,22 @@ public class PlayerState : MonoBehaviour
     }
     public void SetGravityToFire()
     {
-        controller.Gravity = gravityFire;
+        _controller.Gravity = gravityFire;
     }
     public void SetGravityToNormal()
     {
-        controller.Gravity = gravityNormal;
+        _controller.Gravity = gravityNormal;
+    }
+    public void SetGravityToFloat()
+    {
+        _controller.Gravity = gravityFloat;
     }
     private void getIsGround()
     {
-        isGround = controller.Grounded;
+        isGround = _controller.Grounded;
     }
+    public void SetIsFloat(bool active)
+    {
+        _controller.isFloat = active;
+    }   
 }

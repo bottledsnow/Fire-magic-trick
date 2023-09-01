@@ -80,6 +80,7 @@ namespace StarterAssets
         [Header("FireMagic")]
         public bool useGravity;
         public bool useMove;
+        public bool isFloat;
 
         private Vector3 _moveOffset;
         // cinemachine
@@ -91,7 +92,7 @@ namespace StarterAssets
         private float _animationBlend;
         private float _targetRotation = 0.0f;
         private float _rotationVelocity;
-        private float _verticalVelocity;
+        public float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
         // timeout deltatime
@@ -354,6 +355,12 @@ namespace StarterAssets
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
+
+            if(isFloat)
+            {
+                _verticalVelocity = Gravity;
+            }
+            
         }
 
         public void Jump()
