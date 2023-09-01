@@ -65,7 +65,7 @@ public class FireDash : MonoBehaviour
             Pressed = true;
             IsDash = true;
             Dash_Start();
-            Debug.Log("Button");
+            //Button
         }
     }
     private void ButtonPressedStart()
@@ -75,9 +75,9 @@ public class FireDash : MonoBehaviour
             if (!KeepPressed)
             {
                 KeepPressed = true;
-                Debug.Log("Button Pressed Start");
+                //Button Pressed Start
             }
-            Debug.Log("Keep Update");
+            //Keep Update
         }
     }
     private void ButtonRelease()
@@ -94,15 +94,16 @@ public class FireDash : MonoBehaviour
     {
         if (PressedTime < _Input.PressedSensitivity && PressedTime != 0)
         {
-            Debug.Log("Button Click Only");
+            //Button Click Only
         }
     }
     private void ButtonPressedEnd()
     {
         if (PressedTime > _Input.PressedSensitivity)
         {
+            //Button Pressed End
+
             IsDash = false;
-            Debug.Log("Button Pressed End");
             float time_Start = dashTime_Max -Reaction_time;
             float time_End = dashTime_Max + Reaction_time;
             if (time_Start < PressedTime && PressedTime < time_End)

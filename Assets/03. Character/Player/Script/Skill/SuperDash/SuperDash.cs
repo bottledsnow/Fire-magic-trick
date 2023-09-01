@@ -20,8 +20,9 @@ public class SuperDash : MonoBehaviour
     private Vector3 direction;
     private float superDashSpeed = 0;
     private float superDashTimer = 0;
-    private bool isSuperDash;
     private bool isSuperDashThrough;
+
+    [HideInInspector] public bool isSuperDash;
 
     private void Start()
     {
@@ -105,7 +106,7 @@ public class SuperDash : MonoBehaviour
                 isSuperDash = false;
                 superDashTimer = 0;
 
-                if (_playerState.isGround)
+                if (_playerState.nearGround)
                 {
                     superDashStop();
                 } else

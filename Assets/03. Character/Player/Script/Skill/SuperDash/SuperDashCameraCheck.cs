@@ -8,12 +8,14 @@ public class SuperDashCameraCheck : MonoBehaviour
     [SerializeField] private LayerMask mask;
     [SerializeField] private float rayDistance = 10f;
 
+    private SuperDash _superDash;
     private CrosshairUI _crosshairUI;
     private bool isHit = false;
 
     private void Start()
     {
         _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
+        _superDash = GetComponent<SuperDash>();
     }
 
     private void Update()
@@ -34,7 +36,10 @@ public class SuperDashCameraCheck : MonoBehaviour
     }
     private void GetTarget(RaycastHit hit)
     {
-        Target = isHit ? hit.collider.gameObject : null;
+        if(!_superDash.isSuperDash)
+        {
+            Target = isHit ? hit.collider.gameObject : null;
+        }
     }
 
     private void Check_UI()

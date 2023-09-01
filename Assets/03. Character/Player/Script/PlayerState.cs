@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerState : MonoBehaviour
 {
     private ThirdPersonController controller;
+    public bool nearGround;
     public bool isGround;
     [SerializeField] private LayerMask mask;
     [SerializeField] private float rayDistance = 1f;
@@ -24,6 +25,7 @@ public class PlayerState : MonoBehaviour
     private void Update()
     {
         CheckGround();
+        getIsGround();  
     }
     private void CheckGround()
     {
@@ -33,7 +35,7 @@ public class PlayerState : MonoBehaviour
     }
     private void RayHitCheck(Ray ray, out RaycastHit hit)
     {
-        isGround = Physics.Raycast(ray, out hit, rayDistance, mask);
+        nearGround = Physics.Raycast(ray, out hit, rayDistance, mask);
     }
     public void TakeControl()
     {
@@ -65,5 +67,9 @@ public class PlayerState : MonoBehaviour
     public void SetGravityToNormal()
     {
         controller.Gravity = gravityNormal;
+    }
+    private void getIsGround()
+    {
+        isGround = controller.Grounded;
     }
 }
