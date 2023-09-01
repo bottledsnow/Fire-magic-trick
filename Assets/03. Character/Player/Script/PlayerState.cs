@@ -15,6 +15,8 @@ public class PlayerState : MonoBehaviour
 
     public bool nearGround;
     public bool isGround;
+    public bool isFire;
+    public bool isFloat;
     public bool canFloat;
 
     private void Start()
@@ -40,7 +42,7 @@ public class PlayerState : MonoBehaviour
     }
     private void CheckFloat()
     {
-        if(_controller._verticalVelocity < _controller.Gravity * _controller.FallTimeout)
+        if(_controller._verticalVelocity < _controller.Gravity * _controller.FallTimeout && !isFire)
         {
             canFloat = true;
         } else
@@ -71,17 +73,22 @@ public class PlayerState : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawRay(this.transform.position, -this.transform.up * rayDistance);
     }
-    public void SetGravityToFire()
-    {
-        _controller.Gravity = gravityFire;
-    }
+    
     public void SetGravityToNormal()
     {
         _controller.Gravity = gravityNormal;
+        isFire = false;
+        isFloat = false;
+    }
+    public void SetGravityToFire()
+    {
+        _controller.Gravity = gravityFire;
+        isFire = true;
     }
     public void SetGravityToFloat()
     {
         _controller.Gravity = gravityFloat;
+        isFloat = true;
     }
     private void getIsGround()
     {
