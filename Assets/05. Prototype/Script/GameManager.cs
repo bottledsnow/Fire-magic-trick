@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
     public ControllerInput _input;
     public PlayerState _playerState;
     public GameObject UISystem;
+    public GameObject ShootingSystem;
     [HideInInspector] public Transform Player;
     private void Awake()
     {

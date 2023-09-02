@@ -10,6 +10,7 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private float superDashMaxSpeed;
     [SerializeField] private float SuperDashTimeNormal;
     [SerializeField] private float SuperDashTimeFall;
+
     private SuperDashCameraCheck _superDashCameraCheck;
     private CharacterController _characterController;
     private ControllerInput _input;
@@ -62,6 +63,7 @@ public class SuperDash : MonoBehaviour
     {   
         if (isSuperDash)
         {   
+            _playerState.TurnToAimDirection();
             _playerState.OutControl();
             speedIncrease();
             calaulateDirection();

@@ -11,6 +11,8 @@ public class PlayerState : MonoBehaviour
     [Header("Gravity")]
     [SerializeField] private float gravityFire;
     [SerializeField] private float gravityFloat;
+
+    private Shooting_Check _shooting_check;
     private float gravityNormal;
 
     public bool nearGround;
@@ -21,6 +23,7 @@ public class PlayerState : MonoBehaviour
 
     private void Start()
     {
+        _shooting_check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
         _controller = GetComponent<ThirdPersonController>();
         gravityNormal = _controller.Gravity;
     }
@@ -97,5 +100,13 @@ public class PlayerState : MonoBehaviour
     public void SetIsFloat(bool active)
     {
         _controller.isFloat = active;
-    }   
+    }
+    public void TurnToAimDirection()
+    {
+            Vector3 worldAimTarget = _shooting_check.mouseWorldPosition;
+            worldAimTarget.y = transform.position.y;
+            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 50f);
+    }
 }

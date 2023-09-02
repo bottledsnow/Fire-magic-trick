@@ -7,7 +7,6 @@ public class Shooting : MonoBehaviour
     private ControllerInput _Input;
     private EnergySystem energySystem;
     private Shooting_Check _shooting_check;
-    private Shooting_Magazing _magazing;
     [Header("Shoot Setting")]
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private float shootingEnergyCost;
@@ -17,13 +16,7 @@ public class Shooting : MonoBehaviour
         _Input = GameManager.singleton._input;
         _shooting_check = GetComponent<Shooting_Check>();
         energySystem = _Input.GetComponent<EnergySystem>();
-        _magazing = GetComponent<Shooting_Magazing>();
     }
-    private void Update()
-    {
-        TurnToShoot();
-    }
-
     public void shoot(Transform preferb)
     {
         Vector3 aimDir = (_shooting_check.mouseWorldPosition - spawnBulletPosition.position).normalized;
@@ -59,15 +52,5 @@ public class Shooting : MonoBehaviour
             Debug.Log("not enough Fire energy");
         }
     }
-    private void TurnToShoot()
-    {
-        if (_Input.RT)
-        {
-            Vector3 worldAimTarget = _shooting_check.mouseWorldPosition;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 50f);
-        }
-    }
+    
 }
