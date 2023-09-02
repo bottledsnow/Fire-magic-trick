@@ -10,11 +10,9 @@ public class CameraSystem : MonoBehaviour
 
     private Transform playerPosition;
     private Transform cameraTarget;
-    private FireCheck fireCheck;
     private void Start()
     {
         playerPosition = GameManager.singleton.Player;
-        fireCheck = GameManager.singleton._fireCheck;
     }
     public async void ToTeleportCamera()
     {
@@ -30,7 +28,7 @@ public class CameraSystem : MonoBehaviour
 
     private void GetTarget()
     {
-        cameraTarget = fireCheck.FirePoint;
+        
     }
     private void MoveCameraToTarget()
     {

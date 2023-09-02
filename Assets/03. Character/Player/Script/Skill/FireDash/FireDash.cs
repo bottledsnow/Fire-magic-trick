@@ -25,7 +25,6 @@ public class FireDash : MonoBehaviour
     private bool dashedButton = false;
     private bool dashOnCD;
     private bool IsDash;
-    private Fire_Teleport _Teleport;
     private ThirdPersonController _playerController;
     private ControllerInput _Input;
     private CharacterController _characterController;
@@ -35,7 +34,6 @@ public class FireDash : MonoBehaviour
         _Input = GameManager.singleton._input;
         _playerController = _Input.GetComponent<ThirdPersonController>();
         _characterController = _Input.GetComponent<CharacterController>();
-        _Teleport = GetComponent<Fire_Teleport>();
         Dash_Normal = DashEffect_Explode_End.gameObject.transform.localScale;
     }
 
@@ -67,7 +65,7 @@ public class FireDash : MonoBehaviour
             Pressed = true;
             IsDash = true;
             Dash_Start();
-            Debug.Log("Button");
+            //Button
         }
     }
     private void ButtonPressedStart()
@@ -77,9 +75,9 @@ public class FireDash : MonoBehaviour
             if (!KeepPressed)
             {
                 KeepPressed = true;
-                Debug.Log("Button Pressed Start");
+                //Button Pressed Start
             }
-            Debug.Log("Keep Update");
+            //Keep Update
         }
     }
     private void ButtonRelease()
@@ -96,15 +94,16 @@ public class FireDash : MonoBehaviour
     {
         if (PressedTime < _Input.PressedSensitivity && PressedTime != 0)
         {
-            Debug.Log("Button Click Only");
+            //Button Click Only
         }
     }
     private void ButtonPressedEnd()
     {
         if (PressedTime > _Input.PressedSensitivity)
         {
+            //Button Pressed End
+
             IsDash = false;
-            Debug.Log("Button Pressed End");
             float time_Start = dashTime_Max -Reaction_time;
             float time_End = dashTime_Max + Reaction_time;
             if (time_Start < PressedTime && PressedTime < time_End)
@@ -132,7 +131,7 @@ public class FireDash : MonoBehaviour
     {
         if (!dashedButton && _Input.LeftStick != Vector2.zero)
         {
-            if (!dashOnCD && !_Teleport.isTeleporting)
+            if (!dashOnCD )
             {
                 dashedButton = true;
                 StartCoroutine(DashMove());
