@@ -2064,6 +2064,37 @@ Transform:
   m_Father: {fileID: 1242450145492166186}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2297145776948540328
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2682606904377610847}
+  m_Layer: 6
+  m_Name: VFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2682606904377610847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297145776948540328}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8814470198527242356}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2316252640403534130
 GameObject:
   m_ObjectHideFlags: 0
@@ -3574,7 +3605,7 @@ Transform:
   m_Children:
   - {fileID: 5219920234024650122}
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4484200478327761324
 GameObject:
@@ -6767,6 +6798,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9068543812697853327}
+  - {fileID: 2682606904377610847}
   - {fileID: 9068543812874948587}
   - {fileID: 9068543811881134548}
   - {fileID: 9068543811742383820}
@@ -6826,7 +6858,13 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed
+    by Humanoid clips.\n\tTransform 'J_Bip_C_Head'\n\tTransform 'J_Bip_R_UpperLeg'\n\tTransform
+    'J_Bip_L_ToeBase'\n\tTransform 'J_Bip_L_Foot'\n\tTransform 'J_Bip_L_LowerLeg'\n\tTransform
+    'J_Bip_R_Foot'\n\tTransform 'J_Bip_R_LowerLeg'\n\tTransform 'J_Bip_C_Chest'\n\tTransform
+    'J_Bip_R_LowerArm'\n\tTransform 'J_Bip_L_UpperLeg'\n\tand more ...\n\tFrom animation
+    clip 'mixamo.com'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
@@ -6880,13 +6918,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd960bf95f3dd0c4989304e3f8edc008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nearGround: 0
-  isGround: 0
   mask:
     serializedVersion: 2
     m_Bits: 1
   rayDistance: 1.5
   gravityFire: -2.5
+  gravityFloat: -3
+  nearGround: 0
+  isGround: 0
+  isFire: 0
+  isFloat: 0
+  canFloat: 0
 --- !u!114 &8149432151793461947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7065,6 +7107,8 @@ MonoBehaviour:
   LockCameraPosition: 0
   useGravity: 1
   useMove: 1
+  isFloat: 0
+  _verticalVelocity: 0
 --- !u!114 &9134755282286750412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8111,7 +8155,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9068543811033886618
 MonoBehaviour:
@@ -8161,6 +8205,7 @@ MonoBehaviour:
   _input: {fileID: 8149432151793461964}
   _playerState: {fileID: 7196729213330113618}
   UISystem: {fileID: 1143266533357177396}
+  ShootingSystem: {fileID: 9068543811566988696}
   Player: {fileID: 0}
 --- !u!1 &9068543811055088030
 GameObject:
@@ -8505,7 +8550,7 @@ Transform:
   - {fileID: 9068543811559750072}
   - {fileID: 9068543811708229690}
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9068543811122867033
 GameObject:
@@ -13649,7 +13694,7 @@ Transform:
   - {fileID: 9068543812814431267}
   - {fileID: 9068543811577193396}
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9068543811175865488
 GameObject:
@@ -14242,6 +14287,7 @@ GameObject:
   - component: {fileID: 1143266532928261811}
   - component: {fileID: 1143266533838267947}
   - component: {fileID: 812857256}
+  - component: {fileID: 812857257}
   m_Layer: 6
   m_Name: EnergySystem
   m_TagString: Untagged
@@ -14380,6 +14426,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   leastEffectTime: 0.25
+--- !u!114 &812857257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9068543811380647980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68c3752077b2574b8972bfd47256293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFloatTime: 1.5
 --- !u!1 &9068543811389204973
 GameObject:
   m_ObjectHideFlags: 0
@@ -30255,7 +30314,7 @@ Transform:
   - {fileID: 884751498550278705}
   - {fileID: 6211251670410226845}
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9068543811791817235
 GameObject:
@@ -30958,7 +31017,7 @@ Transform:
   m_Children:
   - {fileID: 9068543811274105057}
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9068543811910758111
 GameObject:
@@ -31071,7 +31130,7 @@ Transform:
   - {fileID: 9068543812848598899}
   - {fileID: 9068543811389204972}
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9068543811948962497
 GameObject:
@@ -36589,7 +36648,7 @@ Transform:
   - {fileID: 2400757907008800308}
   - {fileID: 6744404493255071644}
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9068543812007290948
 GameObject:
@@ -44787,7 +44846,7 @@ Transform:
   - {fileID: 9068543811380647955}
   - {fileID: 1143266533357177399}
   m_Father: {fileID: 8814470198527242356}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9068543812915064682
 GameObject:

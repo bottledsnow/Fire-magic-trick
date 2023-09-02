@@ -5,7 +5,7 @@ public class SuperDashKick : MonoBehaviour
 {
     [SerializeField] private float leastEffectTime;
     private ThirdPersonController _thirdPersonController;
-    private CharacterController _characterController;
+    private Animator _playerAnimator;
     private ControllerInput _input;
     private PlayerState _playerState;
     private SuperDash _superDash;
@@ -13,7 +13,6 @@ public class SuperDashKick : MonoBehaviour
     private float timer;
     private bool isTimer;
     private bool isInputY;
-    private bool isSuperDashKick;
 
     private void Start()
     {
@@ -21,6 +20,7 @@ public class SuperDashKick : MonoBehaviour
         _input = GameManager.singleton._input;
         _superDash = GetComponent<SuperDash>();
         _thirdPersonController = _playerState.GetComponent<ThirdPersonController>();
+        _playerAnimator = _playerState.GetComponent<Animator>();
     }
     private void Update()
     {
@@ -66,6 +66,8 @@ public class SuperDashKick : MonoBehaviour
     private void kickSuccess()
     {
         Debug.Log("Success");
+        _playerAnimator.SetTrigger("InputY");
+        _playerAnimator.SetBool("isSuperDash", false);
         _thirdPersonController.Jump();
         _playerState.SetGravityToNormal();
     }

@@ -14,9 +14,11 @@ public class SuperDash : MonoBehaviour
     private SuperDashCameraCheck _superDashCameraCheck;
     private CharacterController _characterController;
     private ControllerInput _input;
+    private PlayerAnimator _playerAnimator;
     private PlayerCollider _playerCollider;
     private PlayerState _playerState;
     private GameObject player;
+
 
     private Vector3 direction;
     private float superDashSpeed = 0;
@@ -32,6 +34,7 @@ public class SuperDash : MonoBehaviour
         _superDashCameraCheck = GetComponent<SuperDashCameraCheck>();
         _characterController = _playerState.GetComponent<CharacterController>();
         _playerCollider = _playerState.GetComponent<PlayerCollider>();
+        _playerAnimator = _playerState.GetComponent<PlayerAnimator>();
         player = _playerState.gameObject;
     }
     private void Update()
@@ -54,6 +57,7 @@ public class SuperDash : MonoBehaviour
             if(!isSuperDash && !isSuperDashThrough)
             {
                 isSuperDash = true;
+                _playerAnimator.SuperDashStart();
                 _playerState.SetGravityToFire();
                 Debug.Log("SuperDash");
             }
@@ -62,8 +66,8 @@ public class SuperDash : MonoBehaviour
     private void superDash()
     {   
         if (isSuperDash)
-        {   
-            _playerState.TurnToAimDirection();
+        {
+            LookAtTarget();
             _playerState.OutControl();
             speedIncrease();
             calaulateDirection();
@@ -121,6 +125,7 @@ public class SuperDash : MonoBehaviour
     private void superDashStop()
     {
         _playerState.SetGravityToNormal();
+        _playerAnimator.SuperDashEnd();
         superDashSpeed = 0;
         Target = null;
     }
@@ -148,5 +153,8 @@ public class SuperDash : MonoBehaviour
         superDashTimer = speedTimer(superDashTimer, SuperDashTimeFall);
         superDashSpeed = superDashReduceSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
     }
-    
+    private void LookAtTarget()
+    {
+        _playerState.transform.LookAt(Target.transform);
+    }
 }
