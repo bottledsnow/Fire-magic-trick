@@ -8,13 +8,22 @@ public class TargetWithinRange : Conditional
     public float max;
     public bool useMin = false;
     public float min;
+    public bool isVector2 = false;
     public SharedGameObject targetObject;
 
     public float distanceToTarget;
 
     public override void OnStart()
     {
-        distanceToTarget = Vector3.Distance(transform.position, targetObject.Value.transform.position);
+        if (isVector2)
+        {
+            distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetObject.Value.transform.position.x, 0, targetObject.Value.transform.position.z));
+        }
+        else
+        {
+            distanceToTarget = Vector3.Distance(transform.position, targetObject.Value.transform.position);
+        }
+
     }
     public override TaskStatus OnUpdate()
     {

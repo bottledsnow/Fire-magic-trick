@@ -64959,7 +64959,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296861861649259392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.718, z: 1.079}
+  m_LocalPosition: {x: 0, y: 0.868, z: 0.069}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65173,6 +65173,7 @@ GameObject:
   - component: {fileID: 296861861798791596}
   - component: {fileID: 296861861798791598}
   - component: {fileID: 296861861798791597}
+  - component: {fileID: 296861861798791599}
   m_Layer: 0
   m_Name: Enemy_Sky
   m_TagString: Untagged
@@ -65227,14 +65228,14 @@ MonoBehaviour:
       variableStartIndex: 
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(-367.597778,-651.3032)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(1.48148346,130.573456)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-1.76889038,138.913513)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-211.290283,143.870972)","Comment":"\u641c\u7d22\u6210\u529f"},"ID":3,"Name":"Sequence
         - IdentifyTarget","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"IdentifyTarget","NodeData":{"Offset":"(-102.940979,194.117645)"},"ID":4,"Name":"Identify
-        Target","Instant":true,"Singleradius":7,"Singleangle":90,"SinglemaxDetect":300,"LayerMasktargetMask":64,"LayerMaskobstructionMask":512,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(94.705925,180.5883)","Comment":"\u9078\u64c7\u653b\u64ca\u624b\u6bb5"},"ID":5,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-418.79895,166.296478)"},"ID":6,"Name":"Sequence
-        - MeleeSmash","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"TargetWithinVector2Range","NodeData":{"Offset":"(-300.5526,168.276169)"},"ID":7,"Name":"Target
-        Within Vector 2 Range","Instant":true,"BooleanuseMax":true,"Singlemax":3,"BooleanuseMin":false,"Singlemin":0,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},"SingledistanceToTarget":0},{"Type":"MeleeSmash","NodeData":{"Offset":"(-130,160)"},"ID":8,"Name":"Melee
-        Smash","Instant":true,"SingleattackDuaction":1,"SinglerotateSpeed":1,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}},{"Type":"MeleeSmashVfx","NodeData":{"Offset":"(0,160)"},"ID":9,"Name":"Melee
-        Smash Vfx","Instant":true,"GameObjectvfx":0,"TransformmeleeSmashPoint":1},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(134.705887,164.705887)"},"ID":10,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(202.592514,176.296478)"},"ID":11,"Name":"Sequence
-        - MoveToPlayer","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"LookAtTarget","NodeData":{"Offset":"(-80,140)"},"ID":12,"Name":"Look
-        At Target","Instant":true,"SinglerotateSpeed":5,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}},{"Type":"MoveToTarget_Sky","NodeData":{"Offset":"(88.3291,136.0351)"},"ID":13,"Name":"Move
-        To Target   Sky","Instant":true,"SinglemoveSpeed":850,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(121.157417,150)","Comment":"\u9592\u7f6e"},"ID":14,"Name":"Sequence
+        Target","Instant":true,"Singleradius":10,"Singleangle":90,"SinglemaxDetect":300,"LayerMasktargetMask":64,"LayerMaskobstructionMask":512,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(94.705925,180.5883)","Comment":"\u9078\u64c7\u653b\u64ca\u624b\u6bb5"},"ID":5,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-188.032242,176.296478)"},"ID":6,"Name":"Sequence
+        - MoveToPlayer","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"TargetWithinRange","NodeData":{"Offset":"(-151.875137,141.428436)"},"ID":7,"Name":"Target
+        Within Range","Instant":true,"BooleanuseMax":false,"Singlemax":0,"BooleanuseMin":true,"Singlemin":6,"BooleanisVector2":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},"SingledistanceToTarget":0},{"Type":"LookAtTarget","NodeData":{"Offset":"(-1.8750391,140)"},"ID":8,"Name":"Look
+        At Target","Instant":true,"SinglerotateSpeed":5,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}},{"Type":"MoveToTarget_Sky","NodeData":{"Offset":"(166.454041,136.0351)"},"ID":9,"Name":"Move
+        To Target   Sky","Instant":true,"SinglemoveSpeed":850,"SinglekeepHeight":2.5,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(271.875,185.625)"},"ID":10,"Name":"Sequence
+        - SkyShoot","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"SkyShoot","NodeData":{"Offset":"(-123.097778,132.696777)"},"ID":11,"Name":"Sky
+        Shoot","Instant":true,"SingleattackDuaction":3,"SinglerotateSpeed":20,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},"TransformshootPoint":0,"Vector3targetPoint":"(0,0,0)"},{"Type":"MeleeSmashVfx","NodeData":{"Offset":"(5.70670128,133.950623)"},"ID":12,"Name":"Melee
+        Smash Vfx","Instant":true,"GameObjectvfx":1,"TransformmeleeSmashPoint":2},{"Type":"BehaviorDesigner.Runtime.Tasks.Wait","NodeData":{"Offset":"(140.412567,124.767609)"},"ID":13,"Name":"Wait","Instant":true,"SharedFloatwaitTime":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedBoolrandomWait":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedFloatrandomWaitMin":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1},"SharedFloatrandomWaitMax":{"Type":"BehaviorDesigner.Runtime.SharedFloat","Name":null,"SinglemValue":1}}]}]}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(121.157417,150)","Comment":"\u9592\u7f6e"},"ID":14,"Name":"Sequence
         - Idle","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Idle","NodeData":{"Offset":"(4.02278233,147.9317)"},"ID":15,"Name":"Idle","Instant":true}]}]}]},"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}]}'
       fieldSerializationData:
         typeName: []
@@ -65242,6 +65243,7 @@ MonoBehaviour:
         startIndex: 
         dataPosition: 
         unityObjects:
+        - {fileID: 296861861649259393}
         - {fileID: 6557820281351849792, guid: a94166e0a249ee04fa45b1f7a679dfe2, type: 3}
         - {fileID: 296861861649259393}
         byteData: 
@@ -65258,13 +65260,112 @@ Rigidbody:
   m_GameObject: {fileID: 296861861798791595}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
+  m_Drag: 3
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!120 &296861861798791599
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296861861798791595}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: -19.586355, y: 4.0099783, z: -28.019205}
+  - {x: -15.752988, y: 2.1015325, z: -30.666374}
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.008195877
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 0, b: 0, a: 0.33333334}
+      key1: {r: 1, g: 0, b: 0, a: 0.78431374}
+      key2: {r: 1, g: 0, b: 0, a: 0.8112789}
+      key3: {r: 0, g: 0, b: 0, a: 0.78431374}
+      key4: {r: 0, g: 0, b: 0, a: 0.33333334}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 32768
+      ctime2: 65535
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 13107
+      atime2: 32768
+      atime3: 52428
+      atime4: 65535
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 3
+      m_NumAlphaKeys: 5
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_UseWorldSpace: 1
+  m_Loop: 0
 --- !u!1 &296861861859615475
 GameObject:
   m_ObjectHideFlags: 0
