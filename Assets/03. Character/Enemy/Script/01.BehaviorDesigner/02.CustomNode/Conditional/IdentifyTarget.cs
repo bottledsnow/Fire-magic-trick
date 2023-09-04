@@ -17,7 +17,7 @@ public class IdentifyTarget : Conditional
     public override TaskStatus OnUpdate()
     {
         FindTarget();
-        if(detect > 0)
+        if (detect > 0)
         {
             return TaskStatus.Success;
         }
@@ -37,17 +37,10 @@ public class IdentifyTarget : Conditional
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2 && !Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
             {
-                if (!Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
-                {
-                    targetObject.Value = rangeChecks[0].gameObject;
-                    detect = maxDetect;
-                }
-                else
-                {
-                    detect--;
-                }
+                targetObject.Value = rangeChecks[0].gameObject;
+                detect = maxDetect;
             }
             else
             {
