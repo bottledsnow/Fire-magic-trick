@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using StarterAssets;
+using MoreMountains.Feedbacks;
 
 public class SuperDash : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private float superDashMaxSpeed;
     [SerializeField] private float SuperDashTimeNormal;
     [SerializeField] private float SuperDashTimeFall;
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player FireDashStart;
+    [SerializeField] private MMF_Player FireDashHit;
+    [SerializeField] private MMF_Player FireDashEnd;
 
     private SuperDashCameraCheck _superDashCameraCheck;
     private CharacterController _characterController;
@@ -59,6 +64,7 @@ public class SuperDash : MonoBehaviour
                 isSuperDash = true;
                 _playerAnimator.SuperDashStart();
                 _playerState.SetGravityToFire();
+                FireDashStart.PlayFeedbacks();
                 Debug.Log("SuperDash");
             }
         }
@@ -111,6 +117,7 @@ public class SuperDash : MonoBehaviour
                 _playerState.TakeControl();
                 isSuperDash = false;
                 superDashTimer = 0;
+                FireDashHit.PlayFeedbacks();
 
                 if (_playerState.nearGround)
                 {
@@ -126,6 +133,7 @@ public class SuperDash : MonoBehaviour
     {
         _playerState.SetGravityToNormal();
         _playerAnimator.SuperDashEnd();
+        FireDashEnd.PlayFeedbacks();
         superDashSpeed = 0;
         Target = null;
     }

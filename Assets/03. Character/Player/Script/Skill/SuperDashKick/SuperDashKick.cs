@@ -1,9 +1,13 @@
+using MoreMountains.Feedbacks;
 using StarterAssets;
 using UnityEngine;
 
 public class SuperDashKick : MonoBehaviour
 {
     [SerializeField] private float leastEffectTime;
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player SuperDashEnd;
+
     private ThirdPersonController _thirdPersonController;
     private Animator _playerAnimator;
     private ControllerInput _input;
@@ -70,6 +74,7 @@ public class SuperDashKick : MonoBehaviour
         _playerAnimator.SetBool("isSuperDash", false);
         _thirdPersonController.Jump();
         _playerState.SetGravityToNormal();
+        SuperDashEnd.PlayFeedbacks();
     }
     private void kickFail()
     {

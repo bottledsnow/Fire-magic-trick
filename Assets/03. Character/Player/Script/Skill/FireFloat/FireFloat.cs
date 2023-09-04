@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class FireFloat : MonoBehaviour
@@ -6,6 +7,7 @@ public class FireFloat : MonoBehaviour
     private PlayerState _playerState;
 
     [SerializeField] private float maxFloatTime;
+    [SerializeField] private MMF_Player fireFloat;
     private float timer;
     private bool isTrigger;
     private bool isTimer;
@@ -41,6 +43,7 @@ public class FireFloat : MonoBehaviour
             isTimer = true;
             _playerState.SetGravityToFloat();
             _playerState.SetIsFloat(true);
+            fireFloat.PlayFeedbacks();
             Debug.Log("float");
         }
     }
@@ -52,6 +55,7 @@ public class FireFloat : MonoBehaviour
             timer = 0;
             _playerState.SetGravityToNormal();
             _playerState.SetIsFloat(false);
+            fireFloat.StopFeedbacks();
             Debug.Log("end");
         }
     }
