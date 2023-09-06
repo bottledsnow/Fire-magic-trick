@@ -22,4 +22,12 @@ public class CrosshairUI : MonoBehaviour
     {
         CrosshairMaterial.color = Normal;
     }
+    public void CrosshairShooting()
+    {
+        CrosshairAnimator.Play("Crosshair");
+    }
+    public void CrosshairHit()
+    {
+        CrosshairAnimator.Play("CrossHairHit");
+    }
 }

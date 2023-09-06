@@ -8,6 +8,7 @@ public class Shooting_Normal : MonoBehaviour
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private float shootCooldown;
 
+    private CrosshairUI _crosshairUI;
     private Shooting _shooting;
     private ControllerInput _Input;
     private bool shooting;
@@ -15,6 +16,7 @@ public class Shooting_Normal : MonoBehaviour
     private void Start()
     {
         _Input = GameManager.singleton._input;
+        _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
         _shooting = GetComponent<Shooting>();
     }
     private void Update()
@@ -25,6 +27,7 @@ public class Shooting_Normal : MonoBehaviour
     {
         if (_Input.RT && !shooting)
         {
+            _crosshairUI.CrosshairShooting();   
             ShootCooldown(shootCooldown);
             _shooting.Shoot_Normal(pfBulletProjectile);
             ThrowFeedback.PlayFeedbacks();
