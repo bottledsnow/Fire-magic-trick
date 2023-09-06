@@ -7,14 +7,17 @@ public class Card_Move : MonoBehaviour
 {
     [Header("Bullet")]
     [SerializeField] private float speed;
+    [SerializeField] private float lifeTime;
     [SerializeField] private float fireRate;
     [SerializeField] private GameObject muzzlePrefab;
     [SerializeField] private GameObject hitPrefab;
 
-    private Vector3 direction;
-    private Quaternion rotateToTarget;
+    private CrosshairUI _crosshairUI;
     void Start()
     {
+        _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
+        DestroyBullet(lifeTime);
+
         if (muzzlePrefab != null)
         {
             var muzzleVFX = Instantiate(muzzlePrefab, transform.position, Quaternion.identity);
@@ -49,6 +52,12 @@ public class Card_Move : MonoBehaviour
         {
             newHit(pos, rot);
         }
+
+        if(co.transform.tag == "Enemy")
+        {
+            _crosshairUI.CrosshairHit();
+        }
+
         Destroy(gameObject);
     }
 
@@ -73,5 +82,9 @@ public class Card_Move : MonoBehaviour
             // playRate need to change to duration;
         }
 
+    }
+    private void DestroyBullet(float lifetime)
+    {
+        Destroy(gameObject, lifetime);
     }
 }

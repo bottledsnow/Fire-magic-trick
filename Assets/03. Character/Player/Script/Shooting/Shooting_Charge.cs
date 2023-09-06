@@ -1,103 +1,174 @@
 using UnityEngine;
-using MoreMountains.Feedbacks;
 
 public class Shooting_Charge : MonoBehaviour
 {
-    public int explodeDamage;
-    [SerializeField] private MMFeedbacks ReadyChargeFeedback;
-    [SerializeField] private MMFeedbacks ReadyChargeCloseFeedback;
-    [SerializeField] private MMFeedbacks OnChargeFeedback;
-    [SerializeField] private MMFeedbacks OnChargeCloseFeedback;
-    [SerializeField] private MMFeedbacks _ChargeFeedback;
-    [SerializeField] private Transform pfChargeProjectile;
-    [SerializeField] private ParticleSystem ChargePartical;
-    [SerializeField] private ParticleSystem ReadyChageParticle;
-    [SerializeField] private float chargeTime;
+    private ControllerInput _input;
 
-    private ParticleSystem.MainModule ChargeParticleMain;
-    private Shooting _shooting;
-    private ShootingSystem shootingSystem;
-    private ControllerInput _Input;
-    private bool triggerParticle;
-    private bool Charge;
-    private bool CanCharge;
-    private bool readyCharge;
-    private float chargePower;
+    [SerializeField] private float chargeInterval;
+
+    [Header("Level")]
+    [SerializeField] private int maxLevel;
+    [SerializeField] private int fireLevel;
+
+    [Header("Bullet")]
+    [SerializeField] private Transform FirePosition;
+    [SerializeField] private float chargeSpeed;
+    [SerializeField] private float chargeLifeTime;
+    [SerializeField] private GameObject pfBullet;
+
+    [Header("Particle")]
+    [SerializeField] private GameObject pfChargeBall_Normal;
+    [SerializeField] private GameObject pfChargeBall_Fire;
+    [SerializeField] private GameObject pfFire;
+    [SerializeField] private GameObject pfHit_Normal;
+    [SerializeField] private GameObject pfHit_Fire;
+
+    private Shooting_Check _shootin_Check;
+    private PlayerState _playerState;
+    private GameObject chargeBullet;
+    private float timer;
+    private bool isCharge;
+    private bool RT;
+    private bool isFire;
+    private bool max;
+    private int level;
 
     private void Start()
     {
-        ChargeParticleMain = ChargePartical.main;
-        ChargeParticleMain.duration = chargeTime;
-        _Input = GameManager.singleton._input;
-        _shooting = GetComponent<Shooting>();
-        shootingSystem = _Input.GetComponent<ShootingSystem>();
+        _input = GameManager.singleton._input;
+        _shootin_Check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
+        _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
     }
+
     private void Update()
     {
-        ChargeSystem();
+        CheckRT();
+        Charge();
+        Timer();
+        Initialization();
     }
-    private void ChargeSystem()
+    #region Key
+    private void Initialization()
     {
-       ChargeInput();
-       ChargePower();
-       ChargeRelease();
-    }
-    private void ChargeRelease()
-    {
-        if(!_Input.RT)
+        if (!_input.RT && RT)
         {
-            if(CanCharge)
-            {
-                readyCharge = false;
-                ReadyChargeCloseFeedback.PlayFeedbacks();
-                _ChargeFeedback.PlayFeedbacks();
-                _shooting.Shoot_Fire(pfChargeProjectile);
-                CanCharge = false;
-                ReadyChageParticle.Stop();
-            }
+            RT = false;
+            Debug.Log("Initialize");
         }
     }
-    private void ChargeInput()
+    private void CheckRT()
     {
-        if (_Input.RT) Charge = true;
-        if (!_Input.RT) Charge = false;
-    }
-    private void ChargePower()
-    {
-        if(Charge)
+        if (_input.RT && !RT)
         {
-            if (!triggerParticle)
-            {
-                triggerParticle = true;
-                ChargePartical.Play();
-                OnChargeFeedback.PlayFeedbacks();
-            }
-            chargePower += Time.deltaTime;
-            if (chargePower > chargeTime)
-            {
-                ReadyCharge();
-            }
-        } else
-        {
-            chargePower = 0;
-            if(triggerParticle)
-            {
-                OnChargeCloseFeedback.PlayFeedbacks();
-                ChargePartical.Stop();
-                triggerParticle = false;
-            }
+            RT = true;
+            isCharge = true;
+            chargeStart();
+            Debug.Log("RT");
         }
     }
-    private void ReadyCharge()
+    #endregion
+    #region Timer
+    private void Charge()
     {
-        if(!readyCharge)
+        if(timer >= chargeInterval)
         {
-            readyCharge = true;
-            ReadyChargeFeedback.PlayFeedbacks();
-            OnChargeCloseFeedback.PlayFeedbacks();
-            CanCharge = true;
-            ChargePartical.Stop();
-            ReadyChageParticle.Play();
+            if(level == maxLevel && !max)
+            {
+                LevelMaxFeedback();
+                max = true;
+            }
+            if(level < maxLevel)
+            {
+                LevelAddFeedback();
+                level++;
+            }
+            if (level >= fireLevel && !isFire)
+            {
+                LevelFireFeedback();
+                isFire = true;
+            }
+            timer = 0;
+        }
+    }
+    private void Timer()
+    {
+        if(RT)
+        {
+            _playerState.TurnToAimDirection();
+            timer += Time.deltaTime;
+        }else
+        {
+            if(isCharge)
+            {
+                ChargeShoot();
+                isCharge = false;
+            }
+            InitializeTimer();
+        }
+    }
+    private void InitializeTimer()
+    {
+        timer = 0;
+        level = 0;
+        isFire = false;
+        max = false;
+    }
+    #endregion
+    private void chargeStart()
+    {
+        chargeBullet = Instantiate(pfBullet);
+        chargeBullet.transform.SetParent(FirePosition);
+        chargeBullet.transform.position = FirePosition.position;
+    }
+    private void LevelAddFeedback()
+    {
+        Debug.Log("Level:" + level);
+        if(level < fireLevel)
+        {
+            instantiateBulletBall(pfChargeBall_Normal);
+        }else
+        {
+            instantiateBulletBall(pfChargeBall_Fire);
+        }
+    }
+    private void LevelFireFeedback()
+    {
+        Debug.Log("Fire");
+        instantiateBulletFire();
+    }
+    private void LevelMaxFeedback()
+    {
+        Debug.Log("MaxLevel");
+    }
+    private void ChargeShoot()
+    {
+        Debug.Log("ChargeShoot");
+        Vector3 aimDir = (_shootin_Check.mouseWorldPosition - FirePosition.position).normalized;
+        chargeBullet.transform.SetParent(null);
+        chargeBullet.transform.rotation = Quaternion.LookRotation(aimDir, Vector3.up);
+        pfCharge pfCharge = chargeBullet.AddComponent<pfCharge>();
+
+        pfCharge.InitializeValue(chargeSpeed, chargeLifeTime,pfHit_Normal,pfHit_Fire);
+        pfCharge.IsFire = isFire;
+    }
+    private void instantiateBulletBall(GameObject pf)
+    {
+        if(chargeBullet != null)
+        {
+            float x = Random.Range(0, 360);
+            float y = Random.Range(0, 360);
+            float z = Random.Range(0, 360);
+            Quaternion rotation = Quaternion.Euler(x, y, z);
+            GameObject Ball = Instantiate(pf, chargeBullet.transform.position, rotation);
+            Ball.transform.SetParent(chargeBullet.transform);
+        }
+    }
+    private void instantiateBulletFire()
+    {
+        if(chargeBullet != null)
+        {
+            GameObject Fire = Instantiate(pfFire, chargeBullet.transform.position, chargeBullet.transform.rotation);
+            Fire.transform.SetParent(chargeBullet.transform);
         }
     }
 }
