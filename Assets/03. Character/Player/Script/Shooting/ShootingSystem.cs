@@ -13,7 +13,7 @@ public class ShootingSystem : MonoBehaviour
     public Shooting_Check _ShootingCheck;
     public Shooting_Aim _ShootingAim;
     public Shooting_Normal _ShootingNormal;
-    public Shooting_Charge_old _ShootingCharge;
+    public Shooting_Charge _ShootingCharge;
     [Header("Shooting UI")]
     public ShootingMode_UI _ShootingModeUI;
     private void Awake()
@@ -21,7 +21,7 @@ public class ShootingSystem : MonoBehaviour
         _ShootingCheck = _Shooting.GetComponent<Shooting_Check>();
         _ShootingAim = _Shooting.GetComponent<Shooting_Aim>();
         _ShootingNormal = _Shooting.GetComponent<Shooting_Normal>();
-        _ShootingCharge = _Shooting.GetComponent<Shooting_Charge_old>(); 
+        _ShootingCharge = _Shooting.GetComponent<Shooting_Charge>(); 
     }
     private void Start()
     {
