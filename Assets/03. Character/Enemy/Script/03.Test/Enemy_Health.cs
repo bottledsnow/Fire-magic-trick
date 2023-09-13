@@ -5,10 +5,7 @@ using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour,IHealth
 {
-    [SerializeField] private MMFeedbacks HitFeedbacks;
-    [SerializeField] private MMFeedbacks DeathFeedbacks;
     [SerializeField] private int maxHealth;
-    [SerializeField] private int health;
     [SerializeField] private int ignitionPoint;
     [SerializeField] private float coolingTime;
     [SerializeField] private float coolingInterval;
@@ -17,6 +14,7 @@ public class Enemy_Health : MonoBehaviour,IHealth
     private Rigidbody rb;
     private Collider[] Colliders;
     public bool isIgnite;
+    private int health;
     public int iHealth
     {
         get { return health; }
@@ -25,6 +23,7 @@ public class Enemy_Health : MonoBehaviour,IHealth
 
     private void Awake()
     {
+        health = maxHealth;
         rb = GetComponent<Rigidbody>();
         Colliders = GetComponentsInChildren<Collider>();
     }
@@ -42,21 +41,16 @@ public class Enemy_Health : MonoBehaviour,IHealth
 
         hitTimer = Time.time;
 
-        Debug.Log("Enemy_Test get damage" + Damage);
-        Debug.Log("Enemy_Test health" + health);
+        Debug.Log("敵人受到傷害" + Damage);
+        Debug.Log("敵人當前血量" + health);
         
         if(health <= 0)
         {
             EnemyDeath();
-            DeathFeedbacks.PlayFeedbacks();
         }
         else if(health <= ignitionPoint)
         {
             EnemyIgnite();
-        }
-        else
-        {
-            HitFeedbacks.PlayFeedbacks();
         }
     }
     private void EnemyDeath()
@@ -68,12 +62,13 @@ public class Enemy_Health : MonoBehaviour,IHealth
     private void EnemyIgnite()
     {
         isIgnite = true;
+        //引燃時的反饋
     }
     private void EnemyCooling()
     {
         health ++;
         coolingTimer = Time.time;
-        Debug.Log("Enemy_Test health" + health);
+        Debug.Log("敵人當前血量" + health);
     }
     private void CloseCollider()
     {
