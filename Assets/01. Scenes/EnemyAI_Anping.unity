@@ -3223,6 +3223,7 @@ GameObject:
   - component: {fileID: 1115530938}
   - component: {fileID: 1115530937}
   - component: {fileID: 1115530936}
+  - component: {fileID: 1115530939}
   m_Layer: 0
   m_Name: Enemy_Melee
   m_TagString: Untagged
@@ -3315,6 +3316,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 177.123, z: 0}
+--- !u!114 &1115530939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115530935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8733839801275c24ead835c0ec794377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitFeedbacks: {fileID: 0}
+  DeathFeedbacks: {fileID: 0}
+  maxHealth: 6
+  health: 6
+  ignitionPoint: 5
+  coolingTime: 3
+  coolingInterval: 2.5
+  isIgnite: 0
 --- !u!1 &1119114449
 GameObject:
   m_ObjectHideFlags: 0
@@ -3588,6 +3609,7 @@ GameObject:
   - component: {fileID: 1238461343}
   - component: {fileID: 1238461342}
   - component: {fileID: 1238461341}
+  - component: {fileID: 1238461345}
   m_Layer: 0
   m_Name: Enemy_Ranged
   m_TagString: Untagged
@@ -3725,7 +3747,7 @@ MonoBehaviour:
       JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(-367.597778,-651.3032)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(1.48148346,130.573456)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":0},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(-1.76889038,138.913513)"},"ID":2,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-211.290283,143.870972)","Comment":"\u641c\u7d22\u6210\u529f"},"ID":3,"Name":"Sequence
         - IdentifyTarget","Instant":true,"AbortTypeabortType":"LowerPriority","Children":[{"Type":"IdentifyTarget","NodeData":{"Offset":"(-102.940979,194.117645)"},"ID":4,"Name":"Identify
         Target","Instant":true,"Singleradius":10,"Singleangle":90,"SinglemaxDetect":300,"LayerMasktargetMask":64,"LayerMaskobstructionMask":512,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}},{"Type":"BehaviorDesigner.Runtime.Tasks.Selector","NodeData":{"Offset":"(94.705925,180.5883)","Comment":"\u9078\u64c7\u653b\u64ca\u624b\u6bb5"},"ID":5,"Name":"Selector","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-210.3913,217.608643)"},"ID":6,"Name":"Sequence
-        - MoveToPlayer","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"TargetWithinRange","NodeData":{"Offset":"(-265.4169,150.416443)"},"ID":7,"Name":"Target
+        - MoveToPlayer","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"TargetWithinRange","NodeData":{"Offset":"(-226.955368,137.595932)"},"ID":7,"Name":"Target
         Within Range","Instant":true,"BooleanuseMax":false,"Singlemax":0,"BooleanuseMin":true,"Singlemin":6,"BooleanisVector2":true,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},"SingledistanceToTarget":0},{"Type":"LookAtTarget","NodeData":{"Offset":"(-83,135)"},"ID":8,"Name":"Look
         At Target","Instant":true,"SinglerotateSpeed":5,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}},{"Type":"MoveToTarget","NodeData":{"Offset":"(77,135)"},"ID":9,"Name":"Move
         To Target","Instant":true,"SinglemoveSpeed":850,"SharedGameObjecttargetObject":{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true}}]},{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(271.875,185.625)"},"ID":10,"Name":"Sequence
@@ -3780,6 +3802,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 177.123, z: 0}
+--- !u!114 &1238461345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238461340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8733839801275c24ead835c0ec794377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitFeedbacks: {fileID: 0}
+  DeathFeedbacks: {fileID: 0}
+  maxHealth: 5
+  health: 5
+  ignitionPoint: 4
+  coolingTime: 5
+  coolingInterval: 2.5
+  isIgnite: 0
 --- !u!1 &1245756915
 GameObject:
   m_ObjectHideFlags: 0
@@ -4976,6 +5018,7 @@ GameObject:
   - component: {fileID: 1477480942}
   - component: {fileID: 1477480941}
   - component: {fileID: 1477480940}
+  - component: {fileID: 1477480944}
   m_Layer: 0
   m_Name: Enemy_Air
   m_TagString: Untagged
@@ -5168,6 +5211,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 177.123, z: 0}
+--- !u!114 &1477480944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1477480939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8733839801275c24ead835c0ec794377, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitFeedbacks: {fileID: 0}
+  DeathFeedbacks: {fileID: 0}
+  maxHealth: 4
+  health: 4
+  ignitionPoint: 3
+  coolingTime: 5
+  coolingInterval: 2.5
+  isIgnite: 0
 --- !u!1 &1569665035
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,13 +7,20 @@ public class Enemy_Health : MonoBehaviour,IHealth
 {
     [SerializeField] private MMFeedbacks HitFeedbacks;
     [SerializeField] private MMFeedbacks DeathFeedbacks;
-    [SerializeField] private int _health;
+    [SerializeField] private int maxHealth;
+    [SerializeField] private int health;
+    [SerializeField] private int ignitionPoint;
+    [SerializeField] private float coolingTime;
+    [SerializeField] private float coolingInterval;
+    private float hitTimer;
+    private float coolingTimer;
     private Rigidbody rb;
     private Collider[] Colliders;
-    public int Health
+    public bool isIgnite;
+    public int iHealth
     {
-        get { return _health; }
-        set { _health = value; }
+        get { return health; }
+        set { health = value; }
     }
 
     private void Awake()
@@ -21,18 +28,31 @@ public class Enemy_Health : MonoBehaviour,IHealth
         rb = GetComponent<Rigidbody>();
         Colliders = GetComponentsInChildren<Collider>();
     }
+
+    private void Update()
+    {
+        if(Time.time - hitTimer > coolingTime && Time.time - coolingTimer > coolingInterval && health < maxHealth)
+        {
+            EnemyCooling();
+        }
+    }
     public void TakeDamage(int Damage)
     {
-        _health -= Damage;
+        health -= Damage;
+
+        hitTimer = Time.time;
 
         Debug.Log("Enemy_Test get damage" + Damage);
-        Debug.Log("Enemy_Test health" + _health);
-
-        if(_health <=0)
+        Debug.Log("Enemy_Test health" + health);
+        
+        if(health <= 0)
         {
             EnemyDeath();
             DeathFeedbacks.PlayFeedbacks();
-
+        }
+        else if(health <= ignitionPoint)
+        {
+            EnemyIgnite();
         }
         else
         {
@@ -45,7 +65,16 @@ public class Enemy_Health : MonoBehaviour,IHealth
         CloseCollider();
         Destroy(gameObject, 1.5f);
     }
-
+    private void EnemyIgnite()
+    {
+        isIgnite = true;
+    }
+    private void EnemyCooling()
+    {
+        health ++;
+        coolingTimer = Time.time;
+        Debug.Log("Enemy_Test health" + health);
+    }
     private void CloseCollider()
     {
         foreach (Collider collider in Colliders)
