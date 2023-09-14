@@ -9,7 +9,6 @@ public class BurningSystem : MonoBehaviour
     private void OnValidate()
     {
         DamageCount = BurningDuration / (BurningInterval_ms / 1000);
-
     }
 
 }
