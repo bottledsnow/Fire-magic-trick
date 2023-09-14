@@ -15,7 +15,6 @@ public class FireDash : MonoBehaviour
     [SerializeField] private Vector3 Dash_Good;
     [SerializeField] private float Reaction_time;
     [Header("FeedBacks")]
-    [SerializeField] private MMF_Player Feedbacks_Dash_CD;
     [SerializeField] private MMF_Player Feedbacks_Dash_Start;
     [SerializeField] private MMF_Player Feedbacks_Dash_End;
     private Vector3 Dash_Normal;
@@ -156,7 +155,6 @@ public class FireDash : MonoBehaviour
     }
     private async void DashCD(float CDtime)
     {
-        Feedbacks_Dash_CD.PlayFeedbacks();
         dashOnCD = true;
         await Task.Delay((int)(CDtime * 1000));
         dashOnCD = false;

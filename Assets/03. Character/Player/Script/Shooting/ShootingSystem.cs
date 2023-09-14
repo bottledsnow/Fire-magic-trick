@@ -1,7 +1,4 @@
 using UnityEngine;
-using StarterAssets;
-using Cinemachine;
-using MoreMountains.Feedbacks;
 
 public class ShootingSystem : MonoBehaviour
 {
@@ -14,8 +11,6 @@ public class ShootingSystem : MonoBehaviour
     public Shooting_Aim _ShootingAim;
     public Shooting_Normal _ShootingNormal;
     public Shooting_Charge _ShootingCharge;
-    [Header("Shooting UI")]
-    public ShootingMode_UI _ShootingModeUI;
     private void Awake()
     {
         _ShootingCheck = _Shooting.GetComponent<Shooting_Check>();
@@ -47,13 +42,11 @@ public class ShootingSystem : MonoBehaviour
     }
     private void ToChooseNormal()
     {
-        _ShootingModeUI.ToChooseNormal();
         _ShootingNormal.enabled = true;
         _ShootingCharge.enabled = false;
     }
     private void ToChooseCharge()
     {
-        _ShootingModeUI.ToChooseCharge();
         _ShootingNormal.enabled = false;
         _ShootingCharge.enabled = true;
     }
