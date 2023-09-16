@@ -21,6 +21,7 @@ public class SuperDash : MonoBehaviour
     private ControllerInput _input;
     private PlayerAnimator _playerAnimator;
     private PlayerCollider _playerCollider;
+    private EnergySystem _energySystem;
     private PlayerState _playerState;
     private GameObject player;
 
@@ -40,12 +41,13 @@ public class SuperDash : MonoBehaviour
         _characterController = _playerState.GetComponent<CharacterController>();
         _playerCollider = _playerState.GetComponent<PlayerCollider>();
         _playerAnimator = _playerState.GetComponent<PlayerAnimator>();
+        _energySystem = _playerState.GetComponent<EnergySystem>();
         player = _playerState.gameObject;
     }
     private void Update()
     {
         GetTarget();
-        superDashStart();
+        superDashStartCheck();
         superDash();
         superDashHit();
         superDashThrough();
@@ -55,19 +57,34 @@ public class SuperDash : MonoBehaviour
     {
         Target = _superDashCameraCheck.Target;
     }
-    private void superDashStart()
+    private void superDashStartCheck()
     {
-        if(_input.LB && Target != null)
+        if (_input.LB && Target != null)
         {
-            if(!isSuperDash && !isSuperDashThrough)
+            if (!isSuperDash && !isSuperDashThrough)
             {
-                isSuperDash = true;
-                _playerAnimator.SuperDashStart();
-                _playerState.SetGravityToFire();
-                FireDashStart.PlayFeedbacks();
-                Debug.Log("SuperDash");
+                EnergyCheck();
             }
         }
+    }
+    private void EnergyCheck()
+    {
+        bool CanUse;
+        _energySystem.UseSuperDash(out CanUse);
+
+        if(CanUse)
+        {
+            superDashStart();
+        }
+    }
+    
+    private void superDashStart()
+    {
+        isSuperDash = true;
+        _playerAnimator.SuperDashStart();
+        _playerState.SetGravityToFire();
+        FireDashStart.PlayFeedbacks();
+        Debug.Log("SuperDash");
     }
     private void superDash()
     {   
