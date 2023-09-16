@@ -12956,13 +12956,13 @@ GameObject:
   - component: {fileID: 9068543811806222237}
   - component: {fileID: 9068543811806222209}
   - component: {fileID: 9068543811806222210}
-  - component: {fileID: 7196729213330113618}
   - component: {fileID: 8149432151793461947}
   - component: {fileID: 8149432151793461946}
   - component: {fileID: 8149432151793461936}
-  - component: {fileID: 8149432151793461965}
   - component: {fileID: 8149432151793461964}
   - component: {fileID: 9068543811806222208}
+  - component: {fileID: 7196729213330113618}
+  - component: {fileID: 8149432151793461965}
   - component: {fileID: 9134755282286750412}
   - component: {fileID: 949887463}
   m_Layer: 6
@@ -13093,29 +13093,6 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
---- !u!114 &7196729213330113618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8149432151793461966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd960bf95f3dd0c4989304e3f8edc008, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mask:
-    serializedVersion: 2
-    m_Bits: 1
-  rayDistance: 1.5
-  gravityFire: -2.5
-  gravityFloat: -3
-  nearGround: 0
-  isGround: 0
-  isFire: 0
-  isFloat: 0
-  canFloat: 0
 --- !u!114 &8149432151793461947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13164,36 +13141,6 @@ MonoBehaviour:
   _ShootingAim: {fileID: 9068543811566988700}
   _ShootingNormal: {fileID: 9068543811566988702}
   _ShootingCharge: {fileID: 506929009924155613}
---- !u!114 &8149432151793461965
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8149432151793461966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &8149432151793461964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13276,6 +13223,59 @@ MonoBehaviour:
   useMove: 1
   isFloat: 0
   _verticalVelocity: 0
+--- !u!114 &7196729213330113618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149432151793461966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd960bf95f3dd0c4989304e3f8edc008, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 1
+  rayDistance: 1.5
+  gravityFire: -2.5
+  gravityFloat: -3
+  nearGround: 0
+  isGround: 0
+  isFire: 0
+  isFloat: 0
+  canFloat: 0
+--- !u!114 &8149432151793461965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8149432151793461966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!114 &9134755282286750412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19849,7 +19849,6 @@ MonoBehaviour:
   DashEffect_Explode_End: {fileID: 9068543811987162462}
   Dash_Good: {x: 1, y: 1, z: 1}
   Reaction_time: 0.15
-  Feedbacks_Dash_CD: {fileID: 9068543811389204947}
   Feedbacks_Dash_Start: {fileID: 9068543812947547403}
   Feedbacks_Dash_End: {fileID: 9068543811987162461}
 --- !u!114 &1143266532928261811
