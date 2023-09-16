@@ -18,36 +18,4 @@ public class ShootingSystem : MonoBehaviour
         _ShootingNormal = _Shooting.GetComponent<Shooting_Normal>();
         _ShootingCharge = _Shooting.GetComponent<Shooting_Charge>(); 
     }
-    private void Start()
-    {
-        _input = GameManager.singleton._input;
-        ToChooseNormal();
-    }
-    private void Update()
-    {
-        //ChooseMode();
-    }
-    private void ChooseMode()
-    {
-        if (_input.ArrowKeyLeft && !isChooseNormal)
-        {
-            isChooseNormal = true;
-            ToChooseNormal();
-        }
-        else if (_input.ArrowKeyRight && isChooseNormal)
-        {
-            isChooseNormal = false;
-            ToChooseCharge();
-        }
-    }
-    private void ToChooseNormal()
-    {
-        _ShootingNormal.enabled = true;
-        _ShootingCharge.enabled = false;
-    }
-    private void ToChooseCharge()
-    {
-        _ShootingNormal.enabled = false;
-        _ShootingCharge.enabled = true;
-    }
 }

@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Shooting_Charge : MonoBehaviour
 {
+    private Shooting_Magazing _shooting_magazing;
     private ControllerInput _input;
 
     [SerializeField] private float chargeInterval;
@@ -38,6 +39,7 @@ public class Shooting_Charge : MonoBehaviour
         _input = GameManager.singleton._input;
         _shootin_Check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
         _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        _shooting_magazing = GetComponent<Shooting_Magazing>();
     }
 
     private void Update()
@@ -120,11 +122,13 @@ public class Shooting_Charge : MonoBehaviour
         chargeBullet.transform.SetParent(FirePosition);
         chargeBullet.transform.position = FirePosition.position;
     }
+    
     private void LevelAddFeedback()
     {
         Debug.Log("Level:" + level);
         if(level < fireLevel)
         {
+            _shooting_magazing.UseBullet();
             instantiateBulletBall(pfChargeBall_Normal);
         }else
         {

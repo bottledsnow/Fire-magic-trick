@@ -14,11 +14,12 @@ public class EnergySystem : MonoBehaviour
     private bool isRecover;
 
     [Header("Cost")]
-    [SerializeField] private float DashCost = 10;
     [SerializeField] private float SuperDashCost = 10;
-    [SerializeField] private float KickCost = 10;
-    [SerializeField] private float FloatCost = 10;
     [SerializeField] private float ReloadCost = 10;
+    [SerializeField] private float ChargeCost = 10;
+    [SerializeField] private float FloatCost = 10;
+    [SerializeField] private float DashCost = 10;
+    [SerializeField] private float KickCost = 10;
 
     [Header("Get")]
     [SerializeField] private float LampGet = 40;
