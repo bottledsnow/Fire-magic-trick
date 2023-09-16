@@ -5,38 +5,52 @@ using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour,IHealth
 {
-    [SerializeField] private MMFeedbacks HitFeedbacks;
-    [SerializeField] private MMFeedbacks DeathFeedbacks;
-    [SerializeField] private int _health;
+    [SerializeField] private int maxHealth;
+    [SerializeField] private int ignitionPoint;
+    [SerializeField] private float coolingTime;
+    [SerializeField] private float coolingInterval;
+    private float hitTimer;
+    private float coolingTimer;
     private Rigidbody rb;
     private Collider[] Colliders;
-    public int Health
+    public bool isIgnite;
+    private int health;
+    public int iHealth
     {
-        get { return _health; }
-        set { _health = value; }
+        get { return health; }
+        set { health = value; }
     }
 
     private void Awake()
     {
+        health = maxHealth;
         rb = GetComponent<Rigidbody>();
         Colliders = GetComponentsInChildren<Collider>();
     }
+
+    private void Update()
+    {
+        if(Time.time - hitTimer > coolingTime && Time.time - coolingTimer > coolingInterval && health < maxHealth)
+        {
+            EnemyCooling();
+        }
+    }
     public void TakeDamage(int Damage)
     {
-        _health -= Damage;
+        health -= Damage;
 
-        Debug.Log("Enemy_Test get damage" + Damage);
-        Debug.Log("Enemy_Test health" + _health);
+        hitTimer = Time.time;
 
-        if(_health <=0)
+        Debug.Log("敵人受到傷害" + Damage);
+        Debug.Log("敵人當前血量" + health);
+        
+        if(health <= 0)
         {
             EnemyDeath();
-            DeathFeedbacks.PlayFeedbacks();
-
         }
-        else
+        else if(health <= ignitionPoint)
         {
-            HitFeedbacks.PlayFeedbacks();
+            EnemyIgnite();
         }
     }
     private void EnemyDeath()
@@ -45,7 +59,17 @@ public class Enemy_Health : MonoBehaviour,IHealth
         CloseCollider();
         Destroy(gameObject, 1.5f);
     }
-
+    private void EnemyIgnite()
+    {
+        isIgnite = true;
+        //引燃時的反饋
+    }
+    private void EnemyCooling()
+    {
+        health ++;
+        coolingTimer = Time.time;
+        Debug.Log("敵人當前血量" + health);
+    }
     private void CloseCollider()
     {
         foreach (Collider collider in Colliders)
