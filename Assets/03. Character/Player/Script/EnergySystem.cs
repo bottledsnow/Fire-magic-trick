@@ -30,6 +30,7 @@ public class EnergySystem : MonoBehaviour
     private void Start()
     {
         _energySystemUI = GameManager.singleton.UISystem.GetComponent<EnergySystemUI>();
+        _energySystemUI.UpdateBar(Energy);
     }
     private void Update()
     {
@@ -163,5 +164,10 @@ public class EnergySystem : MonoBehaviour
                 timer = 0;
             }
         }
+    }
+    public void FullEnergy()
+    {
+        float value = 100-Energy;
+        Increase(value);
     }
 }

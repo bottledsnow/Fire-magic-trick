@@ -9,8 +9,7 @@ public class PrototypeN3 : MonoBehaviour
     [SerializeField] private GameObject Target;
     private ControllerInput _input;
     private bool trigger = false;
-    private bool isLookAt = false;
-    private void Start()
+    private void Start()    
     {
         _input = GameManager.singleton._input;
     }
