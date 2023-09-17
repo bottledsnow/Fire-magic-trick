@@ -19,7 +19,7 @@ public class Shooting_Magazing : MonoBehaviour
     }
     public void UseBullet()
     {
-        if (Bullet <= 0)
+        if (Bullet < 0)
         {
             return;
         }

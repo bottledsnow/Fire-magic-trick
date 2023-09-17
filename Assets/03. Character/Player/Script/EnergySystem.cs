@@ -21,6 +21,7 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] private float DashCost = 10;
     [SerializeField] private float KickCost = 10;
 
+
     [Header("Get")]
     [SerializeField] private float LampGet = 40;
     [SerializeField] private float KillGet = 10;
@@ -109,6 +110,19 @@ public class EnergySystem : MonoBehaviour
         if (CanUse)
         {
             Decrease(ReloadCost);
+        }
+        else
+        {
+            Debug.Log("Energy is not enough");
+        }
+    }
+    public void UseCharge(out bool CanUse)
+    {
+        CanUse = CheckEnergyCanUse(ChargeCost);
+
+        if (CanUse)
+        {
+            Decrease(ChargeCost);
         }
         else
         {
