@@ -51,7 +51,10 @@ public class EnergySystem : MonoBehaviour
     private void UpdateUI(float Value)
     {
         float value = Value / 100;
-        _energySystemUI.UpdateBar(value);
+        if(_energySystemUI != null)
+        {
+            _energySystemUI.UpdateBar(value);
+        }
     }
     #endregion
     #region use Skill
@@ -168,6 +171,7 @@ public class EnergySystem : MonoBehaviour
     public void FullEnergy()
     {
         float value = 100-Energy;
+        Debug.Log(value);
         Increase(value);
     }
 }

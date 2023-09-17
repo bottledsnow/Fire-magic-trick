@@ -25,4 +25,8 @@ public class PrototypeNALL : MonoBehaviour
         EnegrySystem.enabled = true;
         EnegrySystem.FullEnergy();
     }
+    public void ShowShootingMode()
+    {
+        ShootingMode_UI.SetActive(true);
+    }
 }

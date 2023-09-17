@@ -28,9 +28,11 @@ public class PrototypeN2_Enemy : MonoBehaviour
     private void Boom()
     {
         HitFeedbacks.PlayFeedbacks();
+        Debug.Log("Boom");
     }
     private void Kill()
     {
+        Debug.Log("Kill");
         KillFeedbacks.PlayFeedbacks();
         Destroy(gameObject);
     }
