@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Shooting_Charge : MonoBehaviour
 {
+    private Shooting_Magazing _shooting_magazing;
+    private EnergySystem _energySystem;
     private ControllerInput _input;
 
     [SerializeField] private float chargeInterval;
@@ -38,6 +40,8 @@ public class Shooting_Charge : MonoBehaviour
         _input = GameManager.singleton._input;
         _shootin_Check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
         _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        _shooting_magazing = GetComponent<Shooting_Magazing>();
+        _energySystem = GameManager.singleton._playerState.GetComponent<EnergySystem>();
     }
 
     private void Update()
@@ -120,15 +124,17 @@ public class Shooting_Charge : MonoBehaviour
         chargeBullet.transform.SetParent(FirePosition);
         chargeBullet.transform.position = FirePosition.position;
     }
+    
     private void LevelAddFeedback()
     {
         Debug.Log("Level:" + level);
         if(level < fireLevel)
         {
+            _shooting_magazing.UseBullet();
             instantiateBulletBall(pfChargeBall_Normal);
         }else
         {
-            instantiateBulletBall(pfChargeBall_Fire);
+            EnergyCheck();
         }
     }
     private void LevelFireFeedback()
@@ -169,6 +175,16 @@ public class Shooting_Charge : MonoBehaviour
         {
             GameObject Fire = Instantiate(pfFire, chargeBullet.transform.position, chargeBullet.transform.rotation);
             Fire.transform.SetParent(chargeBullet.transform);
+        }
+    }
+    private void EnergyCheck()
+    {
+        bool CanUse = false;
+        _energySystem.UseCharge(out CanUse);
+
+        if(CanUse)
+        {
+            instantiateBulletBall(pfChargeBall_Fire);
         }
     }
 }

@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    private ControllerInput _Input;
-    private EnergySystem energySystem;
+    private Shooting_Magazing _shooting_magazing;
     private Shooting_Check _shooting_check;
     [Header("Shoot Setting")]
     [SerializeField] private Transform spawnBulletPosition;
@@ -13,44 +10,17 @@ public class Shooting : MonoBehaviour
     [SerializeField] private float FireEnergyCost;
     private void Start()
     {
-        _Input = GameManager.singleton._input;
         _shooting_check = GetComponent<Shooting_Check>();
-        energySystem = _Input.GetComponent<EnergySystem>();
+        _shooting_magazing = GetComponent<Shooting_Magazing>();
     }
     public void shoot(Transform preferb)
     {
         Vector3 aimDir = (_shooting_check.mouseWorldPosition - spawnBulletPosition.position).normalized;
         Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+        _shooting_magazing.UseBullet();
     }
     public void Shoot_Normal(Transform preferb)
     {
-        bool canShoot = false;
-        energySystem.CunsumeShootingEnergy(shootingEnergyCost, out canShoot);
-
-        if (canShoot)
-        {
-            shoot(preferb);
-        }
-        else
-        {
-            Debug.Log("not enough shooting energy");
-        }
+        shoot(preferb);
     }
-    public void Shoot_Fire(Transform preferb)
-    {
-        bool canShoot_Fire;
-
-        energySystem.ConsumeFireEnergy(FireEnergyCost, out canShoot_Fire);
-
-        if (canShoot_Fire)
-        {
-            shoot(preferb);
-            Debug.Log("PlayerShootFire");
-        }
-        else
-        {
-            Debug.Log("not enough Fire energy");
-        }
-    }
-    
 }

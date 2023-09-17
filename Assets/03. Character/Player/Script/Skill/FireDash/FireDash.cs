@@ -15,7 +15,6 @@ public class FireDash : MonoBehaviour
     [SerializeField] private Vector3 Dash_Good;
     [SerializeField] private float Reaction_time;
     [Header("FeedBacks")]
-    [SerializeField] private MMF_Player Feedbacks_Dash_CD;
     [SerializeField] private MMF_Player Feedbacks_Dash_Start;
     [SerializeField] private MMF_Player Feedbacks_Dash_End;
     private Vector3 Dash_Normal;
@@ -28,20 +27,20 @@ public class FireDash : MonoBehaviour
     private ThirdPersonController _playerController;
     private ControllerInput _Input;
     private CharacterController _characterController;
-    
+    private EnergySystem _energySystem;
     private void Start()
     {
         _Input = GameManager.singleton._input;
         _playerController = _Input.GetComponent<ThirdPersonController>();
         _characterController = _Input.GetComponent<CharacterController>();
+        _energySystem = _Input.GetComponent<EnergySystem>();
         Dash_Normal = DashEffect_Explode_End.gameObject.transform.localScale;
     }
-
     private void Update()
     {
         ButtonSystem();
     }
-    #region
+    #region Dash Button System
     private void ButtonSystem()
     {
         ButtonTrigger();
@@ -61,11 +60,8 @@ public class FireDash : MonoBehaviour
     {
         if (!Pressed)
         {
-            SetDashScale(Dash_Normal);
             Pressed = true;
-            IsDash = true;
-            Dash_Start();
-            //Button
+            ButtonClickEvent();
         }
     }
     private void ButtonPressedStart()
@@ -84,7 +80,7 @@ public class FireDash : MonoBehaviour
     {
         if (!_Input.ButtonB)
         {
-            Dash_TriggerLimit();
+            ButtonReleaseEvent();
             ButtonClickOnly();
             ButtonPressedEnd();
             ButtonInitialization();
@@ -102,36 +98,55 @@ public class FireDash : MonoBehaviour
         if (PressedTime > _Input.PressedSensitivity)
         {
             //Button Pressed End
-
-            IsDash = false;
-            float time_Start = dashTime_Max -Reaction_time;
-            float time_End = dashTime_Max + Reaction_time;
-            if (time_Start < PressedTime && PressedTime < time_End)
-            {
-                SetDashScale(Dash_Good);
-            }
+            ButtonPressedEndEvent();
         }
     }
     private void ButtonInitialization()
     {
-        
         Pressed = false;
         KeepPressed = false;
         PressedTime = 0;
     }
     #endregion
-    #region Dash Systsem
-    private async void Dash_MaxKeepTime()
+    private void ButtonClickEvent()
     {
-        await Task.Delay((int)(dashTime_Max * 1000));
-        Dash_End();
+        if(!IsDash && !dashOnCD)
+        {
+            useDash();
+        }
     }
-    
+    private void useDash()
+    {
+        bool CanUse;
+        _energySystem.UseDash(out CanUse);
+
+        if (CanUse)
+        {
+            IsDash = true;
+            SetDashScale(Dash_Normal);
+            Dash_Start();
+        }
+    }
+    private void ButtonPressedEndEvent()
+    {
+        IsDash = false;
+        float time_Start = dashTime_Max - Reaction_time;
+        float time_End = dashTime_Max + Reaction_time;
+        if (time_Start < PressedTime && PressedTime < time_End)
+        {
+            SetDashScale(Dash_Good);
+        }
+    }
+    private void ButtonReleaseEvent()
+    {
+        Dash_TriggerLimit();
+    }
+    #region Dash Systsem
     private void Dash_Start()
     {
         if (!dashedButton && _Input.LeftStick != Vector2.zero)
         {
-            if (!dashOnCD )
+            if (!dashOnCD)
             {
                 dashedButton = true;
                 StartCoroutine(DashMove());
@@ -141,6 +156,13 @@ public class FireDash : MonoBehaviour
             }
         }
     }
+    private async void Dash_MaxKeepTime()
+    {
+        await Task.Delay((int)(dashTime_Max * 1000));
+        Dash_End();
+    }
+    
+    
     private void Dash_End()
     {
         IsDash = false;
@@ -156,7 +178,6 @@ public class FireDash : MonoBehaviour
     }
     private async void DashCD(float CDtime)
     {
-        Feedbacks_Dash_CD.PlayFeedbacks();
         dashOnCD = true;
         await Task.Delay((int)(CDtime * 1000));
         dashOnCD = false;

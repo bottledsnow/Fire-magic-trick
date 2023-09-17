@@ -4,12 +4,13 @@ using UnityEngine;
 public class FireFloat : MonoBehaviour
 {
     private ControllerInput _input;
+    private EnergySystem _energySystem;
     private PlayerState _playerState;
-
     [SerializeField] private float maxFloatTime;
     [SerializeField] private MMF_Player fireFloat;
     private float timer;
     private bool isTrigger;
+    private bool isCheck;
     private bool isTimer;
     private bool needInitialize;
 
@@ -17,6 +18,7 @@ public class FireFloat : MonoBehaviour
     {
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
+        _energySystem = _playerState.GetComponent<EnergySystem>();
     }
     private void Update()
     {
@@ -28,11 +30,26 @@ public class FireFloat : MonoBehaviour
     {
         if(_input.ButtonA && _playerState.canFloat && !_playerState.nearGround)
         {
-            floatStart();
+            EnergyCheck();
         }
         else
         {
             floatEnd();
+        }
+    }
+    private void EnergyCheck()
+    {
+        if(!isCheck)
+        {
+            isCheck = true;
+
+            bool CanUse = false;
+            _energySystem.UseFloat(out CanUse);
+
+            if (CanUse)
+            {
+                floatStart();
+            }
         }
     }
     private void floatStart()
@@ -79,8 +96,9 @@ public class FireFloat : MonoBehaviour
     {
         if(_playerState.nearGround && needInitialize)
         {
-            isTrigger = false;
             needInitialize = false;
+            isTrigger = false;
+            isCheck = false;
         }
     }
 }

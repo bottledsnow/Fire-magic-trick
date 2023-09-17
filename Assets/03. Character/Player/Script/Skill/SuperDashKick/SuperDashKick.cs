@@ -9,14 +9,16 @@ public class SuperDashKick : MonoBehaviour
     [SerializeField] private MMF_Player SuperDashEnd;
 
     private ThirdPersonController _thirdPersonController;
-    private Animator _playerAnimator;
     private ControllerInput _input;
+    private EnergySystem _energySystem;
     private PlayerState _playerState;
     private SuperDash _superDash;
+    private Animator _playerAnimator;
 
     private float timer;
     private bool isTimer;
     private bool isInputY;
+    private bool isCheck;
 
     private void Start()
     {
@@ -25,6 +27,7 @@ public class SuperDashKick : MonoBehaviour
         _superDash = GetComponent<SuperDash>();
         _thirdPersonController = _playerState.GetComponent<ThirdPersonController>();
         _playerAnimator = _playerState.GetComponent<Animator>();
+        _energySystem = _playerState.GetComponent<EnergySystem>();
     }
     private void Update()
     {
@@ -36,9 +39,27 @@ public class SuperDashKick : MonoBehaviour
     {
         if(_superDash.isSuperDash && _input.ButtonY)
         {
-            isInputY = true;
-            isTimer = true;
+            EnergyCheck();
         }
+    }
+    private void EnergyCheck()
+    {
+        if(!isCheck)
+        {
+            isCheck = true;
+            bool CanUse = false;
+            _energySystem.UseKick(out CanUse);
+
+            if (CanUse)
+            {
+                KickStart();
+            }
+        }
+    }
+    private void KickStart()
+    {
+        isInputY = true;
+        isTimer = true;
     }
     private void effectTimer()
     {
@@ -75,10 +96,12 @@ public class SuperDashKick : MonoBehaviour
         _thirdPersonController.Jump();
         _playerState.SetGravityToNormal();
         SuperDashEnd.PlayFeedbacks();
+        isCheck = false;
     }
     private void kickFail()
     {
         Debug.Log("Fail");
+        isCheck = false;
     }
     #endregion
 }
