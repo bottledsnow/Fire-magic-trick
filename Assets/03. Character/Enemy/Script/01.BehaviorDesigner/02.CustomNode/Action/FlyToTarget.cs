@@ -2,7 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class MoveToTarget_Sky : Action
+public class FlyToTarget : Action
 {
    public float moveSpeed = 850;
    public float keepHeight = 2.5f;

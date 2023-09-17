@@ -11,7 +11,8 @@ public class TargetWithinRange : Conditional
     public bool isVector2 = false;
     public SharedGameObject targetObject;
 
-    public float distanceToTarget;
+    [SerializeField]
+    private float distanceToTarget;
 
     public override void OnStart()
     {
