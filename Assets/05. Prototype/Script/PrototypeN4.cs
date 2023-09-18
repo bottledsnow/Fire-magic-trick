@@ -6,7 +6,7 @@ public class PrototypeN4 : MonoBehaviour
 {
     [SerializeField] private GameObject Trigger;
     private ControllerInput _input;
-    private bool isTrigger;
+    public bool isTrigger;
     [SerializeField] private MMF_Player Feedbacks;
 
     private void Start()
@@ -23,6 +23,7 @@ public class PrototypeN4 : MonoBehaviour
         if(_input.LB && !isTrigger)
         {
             N4();
+            isTrigger = true;   
         }
     }
     private void N4()

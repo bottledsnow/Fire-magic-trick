@@ -9,6 +9,7 @@ public class PrototypeN3 : MonoBehaviour
     [SerializeField] private GameObject Target;
     private ControllerInput _input;
     private bool trigger = false;
+    public bool isFalling = false;
     private void Start()    
     {
         _input = GameManager.singleton._input;
@@ -19,9 +20,11 @@ public class PrototypeN3 : MonoBehaviour
     }
     private void ToRecoverTimeScale()
     {
-        if(_input.ButtonA && !trigger)
+        if(_input.ButtonA && !trigger && isFalling)
         {
             Feedbacks.StopFeedbacks();
+            trigger = true;
+            isFalling = false;
         }
     }
 }

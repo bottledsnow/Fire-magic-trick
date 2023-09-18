@@ -1,4 +1,3 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.Math;
 using UnityEngine;
 
 public class EnergySystem : MonoBehaviour
@@ -6,6 +5,7 @@ public class EnergySystem : MonoBehaviour
     private EnergySystemUI _energySystemUI;
     [Header("Energy")]
     public float Energy;
+    [SerializeField] private float StartEnergy;
     [Header("Recover")]
     [SerializeField] private float recoverRange;
     [SerializeField] private float recoverTime;
@@ -30,7 +30,7 @@ public class EnergySystem : MonoBehaviour
     private void Start()
     {
         _energySystemUI = GameManager.singleton.UISystem.GetComponent<EnergySystemUI>();
-        _energySystemUI.UpdateBar(Energy);
+        Increase(StartEnergy);
     }
     private void Update()
     {

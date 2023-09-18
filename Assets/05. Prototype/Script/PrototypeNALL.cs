@@ -29,4 +29,8 @@ public class PrototypeNALL : MonoBehaviour
     {
         ShootingMode_UI.SetActive(true);
     }
+    public void ShowMagazing()
+    {
+        Magazing_UI.SetActive(true);
+    }
 }
