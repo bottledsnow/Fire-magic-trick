@@ -1,13 +1,15 @@
 using MoreMountains.Feedbacks;
-using MoreMountains.Tools;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class PrototypeN4 : MonoBehaviour
 {
     [SerializeField] private GameObject Trigger;
+    [SerializeField] private MMF_Player Feedbacks;
+    [SerializeField] private BrokeGlassN4[] BrokeGlassN4s;
     private ControllerInput _input;
     public bool isTrigger;
-    [SerializeField] private MMF_Player Feedbacks;
+    private int BrokenNumber;
 
     private void Start()
     {
@@ -29,5 +31,13 @@ public class PrototypeN4 : MonoBehaviour
     private void N4()
     {
         Feedbacks.StopFeedbacks();
+    }
+    public async void N4GlassBrokenStart()
+    {
+        for(int i=0;i<BrokeGlassN4s.Length;i++)
+        {
+            BrokeGlassN4s[i].Broke();
+            await Task.Delay(750);
+        }
     }
 }

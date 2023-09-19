@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 public class PrototypeN3 : MonoBehaviour
 {
     [SerializeField] private MMF_Player Feedbacks;
+    [SerializeField] private MMF_Player Feedbacks2;
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Target;
     private ControllerInput _input;
@@ -23,6 +24,7 @@ public class PrototypeN3 : MonoBehaviour
         if(_input.ButtonA && !trigger && isFalling)
         {
             Feedbacks.StopFeedbacks();
+            Feedbacks2.PlayFeedbacks();
             trigger = true;
             isFalling = false;
         }
