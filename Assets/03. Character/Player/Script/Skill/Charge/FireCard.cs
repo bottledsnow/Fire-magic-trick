@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using System.Threading.Tasks;
-using static UnityEditor.PlayerSettings;
-using static UnityEngine.Rendering.DebugUI.Table;
-using Unity.VisualScripting;
 
 public class FireCard : MonoBehaviour
 {

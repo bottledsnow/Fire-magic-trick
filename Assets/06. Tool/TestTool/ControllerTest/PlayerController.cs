@@ -1,7 +1,6 @@
 using UnityEngine;
 using StarterAssets;
 using UnityEngine.UI;
-using UnityEditor.PackageManager.UI;
 
 public class PlayerController : MonoBehaviour
 {
