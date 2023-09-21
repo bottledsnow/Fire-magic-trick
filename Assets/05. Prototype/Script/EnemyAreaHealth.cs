@@ -11,4 +11,8 @@ public class EnemyAreaHealth : MonoBehaviour
             Feedbacks.PlayFeedbacks();
         }
     }
+    public void Playfeedback()
+    {
+        Feedbacks.PlayFeedbacks();
+    }
 }

@@ -22,18 +22,22 @@ public class pfCharge : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             EnemyState_Shawn enemyState = collision.gameObject.GetComponent<EnemyState_Shawn>();
-            if(enemyState.isFire)
+            if(enemyState!= null)
             {
-                Instantiate(pfHit_Fire, this.transform.position, Dir);
-            } else
-            {
-                if(IsFire)
+                if (enemyState.isFire)
                 {
                     Instantiate(pfHit_Fire, this.transform.position, Dir);
                 }
                 else
                 {
-                    Instantiate(pfHit_Normal, this.transform.position, Dir);
+                    if (IsFire)
+                    {
+                        Instantiate(pfHit_Fire, this.transform.position, Dir);
+                    }
+                    else
+                    {
+                        Instantiate(pfHit_Normal, this.transform.position, Dir);
+                    }
                 }
             }
         } else

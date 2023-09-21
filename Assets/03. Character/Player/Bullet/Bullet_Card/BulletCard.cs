@@ -7,7 +7,10 @@ public class BulletCard : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             Enemy_Health _health = collision.gameObject.GetComponent<Enemy_Health>();
-            _health.TakeDamage(1);
+            if(_health != null)
+            {
+                _health.TakeDamage(1);
+            }
         }
     }
 }

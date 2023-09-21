@@ -37,7 +37,7 @@ public class PrototypeN4 : MonoBehaviour
         for(int i=0;i<BrokeGlassN4s.Length;i++)
         {
             BrokeGlassN4s[i].Broke();
-            await Task.Delay(750);
+            await Task.Delay(1000);
         }
     }
 }
