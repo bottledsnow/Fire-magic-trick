@@ -14,7 +14,7 @@ public class Enemy_Health : MonoBehaviour,IHealth
     private Rigidbody rb;
     private Collider[] Colliders;
     public bool isIgnite;
-    private int health;
+    public int health;
     public int iHealth
     {
         get { return health; }
