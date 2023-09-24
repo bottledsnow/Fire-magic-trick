@@ -1,9 +1,11 @@
 using StarterAssets;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private float maxPreInputTime = 0.1f;
+    [SerializeField] private float JumpTimeout = 0.1f;
 
     private float preInputTimer = 0f;
     private bool isPreInput = false;
@@ -21,7 +23,6 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
         preInputSystem();
-        jumpSystem();
     }
     #region PreInput
     #region System
@@ -65,7 +66,7 @@ public class PlayerJump : MonoBehaviour
     {
         if (isPreInput)
         {
-            if(_thirdPersonController.Grounded)
+            if(_thirdPersonController.Grounded && _thirdPersonController._jumpTimeoutDelta <= 0f)
             {
                 jump();
                 Initialization();
@@ -73,21 +74,9 @@ public class PlayerJump : MonoBehaviour
         }
     }
     #endregion
-    private void jumpSystem()
+    private async void jump()
     {
-        if(_thirdPersonController.useGravity)
-        {
-            if(_thirdPersonController.Grounded)
-            { 
-                if(_input.ButtonA)
-                {
-                    jump();
-                }
-            }
-        }
-    }
-    private void jump()
-    {
+        await Task.Delay((int)(JumpTimeout *1000f));
         _thirdPersonController.Jump();
     }
 }
