@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject EnergySystem;
     public GameObject ShootingSystem;
     [HideInInspector] public Transform Player;
+
+    [SerializeField] private MMF_Player TimeScaleFeedback;
     private void Awake()
     {
         if(singleton == null)
@@ -18,5 +21,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         Player = _input.gameObject.transform;
+        TimeScaleFeedback.PlayFeedbacks();
     }
 }

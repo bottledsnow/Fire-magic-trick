@@ -96,7 +96,7 @@ namespace StarterAssets
         private float _terminalVelocity = 53.0f;
 
         // timeout deltatime
-        private float _jumpTimeoutDelta;
+        public float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
 
         // animation IDs
@@ -316,7 +316,10 @@ namespace StarterAssets
                 }
 
                 // Jump
-                Jump();
+                if (_input.jump && _jumpTimeoutDelta <= 0.0f)
+                {
+                    Jump();
+                }
 
                 // jump timeout
                 if (_jumpTimeoutDelta >= 0.0f)
@@ -360,13 +363,6 @@ namespace StarterAssets
             
         }
         public void Jump()
-        {
-            if (_input.jump && _jumpTimeoutDelta <= 0.0f)
-            {
-                jump();
-            }
-        }
-        public void jump()
         {
             // the square root of H * -2 * G = how much velocity needed to reach desired height
             _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
