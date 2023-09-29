@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class Enemy_Shawn : MonoBehaviour, IHealth
@@ -13,6 +14,13 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     [Header("Cooling")]
     [SerializeField] private float coolingInterval;
     [SerializeField] private float coolingTime;
+
+    [Header("Feedbacks")]
+    [SerializeField] private EyeColorController _eye;
+    [SerializeField] private MMF_Player feedbacks_Steam;
+    [SerializeField] private MMF_Player feedbacks_Fire;
+    [SerializeField] private MMF_Player feedbacks_Shock;
+    [SerializeField] private MMF_Player feedbacks_Boom;
 
     private Collider[] Colliders;
     private Rigidbody rb;
@@ -32,11 +40,12 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         rb = GetComponent<Rigidbody>();
         Colliders = GetComponentsInChildren<Collider>();
     }
-    #region Cooling
     private void Update()
     {
         EnemyCoolingCheck();
+
     }
+    #region Cooling
     private void EnemyCoolingCheck()
     {
         isCooling = Time.time - hitTimer > coolingTime ? true : false;
@@ -51,6 +60,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     {
         health++;
         coolingTimer = Time.time;
+        healthFeedback(health);
         Debug.Log("敵人當前血量" + health);
     }
     #endregion
@@ -61,6 +71,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
 
         hitTimer = Time.time;
 
+        healthFeedback(health);
         Debug.Log("敵人受到傷害" + Damage);
         Debug.Log("敵人當前血量" + health);
 
@@ -89,6 +100,45 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         foreach (Collider collider in Colliders)
         {
             collider.enabled = false;
+        }
+    }
+    #endregion
+    #region Feedback
+    private void healthFeedback(int health)
+    {
+        if(health == 6)
+        {
+            _eye.SetYellow();
+        }
+        if (health == 5) 
+        {
+            _eye.SetOrange();
+            feedbacks_Steam.StopFeedbacks();
+        }
+        if (health == 4)
+        {
+            _eye.SetRed();
+            feedbacks_Steam.PlayFeedbacks();
+        }
+        if (health == 3)
+        {
+            _eye.SetPurple();
+            feedbacks_Fire.StopFeedbacks();
+            feedbacks_Steam.PlayFeedbacks();
+        }
+        if (health == 2)
+        {
+            feedbacks_Steam.StopFeedbacks();
+            feedbacks_Fire.PlayFeedbacks();
+            feedbacks_Shock.StopFeedbacks();
+        }
+        if (health == 1)
+        {
+            feedbacks_Shock.PlayFeedbacks();
+        }
+        if (health == 0)
+        {
+            feedbacks_Boom.PlayFeedbacks();
         }
     }
     #endregion
