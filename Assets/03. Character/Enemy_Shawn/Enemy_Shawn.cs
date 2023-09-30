@@ -1,10 +1,13 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
-
 public class Enemy_Shawn : MonoBehaviour, IHealth
 {
     [Header("State")]
     public bool isIgnite;
+    public bool isHurt;
+    public bool isSteam;
+    public bool isFire;
+    public bool isShock;
 
     [Header("Health")]
     public int health;
@@ -33,7 +36,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         get { return health; }
         set { health = value; }
     }
-
     private void Awake()
     {
         health = maxHealth;
@@ -43,7 +45,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     private void Update()
     {
         EnemyCoolingCheck();
-
     }
     #region Cooling
     private void EnemyCoolingCheck()
@@ -109,36 +110,67 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         if(health == 6)
         {
             _eye.SetYellow();
+
+            if(isHurt)
+            {
+                isHurt = false;
+            }
         }
         if (health == 5) 
         {
+            isHurt = true;
+
             _eye.SetOrange();
-            feedbacks_Steam.StopFeedbacks();
+
+            if(isSteam)
+            {
+                isSteam = false;
+                feedbacks_Steam.StopFeedbacks();
+            }
         }
         if (health == 4)
         {
+            isSteam = true;
+
             _eye.SetRed();
             feedbacks_Steam.PlayFeedbacks();
         }
         if (health == 3)
         {
             _eye.SetPurple();
-            feedbacks_Fire.StopFeedbacks();
-            feedbacks_Steam.PlayFeedbacks();
+
+            if(isFire)
+            {
+                isFire = false;
+                feedbacks_Steam.PlayFeedbacks();
+                feedbacks_Fire.StopFeedbacks();
+            }
         }
         if (health == 2)
         {
+            isFire = true;
+
             feedbacks_Steam.StopFeedbacks();
             feedbacks_Fire.PlayFeedbacks();
-            feedbacks_Shock.StopFeedbacks();
+
+            if(isShock)
+            {
+                isShock = false;
+                feedbacks_Shock.StopFeedbacks();
+            }
         }
         if (health == 1)
         {
+            isShock = true;
+
             feedbacks_Shock.PlayFeedbacks();
         }
         if (health == 0)
         {
             feedbacks_Boom.PlayFeedbacks();
+            feedbacks_Fire.StopFeedbacks();
+            feedbacks_Shock.StopFeedbacks();
+            feedbacks_Steam.StopFeedbacks();
         }
     }
     #endregion
