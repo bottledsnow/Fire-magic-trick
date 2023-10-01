@@ -10,10 +10,13 @@ public class FireDash : MonoBehaviour
     [SerializeField] private float dashSpeed;
     [SerializeField] private float dashTime_Max;
     [SerializeField] private float CdTime;
+    public float CrashForce;
     [Header("Special Dash")]
     [SerializeField] private ParticleSystem DashEffect_Explode_End;
     [SerializeField] private Vector3 Dash_Good;
     [SerializeField] private float Reaction_time;
+    [Header("Crash")]
+    [SerializeField] FireDashCollider _fireDashCollider;
     [Header("FeedBacks")]
     [SerializeField] private MMF_Player Feedbacks_Dash_Start;
     [SerializeField] private MMF_Player Feedbacks_Dash_End;
@@ -39,6 +42,41 @@ public class FireDash : MonoBehaviour
     private void Update()
     {
         ButtonSystem();
+    }
+    private void ButtonClickEvent()
+    {
+        if (!IsDash && !dashOnCD)
+        {
+            useDash();
+        }
+    }
+    private void useDash()
+    {
+        bool CanUse;
+        _energySystem.UseDash(out CanUse);
+
+        if (CanUse)
+        {
+            IsDash = true;
+            OpenCrash();
+            SetDashScale(Dash_Normal);
+            Dash_Start();
+        }
+    }
+    private void ButtonPressedEndEvent()
+    {
+        IsDash = false;
+        CloseCrash();
+        float time_Start = dashTime_Max - Reaction_time;
+        float time_End = dashTime_Max + Reaction_time;
+        if (time_Start < PressedTime && PressedTime < time_End)
+        {
+            SetDashScale(Dash_Good);
+        }
+    }
+    private void ButtonReleaseEvent()
+    {
+        Dash_TriggerLimit();
     }
     #region Dash Button System
     private void ButtonSystem()
@@ -108,39 +146,6 @@ public class FireDash : MonoBehaviour
         PressedTime = 0;
     }
     #endregion
-    private void ButtonClickEvent()
-    {
-        if(!IsDash && !dashOnCD)
-        {
-            useDash();
-        }
-    }
-    private void useDash()
-    {
-        bool CanUse;
-        _energySystem.UseDash(out CanUse);
-
-        if (CanUse)
-        {
-            IsDash = true;
-            SetDashScale(Dash_Normal);
-            Dash_Start();
-        }
-    }
-    private void ButtonPressedEndEvent()
-    {
-        IsDash = false;
-        float time_Start = dashTime_Max - Reaction_time;
-        float time_End = dashTime_Max + Reaction_time;
-        if (time_Start < PressedTime && PressedTime < time_End)
-        {
-            SetDashScale(Dash_Good);
-        }
-    }
-    private void ButtonReleaseEvent()
-    {
-        Dash_TriggerLimit();
-    }
     #region Dash Systsem
     private void Dash_Start()
     {
@@ -166,6 +171,7 @@ public class FireDash : MonoBehaviour
     private void Dash_End()
     {
         IsDash = false;
+        CloseCrash();
         DashEffect_Explode_End.gameObject.transform.localScale = Dash_Normal;
         Feedbacks_Dash_End.PlayFeedbacks();
     }
@@ -196,6 +202,16 @@ public class FireDash : MonoBehaviour
             _characterController.Move(Dir * dashSpeed * Time.deltaTime);
             yield return null;
         }
+    }
+    #endregion
+    #region Crash
+    private void OpenCrash()
+    {
+        _fireDashCollider.SetIsDash(true);
+    }
+    private void CloseCrash()
+    {
+        _fireDashCollider.SetIsDash(false);
     }
     #endregion
 }
