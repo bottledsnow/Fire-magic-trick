@@ -11,6 +11,7 @@ public class FireDash : MonoBehaviour
     [SerializeField] private float dashTime_Max;
     [SerializeField] private float CdTime;
     public float CrashForce;
+    public float CrashForceUp;
     [Header("Special Dash")]
     [SerializeField] private ParticleSystem DashEffect_Explode_End;
     [SerializeField] private Vector3 Dash_Good;

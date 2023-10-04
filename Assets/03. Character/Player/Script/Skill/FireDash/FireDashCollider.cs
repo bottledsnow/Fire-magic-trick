@@ -5,6 +5,7 @@ public class FireDashCollider : MonoBehaviour
     [SerializeField] private FireDash _fireDash;
     private float CrashForce;
     private bool IsDash;
+    private float CrashForceUp;
     private void Start()
     {
         _fireDash = GameManager.singleton.EnergySystem.GetComponent<FireDash>();
@@ -13,6 +14,7 @@ public class FireDashCollider : MonoBehaviour
     private void Initialization()
     {
         CrashForce = _fireDash.CrashForce;
+        CrashForceUp = _fireDash.CrashForceUp;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -25,7 +27,7 @@ public class FireDashCollider : MonoBehaviour
                 Vector3 EnemyPosition = other.transform.position;
                 Vector3 direction = (EnemyPosition - playerposition).normalized;
                 Vector3 Enemyup = other.transform.up;
-                other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForce / 2;
+                other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
             }
         }
     }
