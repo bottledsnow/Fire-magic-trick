@@ -8,6 +8,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     public bool isSteam;
     public bool isFire;
     public bool isShock;
+    public bool Boom;
 
     [Header("Health")]
     public int health;
@@ -24,6 +25,8 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_Fire;
     [SerializeField] private MMF_Player feedbacks_Shock;
     [SerializeField] private MMF_Player feedbacks_Boom;
+    [SerializeField] private MMF_Player feedbacks_FlyBoom;
+
 
     private Collider[] Colliders;
     private Rigidbody rb;
@@ -174,4 +177,11 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         }
     }
     #endregion
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(Boom)
+        {
+            feedbacks_FlyBoom.PlayFeedbacks();
+        }
+    }
 }

@@ -5,7 +5,7 @@ using MoreMountains.Feedbacks;
 
 public class SuperDash : MonoBehaviour
 {
-    [SerializeField] private GameObject Target;
+    public GameObject Target;
     [SerializeField] private AnimationCurve superDashIncreaseSpeed;
     [SerializeField] private AnimationCurve superDashReduceSpeed;
     [SerializeField] private float superDashMaxSpeed;
@@ -18,6 +18,7 @@ public class SuperDash : MonoBehaviour
 
     private SuperDashCameraCheck _superDashCameraCheck;
     private CharacterController _characterController;
+    private SuperDashKickDown _superDashKickDown;
     private ControllerInput _input;
     private PlayerAnimator _playerAnimator;
     private PlayerCollider _playerCollider;
@@ -38,10 +39,12 @@ public class SuperDash : MonoBehaviour
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
         _superDashCameraCheck = GetComponent<SuperDashCameraCheck>();
+        _superDashKickDown = GetComponent<SuperDashKickDown>();
         _characterController = _playerState.GetComponent<CharacterController>();
         _playerCollider = _playerState.GetComponent<PlayerCollider>();
         _playerAnimator = _playerState.GetComponent<PlayerAnimator>();
         _energySystem = _playerState.GetComponent<EnergySystem>();
+
         player = _playerState.gameObject;
     }
     private void Update()
@@ -81,6 +84,7 @@ public class SuperDash : MonoBehaviour
     private void superDashStart()
     {
         isSuperDash = true;
+        _superDashKickDown.GetTarget(Target);
         _playerAnimator.SuperDashStart();
         _playerState.SetGravityToFire();
         FireDashStart.PlayFeedbacks();
@@ -153,10 +157,11 @@ public class SuperDash : MonoBehaviour
         FireDashEnd.PlayFeedbacks();
         superDashSpeed = 0;
         Target = null;
+        _superDashKickDown.NullTarget();
     }
     private void superDashToThrough()
     {
-        _playerCollider.hit.collider.gameObject.SetActive(false);
+        //_playerCollider.hit.collider.gameObject.SetActive(false);
         isSuperDashThrough = true;
         superDashSpeed = superDashMaxSpeed;
     }

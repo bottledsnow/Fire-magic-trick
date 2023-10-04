@@ -5,10 +5,12 @@ using UnityEngine;
 public class SuperDashKick : MonoBehaviour
 {
     [SerializeField] private float leastEffectTime;
+    [SerializeField] private float newJumpHeight;
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player SuperDashEnd;
 
     private ThirdPersonController _thirdPersonController;
+    private SuperDashKickDown _superdashKickDown;
     private ControllerInput _input;
     private EnergySystem _energySystem;
     private PlayerState _playerState;
@@ -24,6 +26,7 @@ public class SuperDashKick : MonoBehaviour
     {
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
+        _superdashKickDown = GetComponent<SuperDashKickDown>();
         _superDash = GetComponent<SuperDash>();
         _thirdPersonController = _playerState.GetComponent<ThirdPersonController>();
         _playerAnimator = _playerState.GetComponent<Animator>();
@@ -90,10 +93,10 @@ public class SuperDashKick : MonoBehaviour
     #region Kick
     private void kickSuccess()
     {
-        Debug.Log("Success");
+        _superdashKickDown.KickDown();
+        SuperJump();
         _playerAnimator.SetTrigger("InputY");
         _playerAnimator.SetBool("isSuperDash", false);
-        _thirdPersonController.Jump();
         _playerState.SetGravityToNormal();
         SuperDashEnd.PlayFeedbacks();
         isCheck = false;
@@ -102,6 +105,13 @@ public class SuperDashKick : MonoBehaviour
     {
         Debug.Log("Fail");
         isCheck = false;
+    }
+    private void SuperJump()
+    {
+        float jumpHeigh = _thirdPersonController.JumpHeight;
+        _thirdPersonController.JumpHeight = newJumpHeight;
+        _thirdPersonController.Jump();
+        _thirdPersonController.JumpHeight = jumpHeigh;
     }
     #endregion
 }
