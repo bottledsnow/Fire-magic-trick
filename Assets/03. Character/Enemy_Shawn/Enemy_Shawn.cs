@@ -28,6 +28,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
 
 
+    private EnemyState_Shawn _enemyState;
     private Collider[] Colliders;
     private Rigidbody rb;
     private float hitTimer;
@@ -44,6 +45,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         health = maxHealth;
         rb = GetComponent<Rigidbody>();
         Colliders = GetComponentsInChildren<Collider>();
+        _enemyState = GetComponent<EnemyState_Shawn>();
     }
     private void Update()
     {
@@ -145,6 +147,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
             if(isFire)
             {
                 isFire = false;
+                _enemyState.isFire = false;
                 feedbacks_Steam.PlayFeedbacks();
                 feedbacks_Fire.StopFeedbacks();
             }
@@ -152,6 +155,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         if (health == 2)
         {
             isFire = true;
+            _enemyState.isFire = true;
 
             feedbacks_Steam.StopFeedbacks();
             feedbacks_Fire.PlayFeedbacks();

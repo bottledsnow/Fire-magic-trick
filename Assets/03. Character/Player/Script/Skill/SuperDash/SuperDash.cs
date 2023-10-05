@@ -161,7 +161,7 @@ public class SuperDash : MonoBehaviour
     }
     private void superDashToThrough()
     {
-        //_playerCollider.hit.collider.gameObject.SetActive(false);
+        _playerCollider.hit.collider.gameObject.SetActive(false);
         isSuperDashThrough = true;
         superDashSpeed = superDashMaxSpeed;
     }
