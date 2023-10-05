@@ -41,14 +41,13 @@ public class Enemy_Health : MonoBehaviour,IHealth
 
         hitTimer = Time.time;
 
-        Debug.Log("敵人受到傷害" + Damage);
-        Debug.Log("敵人當前血量" + health);
+        Debug.Log("敵人當前血量(" + health + "/" + maxHealth + ")");
         
         if(health <= 0)
         {
             EnemyDeath();
         }
-        else if(health <= ignitionPoint)
+        else if(health <= maxHealth - ignitionPoint)
         {
             EnemyIgnite();
         }
@@ -68,7 +67,12 @@ public class Enemy_Health : MonoBehaviour,IHealth
     {
         health ++;
         coolingTimer = Time.time;
-        Debug.Log("敵人當前血量" + health);
+        Debug.Log("敵人當前血量(" + health + "/" + maxHealth + ")");
+        
+        if(health >= maxHealth - ignitionPoint)
+        {
+            isIgnite = false;
+        }
     }
     private void CloseCollider()
     {
