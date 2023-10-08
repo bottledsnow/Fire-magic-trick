@@ -65,7 +65,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         health++;
         coolingTimer = Time.time;
         healthFeedback(health);
-        Debug.Log("�ĤH���e��q" + health);
+        Debug.Log("Enemy remain health" + health);
     }
     #endregion
     #region Damage
@@ -76,8 +76,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         hitTimer = Time.time;
 
         healthFeedback(health);
-        Debug.Log("�ĤH����ˮ`" + Damage);
-        Debug.Log("�ĤH���e��q" + health);
+        Debug.Log("Enemy remain health" + health);
 
         if (health <= 0)
         {
@@ -97,7 +96,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private void EnemyIgnite()
     {
         isIgnite = true;
-        //�޿U�ɪ����X
     }
     private void CloseCollider()
     {

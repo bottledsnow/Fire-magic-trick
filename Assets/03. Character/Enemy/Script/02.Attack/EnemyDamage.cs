@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour
 {
     [SerializeField] private int damage;
+    [SerializeField] private float force = 20;
     Rigidbody rb;
+    public Vector3 forceDirection;
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Player")
@@ -13,10 +15,11 @@ public class EnemyDamage : MonoBehaviour
             EnergySystem energySystem = collider.gameObject.GetComponent<EnergySystem>();
             energySystem.Energy -= damage;
 
-            // rb = gameObject.GetComponent<Rigidbody>();
-            // Vector3 flatVel = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-            // flatVel.Normalize();
-            // collider.GetComponent<CharacterController>().Move(flatVel * Time.deltaTime);
+            forceDirection = (transform.position - collider.gameObject.transform.position);
+            forceDirection = new Vector3(forceDirection.x,forceDirection.y*0,forceDirection.z);
+
+            ImpactReceiver impactReceiver = collider.gameObject.GetComponent<ImpactReceiver>();
+            impactReceiver.AddImpact(forceDirection , force);
 
             Destroy(gameObject);
         }
