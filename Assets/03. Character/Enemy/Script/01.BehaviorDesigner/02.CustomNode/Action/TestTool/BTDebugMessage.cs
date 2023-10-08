@@ -4,14 +4,12 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class BTDebugMessage : Action
 {
-	public string message;
-	public override void OnStart()
-	{
-		Debug.Log(message);
-	}
+	[Header("DebugMessage")]
+	[SerializeField] private string message;
 
 	public override TaskStatus OnUpdate()
 	{
+		Debug.Log(message);
 		return TaskStatus.Success;
 	}
 }

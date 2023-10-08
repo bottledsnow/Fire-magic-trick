@@ -4,55 +4,63 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class RangedShoot_Aimming : Action
 {
-    public float aimmingDuaction = 2.5f;
-    public float rotateSpeed = 5;
-    public Transform aimmingLinePoint;
-    public float playerHeight = 1.3f;
-    public SharedGameObject targetObject;
+    [Header("SharedVariable")]
+    [SerializeField] private SharedGameObject targetObject;
+    [Header("Aimming")]
+    [SerializeField] private float aimmingDuaction = 2.5f;
+    [SerializeField] private float rotateSpeed = 5;
+    [SerializeField] private Transform aimmingLinePoint;
+    [Header("Player")]
+    [SerializeField] private float playerHeight = 0.3f;
+    
     private Vector3 targetPoint;
-    private float timer;
+    private float aimmingTimer;
     private LineRenderer lineRenderer;
 
     public override void OnStart()
     {
-        timer = Time.time;
+        aimmingTimer = Time.time;
         AimmingEnable();
     }
 
     public override TaskStatus OnUpdate()
     {
-        if (Time.time - timer <= aimmingDuaction - 0.5f)
+        if (Time.time - aimmingTimer <= aimmingDuaction - 0.5f)
         {
             _LookAtTarget();
             AimmingLineRunning();
         }
-        if (Time.time - timer >= aimmingDuaction)
+        else
         {
             AimmingLineDisable();
+        }
+        if (Time.time - aimmingTimer >= aimmingDuaction)
+        {
             return TaskStatus.Success;
         }
         return TaskStatus.Running;
     }
 
-    void _LookAtTarget()
+    private void _LookAtTarget()
     {
         Quaternion rotation = Quaternion.LookRotation(new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z) - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
     }
-
-    void AimmingEnable()
+    #region AimmingLine
+    private void AimmingEnable()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = true;
     }
-    void AimmingLineRunning()
+    private void AimmingLineRunning()
     {
-        targetPoint = new Vector3(targetObject.Value.transform.position.x, targetObject.Value.transform.position.y + playerHeight / 2, targetObject.Value.transform.position.z);
+        targetPoint = new Vector3(targetObject.Value.transform.position.x, targetObject.Value.transform.position.y + playerHeight, targetObject.Value.transform.position.z);
         lineRenderer.SetPosition(0, aimmingLinePoint.position);
         lineRenderer.SetPosition(1, targetPoint);
     }
-    void AimmingLineDisable()
+    private void AimmingLineDisable()
     {
         lineRenderer.enabled = false;
     }
+    #endregion
 }

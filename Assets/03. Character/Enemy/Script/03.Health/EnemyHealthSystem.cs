@@ -1,6 +1,6 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
-public class Enemy_Shawn : MonoBehaviour, IHealth
+public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
     [Header("State")]
     public bool isIgnite;
@@ -19,11 +19,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     [SerializeField] private float coolingInterval;
     [SerializeField] private float coolingTime;
 
-    [Header("FeedbackTiming")]
-    [SerializeField] private int steamPoint;
-    private int ignitePoint;
-    [SerializeField] private int shockPoint;
-    
     [Header("Feedbacks")]
     [SerializeField] private EyeColorController _eye;
     [SerializeField] private MMF_Player feedbacks_Steam;

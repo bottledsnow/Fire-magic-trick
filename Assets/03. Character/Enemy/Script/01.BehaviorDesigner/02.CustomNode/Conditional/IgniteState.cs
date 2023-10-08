@@ -6,7 +6,7 @@ public class IgniteState : Conditional
 {
 	public override TaskStatus OnUpdate()
 	{
-		if(this.GetComponent<Enemy_Health>().isIgnite)
+		if(this.GetComponent<EnemyHealthSystem>().isIgnite)
 		{
 			return TaskStatus.Success;
 		}

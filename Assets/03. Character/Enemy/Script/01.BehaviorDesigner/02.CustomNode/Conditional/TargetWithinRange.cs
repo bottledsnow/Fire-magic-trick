@@ -4,14 +4,18 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class TargetWithinRange : Conditional
 {
-    public bool useMax = false;
-    public float max;
-    public bool useMin = false;
-    public float min;
-    public bool isVector2 = false;
-    public SharedGameObject targetObject;
+    [Header("SharedVariable")]
+    [SerializeField] private SharedGameObject targetObject;
 
-    [SerializeField]
+    [Header("Distance")]
+    [SerializeField] private bool useMax = false;
+    [SerializeField] private float max;
+    [SerializeField] private bool useMin = false;
+    [SerializeField] private float min;
+
+    [Header("Vector")]
+    [SerializeField] private bool isVector2 = false;
+
     private float distanceToTarget;
 
     public override void OnStart()
@@ -38,7 +42,7 @@ public class TargetWithinRange : Conditional
         }
     }
 
-    bool isWithinRange()
+    private bool isWithinRange()
     {
         if (!useMax)
         {

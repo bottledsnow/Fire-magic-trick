@@ -4,13 +4,11 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class MeleeSmashVfx : Action
 {
-	public GameObject vfx;
+	[Header("WeaponObject")]
+	[SerializeField] private GameObject vfx;
+	[Header("FiredTransform")]
 	public Transform meleeSmashPoint;
-	public override void OnStart()
-	{
-		
-	}
-
+	
 	public override TaskStatus OnUpdate()
 	{
 		Object.Instantiate(vfx, meleeSmashPoint.position , Quaternion.identity);
