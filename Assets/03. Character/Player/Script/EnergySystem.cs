@@ -22,10 +22,10 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] private float KickCost = 10;
 
 
-    [Header("Get")]
-    [SerializeField] private float LampGet = 40;
-    [SerializeField] private float KillGet = 10;
-    [SerializeField] private float SuperKillGet = 10;
+    //[Header("Get")]
+    //[SerializeField] private float LampGet = 40;
+    //[SerializeField] private float KillGet = 10;
+    //[SerializeField] private float SuperKillGet = 10;
 
     private void Start()
     {

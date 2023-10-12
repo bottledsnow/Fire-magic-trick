@@ -3,7 +3,7 @@ using UnityEngine;
 public class ShootingSystem : MonoBehaviour
 {
     private ControllerInput _input;
-    private bool isChooseNormal = true;
+    //private bool isChooseNormal = true;
 
     [Header("Shooting System Component")]
     public Shooting _Shooting;
