@@ -28,7 +28,8 @@ namespace StarterAssets
 
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
-        public float Sensitivity = 1f;
+        public float Sensitivity_x = 1f;
+        public float Sensitivity_y = 0.5f;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
@@ -78,6 +79,7 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         [Header("FireMagic")]
+        public bool isJump;
         public bool useGravity;
         public bool useMove;
         public bool isFloat;
@@ -195,6 +197,13 @@ namespace StarterAssets
             Grounded = Physics.CheckSphere(spherePosition, GroundedRadius, GroundLayers,
                 QueryTriggerInteraction.Ignore);
 
+
+            //Reset Jump
+            if(Grounded && isJump)
+            {
+                isJump = false;
+            }
+
             // update animator if using character
             if (_hasAnimator)
             {
@@ -210,8 +219,8 @@ namespace StarterAssets
                 //Don't multiply mouse input by Time.deltaTime;
                 float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier * Sensitivity;
-                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier * Sensitivity;
+                _cinemachineTargetYaw += _input.look.x * deltaTimeMultiplier * Sensitivity_y;
+                _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier * Sensitivity_y;
             }
 
             // clamp our rotations so our values are limited 360 degrees
@@ -364,13 +373,16 @@ namespace StarterAssets
         }
         public void Jump()
         {
-            // the square root of H * -2 * G = how much velocity needed to reach desired height
-            _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
-
-            // update animator if using character
-            if (_hasAnimator)
+            if(!isJump)
             {
-                _animator.SetBool(_animIDJump, true);
+                isJump = true;
+                // the square root of H * -2 * G = how much velocity needed to reach desired height
+                _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
+                // update animator if using character
+                if (_hasAnimator)
+                {
+                    _animator.SetBool(_animIDJump, true);
+                }
             }
         }
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -414,9 +426,10 @@ namespace StarterAssets
             }
         }
         */
-        public void SetSensitivity(float newSensitivity)
+        public void SetSensitivity(float newSensitive_x,float newSensitive_y)
         {
-            Sensitivity = newSensitivity;
+            Sensitivity_x = newSensitive_x;
+            Sensitivity_y = newSensitive_y;
         }
 
         public void SetRotateOnMove(bool newRotateOnMove)

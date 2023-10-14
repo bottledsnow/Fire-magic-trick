@@ -10,8 +10,11 @@ public class Shooting_Aim : MonoBehaviour
 
     [Header("Aim Setting")]
     [SerializeField] private CinemachineVirtualCamera aimVirtualCamera;
-    [SerializeField] private float normalSensitivity;
-    [SerializeField] private float aimSensitivity;
+    [SerializeField] private float normalSensitivity_x;
+    [SerializeField] private float normalSensitivity_y;
+    [SerializeField] private float aimSensitivity_x;
+    [SerializeField] private float aimSensitivity_y;
+
 
 
     private void Start()
@@ -34,7 +37,7 @@ public class Shooting_Aim : MonoBehaviour
         if (_Input.LT)
         {
             aimVirtualCamera.gameObject.SetActive(true);
-            thirdPersonController.SetSensitivity(aimSensitivity);
+            thirdPersonController.SetSensitivity(aimSensitivity_x,aimSensitivity_y);
             //thirdPersonController.SetRotateOnMove(false);
 
             Vector3 worldAimTarget = mouseWorldPosition;
@@ -47,10 +50,10 @@ public class Shooting_Aim : MonoBehaviour
     }
     private void AimClose()
     {
-        if (!_Input.LT)
+        if (!_Input.LT) 
         {
             aimVirtualCamera.gameObject.SetActive(false);
-            thirdPersonController.SetSensitivity(normalSensitivity);
+            thirdPersonController.SetSensitivity(normalSensitivity_x,normalSensitivity_y);
             thirdPersonController.SetRotateOnMove(true);
         }
     }

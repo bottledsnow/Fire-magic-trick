@@ -68,7 +68,10 @@ public class PlayerJump : MonoBehaviour
         {
             if(_thirdPersonController.Grounded && _thirdPersonController._jumpTimeoutDelta <= 0f)
             {
-                jump();
+                if(!_thirdPersonController.isJump)
+                {
+                    jump();
+                }
                 Initialization();
             }
         }

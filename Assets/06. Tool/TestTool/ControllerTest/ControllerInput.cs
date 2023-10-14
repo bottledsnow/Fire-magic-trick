@@ -183,6 +183,7 @@ public class ControllerInput : MonoBehaviour
     {
         SwitchLSB();
         TriggerLSB();
+        sprintToRunning();
         StopSrint();
     }
     private void SwitchLSB()
@@ -200,6 +201,10 @@ public class ControllerInput : MonoBehaviour
                 SprintMode = true;
             }
         }
+    }
+    private void sprintToRunning()
+    {
+         float strength = Mathf.Abs(LeftStick.x) + Mathf.Abs(LeftStick.y);
     }
     private void TriggerLSB()
     {
