@@ -39,9 +39,9 @@ public class Shooting_Charge : MonoBehaviour
     {
         _input = GameManager.singleton._input;
         _shootin_Check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
-        _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
         _shooting_magazing = GetComponent<Shooting_Magazing>();
         _energySystem = GameManager.singleton._playerState.GetComponent<EnergySystem>();
+        _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
     }
 
     private void Update()

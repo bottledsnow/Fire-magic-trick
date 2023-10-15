@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject UISystem;
     public GameObject EnergySystem;
     public GameObject ShootingSystem;
-    [HideInInspector] public Transform Player;
+    public Transform Player;
 
     private void Awake()
     {

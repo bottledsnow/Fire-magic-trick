@@ -84,6 +84,7 @@ namespace StarterAssets
         public bool useMove;
         public bool isFloat;
 
+        private Move_Our _move_Our;
         private Vector3 _moveOffset;
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -107,6 +108,9 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+
+        [Header("System Mode")]
+        public bool UseOurMove;
 
 #if ENABLE_INPUT_SYSTEM 
         private PlayerInput _playerInput;
@@ -152,6 +156,7 @@ namespace StarterAssets
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
             _controllerInput = GetComponent<ControllerInput>();
+            _move_Our = GetComponent<Move_Our>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
 #else
@@ -253,21 +258,41 @@ namespace StarterAssets
             if (currentHorizontalSpeed < targetSpeed - speedOffset ||
                 currentHorizontalSpeed > targetSpeed + speedOffset)
             {
-                // creates curved result rather than a linear one giving a more organic speed change
-                // note T in Lerp is clamped, so we don't need to clamp our speed
-                _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
-                    Time.deltaTime * SpeedChangeRate);
+                if(UseOurMove)
+                {
+                    _speed = _move_Our.MoveNew(_speed, currentHorizontalSpeed, targetSpeed, inputMagnitude, SpeedChangeRate);
+                }else
+                {
+                    // creates curved result rather than a linear one giving a more organic speed change
+                    // note T in Lerp is clamped, so we don't need to clamp our speed
+                    _speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude,
+                        Time.deltaTime * SpeedChangeRate);
 
-                // round speed to 3 decimal places
-                _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                    // round speed to 3 decimal places
+                    _speed = Mathf.Round(_speed * 1000f) / 1000f;
+                }
             }
             else
             {
-                _speed = targetSpeed;
+                if(UseOurMove)
+                {
+                    _speed = _move_Our.MoveElseNew(_speed,targetSpeed);
+                }
+                else
+                {
+                    _speed = targetSpeed;
+                }
             }
 
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
-            if (_animationBlend < 0.01f) _animationBlend = 0f;
+            if(UseOurMove)
+            {
+                _animationBlend = _move_Our.AnimationBlendNew(_animationBlend, _speed);
+            }else
+            {
+                _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+                if (_animationBlend < 0.01f) _animationBlend = 0f;
+            }
+
 
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
@@ -300,7 +325,16 @@ namespace StarterAssets
             if (_hasAnimator)
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
-                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+
+                if(UseOurMove)
+                {
+                    _animator.SetFloat(_animIDMotionSpeed, _move_Our.AnimatorMotionNew());
+                }
+                else
+                {
+                    _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+
+                }
             }
         }
 
@@ -376,6 +410,7 @@ namespace StarterAssets
             if(!isJump)
             {
                 isJump = true;
+
                 // the square root of H * -2 * G = how much velocity needed to reach desired height
                 _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 // update animator if using character
