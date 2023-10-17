@@ -10,6 +10,10 @@ public class Move_Our : MonoBehaviour
     [SerializeField] private float moveSpeed = 3f;
     [SerializeField] private float slowRunSpeed = 5f;
     [SerializeField] private float fastRunSpeed = 7f;
+    [Header("Motion")]
+    [SerializeField] private float motion_Move = 1f;
+    [SerializeField] private float motion_Run = 1f;
+
     [Header("Camera")]
     [SerializeField] private CinemachineVirtualCamera cameraNormal;
     [SerializeField] private CinemachineVirtualCamera cameraRunFast;
@@ -84,7 +88,7 @@ public class Move_Our : MonoBehaviour
             if (StickPower < 0.5f)
             {
                 //move speed
-                _speed = moveSpeed * StickPower *2;
+                _speed = moveSpeed * StickPower * 2;
             }
             else
             {
@@ -142,7 +146,7 @@ public class Move_Our : MonoBehaviour
             if (0f <StickPower && StickPower < 0.5f)
             {
                 //move speed
-                motion = StickPower;
+                motion = motion_Move;
             }
             else
             {
