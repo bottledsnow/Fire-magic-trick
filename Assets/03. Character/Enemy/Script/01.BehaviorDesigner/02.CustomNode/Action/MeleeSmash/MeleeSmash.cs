@@ -4,9 +4,13 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class MeleeSmash : Action
 {
-	public float attackDuaction;
-	public float rotateSpeed = 1;
-    public SharedGameObject targetObject;
+	[Header("SharedVariable")]
+	[SerializeField] private SharedGameObject targetObject;
+	[Header("MovementDuaction")]
+	[SerializeField] private float attackDuaction;
+	[Header("Rotate")]
+	[SerializeField] private float rotateSpeed = 1;
+
 	private float timer;
 
 	public override void OnStart()

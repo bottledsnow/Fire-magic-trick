@@ -1,6 +1,6 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
-public class Enemy_Shawn : MonoBehaviour, IHealth
+public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
     [Header("State")]
     public bool isIgnite;
@@ -19,11 +19,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     [SerializeField] private float coolingInterval;
     [SerializeField] private float coolingTime;
 
-    [Header("FeedbackTiming")]
-    [SerializeField] private int steamPoint;
-    private int ignitePoint;
-    [SerializeField] private int shockPoint;
-    
     [Header("Feedbacks")]
     [SerializeField] private EyeColorController _eye;
     [SerializeField] private MMF_Player feedbacks_Steam;
@@ -33,7 +28,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
 
 
-    private EnemyState_Shawn _enemyState;
     private Collider[] Colliders;
     private Rigidbody rb;
     private float hitTimer;
@@ -50,7 +44,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         health = maxHealth;
         rb = GetComponent<Rigidbody>();
         Colliders = GetComponentsInChildren<Collider>();
-        _enemyState = GetComponent<EnemyState_Shawn>();
     }
     private void Update()
     {
@@ -72,7 +65,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         health++;
         coolingTimer = Time.time;
         healthFeedback(health);
-        Debug.Log("�ĤH���e��q" + health);
+        Debug.Log("Enemy remain health" + health);
     }
     #endregion
     #region Damage
@@ -83,8 +76,7 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         hitTimer = Time.time;
 
         healthFeedback(health);
-        Debug.Log("�ĤH����ˮ`" + Damage);
-        Debug.Log("�ĤH���e��q" + health);
+        Debug.Log("Enemy remain health" + health);
 
         if (health <= 0)
         {
@@ -104,7 +96,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
     private void EnemyIgnite()
     {
         isIgnite = true;
-        //�޿U�ɪ����X
     }
     private void CloseCollider()
     {
@@ -152,7 +143,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
             if(isFire)
             {
                 isFire = false;
-                _enemyState.isFire = false;
                 feedbacks_Steam.PlayFeedbacks();
                 feedbacks_Fire.StopFeedbacks();
             }
@@ -160,7 +150,6 @@ public class Enemy_Shawn : MonoBehaviour, IHealth
         if (health == 2)
         {
             isFire = true;
-            _enemyState.isFire = true;
 
             feedbacks_Steam.StopFeedbacks();
             feedbacks_Fire.PlayFeedbacks();

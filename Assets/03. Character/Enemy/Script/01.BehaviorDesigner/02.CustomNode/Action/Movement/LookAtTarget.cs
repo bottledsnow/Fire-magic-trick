@@ -4,8 +4,11 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class LookAtTarget : Action
 {
-    public float rotateSpeed = 200;
-    public SharedGameObject targetObject;
+    [Header("SharedVariable")]
+    [SerializeField] private SharedGameObject targetObject;
+    [Header("Rotate")]
+    [SerializeField] private float rotateSpeed = 200;
+    
 
     public override void OnStart()
     {

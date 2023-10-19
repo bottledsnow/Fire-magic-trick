@@ -4,10 +4,12 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class RushAttack : Action
 {
+	[Header("JumpForce")]
 	[SerializeField] private float upForce;
 	[SerializeField] private float forwardForce;
-	[SerializeField] private float moveSpeed;
+
 	private Rigidbody rb;
+	
 	public override void OnStart()
 	{
 		rb = GetComponent<Rigidbody>();

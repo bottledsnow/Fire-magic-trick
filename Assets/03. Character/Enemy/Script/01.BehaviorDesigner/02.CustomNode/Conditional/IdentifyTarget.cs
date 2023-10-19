@@ -4,20 +4,22 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class IdentifyTarget : Conditional
 {
-    public float radius;
-    public float angle;
-    public float maxDetect;
-    public LayerMask targetMask;
-    public LayerMask obstructionMask;
+    [Header("SharedVariable")]
+    [SerializeField] private SharedGameObject targetObject;
+    [Header("DetectArea")]
+    [SerializeField] private float radius;
+    [SerializeField] private float angle;
+    [SerializeField] private LayerMask targetMask;
+    [SerializeField] private LayerMask obstructionMask;
+    [Header("Alert")]
+    [SerializeField] private float maxAlert = 100;
 
-    public SharedGameObject targetObject;
-
-    private float detect;
+    private float alert;
 
     public override TaskStatus OnUpdate()
     {
         FindTarget();
-        if (detect > 0)
+        if (alert > 0)
         {
             return TaskStatus.Success;
         }
@@ -40,16 +42,16 @@ public class IdentifyTarget : Conditional
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2 && !Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
             {
                 targetObject.Value = rangeChecks[0].gameObject;
-                detect = maxDetect;
+                alert = maxAlert;
             }
             else
             {
-                detect--;
+                alert--;
             }
         }
         else
         {
-            detect--;
+            alert--;
         }
     }
 }
