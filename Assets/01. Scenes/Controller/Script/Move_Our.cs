@@ -109,7 +109,6 @@ public class Move_Our : MonoBehaviour
                 _speed =slowRunSpeed + (fastRunSpeed- slowRunSpeed)* StickPower;
             }
         }
-        Debug.Log("Speed: " + _speed);
         _speed = Mathf.Round(_speed * 1000f) / 1000f;
 
         return _speed;
