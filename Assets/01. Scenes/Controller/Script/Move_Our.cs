@@ -45,7 +45,7 @@ public class Move_Our : MonoBehaviour
     }
     private void CameraSwitch()
     {
-        if(!Trigger)
+        if(_input.LSB && !Trigger)
         {
             if(!_input.SprintMode && !CameraSwitchOn)
             {
