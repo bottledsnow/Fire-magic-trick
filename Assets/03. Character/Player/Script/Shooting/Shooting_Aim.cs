@@ -6,6 +6,7 @@ public class Shooting_Aim : MonoBehaviour
 {
     private ControllerInput _Input;
     private ThirdPersonController thirdPersonController;
+    private PlayerState _playerState;
     private Vector3 mouseWorldPosition = Vector3.zero;
 
     [Header("Aim Setting")]
@@ -21,6 +22,7 @@ public class Shooting_Aim : MonoBehaviour
     {
         _Input = GameManager.singleton._input;
         thirdPersonController = _Input.GetComponent<ThirdPersonController>();
+        _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
     }
 
     private void Update()
@@ -36,6 +38,7 @@ public class Shooting_Aim : MonoBehaviour
     {
         if (_Input.LT)
         {
+            _playerState.TurnToAimDirection();
             aimVirtualCamera.gameObject.SetActive(true);
             thirdPersonController.SetSensitivity(aimSensitivity_x,aimSensitivity_y);
             //thirdPersonController.SetRotateOnMove(false);
