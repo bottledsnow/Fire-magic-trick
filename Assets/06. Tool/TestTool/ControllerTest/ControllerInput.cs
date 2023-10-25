@@ -37,6 +37,7 @@ public class ControllerInput : MonoBehaviour
     [Header("Setting")]
     public bool Option;
     public bool Window;
+    public bool anyKey;
 
     #region InputSystem_Input
     public void OnController_Stick_Left(InputValue value)
@@ -111,6 +112,10 @@ public class ControllerInput : MonoBehaviour
     {
         Input_Window(value.isPressed);
     }
+    public void OnAnyKey(InputValue value)
+    {
+        AnyKey(value.isPressed);
+    }
     #endregion
     #region Button_Input
     public void Input_Button_A(bool newButtonState)
@@ -176,6 +181,10 @@ public class ControllerInput : MonoBehaviour
     public void Input_Window(bool newButtonState)
     {
         Window = newButtonState;
+    }
+    public void AnyKey(bool newButtonState)
+    {
+        anyKey = newButtonState;
     }
     #endregion
 
