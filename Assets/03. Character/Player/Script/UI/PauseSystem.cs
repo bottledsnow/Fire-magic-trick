@@ -18,7 +18,6 @@ public class PauseSystem : MonoBehaviour
     private void Update()
     {
         pauseSystem();
-        Debug.Log(Time.timeScale);
     }
     private void pauseSystem()
     {
