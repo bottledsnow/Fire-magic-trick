@@ -1,8 +1,10 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class FireDashCollider : MonoBehaviour
 {
     [SerializeField] private FireDash _fireDash;
+    [SerializeField] private MMF_Player HitFeedbacks;
     private float CrashForce;
     private bool IsDash;
     private float CrashForceUp;
@@ -27,6 +29,7 @@ public class FireDashCollider : MonoBehaviour
                 Vector3 EnemyPosition = other.transform.position;
                 Vector3 direction = (EnemyPosition - playerposition).normalized;
                 Vector3 Enemyup = other.transform.up;
+                HitFeedbacks.PlayFeedbacks();
                 other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
             }
         }
