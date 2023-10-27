@@ -12,7 +12,6 @@ public class Move_Our : MonoBehaviour
     [SerializeField] private float fastRunSpeed = 7f;
     [Header("Motion")]
     [SerializeField] private float motion_Move = 1f;
-    [SerializeField] private float motion_Run = 1f;
 
     [Header("Camera")]
     [SerializeField] private CinemachineVirtualCamera cameraNormal;
