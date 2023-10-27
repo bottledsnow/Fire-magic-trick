@@ -6,10 +6,13 @@ public class RangedShoot_Aimming : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
+    
     [Header("Aimming")]
     [SerializeField] private float aimmingDuaction = 2.5f;
-    [SerializeField] private float rotateSpeed = 5;
+    [SerializeField] private float rotateSpeed = 200;
+    [SerializeField] private float AimmingLineDisableDelay = 0f;
     [SerializeField] private Transform aimmingLinePoint;
+
     [Header("Player")]
     [SerializeField] private float playerHeight = 0.3f;
     
@@ -25,9 +28,9 @@ public class RangedShoot_Aimming : Action
 
     public override TaskStatus OnUpdate()
     {
-        if (Time.time - aimmingTimer <= aimmingDuaction - 0.5f)
+        LookAtTarget();
+        if (Time.time - aimmingTimer <= aimmingDuaction - AimmingLineDisableDelay)
         {
-            _LookAtTarget();
             AimmingLineRunning();
         }
         else
@@ -41,7 +44,7 @@ public class RangedShoot_Aimming : Action
         return TaskStatus.Running;
     }
 
-    private void _LookAtTarget()
+    private void LookAtTarget()
     {
         Quaternion rotation = Quaternion.LookRotation(new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z) - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
