@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Enemy_Boom : MonoBehaviour
 {
-    [SerializeField] private Enemy_Shawn enemy_Shawn;
-    public Rigidbody rb;
-    private void Awake()
+    [SerializeField] private EnemyHealthSystem enemyHealthSystesm;
+    [HideInInspector]public Rigidbody rb;
+    private void Awake()        
     {
-        rb = enemy_Shawn.GetComponent<Rigidbody>();
+        rb = enemyHealthSystesm.GetComponent<Rigidbody>();
     }
     public void Boom()
     {
-        enemy_Shawn.Boom = true;
+        enemyHealthSystesm.Boom = true;
     }
 }
