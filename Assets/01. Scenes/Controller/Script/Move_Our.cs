@@ -14,13 +14,13 @@ public class Move_Our : MonoBehaviour
     [SerializeField] private float motion_Move = 1f;
 
     [Header("Camera")]
+    [SerializeField] private bool isRunCamera;
     [SerializeField] private CinemachineVirtualCamera cameraNormal;
     [SerializeField] private CinemachineVirtualCamera cameraRunFast;
 
     private ControllerInput _input;
     private ThirdPersonController _thirdPersonController;
 
-    private bool CameraSwitchOn = false;
     private bool Trigger;
 
     private void Start()
@@ -36,6 +36,8 @@ public class Move_Our : MonoBehaviour
         if(UseOurMove)
         {
             _thirdPersonController.UseOurMove = true;
+            _thirdPersonController.MoveSpeed = moveSpeed;
+            _thirdPersonController.SprintSpeed = fastRunSpeed;
         }
     }
     private void Update()
@@ -46,13 +48,17 @@ public class Move_Our : MonoBehaviour
     {
         if(_input.LSB && !Trigger)
         {
-            if(!_input.SprintMode && !CameraSwitchOn)
+            Debug.Log(_input.SprintMode);
+            if(_input.SprintMode)
             {
                 SetCameraNormal();
             }
             else
             {
-                SetCameraRun();
+                if(_input.LeftStick.magnitude > 0.5f)
+                {
+                    SetCameraRun();
+                }
             }
             Trigger = true;
         }
@@ -69,20 +75,20 @@ public class Move_Our : MonoBehaviour
     }
     private void SetCameraNormal()
     {
+        isRunCamera = false;
         cameraNormal.gameObject.SetActive(true);
         cameraRunFast.gameObject.SetActive(false);
-        CameraSwitchOn = !CameraSwitchOn;
     }
     private void SetCameraRun()
     {
+        isRunCamera = true;
         cameraNormal.gameObject.SetActive(false);
         cameraRunFast.gameObject.SetActive(true);
-        CameraSwitchOn = !CameraSwitchOn;
     }
     public float MoveNew(float _speed,float currentHorizontalSpeed,float targetSpeed,float inputMagnitude,float SpeedChangeRate)
     {
         float StickPower = _input.LeftStick.magnitude;
-        if(!_input.SprintMode)
+        if(!isRunCamera)
         {
             if (StickPower < 0.5f)
             {
@@ -96,11 +102,11 @@ public class Move_Our : MonoBehaviour
             }
         }
         else
+        if (isRunCamera)
         {
             if (StickPower < 0.5f)
             {
-                //move speed
-                _speed = moveSpeed * StickPower*2;
+                _input.SprintMode = false;
             }
             else
             {
@@ -121,14 +127,15 @@ public class Move_Our : MonoBehaviour
     {
         float StickPower = _input.LeftStick.magnitude;
 
-        if(_input.SprintMode)
-        {
-            _animationBlend = fastRunSpeed * StickPower;
-
-        }
-        else
+        
+        if (!isRunCamera)
         {
             _animationBlend = slowRunSpeed * StickPower;
+        }
+        else
+        if (isRunCamera)
+        {
+            _animationBlend = fastRunSpeed * StickPower;
         }
         if (_animationBlend < 0.01f) _animationBlend = 0f;
 
@@ -138,7 +145,7 @@ public class Move_Our : MonoBehaviour
     {
         float StickPower = _input.LeftStick.magnitude;
         float motion = 0;
-        if (!_input.SprintMode)
+        if (!isRunCamera)
         {
             
             if (0f <StickPower && StickPower < 0.5f)
@@ -157,6 +164,7 @@ public class Move_Our : MonoBehaviour
             }
         }
         else
+        if(isRunCamera)
         {
             
             if (0f < StickPower &&StickPower < 0.5f)
