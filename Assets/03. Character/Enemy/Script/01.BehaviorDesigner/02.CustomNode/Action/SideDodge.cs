@@ -6,17 +6,17 @@ public class SideDodge : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
-    
+
     [Header("Rotate")]
-    [SerializeField] private float rotateSpeed = 200;
+    [SerializeField] private float rotateSpeed = 15;
 
     [Header("Dodge")]
-    public float initialMoveSpeed = 10.0f;
-    public float slowdownRate = 0.5f; 
+    public float initialMoveSpeed = 40;
+    public float slowdownRate = 0.5f;
     public float stopVelocity = 0.6f;
     private Rigidbody rb;
     private float timer;
-    
+
     public override void OnStart()
     {
         rb = GetComponent<Rigidbody>();
@@ -38,8 +38,11 @@ public class SideDodge : Action
 
     private void StartDodge()
     {
-        int dodgeDirection = (Random.value > 0.5f) ? 1 : -1;
-        rb.AddForce(transform.right * dodgeDirection * initialMoveSpeed * Time.deltaTime, ForceMode.VelocityChange);
+        rb.velocity = Vector3.zero;
+
+        int randomDirection = (Random.value > 0.5f) ? 1 : -1;
+        Debug.Log(randomDirection);
+        rb.AddForce(transform.right * randomDirection * initialMoveSpeed, ForceMode.Impulse);
     }
 
     private void LookAtTarget()

@@ -25,7 +25,7 @@ public class Rush_Ready : Action
     {
         if (Time.time - readyTimer <= readyDuaction)
         {
-            _LookAtTarget();
+            LookAtTarget();
         }
         if (Time.time - readyTimer >= readyDuaction)
         {
@@ -34,7 +34,7 @@ public class Rush_Ready : Action
         return TaskStatus.Running;
     }
 
-    private void _LookAtTarget()
+    private void LookAtTarget()
     {
         Quaternion rotation = Quaternion.LookRotation(new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z) - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
