@@ -4,44 +4,28 @@ using Cinemachine;
 
 public class CameraSystem : MonoBehaviour
 {
-    [SerializeField] private CinemachineVirtualCamera playerCamera;
-    [SerializeField] private float Distance;
-    [SerializeField] private float cameraHight;
+    [SerializeField] private CinemachineVirtualCamera Camera_Normal;
+    [SerializeField] private CinemachineVirtualCamera Camera_Run;
+    [SerializeField] private CinemachineVirtualCamera Camera_Aim;
+    [SerializeField] private CinemachineVirtualCamera Camera_Death;
 
-    private Transform playerPosition;
-    private Transform cameraTarget;
-    private void Start()
+    public void useCamera_normal()
     {
-        playerPosition = GameManager.singleton.Player;
-    }
-    public async void ToTeleportCamera()
-    {
-        ToTeleportCamera_Start();
-        await Task.Delay(700);
-    }
-    public void ToTeleportCamera_Start()
-    {
-        GetTarget();
-        MoveCameraToTarget();
-        ClosePlayerCamera();
-    }
 
-    private void GetTarget()
-    {
-        
     }
-    private void MoveCameraToTarget()
+    public void useCamera_Run()
     {
-        Vector3 direction = (playerPosition.position - cameraTarget.transform.position).normalized;
-        Vector3 CameraPositoin = cameraTarget.position + direction * Distance;
-        Vector3 hight = new Vector3(0, cameraHight, 0);
+
     }
-    private void ClosePlayerCamera()
+    public void useCamera_Aim()
     {
-        playerCamera.gameObject.SetActive(false);
+
     }
-    private void OpenPlayerCamera()
+    public void useCamera_Death()
     {
-        playerCamera.gameObject.SetActive(true);
+        Camera_Death.gameObject.SetActive(true);
+        Camera_Aim.gameObject.SetActive(false);
+        Camera_Run.gameObject.SetActive(false);
+        Camera_Normal.gameObject.SetActive(false);
     }
 }

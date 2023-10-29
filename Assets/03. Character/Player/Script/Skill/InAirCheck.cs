@@ -19,7 +19,7 @@ public class InAirCheck : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, AirLengh))
         {
-            Debug.Log("射線命中了物體：" + hit.collider.gameObject.name);
+            Debug.Log("射?命中了物體：" + hit.collider.gameObject.name);
             InAir = false;
         }else
         {
@@ -28,10 +28,10 @@ public class InAirCheck : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        // 設置 Gizmos 的顏色
+        // 設置 Gizmos 的?色
         Gizmos.color = Color.yellow;
 
-        // 繪製射線，起點為物體位置，方向為向下
+        // 繪製射?，起點為物體位置，方向為向下
         Gizmos.DrawRay(transform.position, Vector3.down * AirLengh);
     }
 }

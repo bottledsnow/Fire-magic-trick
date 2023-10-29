@@ -8,7 +8,7 @@ public class FireAbsorb : MonoBehaviour
     public ParticleSystem _particleSystem; // 粒子系統
     public float convergenceSpeed = 5f; // 匯聚速度
 
-    private ParticleSystem.Particle[] particles; // 粒子陣列
+    private ParticleSystem.Particle[] particles; // 粒子?列
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class FireAbsorb : MonoBehaviour
 
         for (int i = 0; i < particleCount; i++)
         {
-            // 使用 Lerp 函式讓粒子匯聚到目標座標
+            // 使用 Lerp 函式?粒子匯聚到目標座標
             particles[i].position = Vector3.Lerp(particles[i].position, target, convergenceSpeed * Time.deltaTime);
         }
 
