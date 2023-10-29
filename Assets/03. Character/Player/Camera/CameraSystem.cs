@@ -12,7 +12,7 @@ public class CameraSystem : MonoBehaviour
     public void useCamera_normal()
     {
 
-    }
+    }   
     public void useCamera_Run()
     {
 

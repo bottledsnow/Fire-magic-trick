@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Threading.Tasks;
-using System.Net.NetworkInformation;
 
 public class Shooting_Magazing : MonoBehaviour
 {
