@@ -6,15 +6,13 @@ public class ShieldShoot_Aimming : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
+    [SerializeField] private SharedGameObject shield;
     
     [Header("Aimming")]
     [SerializeField] private float aimmingDuaction = 2.5f;
     [SerializeField] private float rotateSpeed = 15;
     [SerializeField] private float AimmingLineDisableDelay = 0f;
     [SerializeField] private Transform aimmingLinePoint;
-
-    [Header("Shield")]
-    [SerializeField] private GameObject shield;
 
     [Header("Player")]
     [SerializeField] private float playerHeight = 0.3f;
@@ -27,6 +25,7 @@ public class ShieldShoot_Aimming : Action
     {
         aimmingTimer = Time.time;
         AimmingEnable();
+        ShieldEnable();
     }
 
     public override TaskStatus OnUpdate()
@@ -35,10 +34,12 @@ public class ShieldShoot_Aimming : Action
         if (Time.time - aimmingTimer <= aimmingDuaction - AimmingLineDisableDelay)
         {
             AimmingLineRunning();
+            ShieldEnable();
         }
         else
         {
             AimmingLineDisable();
+            ShieldDisable();
         }
         if (Time.time - aimmingTimer >= aimmingDuaction)
         {
@@ -57,8 +58,6 @@ public class ShieldShoot_Aimming : Action
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.enabled = true;
-
-        shield.SetActive(true);
     }
     private void AimmingLineRunning()
     {
@@ -69,8 +68,22 @@ public class ShieldShoot_Aimming : Action
     private void AimmingLineDisable()
     {
         lineRenderer.enabled = false;
-
-        shield.SetActive(false);
+    }
+    #endregion
+    #region Shield
+    private void ShieldEnable()
+    {
+        if(shield != null)
+        {
+            shield.Value.SetActive(true);
+        }
+    }
+    private void ShieldDisable()
+    {
+        if(shield != null)
+        {
+            shield.Value.SetActive(false);
+        }
     }
     #endregion
 }
