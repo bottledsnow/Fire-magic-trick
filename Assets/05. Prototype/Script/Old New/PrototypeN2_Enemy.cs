@@ -34,6 +34,13 @@ public class PrototypeN2_Enemy : MonoBehaviour
     {
         Debug.Log("Kill");
         KillFeedbacks.PlayFeedbacks();
-        Destroy(gameObject);
+        this.gameObject.SetActive(false);
+    }
+    public void ReSetState()
+    {
+        hitNumber = 0;
+        HitFeedbacks.StopFeedbacks();
+        KillFeedbacks.StopFeedbacks();
+        this.gameObject.SetActive(true);
     }
 }
