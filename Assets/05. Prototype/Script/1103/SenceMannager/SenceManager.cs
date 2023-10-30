@@ -10,8 +10,10 @@ public class SenceManager : MonoBehaviour
     [SerializeField] private Collider ColliderLand;
     [Header("Position")]
     [SerializeField] private Transform GlassPosition;
+    [SerializeField] private Transform EnemyPosition;
     [Header("Preferb")]
     [SerializeField] private Transform Glass;
+    [SerializeField] private Transform Enemy;
     [Header("Feedback")]
     [SerializeField] private MMF_Player GlassBroke;
     private void Start()
@@ -19,8 +21,10 @@ public class SenceManager : MonoBehaviour
         _progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
 
         _progressSystem.OnPlayerDeath += StartAreaRebirth;
+        _progressSystem.OnPlayerDeath += RebirthEnemy;
 
         CreateGlass();
+        RebirthEnemy();
     }
     
     private void Update()
@@ -50,6 +54,10 @@ public class SenceManager : MonoBehaviour
         Transform glass = Instantiate(Glass, GlassPosition.transform.position, GlassPosition.transform.rotation);
         BigGlass = glass.GetComponent<BrokeGlass>();
         ColliderLand.enabled = true;
+    }
+    public void RebirthEnemy()
+    {
+        Instantiate(Enemy, EnemyPosition.transform.position, EnemyPosition.transform.rotation);
     }
     #region Area Progress
     private void StartAreaRebirth()
