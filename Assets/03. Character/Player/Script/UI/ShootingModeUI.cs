@@ -9,7 +9,6 @@ public class ShootingModeUI : MonoBehaviour
     [SerializeField] private MMF_Player Feedbacks_Charge;
     public void ChooseNormal()
     {
-        Debug.Log("Normal UI");
         Feedbacks.PlayFeedbacks();
         Feedbacks_Normal.PlayFeedbacks();
     }

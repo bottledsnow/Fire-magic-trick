@@ -38,7 +38,7 @@ public class SenceManager : MonoBehaviour
             GlassBroken();
         }
     }
-    private void GlassBroken()
+    public void GlassBroken()
     {
         ColliderLand.enabled = false;
         GlassBroke.PlayFeedbacks();
