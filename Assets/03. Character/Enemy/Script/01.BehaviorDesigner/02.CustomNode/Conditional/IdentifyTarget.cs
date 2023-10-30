@@ -6,11 +6,13 @@ public class IdentifyTarget : Conditional
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
+
     [Header("DetectArea")]
     [SerializeField] private float radius;
     [SerializeField] private float angle;
     [SerializeField] private LayerMask targetMask;
     [SerializeField] private LayerMask obstructionMask;
+    
     [Header("Alert")]
     [SerializeField] private float maxAlert = 100;
 
@@ -18,7 +20,7 @@ public class IdentifyTarget : Conditional
 
     public override TaskStatus OnUpdate()
     {
-        FindTarget();
+        FieldOfView();
         if (alert > 0)
         {
             return TaskStatus.Success;
@@ -30,7 +32,7 @@ public class IdentifyTarget : Conditional
         }
     }
 
-    void FindTarget()
+    private void FieldOfView()
     {
         Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
 
