@@ -21,7 +21,6 @@ public class SuperDashKickDown : MonoBehaviour
             enemy_Boom.Boom();
             Vector3 rbUp = rb.gameObject.transform.up;
             rb.velocity = -rbUp * kickDownForce;
-            
         }
     }
 }

@@ -1,11 +1,15 @@
 using MoreMountains.Feedbacks;
 using StarterAssets;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class SuperDashKick : MonoBehaviour
 {
     [SerializeField] private float leastEffectTime;
     [SerializeField] private float newJumpHeight;
+    [Header("Layermask")]
+    [SerializeField] private LayerMask NormalLeyer;
+    [SerializeField] private LayerMask KickLayer;
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player SuperDashEnd;
 
@@ -63,6 +67,7 @@ public class SuperDashKick : MonoBehaviour
     {
         isInputY = true;
         isTimer = true;
+        _superDash.SetIsKick(true);
     }
     private void effectTimer()
     {
@@ -89,22 +94,48 @@ public class SuperDashKick : MonoBehaviour
             kickFail();
         }
     }
+    public bool timerCheck(bool kickSuccess)
+    {
+        if(!isInputY)
+        {
+            return false;
+        }else
+        {
+            if (timer < leastEffectTime)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+    }
     #endregion
     #region Kick
     private void kickSuccess()
     {
-        _superdashKickDown.KickDown();
+        KickTriggerCheck();
+        //_superdashKickDown.KickDown();
         SuperJump();
         _playerAnimator.SetTrigger("InputY");
         _playerAnimator.SetBool("isSuperDash", false);
         _playerState.SetGravityToNormal();
         SuperDashEnd.PlayFeedbacks();
         isCheck = false;
+        _superDash.SetIsKick(false);
+    }
+    private async void KickTriggerCheck()
+    {
+        _playerState.gameObject.layer = 16;
+        await Task.Delay(500);
+        _playerState.gameObject.layer = 6;
     }
     private void kickFail()
     {
         Debug.Log("Fail");
         isCheck = false;
+        _superDash.SetIsKick(false);
     }
     private void SuperJump()
     {

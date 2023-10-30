@@ -22,6 +22,7 @@ public class SuperDash : MonoBehaviour
     private ControllerInput _input;
     private PlayerAnimator _playerAnimator;
     private PlayerCollider _playerCollider;
+    private SuperDashKick _superDashKick;
     private EnergySystem _energySystem;
     private PlayerState _playerState;
     private GameObject player;
@@ -31,11 +32,13 @@ public class SuperDash : MonoBehaviour
     private float superDashSpeed = 0;
     private float superDashTimer = 0;
     private bool isSuperDashThrough;
+    private bool isKick;
 
     [HideInInspector] public bool isSuperDash;
 
     private void Start()
     {
+        _superDashKick = GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
         _superDashCameraCheck = GetComponent<SuperDashCameraCheck>();
@@ -145,7 +148,14 @@ public class SuperDash : MonoBehaviour
                     superDashStop();
                 } else
                 {
-                    superDashToThrough();
+                    if(_superDashKick.timerCheck(isKick))
+                    {
+                        _superDashKickDown.KickDown();
+                        superDashStop();
+                    }else
+                    {
+                        superDashToThrough();
+                    }
                 }
             }
         }
@@ -186,5 +196,9 @@ public class SuperDash : MonoBehaviour
     private void LookAtTarget()
     {
         _playerState.transform.LookAt(Target.transform);
+    }
+    public void SetIsKick(bool value)
+    {
+        //isKick = value;
     }
 }
