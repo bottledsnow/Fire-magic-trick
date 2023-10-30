@@ -33,7 +33,7 @@ public class Lazer_ShieldAimming : Action
 
     public override TaskStatus OnUpdate()
     {
-        LookAtTarget();
+        LimitedRotation();
         if (Time.time - aimmingTimer <= aimmingDuaction - AimmingEndDelay)
         {
             AimmingLineRunning();
@@ -51,10 +51,21 @@ public class Lazer_ShieldAimming : Action
         return TaskStatus.Running;
     }
 
-    private void LookAtTarget()
+    private void LimitedRotation()
     {
-        Quaternion rotation = Quaternion.LookRotation(new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z) - transform.position);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+        Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
+        Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
+
+        float angle = Quaternion.Angle(transform.rotation, rotation);
+
+        float maxRotationSpeed = rotateSpeed * Time.deltaTime;
+        if (angle > maxRotationSpeed)
+        {
+            float t = maxRotationSpeed / angle;
+            rotation = Quaternion.Slerp(transform.rotation, rotation, t);
+        }
+
+        transform.rotation = rotation;
     }
     #region AimmingLine
     private void AimmingEnable()
