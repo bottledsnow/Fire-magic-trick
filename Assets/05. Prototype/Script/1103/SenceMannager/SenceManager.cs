@@ -9,17 +9,27 @@ public class SenceManager : MonoBehaviour
     private BrokeGlass BigGlass;
     private GlassRoad GlassRoadScript;
     private Transform[] EnemyFly = new Transform[2];
+    private Transform glassPlatform;
+    private Transform glassWall;
+    private Transform groundGlass;
     [SerializeField] private Collider ColliderLand;
     [Header("Position")]
     [SerializeField] private Transform GlassPosition;
     [SerializeField] private Transform EnemyPosition;
     [SerializeField] private Transform GlassRoadPosition;
     [SerializeField] private Transform[] EnemyFlyPositions;
+    [SerializeField] private Transform GlassPlatformPosition;
+    [SerializeField] private Transform GlassWallPosition;
+    [SerializeField] private Transform GroundGlassPosition;
 
     [Header("Preferb")]
     [SerializeField] private Transform Glass;
     [SerializeField] private Transform Enemy;
     [SerializeField] private Transform GlassRoad;
+    [SerializeField] private Transform GlassPlatform;
+    [SerializeField] private Transform GlassWall;
+    [SerializeField] private Transform GroundGlass;
+
     [Header("Feedback")]
     [SerializeField] private MMF_Player GlassBroke;
     private void Start()
@@ -30,13 +40,22 @@ public class SenceManager : MonoBehaviour
         _progressSystem.OnPlayerDeath += RebirthEnemy;
         _progressSystem.OnPlayerDeath += DestroyGlassRoad;
         _progressSystem.OnPlayerDeath += RebirthGlassRoad;
-        _progressSystem.OnPlayerDeath += RebirtEnemyFly;
         _progressSystem.OnPlayerDeath += DestroyEnemyFly;
+        _progressSystem.OnPlayerDeath += RebirthEnemyFly;
+        _progressSystem.OnPlayerDeath += DestoryGlassPlatform;
+        _progressSystem.OnPlayerDeath += RebirthGlassPlatform;
+        _progressSystem.OnPlayerDeath += DestoryGlassWall;
+        _progressSystem.OnPlayerDeath += RebirthGlassWall;
+        _progressSystem.OnPlayerDeath += DestoryGroundGlass;
+        _progressSystem.OnPlayerDeath += RebirthGroundGlass;
 
         RebirthGlass();
         RebirthEnemy();
         RebirthGlassRoad();
-        RebirtEnemyFly();
+        RebirthEnemyFly();
+        RebirthGlassPlatform();
+        RebirthGlassWall();
+        RebirthGroundGlass();
     }
     
     private void Update()
@@ -72,6 +91,21 @@ public class SenceManager : MonoBehaviour
     {
         GlassRoadScript.GlassBrokenStart();
     }
+    public void ExitTeachArea()
+    {
+        _progressSystem.OnPlayerDeath -= StartAreaRebirth;
+        _progressSystem.OnPlayerDeath -= RebirthEnemy;
+        _progressSystem.OnPlayerDeath -= DestroyGlassRoad;
+        _progressSystem.OnPlayerDeath -= RebirthGlassRoad;
+        _progressSystem.OnPlayerDeath -= DestroyEnemyFly;
+        _progressSystem.OnPlayerDeath -= RebirthEnemyFly;
+        _progressSystem.OnPlayerDeath -= DestoryGlassPlatform;
+        _progressSystem.OnPlayerDeath -= RebirthGlassPlatform;
+        _progressSystem.OnPlayerDeath -= DestoryGlassWall;
+        _progressSystem.OnPlayerDeath -= RebirthGlassWall;
+        _progressSystem.OnPlayerDeath -= DestoryGroundGlass;
+        _progressSystem.OnPlayerDeath -= RebirthGroundGlass;
+    }
     #region Rebirth
     public void RebirthEnemy()
     {
@@ -82,10 +116,22 @@ public class SenceManager : MonoBehaviour
         Transform tran = Instantiate(GlassRoad, GlassRoadPosition.transform.position, GlassRoadPosition.transform.rotation);
         GlassRoadScript = tran.GetComponent<GlassRoad>();
     }
-    public void RebirtEnemyFly()
+    public void RebirthEnemyFly()
     {
         EnemyFly[0] = Instantiate(Enemy, EnemyFlyPositions[0].transform.position, EnemyFlyPositions[0].transform.rotation);
         EnemyFly[1] = Instantiate(Enemy, EnemyFlyPositions[1].transform.position, EnemyFlyPositions[1].transform.rotation);
+    }
+    public void RebirthGlassPlatform()
+    {
+        glassPlatform = Instantiate(GlassPlatform, GlassPlatformPosition.transform.position, GlassPlatformPosition.transform.rotation);
+    }
+    public void RebirthGlassWall()
+    {
+        glassWall = Instantiate(GlassWall, GlassWallPosition.transform.position, GlassWallPosition.transform.rotation);
+    }
+    public void RebirthGroundGlass()
+    {
+        groundGlass = Instantiate(GroundGlass, GroundGlassPosition.transform.position, GroundGlassPosition.transform.rotation);
     }
     public void DestroyEnemyFly()
     {
@@ -95,6 +141,18 @@ public class SenceManager : MonoBehaviour
     public void DestroyGlassRoad()
     {
         GlassRoadScript.gameObject.SetActive(false);
+    }
+    public void DestoryGlassPlatform()
+    {
+        Destroy(glassPlatform.gameObject);
+    }
+    public void DestoryGlassWall()
+    {
+        Destroy(glassWall.gameObject);
+    }
+    public void DestoryGroundGlass()
+    {
+        Destroy(groundGlass.gameObject);
     }
     #endregion
     #region Area Progress
