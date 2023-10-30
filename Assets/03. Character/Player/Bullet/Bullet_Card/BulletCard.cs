@@ -9,7 +9,7 @@ public class BulletCard : MonoBehaviour
             IHealth _health = collision.gameObject.GetComponent<IHealth>();
             if(_health != null)
             {
-                _health.TakeDamage(1);
+                
             }
         }
     }

@@ -69,9 +69,9 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     #endregion
     #region Damage
-    public void TakeDamage(int Damage)
+    public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
     {
-        health -= Damage;
+        health -= damage;
 
         hitTimer = Time.time;
 

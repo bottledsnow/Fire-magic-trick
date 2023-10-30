@@ -13,7 +13,7 @@ public class BulletDamage : MonoBehaviour
             MMFeedbacks EnemyFeedback = collision.gameObject.GetComponent<MMFeedbacks>();
             EnemyFeedback?.PlayFeedbacks();
             IHealth health = collision.gameObject.GetComponent<IHealth>();
-            health.TakeDamage(damage);
+            //health.TakeDamage(damage);
         }
     }
 }
