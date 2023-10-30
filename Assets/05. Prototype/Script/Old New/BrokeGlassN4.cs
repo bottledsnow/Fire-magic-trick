@@ -34,7 +34,12 @@ public class BrokeGlassN4 : MonoBehaviour
     public void Broke()
     {
         Debug.Log("Broke");
-        Feedbacks.PlayFeedbacks();
+
+        if(Feedbacks != null)
+        {
+            Feedbacks.PlayFeedbacks();
+        }
+
         for (int i = 0;i < glasses.Length;i++)
         {
             if (glasses[i] != null)
