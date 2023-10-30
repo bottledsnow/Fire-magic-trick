@@ -8,8 +8,6 @@ public class GameMannager1103 : MonoBehaviour
     [Header("Test")]
     [SerializeField] private bool StartToArea_A = false;
     [SerializeField] private GameObject TeachSystem;
-    [Header("Mannager")]
-    [SerializeField] PrototypeN2_Enemy _prototypeN2_Enemy;
     private void Start()
     {
         player = GameManager.singleton.Player;
@@ -19,8 +17,7 @@ public class GameMannager1103 : MonoBehaviour
     private void Update()
     {
         TestTool();
-        TestRebirth();
-    }
+    }   
     private void TestTool()
     {
         if(Input.GetKeyDown(KeyCode.Alpha1))
@@ -42,14 +39,10 @@ public class GameMannager1103 : MonoBehaviour
     }
     private void StartArea_A()
     {
-        TeachSystem.SetActive(false);
-        PassTeaching();
-    }
-    private void TestRebirth()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(TeachSystem != null)
         {
-            _prototypeN2_Enemy.ReSetState();
+            TeachSystem.SetActive(false);
         }
+        PassTeaching();
     }
 }

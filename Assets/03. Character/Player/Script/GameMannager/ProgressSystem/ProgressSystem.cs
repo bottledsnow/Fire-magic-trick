@@ -21,7 +21,7 @@ public class ProgressSystem : MonoBehaviour
         if(ProgressCheckPoint != null)
         {
             player.transform.position = ProgressCheckPoint.position;
-            OnPlayerDeath.Invoke();
+            OnPlayerDeath?.Invoke();
             PlayerRebirth();
         }
     }

@@ -61,7 +61,6 @@ public class FireFloat : MonoBehaviour
             _playerState.SetGravityToFloat();
             _playerState.SetIsFloat(true);
             fireFloat.PlayFeedbacks();
-            Debug.Log("float");
         }
     }
     private void floatEnd()

@@ -5,12 +5,11 @@ public class BrokeGlass : MonoBehaviour
 {
     [SerializeField] private Rigidbody[] glasses;
     [SerializeField] private float force = 100f;
-    [SerializeField] private MMF_Player Feedbacks;
 
     private void Start()
     {
         GetAllChild();
-    }
+    }   
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.I))
@@ -33,7 +32,6 @@ public class BrokeGlass : MonoBehaviour
     public void Broke()
     {
         Debug.Log("Broke");
-        Feedbacks.PlayFeedbacks();
         for (int i = 0;i < glasses.Length;i++)
         {
             if (glasses[i] != null)
