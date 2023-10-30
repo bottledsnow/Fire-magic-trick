@@ -6,9 +6,10 @@ public class EnemyDamage : MonoBehaviour
 {
     [SerializeField] private int damage;
     [SerializeField] private float force = 20;
-    [SerializeField] private bool isBullet = false;
+    [SerializeField] private bool destroyAfterHit = false;
     Rigidbody rb;
     public Vector3 forceDirection;
+
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Player")
@@ -22,7 +23,7 @@ public class EnemyDamage : MonoBehaviour
             ImpactReceiver impactReceiver = collider.gameObject.GetComponent<ImpactReceiver>();
             impactReceiver.AddImpact(forceDirection , force);
 
-            if(isBullet)
+            if(destroyAfterHit)
             {
                 Destroy(gameObject);
             }

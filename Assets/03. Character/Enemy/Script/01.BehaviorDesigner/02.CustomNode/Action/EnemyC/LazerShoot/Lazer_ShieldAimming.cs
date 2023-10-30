@@ -2,17 +2,20 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class ShieldShoot_Aimming : Action
+public class Lazer_ShieldAimming : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedGameObject shield;
     
-    [Header("Aimming")]
-    [SerializeField] private float aimmingDuaction = 2.5f;
+    [Header("Behavior")]
+    [SerializeField] private float aimmingDuaction = 3.5f;
     [SerializeField] private float rotateSpeed = 15;
-    [SerializeField] private float AimmingLineDisableDelay = 0f;
+    [SerializeField] private float AimmingEndDelay = 0.1f;
+
+    [Header("AimmingLine")]
     [SerializeField] private Transform aimmingLinePoint;
+    [SerializeField] private float aimmingLineLength;
 
     [Header("Player")]
     [SerializeField] private float playerHeight = 0.3f;
@@ -31,7 +34,7 @@ public class ShieldShoot_Aimming : Action
     public override TaskStatus OnUpdate()
     {
         LookAtTarget();
-        if (Time.time - aimmingTimer <= aimmingDuaction - AimmingLineDisableDelay)
+        if (Time.time - aimmingTimer <= aimmingDuaction - AimmingEndDelay)
         {
             AimmingLineRunning();
             ShieldEnable();
@@ -61,7 +64,7 @@ public class ShieldShoot_Aimming : Action
     }
     private void AimmingLineRunning()
     {
-        targetPoint = new Vector3(targetObject.Value.transform.position.x, targetObject.Value.transform.position.y + playerHeight, targetObject.Value.transform.position.z);
+        targetPoint = aimmingLinePoint.position + aimmingLinePoint.forward * aimmingLineLength;
         lineRenderer.SetPosition(0, aimmingLinePoint.position);
         lineRenderer.SetPosition(1, targetPoint);
     }
