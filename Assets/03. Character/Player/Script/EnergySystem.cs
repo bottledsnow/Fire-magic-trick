@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class EnergySystem : MonoBehaviour
 {
@@ -30,13 +31,28 @@ public class EnergySystem : MonoBehaviour
     private void Start()
     {
         _energySystemUI = GameManager.singleton.UISystem.GetComponent<EnergySystemUI>();
-        Increase(StartEnergy);
+
+        SetEnegy(StartEnergy);
     }
     private void Update()
     {
         RecoverSystem();
     }
-    
+    #region Set
+    public void SetEnegy(float value)
+    {
+        Energy = value;
+        UpdateUI();
+    }
+    public void UpdateUI()
+    {
+        float value = Energy / 100;
+        if (_energySystemUI != null)
+        {
+            _energySystemUI.UpdateBar(value);
+        }
+    }
+    #endregion
     #region Increase Decrease
     private void Increase(float energy)
     {
@@ -145,6 +161,7 @@ public class EnergySystem : MonoBehaviour
         }
     }
     #endregion
+    #region Recover
     private void RecoverSystem()
     {
         RecoverCheck();
@@ -174,4 +191,5 @@ public class EnergySystem : MonoBehaviour
         Debug.Log(value);
         Increase(value);
     }
+    #endregion
 }

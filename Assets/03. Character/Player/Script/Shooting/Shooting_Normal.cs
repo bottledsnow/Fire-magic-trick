@@ -27,10 +27,10 @@ public class Shooting_Normal : MonoBehaviour
     {
         if (_Input.RT && !shooting)
         {
-            _crosshairUI.CrosshairShooting();   
-            ShootCooldown(shootCooldown);
-            _shooting.Shoot_Normal(pfBulletProjectile);
             ThrowFeedback.PlayFeedbacks();
+            _shooting.Shoot_Normal(pfBulletProjectile);
+            _crosshairUI.CrosshairShooting();
+            ShootCooldown(shootCooldown);
         }
     }
     private async void ShootCooldown(float shootCooldown)

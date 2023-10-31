@@ -83,6 +83,7 @@ public class Shooting_Magazing : MonoBehaviour
         }
 
         Bullet -= 1;
+
         _magazingUI.UpdateBulletsNumber(Bullet);
     }
     public void ClearBullet()

@@ -48,7 +48,6 @@ public class Move_Our : MonoBehaviour
     {
         if(_input.LSB && !Trigger)
         {
-            Debug.Log(_input.SprintMode);
             if(_input.SprintMode)
             {
                 SetCameraNormal();

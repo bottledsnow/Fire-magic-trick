@@ -15714,7 +15714,7 @@ RectTransform:
   - {fileID: 1179671006707261254}
   - {fileID: 7883801342766291947}
   m_Father: {fileID: 5337558587730069328}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -16356,7 +16356,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4020344256870572589}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2210d800215821c4397bc9754b476e2f, type: 3}
   m_Name: 
@@ -32394,6 +32394,7 @@ GameObject:
   - component: {fileID: 4020344257410031660}
   - component: {fileID: 1642922106}
   - component: {fileID: 1014022857}
+  - component: {fileID: 663968904}
   m_Layer: 6
   m_Name: GameManager
   m_TagString: Untagged
@@ -32498,6 +32499,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ProgressCheckPoint: {fileID: 0}
+--- !u!114 &663968904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4020344257410031649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e96747a92180849a9c0a6fd93d2c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  useTeach: 1
+  UI_Energy: {fileID: 5337558588813017569}
+  UI_ShootingMagazing: {fileID: 3668622516983111967}
+  UI_ShootingMode: {fileID: 5337558589763689651}
 --- !u!1 &4020344257424640128
 GameObject:
   m_ObjectHideFlags: 0
@@ -32659,11 +32676,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4020344257589024678}
+  - component: {fileID: 5337558588166125596}
   - component: {fileID: 4020344257589024679}
   - component: {fileID: 5030348826532184326}
   - component: {fileID: 5030348827745102238}
   - component: {fileID: 5337558588166125597}
-  - component: {fileID: 5337558588166125596}
   - component: {fileID: 5337558588405935915}
   m_Layer: 6
   m_Name: EnergySystem
@@ -32692,6 +32709,20 @@ Transform:
   m_Father: {fileID: 4020344258244591710}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5337558588166125596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4020344257589024665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b68c3752077b2574b8972bfd47256293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxFloatTime: 1.5
+  fireFloat: {fileID: 5337558588332819866}
 --- !u!114 &4020344257589024679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32821,20 +32852,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65536
   SuperDashEnd: {fileID: 5337558588420704670}
---- !u!114 &5337558588166125596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4020344257589024665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b68c3752077b2574b8972bfd47256293, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxFloatTime: 1.5
-  fireFloat: {fileID: 5337558588332819866}
 --- !u!114 &5337558588405935915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52206,7 +52223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Energy: 0
-  StartEnergy: 100
+  StartEnergy: 50
   recoverRange: 50
   recoverTime: 0.25
   recover: 5
@@ -53076,8 +53093,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5337558588813017568}
-  - {fileID: 8300603648339259139}
   - {fileID: 5337558589763689650}
+  - {fileID: 8300603648339259139}
   - {fileID: 5337558588441527050}
   - {fileID: 638303541}
   - {fileID: 1417565052}
@@ -74894,7 +74911,7 @@ GameObject:
   - component: {fileID: 5337558588813017571}
   - component: {fileID: 5337558589358025476}
   m_Layer: 6
-  m_Name: HorizontalBar
+  m_Name: EnergyBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -88793,7 +88810,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5337558587730069328}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
