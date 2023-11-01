@@ -68,7 +68,8 @@ public class SuperDash : MonoBehaviour
         isSuperDash = false;
         isKick = false;
         useSuperDashTimer = false;
-        _superDashCollider.SetIsSuperDash(false) ;
+        _superDashCollider.SetIsSuperDash(false);
+        _playerState.TakeControl();
     }
     private void GetTarget()
     {
