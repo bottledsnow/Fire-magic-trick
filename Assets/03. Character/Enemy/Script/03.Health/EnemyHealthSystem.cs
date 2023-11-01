@@ -30,6 +30,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
 
     private ProgressSystem _progress;
+    private Transform startPosition;
     private float hitTimer;
     private float coolingTimer;
     private bool isCooling;
@@ -46,6 +47,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private void Start()
     {
         _progress = GameManager.singleton.GetComponent<ProgressSystem>();
+        startPosition = this.transform;
     }
     private void Update()
     {
@@ -185,6 +187,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     private void Initialization()
     {
+        this.transform.position = startPosition.position;
         this.gameObject.SetActive(true);
         isIgnite = false;
         isHurt = false;
