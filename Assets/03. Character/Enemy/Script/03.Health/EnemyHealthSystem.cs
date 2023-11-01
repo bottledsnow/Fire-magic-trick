@@ -1,6 +1,6 @@
 using MoreMountains.Feedbacks;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Threading.Tasks;
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
     [Header("State")]
@@ -12,6 +12,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public bool Boom;
 
     [Header("Health")]
+    [SerializeField] private int StartHealth;
     public int health;
     [SerializeField] private int maxHealth;
     [SerializeField] private int ignitionPoint;
@@ -28,9 +29,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_Boom;
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
 
-
-    private Collider[] Colliders;
-    private Rigidbody rb;
+    private ProgressSystem _progress;
     private float hitTimer;
     private float coolingTimer;
     private bool isCooling;
@@ -43,12 +42,15 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private void Awake()
     {
         health = maxHealth;
-        rb = GetComponent<Rigidbody>();
-        Colliders = GetComponentsInChildren<Collider>();
+    }
+    private void Start()
+    {
+        _progress = GameManager.singleton.GetComponent<ProgressSystem>();
     }
     private void Update()
     {
         EnemyCoolingCheck();
+        Test();
     }
     #region Cooling
     private void EnemyCoolingCheck()
@@ -81,29 +83,16 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         if (health <= 0)
         {
-            EnemyDeath();
+            EnemyDie();
         }
         else if (health <= ignitionPoint)
         {
             EnemyIgnite();
         }
     }
-    private void EnemyDeath()
-    {
-        rb.drag = 10;
-        CloseCollider();
-        Destroy(gameObject, 1.5f);
-    }
     private void EnemyIgnite()
     {
         isIgnite = true;
-    }
-    private void CloseCollider()
-    {
-        foreach (Collider collider in Colliders)
-        {
-            collider.enabled = false;
-        }
     }
     #endregion
     #region Feedback
@@ -188,6 +177,35 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         }
     }
     #endregion
+    #region
+    private async void EnemyDie()
+    {
+        await Task.Delay(1500);
+        //this.gameObject.SetActive(false);
+    }
+    private void Initialization()
+    {
+        this.gameObject.SetActive(true);
+        isIgnite = false;
+        isHurt = false;
+        isSteam = false;
+        isFire = false;
+        isShock = false;
+        Boom = false;
+        _eye.SetYellow();
+        feedbacks_Steam.StopFeedbacks();
+        feedbacks_Fire.StopFeedbacks();
+        feedbacks_Shock.StopFeedbacks();
+        feedbacks_Boom.StopFeedbacks();
+        feedbacks_FlyBoom.StopFeedbacks();
+        health = StartHealth;
+    }   
+    private void Test()
+    {
+        _progress.OnPlayerDeath += Initialization;
+    }
+    #endregion
+
     private void OnCollisionEnter(Collision collision)
     {
         if(Boom)
