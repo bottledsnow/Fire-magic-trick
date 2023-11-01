@@ -8,6 +8,11 @@ public class Shooting_Charge : MonoBehaviour
 
     [SerializeField] private float chargeInterval;
 
+    [Header("Damage")]
+    [SerializeField] private int MaxDamage;
+    [SerializeField] private float repelBase;
+    private int Damage;
+    private float repel;
     [Header("Level")]
     [SerializeField] private int maxLevel;
     [SerializeField] private int fireLevel;
@@ -149,6 +154,10 @@ public class Shooting_Charge : MonoBehaviour
     private void ChargeShoot()
     {
         Debug.Log("ChargeShoot");
+
+        ToGiveBulletDamage(level);
+        ToGiveBulletRepel(level);
+
         Vector3 aimDir = (_shootin_Check.mouseWorldPosition - FirePosition.position).normalized;
         chargeBullet.transform.SetParent(null);
         chargeBullet.transform.rotation = Quaternion.LookRotation(aimDir, Vector3.up);
@@ -156,6 +165,24 @@ public class Shooting_Charge : MonoBehaviour
 
         pfCharge.InitializeValue(chargeSpeed, chargeLifeTime,pfHit_Normal,pfHit_Fire);
         pfCharge.IsFire = isFire;
+    }
+    private void ToGiveBulletDamage(int level)
+    {
+        PlayerDamage playerDamage = chargeBullet.GetComponent<PlayerDamage>();
+        
+        if(level >= MaxDamage)
+        {
+            Damage = MaxDamage;
+        }
+
+        playerDamage.damage = Damage;
+    }
+    private void ToGiveBulletRepel(int levelfe)
+    {
+        ChargeRepel chargeRepel = chargeBullet.GetComponent<ChargeRepel>();
+
+        repel = repelBase * level;
+        chargeRepel.repelForfce = repel;
     }
     private void instantiateBulletBall(GameObject pf)
     {

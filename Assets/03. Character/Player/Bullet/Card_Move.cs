@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -13,9 +11,11 @@ public class Card_Move : MonoBehaviour
     [SerializeField] private GameObject hitPrefab;
 
     private CrosshairUI _crosshairUI;
+    private PlayerDamage _playerDamage;
     void Start()
     {
         _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
+        _playerDamage = GetComponent<PlayerDamage>();
         DestroyBullet(lifeTime);
 
         if (muzzlePrefab != null)
@@ -57,6 +57,8 @@ public class Card_Move : MonoBehaviour
         {
             _crosshairUI.CrosshairHit();
         }
+
+        _playerDamage.ToDamageEnemy(co);
 
         Destroy(gameObject);
     }

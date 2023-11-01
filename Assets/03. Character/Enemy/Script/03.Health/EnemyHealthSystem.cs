@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using Unity.VisualScripting;
 using UnityEngine;
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
@@ -72,7 +73,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
     {
         health -= damage;
-
+        Debug.Log(health);
         hitTimer = Time.time;
 
         healthFeedback(health);
@@ -140,6 +141,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         {
             _eye.SetPurple();
 
+            if(!isSteam)
+            {
+                isSteam = true;
+                feedbacks_Steam.PlayFeedbacks();
+            }
+
             if(isFire)
             {
                 isFire = false;
@@ -165,8 +172,14 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
             isShock = true;
 
             feedbacks_Shock.PlayFeedbacks();
+
+            if(!isFire)
+            {
+                isFire = true;
+                feedbacks_Fire.PlayFeedbacks();
+            }
         }
-        if (health == 0)
+        if (health == 0 || health<0)
         {
             feedbacks_Boom.PlayFeedbacks();
             feedbacks_Fire.StopFeedbacks();

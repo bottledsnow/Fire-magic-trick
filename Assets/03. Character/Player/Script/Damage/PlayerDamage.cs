@@ -5,8 +5,7 @@ public class PlayerDamage : MonoBehaviour
     [SerializeField]
     private DamageType damageType;
 
-    [SerializeField]
-    private int damage;
+    public int damage;
 
     public enum DamageType
     {
@@ -16,16 +15,20 @@ public class PlayerDamage : MonoBehaviour
         SuperDash,
         Kick
     }
-
-    private void OnCollisionEnter(Collision collision)
+    public void ToDamageEnemy(Collider other)
     {
-        if (collision.gameObject.tag == "Enemy")
+        IHealth _health = other.gameObject.GetComponent<IHealth>();
+        if (_health != null)
         {
-            IHealth _health = collision.gameObject.GetComponent<IHealth>();
-            if(_health != null)
-            {
-                _health.TakeDamage(damage,damageType);
-            }
+            _health.TakeDamage(damage, damageType);
+        }
+    }
+    public void ToDamageEnemy(Collision Collision)
+    {
+        IHealth _health = Collision.gameObject.GetComponent<IHealth>();
+        if (_health != null)
+        {
+            _health.TakeDamage(damage, damageType);
         }
     }
 }

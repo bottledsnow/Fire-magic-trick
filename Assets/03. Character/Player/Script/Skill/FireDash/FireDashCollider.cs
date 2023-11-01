@@ -8,9 +8,11 @@ public class FireDashCollider : MonoBehaviour
     private float CrashForce;
     private bool IsDash;
     private float CrashForceUp;
+    private PlayerDamage _playerDamage;
     private void Start()
     {
         _fireDash = GameManager.singleton.EnergySystem.GetComponent<FireDash>();
+        _playerDamage = GetComponent<PlayerDamage>();
         Initialization();
     }
     private void Initialization()
@@ -29,6 +31,7 @@ public class FireDashCollider : MonoBehaviour
                 Vector3 EnemyPosition = other.transform.position;
                 Vector3 direction = (EnemyPosition - playerposition).normalized;
                 Vector3 Enemyup = other.transform.up;
+                _playerDamage.ToDamageEnemy(other);
                 HitFeedbacks.PlayFeedbacks();
                 other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
             }

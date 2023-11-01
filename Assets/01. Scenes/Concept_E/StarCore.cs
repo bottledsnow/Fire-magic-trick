@@ -16,7 +16,10 @@ public class StarCore : MonoBehaviour
         for(int i = 0;i<10;i++)
         {
             await Task.Delay(msDelay);
-            CircleFeedbacks.PlayFeedbacks();
+            if(CircleFeedbacks != null)
+            {
+                CircleFeedbacks.PlayFeedbacks();
+            }
             Debug.Log("rotation");
         }
     }

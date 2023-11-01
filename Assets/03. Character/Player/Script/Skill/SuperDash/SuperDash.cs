@@ -11,6 +11,10 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private float superDashMaxSpeed;
     [SerializeField] private float SuperDashTimeNormal;
     [SerializeField] private float SuperDashTimeFall;
+    [Header("Crash")]
+    public float CrashForce;
+    public float CrashForceUp;
+
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player FireDashStart;
     [SerializeField] private MMF_Player FireDashHit;
