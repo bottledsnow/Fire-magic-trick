@@ -15346,6 +15346,7 @@ GameObject:
   - component: {fileID: 1430958700}
   - component: {fileID: 1430958699}
   - component: {fileID: 1430958697}
+  - component: {fileID: 1430958701}
   m_Layer: 6
   m_Name: SuperDashCrash
   m_TagString: Untagged
@@ -15395,7 +15396,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1430958697
 MonoBehaviour:
@@ -15409,8 +15410,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0229156a5dc8fe84b846facc030db38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageType: 2
-  damage: 2
+  damageType: 3
+  damage: 5
+--- !u!114 &1430958701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430958695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e368ed5c042e9e7488e37b10a9c84676, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitFeedbacks: {fileID: 753310554}
 --- !u!1 &1715597767
 GameObject:
   m_ObjectHideFlags: 0
@@ -21518,6 +21532,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chargeInterval: 0.5
+  MaxDamage: 5
+  repelBase: 5
   maxLevel: 6
   fireLevel: 3
   FirePosition: {fileID: 4020344257340450069}
@@ -37967,8 +37983,9 @@ MonoBehaviour:
   superDashMaxSpeed: 25
   SuperDashTimeNormal: 0.66
   SuperDashTimeFall: 2.5
-  CrashForce: 0
-  CrashForceUp: 0
+  _superDashCollider: {fileID: 1430958701}
+  CrashForce: 15
+  CrashForceUp: 6
   FireDashStart: {fileID: 5337558589521680097}
   FireDashHit: {fileID: 5337558589184096788}
   FireDashEnd: {fileID: 5337558588420704670}
@@ -38011,6 +38028,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 65536
   SuperDashEnd: {fileID: 5337558588420704670}
+  _superDashCollider: {fileID: 1430958701}
 --- !u!114 &5337558588405935915
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2126,7 +2126,6 @@ GameObject:
   - component: {fileID: 1181554129}
   - component: {fileID: 1181554128}
   - component: {fileID: 1181554127}
-  - component: {fileID: 1181554126}
   m_Layer: 10
   m_Name: CheckArea
   m_TagString: Untagged
@@ -2226,19 +2225,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyHealthSystesm: {fileID: 5810376233217811265}
   rb: {fileID: 258744342}
---- !u!135 &1181554126
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181554124}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 0.2
-  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &1226804448
 GameObject:
   m_ObjectHideFlags: 0
@@ -2824,7 +2810,6 @@ GameObject:
   - component: {fileID: 258744342}
   - component: {fileID: 258744341}
   - component: {fileID: 258744339}
-  - component: {fileID: 1599290801}
   m_Layer: 14
   m_Name: Enemy_Shawn
   m_TagString: Enemy
@@ -2924,20 +2909,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isFire: 0
---- !u!114 &1599290801
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3804514031251063749}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0229156a5dc8fe84b846facc030db38d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageType: 0
-  damage: 0
 --- !u!1 &3804514032007937288
 GameObject:
   m_ObjectHideFlags: 0

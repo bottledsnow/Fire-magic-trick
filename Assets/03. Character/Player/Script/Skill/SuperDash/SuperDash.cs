@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using StarterAssets;
 using MoreMountains.Feedbacks;
 
 public class SuperDash : MonoBehaviour
@@ -12,6 +10,7 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private float SuperDashTimeNormal;
     [SerializeField] private float SuperDashTimeFall;
     [Header("Crash")]
+    [SerializeField] private SuperDashCollider _superDashCollider;
     public float CrashForce;
     public float CrashForceUp;
 
@@ -51,7 +50,6 @@ public class SuperDash : MonoBehaviour
         _playerCollider = _playerState.GetComponent<PlayerCollider>();
         _playerAnimator = _playerState.GetComponent<PlayerAnimator>();
         _energySystem = _playerState.GetComponent<EnergySystem>();
-
         player = _playerState.gameObject;
     }
     private void Update()
@@ -91,6 +89,8 @@ public class SuperDash : MonoBehaviour
     private void superDashStart()
     {
         isSuperDash = true;
+        _superDashCollider.SetIsSuperDash(true);
+
         _superDashKickDown.GetTarget(Target);
         _playerAnimator.SuperDashStart();
         _playerState.SetGravityToFire();
@@ -101,11 +101,18 @@ public class SuperDash : MonoBehaviour
     {   
         if (isSuperDash)
         {
-            LookAtTarget();
-            _playerState.OutControl();
-            speedIncrease();
-            calaulateDirection();
-            move();
+            if(Target !=null)
+            {
+                LookAtTarget();
+                _playerState.OutControl();
+                speedIncrease();
+                calaulateDirection();
+                move();
+            }
+            else
+            {
+                EnemyDissapear();
+            }
         }
     }
     private void move()
@@ -166,6 +173,7 @@ public class SuperDash : MonoBehaviour
     }
     private void superDashStop()
     {
+        _superDashCollider.SetIsSuperDash(false);
         _playerState.SetGravityToNormal();
         _playerAnimator.SuperDashEnd();
         FireDashEnd.PlayFeedbacks();
@@ -204,5 +212,12 @@ public class SuperDash : MonoBehaviour
     public void SetIsKick(bool value)
     {
         //isKick = value;
+    }
+    public void EnemyDissapear()
+    {
+        if(Target ==null)
+        {
+            superDashStop();
+        }
     }
 }

@@ -12,9 +12,9 @@ public class SuperDashKick : MonoBehaviour
     [SerializeField] private LayerMask KickLayer;
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player SuperDashEnd;
-
+    [Header("Collider")]
+    [SerializeField] private SuperDashCollider _superDashCollider;
     private ThirdPersonController _thirdPersonController;
-    private SuperDashKickDown _superdashKickDown;
     private ControllerInput _input;
     private EnergySystem _energySystem;
     private PlayerState _playerState;
@@ -25,12 +25,10 @@ public class SuperDashKick : MonoBehaviour
     private bool isTimer;
     private bool isInputY;
     private bool isCheck;
-
     private void Start()
     {
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
-        _superdashKickDown = GetComponent<SuperDashKickDown>();
         _superDash = GetComponent<SuperDash>();
         _thirdPersonController = _playerState.GetComponent<ThirdPersonController>();
         _playerAnimator = _playerState.GetComponent<Animator>();
@@ -67,6 +65,7 @@ public class SuperDashKick : MonoBehaviour
     {
         isInputY = true;
         isTimer = true;
+        _superDashCollider.SetKick(true);
         _superDash.SetIsKick(true);
     }
     private void effectTimer()
@@ -124,6 +123,7 @@ public class SuperDashKick : MonoBehaviour
         SuperDashEnd.PlayFeedbacks();
         isCheck = false;
         _superDash.SetIsKick(false);
+        _superDashCollider.SetKick(false);
     }
     private async void KickTriggerCheck()
     {
@@ -136,6 +136,7 @@ public class SuperDashKick : MonoBehaviour
         Debug.Log("Fail");
         isCheck = false;
         _superDash.SetIsKick(false);
+        _superDashCollider.SetKick(false);
     }
     private void SuperJump()
     {
