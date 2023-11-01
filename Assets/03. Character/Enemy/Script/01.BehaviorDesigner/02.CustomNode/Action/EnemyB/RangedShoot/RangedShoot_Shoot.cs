@@ -6,19 +6,22 @@ public class RangedShoot_Shoot : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
+    [SerializeField] private SharedTransform behaviorObject;
 
     [Header("Bullet")]
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform firePoint;
+    
     [SerializeField] private float bulletSpeed = 20;
 
     [Header("Player")]
     [SerializeField] private float playerHeight = 0.3f;
 
+    private Transform firePoint;
+
 
     public override void OnStart()
     {
-
+        firePoint = behaviorObject.Value.Find("FirePoint");
     }
 
     public override TaskStatus OnUpdate()

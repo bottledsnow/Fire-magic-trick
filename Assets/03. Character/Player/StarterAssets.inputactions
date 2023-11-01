@@ -72,7 +72,7 @@
                     "name": "Controller_Button_B",
                     "type": "Value",
                     "id": "91d58cc7-a7ab-4bdd-9e6d-0b7553f262c9",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -454,17 +454,6 @@
                 },
                 {
                     "name": "",
-                    "id": "16d1fd67-7d10-4fe7-9883-f81a7b4c36c8",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Controller_Button_A",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "2f612ca2-3885-4ece-b975-b851a6088208",
                     "path": "<Keyboard>/space",
                     "interactions": "",
@@ -476,12 +465,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5c68451c-6b7a-4a15-9765-0e1b745e5f76",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "16d1fd67-7d10-4fe7-9883-f81a7b4c36c8",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Controller_Button_B",
+                    "action": "Controller_Button_A",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -492,6 +481,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
+                    "action": "Controller_Button_B",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5c68451c-6b7a-4a15-9765-0e1b745e5f76",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Controller_Button_B",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -547,6 +547,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "Controller_ArrowKey_Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "32fc63dd-c2b7-4ba8-b8b5-f9a8cfeed974",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
                     "action": "Controller_ArrowKey_Up",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -652,12 +663,12 @@
                 },
                 {
                     "name": "",
-                    "id": "f054afa5-cb13-457d-b5c3-f41e5394fab5",
-                    "path": "<Mouse>/rightButton",
+                    "id": "200a51d4-d8ce-430e-9afb-f4d284e697ad",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
-                    "action": "Controller_Left_Trigger",
+                    "action": "Controller_Left_Button",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -668,17 +679,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Controller_Left_Button",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "200a51d4-d8ce-430e-9afb-f4d284e697ad",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "KeyboardMouse",
                     "action": "Controller_Left_Button",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1010,6 +1010,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f054afa5-cb13-457d-b5c3-f41e5394fab5",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Controller_Left_Trigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

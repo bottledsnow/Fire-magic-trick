@@ -5,13 +5,15 @@ using BehaviorDesigner.Runtime.Tasks;
 public class ShieldEnable : Action
 {
     [Header("SharedVariable")]
-    [SerializeField] private SharedGameObject shield;
+    [SerializeField] private SharedTransform behaviorObject;
     
     public override void OnStart()
     {
+        GameObject shield = behaviorObject.Value.Find("Shield").gameObject;
+
         if(shield != null)
         {
-            shield.Value.SetActive(true);
+            shield.SetActive(true);
         }
     }
 

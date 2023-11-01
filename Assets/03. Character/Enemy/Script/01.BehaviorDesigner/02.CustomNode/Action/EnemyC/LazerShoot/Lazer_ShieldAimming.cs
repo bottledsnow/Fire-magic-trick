@@ -6,7 +6,7 @@ public class Lazer_ShieldAimming : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
-    [SerializeField] private SharedGameObject shield;
+    [SerializeField] private SharedTransform behaviorObject;
     
     [Header("Behavior")]
     [SerializeField] private float aimmingDuaction = 3.5f;
@@ -14,18 +14,21 @@ public class Lazer_ShieldAimming : Action
     [SerializeField] private float AimmingEndDelay = 0.1f;
 
     [Header("AimmingLine")]
-    [SerializeField] private Transform aimmingLinePoint;
     [SerializeField] private float aimmingLineLength;
 
     [Header("Player")]
     [SerializeField] private float playerHeight = 0.3f;
     
+    private Transform aimmingLinePoint;
+    private GameObject shield;
     private Vector3 targetPoint;
     private float aimmingTimer;
     private LineRenderer lineRenderer;
 
     public override void OnStart()
     {
+        aimmingLinePoint = behaviorObject.Value.Find("AimmingLinePoint");
+        shield = behaviorObject.Value.Find("Shield").gameObject;
         aimmingTimer = Time.time;
         AimmingEnable();
         ShieldEnable();
@@ -89,14 +92,14 @@ public class Lazer_ShieldAimming : Action
     {
         if(shield != null)
         {
-            shield.Value.SetActive(true);
+            shield.SetActive(true);
         }
     }
     private void ShieldDisable()
     {
         if(shield != null)
         {
-            shield.Value.SetActive(false);
+            shield.SetActive(false);
         }
     }
     #endregion

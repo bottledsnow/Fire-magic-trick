@@ -5,23 +5,24 @@ using UnityEngine.VFX;
 
 public class LazerShoot : Action
 {
-    [Header("VFX")]
-    [SerializeField] private VisualEffect lazerVfx;
+    [Header("SharedVariable")]
+    [SerializeField] private SharedTransform behaviorObject;
 
-    [Header("Collider")]
-    [SerializeField] private GameObject lazerCollider;
-
+    private VisualEffect lazerVFX;
+    private GameObject lazerCollider;
     private float vfxDuration;
     private float timer;
 
     public override void OnStart()
     {
+        lazerVFX = behaviorObject.Value.Find("Lazer_VFX").GetComponent<VisualEffect>();
+        lazerCollider = behaviorObject.Value.Find("Lazer_Collider").gameObject;
+        vfxDuration = lazerVFX.GetFloat("Lifetime");
         timer = Time.time;
-        vfxDuration = lazerVfx.GetFloat("Lifetime");
 
-        if (lazerVfx != null && lazerCollider != null)
+        if (lazerVFX != null && lazerCollider != null)
         {
-            lazerVfx.Play();
+            lazerVFX.Play();
             lazerCollider.SetActive(true);
         }
     }
