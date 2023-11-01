@@ -1,5 +1,6 @@
 using UnityEngine;
 using MoreMountains.Feedbacks;
+using System.Threading.Tasks;
 
 public class SuperDash : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class SuperDash : MonoBehaviour
     private float superDashTimer = 0;
     private bool isSuperDashThrough;
     private bool isKick;
+    private bool useSuperDashTimer;
 
     [HideInInspector] public bool isSuperDash;
 
@@ -60,7 +62,14 @@ public class SuperDash : MonoBehaviour
         superDashHit();
         superDashThrough();
     }
-
+    private void Initialization()
+    {
+        isSuperDashThrough = false;
+        isSuperDash = false;
+        isKick = false;
+        useSuperDashTimer = false;
+        _superDashCollider.SetIsSuperDash(false) ;
+    }
     private void GetTarget()
     {
         Target = _superDashCameraCheck.Target;
@@ -90,11 +99,11 @@ public class SuperDash : MonoBehaviour
     {
         isSuperDash = true;
         _superDashCollider.SetIsSuperDash(true);
-
         _superDashKickDown.GetTarget(Target);
         _playerAnimator.SuperDashStart();
         _playerState.SetGravityToFire();
         FireDashStart.PlayFeedbacks();
+        SuperDashStopTimer();
         Debug.Log("SuperDash");
     }
     private void superDash()
@@ -103,6 +112,7 @@ public class SuperDash : MonoBehaviour
         {
             if(Target !=null)
             {
+
                 LookAtTarget();
                 _playerState.OutControl();
                 speedIncrease();
@@ -218,6 +228,16 @@ public class SuperDash : MonoBehaviour
         if(Target ==null)
         {
             superDashStop();
+            Initialization();
+        }
+    }
+    private async void SuperDashStopTimer()
+    {
+        await Task.Delay(5000);
+        if(isSuperDash)
+        {
+            superDashStop();
+            Initialization();
         }
     }
 }

@@ -8,7 +8,6 @@ public class EnergySystemUI : MonoBehaviour
     {
         if (MMProgressBar != null)
         {
-            MMProgressBar.Initialization();
             MMProgressBar.UpdateBar01(value);
         }
     }
