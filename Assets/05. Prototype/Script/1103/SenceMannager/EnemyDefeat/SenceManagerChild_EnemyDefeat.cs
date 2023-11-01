@@ -23,7 +23,7 @@ public class SenceManagerChild_EnemyDefeat : MonoBehaviour
     }
     private void EnemyDeath()
     {
-        if(Enemy==null && EnemyAlive)
+        if(Enemy.active==false && EnemyAlive)
         {
             EnemyAlive = false;
             _senceManager.GlassBroken();

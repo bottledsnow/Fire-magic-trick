@@ -1,8 +1,11 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using System.Threading.Tasks;
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
+
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
+    [SerializeField] private bool isTeachEnemy;
     [Header("State")]
     public bool isIgnite;
     public bool isHurt;
@@ -48,11 +51,15 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         _progress = GameManager.singleton.GetComponent<ProgressSystem>();
         startPosition = this.transform;
+
+        if(isTeachEnemy == false)
+        {
+            RebirthScription();
+        }
     }
     private void Update()
     {
         EnemyCoolingCheck();
-        Test();
     }
     #region Cooling
     private void EnemyCoolingCheck()
@@ -203,9 +210,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         feedbacks_FlyBoom.StopFeedbacks();
         health = StartHealth;
     }   
-    private void Test()
+    private void RebirthScription()
     {
-        _progress.OnPlayerDeath += Initialization;
+        if(isTeachEnemy==false)
+        {
+            _progress.OnPlayerDeath += Initialization;
+        }
     }
     #endregion
 
