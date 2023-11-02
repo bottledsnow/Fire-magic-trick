@@ -25,6 +25,7 @@ public class Teach_TimelineTrigger : MonoBehaviour
     {
         if(!Trigger)
         {
+            playableDirector.Stop();
             playableDirector.Play();
             Trigger = true;
         }

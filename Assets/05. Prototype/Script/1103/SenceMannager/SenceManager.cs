@@ -34,6 +34,9 @@ public class SenceManager : MonoBehaviour
 
     [Header("Feedback")]
     [SerializeField] private MMF_Player GlassBroke;
+
+    [Header("TeachTitle")]
+    [SerializeField]  private GameObject TeachTitle;
     private void Start()
     {
         _progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
@@ -117,6 +120,8 @@ public class SenceManager : MonoBehaviour
         _progressSystem.OnPlayerDeath -= RebirthGlassWall;
         _progressSystem.OnPlayerDeath -= DestoryGroundGlass;
         _progressSystem.OnPlayerDeath -= RebirthGroundGlass;
+
+        TeachTitle.SetActive(false);    
     }
     #region Rebirth
     public void RebirthEnemy()
