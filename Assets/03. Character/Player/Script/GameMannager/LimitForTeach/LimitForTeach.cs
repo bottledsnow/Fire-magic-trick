@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class LimitForTeach : MonoBehaviour
 {
-    [SerializeField] private bool useTeach;
-
+    public bool useTeach;
+    
     private FireFloat _fireFloat;
     private FireDash _fireDash;
     private SuperDash _superDash;
@@ -35,7 +35,7 @@ public class LimitForTeach : MonoBehaviour
         Initialization();
     }
 
-    private void Initialization()
+    public void Initialization()
     {
         if(useTeach)
         {
@@ -47,6 +47,16 @@ public class LimitForTeach : MonoBehaviour
             SetUI_EnergySystem(false);
             SetUI_ShootingMagazing(false);
             SetUI_ShootingMode(false);
+        }else
+        {
+            SetFloatingScript(true);
+            SetBulletMagazingScript(true);
+            SetShootingModeScript(true);
+            SetDashScript(true);
+            SetSuperDashScript(true);
+            SetUI_EnergySystem(true);
+            SetUI_ShootingMagazing(true);
+            SetUI_ShootingMode(true);
         }
     }
     #region Set

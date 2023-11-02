@@ -13,7 +13,7 @@ public class SenceManager : MonoBehaviour
     private Transform glassWall;
     private Transform groundGlass;
     [Header("StartArea")]
-    [SerializeField] private bool PassTeach;
+    public bool PassTeach;
     [SerializeField] private Collider ColliderLand;
     [Header("Position")]
     [SerializeField] private Transform GlassPosition;

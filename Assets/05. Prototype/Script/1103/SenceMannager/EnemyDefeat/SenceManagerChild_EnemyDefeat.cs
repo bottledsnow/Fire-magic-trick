@@ -23,10 +23,13 @@ public class SenceManagerChild_EnemyDefeat : MonoBehaviour
     }
     private void EnemyDeath()
     {
-        if(Enemy.active==false && EnemyAlive)
+        if(Enemy !=null)
         {
-            EnemyAlive = false;
-            _senceManager.GlassBroken();
+            if (Enemy.activeSelf == false && EnemyAlive)
+            {
+                EnemyAlive = false;
+                _senceManager.GlassBroken();
+            }
         }
     }
 }

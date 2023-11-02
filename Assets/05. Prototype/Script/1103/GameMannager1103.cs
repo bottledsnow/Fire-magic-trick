@@ -5,27 +5,19 @@ public class GameMannager1103 : MonoBehaviour
     private Transform player;
 
     [SerializeField] private Transform Area_A;
-    [Header("Test")]
+    [Header("StartA")]
     [SerializeField] private bool StartToArea_A = false;
-    [SerializeField] private GameObject TeachSystem;
+    [SerializeField] private SenceManager senceMannager;
+    private LimitForTeach TeachLimit;
+
     private void Start()
     {
         player = GameManager.singleton.Player;
+        TeachLimit = GameManager.singleton.GetComponent<LimitForTeach>();
 
         StartAreaCheck();   
     }
-    private void Update()
-    {
-        TestTool();
-    }   
-    private void TestTool()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            PassTeaching();
-        }
-        
-    }
+    
     private void PassTeaching()
     {
         player.transform.position = Area_A.transform.position;
@@ -35,14 +27,18 @@ public class GameMannager1103 : MonoBehaviour
         if(StartToArea_A)
         {
             StartArea_A();
+            TeachLimit.useTeach = false;
+            TeachLimit.Initialization();
+            senceMannager.PassTeach = true;
+        }else
+        {
+            TeachLimit.useTeach = true;
+            TeachLimit.Initialization();
+            senceMannager.PassTeach = false;
         }
     }
     private void StartArea_A()
     {
-        if(TeachSystem != null)
-        {
-            TeachSystem.SetActive(false);
-        }
         PassTeaching();
     }
 }

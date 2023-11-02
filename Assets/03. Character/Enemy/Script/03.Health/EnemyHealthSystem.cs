@@ -34,6 +34,8 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
     private ProgressSystem _progress;
     private Transform startPosition;
+    private Vector3 StartPosition;
+    private Quaternion StartRotation;
     private float hitTimer;
     private float coolingTimer;
     private bool isCooling;
@@ -51,10 +53,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         _progress = GameManager.singleton.GetComponent<ProgressSystem>();
         startPosition = this.transform;
-
-        if(isTeachEnemy == false)
+        StartPosition = this.transform.position;
+        StartRotation = this.transform.rotation;
+        if (isTeachEnemy == false)
         {
             RebirthScription();
+            Debug.Log("Rebirth");
         }
     }
     private void Update()
@@ -194,7 +198,8 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     private void Initialization()
     {
-        this.transform.position = startPosition.position;
+        this.transform.position = StartPosition;
+        this.transform.rotation = StartRotation;
         this.gameObject.SetActive(true);
         isIgnite = false;
         isHurt = false;
