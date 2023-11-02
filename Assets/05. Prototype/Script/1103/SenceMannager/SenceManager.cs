@@ -73,21 +73,8 @@ public class SenceManager : MonoBehaviour
         RebirthGlassWall();
         RebirthGroundGlass();
     }
-    private void Update()
-    {
-        Test();
-    }
-    private void Test()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            RebirthGlass();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            GlassBroken();
-        }
-    }
+    
+    
     public void GlassBroken()
     {
         ColliderLand.enabled = false;

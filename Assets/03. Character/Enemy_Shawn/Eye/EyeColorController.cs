@@ -10,7 +10,10 @@ public class EyeColorController : MonoBehaviour
     }
     public void SetYellow()
     {
-        animator.SetTrigger("Yellow");
+        if (animator != null)
+        {
+            animator.SetTrigger("Yellow");
+        }
     }
     public void SetOrange()
     {
