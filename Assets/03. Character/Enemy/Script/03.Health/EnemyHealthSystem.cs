@@ -84,7 +84,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
     {
         health -= damage;
-        Debug.Log(health);
         hitTimer = Time.time;
 
         healthFeedback(health);

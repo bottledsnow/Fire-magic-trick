@@ -19,7 +19,7 @@ public class EnemyShield : MonoBehaviour,IHealth
         }
         else
         {
-            
+            Debug.Log("沒用的，麗莎。");
         }
     }
 }

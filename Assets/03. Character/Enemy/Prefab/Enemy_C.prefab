@@ -25715,7 +25715,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 10
+      - m_Value: 25
         m_Name: Length
         m_Overridden: 1
       - m_Value: 0.5
@@ -25727,10 +25727,10 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 3.2869196, y: 0.43022513, z: 0.62982374, w: 0}
+      - m_Value: {x: 3.7259114, y: 0.4745265, z: 0.69128525, w: 0}
         m_Name: LightningColor
         m_Overridden: 1
-      - m_Value: {x: 2.0368667, y: 0.7464957, z: 0.7722975, w: 1}
+      - m_Value: {x: 2.360214, y: 0.18926246, z: 0.22544445, w: 1}
         m_Name: FlashColor
         m_Overridden: 1
     m_Uint:
@@ -26088,8 +26088,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3623152132013770467}
   m_LocalRotation: {x: -0, y: -0.7071068, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0.055, y: 0.1, z: 5.55}
-  m_LocalScale: {x: 0.20521896, y: 10, z: 0.11741}
+  m_LocalPosition: {x: 0.055, y: 0.1, z: 13.06}
+  m_LocalScale: {x: 0.20521896, y: 25, z: 0.11741}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3623152132140516109}
@@ -26171,9 +26171,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  force: 50
+  force: -60
   destroyAfterHit: 0
-  forceDirection: {x: 0, y: 0, z: 0}
+  forcePoint: {fileID: 3623152131522224700}
 --- !u!1 &3623152132140516108
 GameObject:
   m_ObjectHideFlags: 0
@@ -32326,6 +32326,7 @@ GameObject:
   - component: {fileID: 7490170420053955959}
   - component: {fileID: 5790984646938024658}
   - component: {fileID: 8626999761782418968}
+  - component: {fileID: 2132330775777021405}
   - component: {fileID: 5790984646938024659}
   m_Layer: 14
   m_Name: Shield
@@ -32342,7 +32343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7834502910578003917}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.23}
+  m_LocalPosition: {x: 0, y: 0, z: -0.18}
   m_LocalScale: {x: 0.010560266, y: 0.010560266, z: 0.010560266}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32377,7 +32378,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: dc8331341eb93a04ab7c9d97d8364f89, type: 2}
+  - {fileID: 2100000, guid: d99ba65cbe80cbe4d88b8eb019dd8a53, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -32399,6 +32400,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2132330775777021405
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834502910578003917}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1272481795433867914, guid: f026005da3f8c244b8c7be48a8758246, type: 3}
 --- !u!114 &5790984646938024659
 MonoBehaviour:
   m_ObjectHideFlags: 0

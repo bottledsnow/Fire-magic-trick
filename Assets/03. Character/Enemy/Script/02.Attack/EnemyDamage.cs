@@ -7,8 +7,9 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] private int damage;
     [SerializeField] private float force = 20;
     [SerializeField] private bool destroyAfterHit = false;
+    [SerializeField] private Transform forcePoint;
     Rigidbody rb;
-    public Vector3 forceDirection;
+    Vector3 forceDirection;
 
     private void OnTriggerEnter(Collider collider)
     {
@@ -17,8 +18,8 @@ public class EnemyDamage : MonoBehaviour
             EnergySystem energySystem = collider.gameObject.GetComponent<EnergySystem>();
             energySystem.Energy -= damage;
 
-            forceDirection = (transform.position - collider.gameObject.transform.position);
-            forceDirection = new Vector3(forceDirection.x,forceDirection.y*0,forceDirection.z);
+            forceDirection = (forcePoint.position - collider.gameObject.transform.position);
+            forceDirection = new Vector3(forceDirection.x,0,forceDirection.z);
 
             ImpactReceiver impactReceiver = collider.gameObject.GetComponent<ImpactReceiver>();
             impactReceiver.AddImpact(forceDirection , force);

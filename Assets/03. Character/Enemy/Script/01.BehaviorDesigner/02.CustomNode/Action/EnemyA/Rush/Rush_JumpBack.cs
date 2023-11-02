@@ -12,7 +12,7 @@ public class Rush_JumpBack : Action
     [SerializeField] private float backForce;
 
     [Header("GroundCheck")]
-    [SerializeField] private float raycastDistance = 0.35f;
+    [SerializeField] private float raycastDistance = 0.3f;
 
     private Rigidbody rb;
     private float timer;
