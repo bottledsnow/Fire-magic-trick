@@ -1,4 +1,5 @@
 using Cinemachine;
+using MoreMountains.Feedbacks;
 using StarterAssets;
 using UnityEngine;
 
@@ -17,6 +18,8 @@ public class Move_Our : MonoBehaviour
     [SerializeField] private bool isRunCamera;
     [SerializeField] private CinemachineVirtualCamera cameraNormal;
     [SerializeField] private CinemachineVirtualCamera cameraRunFast;
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player SpeedLineWhite;
 
     private ControllerInput _input;
     private ThirdPersonController _thirdPersonController;
@@ -77,12 +80,14 @@ public class Move_Our : MonoBehaviour
         isRunCamera = false;
         cameraNormal.gameObject.SetActive(true);
         cameraRunFast.gameObject.SetActive(false);
+        SpeedLineWhite.StopFeedbacks();
     }
     private void SetCameraRun()
     {
         isRunCamera = true;
         cameraNormal.gameObject.SetActive(false);
         cameraRunFast.gameObject.SetActive(true);
+        SpeedLineWhite.PlayFeedbacks();
     }
     public float MoveNew(float _speed,float currentHorizontalSpeed,float targetSpeed,float inputMagnitude,float SpeedChangeRate)
     {

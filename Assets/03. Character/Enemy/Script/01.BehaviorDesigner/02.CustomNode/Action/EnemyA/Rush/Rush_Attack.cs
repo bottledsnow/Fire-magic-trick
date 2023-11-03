@@ -20,7 +20,10 @@ public class Rush_Attack : Action
 
     public override void OnStart()
     {
-        rushCollider = behaviorObject.Value.Find("RushCollider").gameObject;
+        if(behaviorObject.Value != null)
+        {
+            rushCollider = behaviorObject.Value.Find("RushCollider").gameObject;
+        }
         rb = GetComponent<Rigidbody>();
         timer = Time.time;
         Jump();
@@ -46,8 +49,11 @@ public class Rush_Attack : Action
 
 	private void ColliderController(bool isActive)
 	{
-		rushCollider.SetActive(isActive);
-	}
+        if(rushCollider !=null)
+        {
+            rushCollider.SetActive(isActive);
+        }
+    }
 
     bool isGrounded()
     {

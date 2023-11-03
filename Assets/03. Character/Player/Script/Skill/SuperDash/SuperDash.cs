@@ -1,6 +1,5 @@
 using UnityEngine;
 using MoreMountains.Feedbacks;
-using System.Threading.Tasks;
 
 public class SuperDash : MonoBehaviour
 {
@@ -19,7 +18,8 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private MMF_Player FireDashStart;
     [SerializeField] private MMF_Player FireDashHit;
     [SerializeField] private MMF_Player FireDashEnd;
-
+    [Header("SuperDash Stop Timer")]
+    [SerializeField] private float MaxStopTimer = 5f;
     private SuperDashCameraCheck _superDashCameraCheck;
     private CharacterController _characterController;
     private SuperDashKickDown _superDashKickDown;
@@ -35,9 +35,11 @@ public class SuperDash : MonoBehaviour
     private Vector3 direction;
     private float superDashSpeed = 0;
     private float superDashTimer = 0;
+    private float timer;
     private bool isSuperDashThrough;
     private bool isKick;
     private bool useSuperDashTimer;
+    private bool isTimer;
 
     [HideInInspector] public bool isSuperDash;
 
@@ -61,9 +63,12 @@ public class SuperDash : MonoBehaviour
         superDash();
         superDashHit();
         superDashThrough();
+        StopTimerSystem();
     }
     private void Initialization()
     {
+        isTimer = false;
+        timer = 0;
         isSuperDashThrough = false;
         isSuperDash = false;
         isKick = false;
@@ -98,13 +103,13 @@ public class SuperDash : MonoBehaviour
     
     private void superDashStart()
     {
+        isTimer = true;
         isSuperDash = true;
         _superDashCollider.SetIsSuperDash(true);
         _superDashKickDown.GetTarget(Target);
         _playerAnimator.SuperDashStart();
         _playerState.SetGravityToFire();
         FireDashStart.PlayFeedbacks();
-        SuperDashStopTimer();
         Debug.Log("SuperDash");
     }
     private void superDash()
@@ -191,6 +196,7 @@ public class SuperDash : MonoBehaviour
         superDashSpeed = 0;
         Target = null;
         _superDashKickDown.NullTarget();
+        isTimer = false;
     }
     private void superDashToThrough()
     {
@@ -232,13 +238,23 @@ public class SuperDash : MonoBehaviour
             Initialization();
         }
     }
-    private async void SuperDashStopTimer()
+    #region Stop Timer
+    private void StopTimerSystem()
     {
-        await Task.Delay(5000);
-        if(isSuperDash)
+        if(isTimer)
         {
-            superDashStop();
-            Initialization();
+            timer += Time.deltaTime;
         }
+        if(timer>= MaxStopTimer)
+        {
+            SuperDashStopTimer();
+        }
+    }
+    #endregion
+    private void SuperDashStopTimer()
+    {
+        superDashStop();
+        Initialization();
+        Debug.Log("Stop Timer");
     }
 }

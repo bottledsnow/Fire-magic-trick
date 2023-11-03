@@ -479,6 +479,9 @@ namespace StarterAssets
         {
             _moveOffset = moveOffset;
         }
+        public void DoUsePlayer()
+        {
+        }
 
     }
 }

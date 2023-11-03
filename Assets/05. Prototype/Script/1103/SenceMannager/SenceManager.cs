@@ -13,7 +13,7 @@ public class SenceManager : MonoBehaviour
     private Transform glassWall;
     private Transform groundGlass;
     [Header("StartArea")]
-    [SerializeField] private bool PassTeach;
+    public bool PassTeach;
     [SerializeField] private Collider ColliderLand;
     [Header("Position")]
     [SerializeField] private Transform GlassPosition;
@@ -34,6 +34,9 @@ public class SenceManager : MonoBehaviour
 
     [Header("Feedback")]
     [SerializeField] private MMF_Player GlassBroke;
+
+    [Header("TeachTitle")]
+    [SerializeField]  private GameObject TeachTitle;
     private void Start()
     {
         _progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
@@ -70,21 +73,8 @@ public class SenceManager : MonoBehaviour
         RebirthGlassWall();
         RebirthGroundGlass();
     }
-    private void Update()
-    {
-        Test();
-    }
-    private void Test()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            RebirthGlass();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            GlassBroken();
-        }
-    }
+    
+    
     public void GlassBroken()
     {
         ColliderLand.enabled = false;
@@ -117,6 +107,8 @@ public class SenceManager : MonoBehaviour
         _progressSystem.OnPlayerDeath -= RebirthGlassWall;
         _progressSystem.OnPlayerDeath -= DestoryGroundGlass;
         _progressSystem.OnPlayerDeath -= RebirthGroundGlass;
+
+        TeachTitle.SetActive(false);    
     }
     #region Rebirth
     public void RebirthEnemy()

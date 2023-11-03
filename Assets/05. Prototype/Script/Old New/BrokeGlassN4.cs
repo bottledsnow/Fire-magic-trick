@@ -11,13 +11,7 @@ public class BrokeGlassN4 : MonoBehaviour
     {
         GetAllChild();
     }
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            Broke();
-        }
-    }
+    
     private void GetAllChild()
     {
         glasses = new Rigidbody[transform.childCount];
