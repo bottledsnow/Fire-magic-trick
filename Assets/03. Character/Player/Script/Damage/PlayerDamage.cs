@@ -20,7 +20,10 @@ public class PlayerDamage : MonoBehaviour
         IHealth _health = other.gameObject.GetComponent<IHealth>();
         if (_health != null)
         {
-            _health.TakeDamage(damage, damageType);
+            if(other.gameObject != null)
+            {
+                _health.TakeDamage(damage, damageType);
+            }
         }
     }
     public void ToDamageEnemy(Collision Collision)
@@ -28,7 +31,10 @@ public class PlayerDamage : MonoBehaviour
         IHealth _health = Collision.gameObject.GetComponent<IHealth>();
         if (_health != null)
         {
-            _health.TakeDamage(damage, damageType);
+            if(Collision.gameObject != null)
+            {
+                _health.TakeDamage(damage, damageType);
+            }
         }
     }
 }

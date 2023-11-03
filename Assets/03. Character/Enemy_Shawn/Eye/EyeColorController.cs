@@ -17,6 +17,7 @@ public class EyeColorController : MonoBehaviour
     }
     public void SetOrange()
     {
+
         animator.SetTrigger("Orange");
     }
     public void SetRed()
@@ -25,6 +26,9 @@ public class EyeColorController : MonoBehaviour
     }
     public void SetPurple()
     {
-        animator.SetTrigger("Purple");
+        if(animator !=null)
+        {
+            animator.SetTrigger("Purple");
+        }
     }
 }
