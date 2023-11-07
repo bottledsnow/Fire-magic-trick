@@ -165,6 +165,7 @@ public class SuperDash : MonoBehaviour
         {
             if (_playerCollider.hit.collider.tag == "Enemy")
             {
+
                 _playerState.TakeControl();
                 isSuperDash = false;
                 superDashTimer = 0;

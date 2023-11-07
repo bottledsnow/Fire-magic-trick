@@ -5,17 +5,15 @@ public class SuperDashCollider : MonoBehaviour
 {
     [SerializeField] private MMF_Player HitFeedbacks;
     private SuperDash _superDash;
-    private SuperDashKick _superDashKick;
     private PlayerDamage _playerDamage;
     private float CrashForce;
     private float CrashForceUp;
     private bool IsSuperDash;
-    private bool SuperDashHit;
     private bool IsSuperDashKick;
+    private bool canTrigger;
     private void Start()
     {
         _superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
-        _superDashKick = GameManager.singleton.EnergySystem.GetComponent <SuperDashKick>();
         _playerDamage = GetComponent<PlayerDamage>();
         Initialization();
     }
@@ -30,28 +28,25 @@ public class SuperDashCollider : MonoBehaviour
         {
             if (other.CompareTag("Enemy"))
             {
-                Debug.Log("Hit");
-                SuperDashHit = true;
-                Vector3 playerposition = transform.parent.transform.position;
-                Vector3 EnemyPosition = other.transform.position;
-                Vector3 direction = (EnemyPosition - playerposition).normalized;
-                Vector3 Enemyup = other.transform.up;
-                HitFeedbacks.PlayFeedbacks();
-                other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
+                if(canTrigger)
+                {
+                    Debug.Log("SuperDash Damage");
+                    canTrigger = false;
+                    Vector3 playerposition = transform.parent.transform.position;
+                    Vector3 EnemyPosition = other.transform.position;
+                    Vector3 direction = (EnemyPosition - playerposition).normalized;
+                    Vector3 Enemyup = other.transform.up;
+                    HitFeedbacks.PlayFeedbacks();
+                    other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
+                    _playerDamage.ToDamageEnemy(other);
+                }
             }
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if(SuperDashHit && !IsSuperDashKick)
-        {
-            SuperDashHit = false;
-            _playerDamage.ToDamageEnemy(other);
-        }
-    }   
     public void SetIsSuperDash(bool value)
     {
         IsSuperDash = value;
+        canTrigger = value;
     }
     public void SetKick(bool value)
     {
