@@ -11,6 +11,7 @@ public class SuperDashCollider : MonoBehaviour
     private bool IsSuperDash;
     private bool IsSuperDashKick;
     private bool canTrigger;
+    public bool EnemyToClose;
     private void Start()
     {
         _superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
@@ -24,11 +25,27 @@ public class SuperDashCollider : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        ToSuperHitEnemy(other);
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        ToSuperHitEnemy(other);
+        EnemyStayCheck(other);
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            EnemyToClose = false;
+        }
+    }
+    private void ToSuperHitEnemy(Collider other)
+    {
         if (IsSuperDash && !IsSuperDashKick)
         {
             if (other.CompareTag("Enemy"))
             {
-                if(canTrigger)
+                if (canTrigger)
                 {
                     Debug.Log("SuperDash Damage");
                     canTrigger = false;
@@ -43,6 +60,15 @@ public class SuperDashCollider : MonoBehaviour
             }
         }
     }
+    private void EnemyStayCheck(Collider other)
+    {
+        if(other.CompareTag("Enemy"))
+        {
+            EnemyToClose = true;
+            Debug.Log("Comaper");
+        }
+    }
+    
     public void SetIsSuperDash(bool value)
     {
         IsSuperDash = value;
@@ -51,5 +77,9 @@ public class SuperDashCollider : MonoBehaviour
     public void SetKick(bool value)
     {
         IsSuperDashKick = value;
+    }
+    public void SetEnemyToClose(bool Value)
+    {
+        EnemyToClose = Value;
     }
 }

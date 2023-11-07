@@ -23,9 +23,17 @@ public class FireDashCollider : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        ToDashHitEnemy(other);
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        ToDashHitEnemy(other);
+    }
+    private void ToDashHitEnemy(Collider other)
+    {
         if (IsDash)
         {
-            if(canTriggerDamage)
+            if (canTriggerDamage)
             {
                 if (other.CompareTag("Enemy"))
                 {

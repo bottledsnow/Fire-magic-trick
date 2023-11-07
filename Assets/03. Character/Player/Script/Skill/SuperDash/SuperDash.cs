@@ -70,6 +70,7 @@ public class SuperDash : MonoBehaviour
         isKick = false;
         _superDashCollider.SetIsSuperDash(false);
         _playerState.TakeControl();
+        _superDashCollider.SetEnemyToClose(false);
     }
     private void GetTarget()
     {
@@ -81,7 +82,13 @@ public class SuperDash : MonoBehaviour
         {
             if (!isSuperDash && !isSuperDashThrough)
             {
-                EnergyCheck();
+                if(_superDashCollider.EnemyToClose)
+                {
+                    Debug.Log("Enemy To Close");
+                }else
+                {
+                    EnergyCheck();
+                }
             }
         }
     }
@@ -205,6 +212,7 @@ public class SuperDash : MonoBehaviour
         superDashSpeed = 0;
         Target = null;
         _superDashKickDown.NullTarget();
+        Initialization();
     }
     private void superDashToThrough()
     {
@@ -240,7 +248,6 @@ public class SuperDash : MonoBehaviour
         if(Target ==null)
         {
             superDashStop();
-            Initialization();
         }
     }
 }
