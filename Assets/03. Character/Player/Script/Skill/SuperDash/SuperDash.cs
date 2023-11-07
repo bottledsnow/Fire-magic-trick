@@ -20,6 +20,8 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private MMF_Player FireDashEnd;
     [Header("SuperDash Stop Timer")]
     [SerializeField] private float MaxStopTimer = 5f;
+
+
     private SuperDashCameraCheck _superDashCameraCheck;
     private CharacterController _characterController;
     private SuperDashKickDown _superDashKickDown;
@@ -35,11 +37,8 @@ public class SuperDash : MonoBehaviour
     private Vector3 direction;
     private float superDashSpeed = 0;
     private float superDashTimer = 0;
-    private float timer;
     private bool isSuperDashThrough;
     private bool isKick;
-    private bool useSuperDashTimer;
-    private bool isTimer;
 
     [HideInInspector] public bool isSuperDash;
 
@@ -63,16 +62,12 @@ public class SuperDash : MonoBehaviour
         superDash();
         superDashHit();
         superDashThrough();
-        StopTimerSystem();
     }
     private void Initialization()
     {
-        isTimer = false;
-        timer = 0;
         isSuperDashThrough = false;
         isSuperDash = false;
         isKick = false;
-        useSuperDashTimer = false;
         _superDashCollider.SetIsSuperDash(false);
         _playerState.TakeControl();
     }
@@ -103,22 +98,20 @@ public class SuperDash : MonoBehaviour
     
     private void superDashStart()
     {
-        isTimer = true;
         isSuperDash = true;
+
         _superDashCollider.SetIsSuperDash(true);
         _superDashKickDown.GetTarget(Target);
         _playerAnimator.SuperDashStart();
         _playerState.SetGravityToFire();
         FireDashStart.PlayFeedbacks();
-        Debug.Log("SuperDash");
     }
     private void superDash()
     {   
         if (isSuperDash)
         {
-            if(Target !=null)
+            if(Target!=null)
             {
-
                 LookAtTarget();
                 _playerState.OutControl();
                 speedIncrease();
@@ -128,26 +121,33 @@ public class SuperDash : MonoBehaviour
             else
             {
                 EnemyDissapear();
+                Debug.Log("EnemyDissapear");
             }
         }
     }
-    private void move()
+    private void LookAtTarget()
     {
-        _characterController.Move(direction * superDashSpeed * Time.deltaTime);
+        _playerState.transform.LookAt(Target.transform);
+    }
+    private void speedIncrease()
+    {
+        superDashTimer = speedTimer(superDashTimer, SuperDashTimeNormal);
+        superDashSpeed = superDashIncreaseSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
     }
     private void calaulateDirection()
     {
         direction = calculateDirection(player.transform.position, Target.transform.position).normalized;
     }
+    private void move()
+    {
+        _characterController.Move(direction * superDashSpeed * Time.deltaTime);
+    }
+    
     private Vector3 calculateDirection(Vector3 start, Vector3 end)
     {
         return end - start;
     }
-    private void speedIncrease()
-    {
-       superDashTimer = speedTimer(superDashTimer,SuperDashTimeNormal);
-       superDashSpeed = superDashIncreaseSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
-    }
+    
     private float speedTimer(float timer,float dashtime)
     {
         if (timer <= 1f)
@@ -172,13 +172,12 @@ public class SuperDash : MonoBehaviour
 
                 if (_playerState.nearGround)
                 {
-                    superDashStop();
+                    HitGroundEnemy();
                 } else
                 {
                     if(_superDashKick.timerCheck(isKick))
                     {
-                        _superDashKickDown.KickDown();
-                        superDashStop();
+                        HitToKickDown();
                     }else
                     {
                         superDashToThrough();
@@ -186,6 +185,15 @@ public class SuperDash : MonoBehaviour
                 }
             }
         }
+    }
+    private void HitGroundEnemy()
+    {
+        superDashStop();
+    }
+    private void HitToKickDown()
+    {
+        _superDashKickDown.KickDown();
+        superDashStop();
     }
     private void superDashStop()
     {
@@ -196,7 +204,6 @@ public class SuperDash : MonoBehaviour
         superDashSpeed = 0;
         Target = null;
         _superDashKickDown.NullTarget();
-        isTimer = false;
     }
     private void superDashToThrough()
     {
@@ -222,10 +229,7 @@ public class SuperDash : MonoBehaviour
         superDashTimer = speedTimer(superDashTimer, SuperDashTimeFall);
         superDashSpeed = superDashReduceSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
     }
-    private void LookAtTarget()
-    {
-        _playerState.transform.LookAt(Target.transform);
-    }
+    
     public void SetIsKick(bool value)
     {
         //isKick = value;
@@ -237,24 +241,5 @@ public class SuperDash : MonoBehaviour
             superDashStop();
             Initialization();
         }
-    }
-    #region Stop Timer
-    private void StopTimerSystem()
-    {
-        if(isTimer)
-        {
-            timer += Time.deltaTime;
-        }
-        if(timer>= MaxStopTimer)
-        {
-            SuperDashStopTimer();
-        }
-    }
-    #endregion
-    private void SuperDashStopTimer()
-    {
-        superDashStop();
-        Initialization();
-        Debug.Log("Stop Timer");
     }
 }

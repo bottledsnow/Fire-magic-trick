@@ -1,7 +1,6 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using System.Threading.Tasks;
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityGameObject;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
@@ -165,7 +164,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
             if(isShock)
             {
                 isShock = false;
-                //feedbacks_Shock.StopFeedbacks();
+                feedbacks_Shock.StopFeedbacks();
             }
         }
         if (health == 1)
@@ -174,7 +173,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
             if(this.transform.gameObject !=null)
             {
-                //feedbacks_Shock.PlayFeedbacks();
+                feedbacks_Shock.PlayFeedbacks();
             }
 
             if (!isFire)
