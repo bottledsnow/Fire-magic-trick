@@ -6,7 +6,6 @@ public class Card_Move : MonoBehaviour
     [Header("Bullet")]
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
-    [SerializeField] private float fireRate;
     [SerializeField] private GameObject muzzlePrefab;
     [SerializeField] private GameObject hitPrefab;
 
@@ -81,9 +80,7 @@ public class Card_Move : MonoBehaviour
         if (psHit != null)
         {
             Destroy(hitVFX, psHit.playRate);
-            // playRate need to change to duration;
         }
-
     }
     private void DestroyBullet(float lifetime)
     {

@@ -4907,7 +4907,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5024,6 +5024,37 @@ PlayableDirector:
   m_ExposedReferences:
     m_References:
     - 050eb48952c117c4ea74dee9f2da2716: {fileID: 112838033}
+--- !u!1 &284743640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284743641}
+  m_Layer: 6
+  m_Name: spawnBulletPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &284743641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284743640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.635}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 504828553}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &373076905
 GameObject:
   m_ObjectHideFlags: 0
@@ -9841,6 +9872,38 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &504828552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 504828553}
+  m_Layer: 6
+  m_Name: spawnBulletPositionOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &504828553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 504828552}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.918, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 284743641}
+  m_Father: {fileID: 4020344257340450069}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &588994983
 GameObject:
   m_ObjectHideFlags: 0
@@ -27853,7 +27916,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d4feaccdc3a550459f4ce50d7376cf3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnBulletPosition: {fileID: 4020344257340450069}
+  spawnBulletPositionOrigin: {fileID: 504828553}
+  spawnBulletPosition: {fileID: 284743641}
   shootingEnergyCost: 10
   FireEnergyCost: 10
 --- !u!114 &4020344256870572599
@@ -27918,8 +27982,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrowFeedback: {fileID: 4020344258285351108}
-  pfBulletProjectile: {fileID: 2540971888450268846, guid: 36ad030d939a437448d0d7999747fc71, type: 3}
+  spawnBulletPosition: {fileID: 4020344257340450069}
+  pfBulletProjectile: {fileID: 2585087723916746599, guid: 2a10de5c7a50e13498328cceb57f518e, type: 3}
   shootCooldown: 0.5
+  useThrowFeedbacks: 1
+  ThrowParticle: {fileID: 0}
+  RotationStan: 0
+  RotationRan: 50
 --- !u!114 &5555797612043937640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43712,10 +43781,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4020344257340450068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.096, y: 0.817, z: 0.591}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 504828553}
   m_Father: {fileID: 3477228270690418625}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61774,6 +61844,7 @@ GameObject:
   - component: {fileID: 4020344258285351110}
   - component: {fileID: 4020344258285351108}
   - component: {fileID: 4020344258285351111}
+  - component: {fileID: 736595908}
   m_Layer: 6
   m_Name: ThrowFeedbacks
   m_TagString: Untagged
@@ -61934,6 +62005,47 @@ MonoBehaviour:
   MaxPitch: 1
   SfxAudioMixerGroup: {fileID: 0}
   Priority: 128
+--- !u!114 &736595908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4020344258285350969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c27131831afa28b499cb120fc9059997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Particles Play
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    ExcludeFromHoldingPauses: 0
+    ContributeToTotalDuration: 1
+    InitialDelay: 0
+    CooldownDuration: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Mode: 0
+  BoundParticleSystem: {fileID: 0}
+  RandomParticleSystems: []
+  MoveToPosition: 0
+  ActivateOnPlay: 0
 --- !u!1 &4020344258296931410
 GameObject:
   m_ObjectHideFlags: 0
