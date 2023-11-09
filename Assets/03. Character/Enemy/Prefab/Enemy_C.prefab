@@ -25321,7 +25321,6 @@ GameObject:
   - component: {fileID: 3623152130198537311}
   - component: {fileID: 3623152130198537299}
   - component: {fileID: 3623152130198537298}
-  - component: {fileID: 3623152130198537308}
   m_Layer: 14
   m_Name: Sphere
   m_TagString: Untagged
@@ -25394,26 +25393,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &3623152130198537308
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3623152130198537310}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3623152130248176064
 GameObject:
   m_ObjectHideFlags: 0
@@ -25511,8 +25490,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!120 &3623152130248176070
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -25798,7 +25777,6 @@ GameObject:
   - component: {fileID: 3623152131291788970}
   - component: {fileID: 3623152131291788974}
   - component: {fileID: 3623152131291788969}
-  - component: {fileID: 3623152131291788971}
   m_Layer: 14
   m_Name: Cube
   m_TagString: Untagged
@@ -25871,26 +25849,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &3623152131291788971
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3623152131291789013}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3623152131402958385
 GameObject:
   m_ObjectHideFlags: 0
@@ -25902,7 +25860,6 @@ GameObject:
   - component: {fileID: 3623152131402958390}
   - component: {fileID: 3623152131402958346}
   - component: {fileID: 3623152131402958389}
-  - component: {fileID: 3623152131402958391}
   m_Layer: 14
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -25975,26 +25932,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!95 &3623152131402958391
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3623152131402958385}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3623152131522224703
 GameObject:
   m_ObjectHideFlags: 0
@@ -26171,8 +26108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  force: -60
-  destroyAfterHit: 0
+  force: -40
   forcePoint: {fileID: 3623152131522224700}
 --- !u!1 &3623152132140516108
 GameObject:
@@ -32408,7 +32344,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7834502910578003917}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1

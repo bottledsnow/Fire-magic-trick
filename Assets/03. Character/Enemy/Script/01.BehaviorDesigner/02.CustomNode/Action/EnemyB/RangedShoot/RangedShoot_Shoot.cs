@@ -10,7 +10,6 @@ public class RangedShoot_Shoot : Action
 
     [Header("Bullet")]
     [SerializeField] private GameObject bulletPrefab;
-    
     [SerializeField] private float bulletSpeed = 20;
 
     [Header("Player")]
