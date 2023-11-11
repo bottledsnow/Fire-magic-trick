@@ -40,11 +40,7 @@ public class Bullet_Normal : MonoBehaviour
     {
         var hitVFX = Instantiate(hitPrefab, pos, rot);
         var psHit = hitVFX.GetComponent<VisualEffect>();
-        if (psHit != null)
-        {
-            Destroy(hitVFX, psHit.playRate);
-            // playRate need to change to duration;
-        }
+        Destroy(hitVFX, 1.5f);
 
     }
     private void Initialization()
@@ -63,7 +59,7 @@ public class Bullet_Normal : MonoBehaviour
     private void DestroyBullet()
     {
         bulletCollider.enabled = false;
-        rb.drag = 10;
-        Destroy(gameObject,1.5f);
+        rb.drag = 100;
+        Destroy(gameObject,0.3f);
     }
 }

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 
 public class Shooting_Normal : MonoBehaviour
 {
-    [SerializeField] private MMFeedbacks ThrowFeedback;
+    [SerializeField] private MMF_Player ThrowFeedback;
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private float shootCooldown;
@@ -35,6 +35,7 @@ public class Shooting_Normal : MonoBehaviour
         if (_Input.RT && !shooting)
         {
             ThrowFeedbacks();
+
             _shooting.Shoot_Normal(pfBulletProjectile);
             _crosshairUI.CrosshairShooting();
             ShootCooldown(shootCooldown);
@@ -48,7 +49,9 @@ public class Shooting_Normal : MonoBehaviour
     }
     private void ThrowFeedbacks()
     {
-        if(useThrowFeedbacks)
+        ThrowFeedback.PlayFeedbacks();
+
+        if (useThrowFeedbacks)
         {
             if(ThrowFeedbacksIndex == 0)
             {
