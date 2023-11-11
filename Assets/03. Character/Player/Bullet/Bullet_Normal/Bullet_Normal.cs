@@ -16,11 +16,13 @@ public class Bullet_Normal : MonoBehaviour
     private Collider bulletCollider;
     private Rigidbody rb;
     private CrosshairUI _crosshairUI;
+    private PlayerDamage _playerDamage;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         bulletCollider = GetComponent<Collider>();
         _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
+        _playerDamage = GetComponent<PlayerDamage>();
         Initialization();
     }
     private void Update()
@@ -32,6 +34,11 @@ public class Bullet_Normal : MonoBehaviour
         //Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, -this.transform.forward);
         Vector3 pos = contact.point;
+
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            _playerDamage.ToDamageEnemy(collision);
+        }
 
         newHit(pos, rot);
         CroshairFeedback();
