@@ -1,11 +1,15 @@
 using UnityEngine;
 using UnityEngine.VFX;
+using System.Threading.Tasks;
 
 public class Bullet_Normal : MonoBehaviour
 {
     [Header("Bullet")]
     [SerializeField] private float lifeTime;
-    [SerializeField] private float speed;
+    [SerializeField] private float speed_Start;
+    [SerializeField] private float speed_Add;
+    [Header("Feedback")]
+    [SerializeField] private ParticleSystem addspeedFeedback;
     [Header("Preferb")]
     [SerializeField] private GameObject hitPrefab;
 
@@ -25,7 +29,8 @@ public class Bullet_Normal : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint contact = collision.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        //Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, -this.transform.forward);
         Vector3 pos = contact.point;
 
         newHit(pos, rot);
@@ -48,9 +53,12 @@ public class Bullet_Normal : MonoBehaviour
         DestroyBullet(lifeTime);
         GiveSpeed();
     }
-    private void GiveSpeed()
+    private async void GiveSpeed()
     {
-        rb.velocity = transform.forward * speed;
+        rb.velocity = transform.forward * speed_Start;
+        await Task.Delay(300);
+        rb.velocity = transform.forward * speed_Add;
+        addspeedFeedback.Play();
     }
     private void DestroyBullet(float lifetime)
     {

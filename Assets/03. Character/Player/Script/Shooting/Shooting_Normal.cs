@@ -9,6 +9,8 @@ public class Shooting_Normal : MonoBehaviour
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private Transform pfBulletProjectile;
     [SerializeField] private float shootCooldown;
+    [Header("Pisto")]
+    [SerializeField] private bool usePistoMode;
     [Header("Throw Feedbacks")]
     [SerializeField] private bool useThrowFeedbacks;
     [SerializeField] private MMF_Player Throw_A;
@@ -19,6 +21,7 @@ public class Shooting_Normal : MonoBehaviour
     private Shooting _shooting;
     private ControllerInput _Input;
     private bool shooting;
+    private bool pisto;
     private int ThrowFeedbacksIndex;
     private void Start()
     {
@@ -28,18 +31,43 @@ public class Shooting_Normal : MonoBehaviour
     }
     private void Update()
     {
-        Shooting();
+        ShootingSystem();
+        PistoSystem();
     }
-    private void Shooting()
+    private void ShootingSystem()
     {
         if (_Input.RT && !shooting)
         {
-            ThrowFeedbacks();
-
-            _shooting.Shoot_Normal(pfBulletProjectile);
-            _crosshairUI.CrosshairShooting();
-            ShootCooldown(shootCooldown);
+            if(usePistoMode)
+            {
+                if(!pisto)
+                {
+                    Shooting();
+                    pisto = true;
+                }
+            }else
+            {
+                Shooting();
+            }
         }
+    }
+    private void PistoSystem()
+    {
+        if(usePistoMode)
+        {
+            if (!_Input.RT)
+            {
+                pisto = false;
+            }
+        }
+    }
+    private void Shooting()
+    {
+        ThrowFeedbacks();
+
+        _shooting.Shoot_Normal(pfBulletProjectile);
+        _crosshairUI.CrosshairShooting();
+        ShootCooldown(shootCooldown);
     }
     private async void ShootCooldown(float shootCooldown)
     {
