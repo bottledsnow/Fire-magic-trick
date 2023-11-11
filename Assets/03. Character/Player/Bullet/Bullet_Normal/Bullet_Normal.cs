@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.VFX;
 using System.Threading.Tasks;
+using UnityEditor.Experimental.GraphView;
 
 public class Bullet_Normal : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class Bullet_Normal : MonoBehaviour
     [SerializeField] private float lifeTime;
     [SerializeField] private float speed_Start;
     [SerializeField] private float speed_Add;
+    [SerializeField] private float force;
     [Header("Feedback")]
     [SerializeField] private ParticleSystem addspeedFeedback;
+    [SerializeField] private ParticleSystem hitEnemyFeedback;
     [Header("Preferb")]
     [SerializeField] private GameObject hitPrefab;
+    [SerializeField] private GameObject hitEnemyPreferb;
 
     private Collider bulletCollider;
     private Rigidbody rb;
@@ -25,9 +29,7 @@ public class Bullet_Normal : MonoBehaviour
         _playerDamage = GetComponent<PlayerDamage>();
         Initialization();
     }
-    private void Update()
-    {
-    }
+    
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint contact = collision.contacts[0];
@@ -38,11 +40,21 @@ public class Bullet_Normal : MonoBehaviour
         if(collision.gameObject.CompareTag("Enemy"))
         {
             _playerDamage.ToDamageEnemy(collision);
+            GameObject enemyhit = Instantiate(hitEnemyPreferb, pos, rot);
+            KickBackEnemy(collision);
+            Destroy(enemyhit, 1f);
         }
 
         newHit(pos, rot);
         CroshairFeedback();
         DestroyBullet();
+    }
+    private void KickBackEnemy(Collision collision)
+    {
+        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+        Vector3 Direction = (collision.transform.position - transform.position).normalized;
+        Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
+        rb.AddForce(ForceDirection * force, ForceMode.Impulse);
     }
     private void CroshairFeedback()
     {
