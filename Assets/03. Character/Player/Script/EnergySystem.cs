@@ -1,5 +1,4 @@
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class EnergySystem : MonoBehaviour
 {
@@ -32,7 +31,7 @@ public class EnergySystem : MonoBehaviour
     {
         _energySystemUI = GameManager.singleton.UISystem.GetComponent<EnergySystemUI>();
 
-        SetEnegy(StartEnergy);
+        //SetEnegy(StartEnergy);
     }
     private void Update()
     {
