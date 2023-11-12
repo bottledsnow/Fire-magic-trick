@@ -5,9 +5,8 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour
 {
     [SerializeField] private int damage;
-    [SerializeField] private float force = 20;
-    [SerializeField] private bool destroyAfterHit = false;
-    [SerializeField] private Transform forcePoint;
+    [SerializeField] private float force;
+    public Transform forcePoint;
     Rigidbody rb;
     Vector3 forceDirection;
 
@@ -18,17 +17,20 @@ public class EnemyDamage : MonoBehaviour
             EnergySystem energySystem = collider.gameObject.GetComponent<EnergySystem>();
             energySystem.Energy -= damage;
 
-            forceDirection = (forcePoint.position - collider.gameObject.transform.position);
-            forceDirection = new Vector3(forceDirection.x,0,forceDirection.z);
+            if(forcePoint != null)
+            {
+                forceDirection = (forcePoint.position - collider.gameObject.transform.position);
+                forceDirection = new Vector3(forceDirection.x,0,forceDirection.z);
+            }
+            
 
             ImpactReceiver impactReceiver = collider.gameObject.GetComponent<ImpactReceiver>();
             impactReceiver.AddImpact(forceDirection , force);
-
-            if(destroyAfterHit)
-            {
-                Destroy(gameObject);
-            }
-           
         }
+    }
+
+    public void PlayerGetDamage()
+    {
+        
     }
 }
