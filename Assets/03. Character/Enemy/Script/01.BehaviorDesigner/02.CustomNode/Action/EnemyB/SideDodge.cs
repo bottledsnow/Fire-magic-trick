@@ -6,7 +6,7 @@ public class SideDodge : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
-
+    
     [Header("Rotate")]
     [SerializeField] private float rotateSpeed = 15;
 
@@ -41,7 +41,6 @@ public class SideDodge : Action
         rb.velocity = Vector3.zero;
 
         int randomDirection = (Random.value > 0.5f) ? 1 : -1;
-        Debug.Log(randomDirection);
         rb.AddForce(transform.right * randomDirection * initialMoveSpeed, ForceMode.Impulse);
     }
 

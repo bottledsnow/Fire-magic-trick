@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyDamage : MonoBehaviour
 {
     [SerializeField] private int damage;
-    [SerializeField] private float force = 20;
+    [SerializeField] private float force;
     public Transform forcePoint;
     Rigidbody rb;
     Vector3 forceDirection;
@@ -27,5 +27,10 @@ public class EnemyDamage : MonoBehaviour
             ImpactReceiver impactReceiver = collider.gameObject.GetComponent<ImpactReceiver>();
             impactReceiver.AddImpact(forceDirection , force);
         }
+    }
+
+    public void PlayerGetDamage()
+    {
+        
     }
 }
