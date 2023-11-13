@@ -170,9 +170,9 @@ public class SuperDash : MonoBehaviour
     {
         if(isSuperDash && _playerCollider.hit !=null)
         {
+                Debug.Log("Fire Point Hit");
             if (_playerCollider.hit.collider.tag == "Enemy")
             {
-
                 _playerState.TakeControl();
                 isSuperDash = false;
                 superDashTimer = 0;
@@ -191,6 +191,17 @@ public class SuperDash : MonoBehaviour
                         superDashToThrough();
                     }
                 }
+            }
+            if(_playerCollider.hit.collider.CompareTag("FirePoint"))
+            {
+                FirePoint point = _playerCollider.hit.collider.GetComponent<FirePoint>();
+                point.ToUseFirePoint();
+
+                _playerState.TakeControl();
+                isSuperDash = false;
+                superDashTimer = 0;
+                FireDashHit.PlayFeedbacks();
+                superDashStop();
             }
         }
     }

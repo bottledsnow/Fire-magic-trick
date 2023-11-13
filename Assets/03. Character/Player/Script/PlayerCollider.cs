@@ -15,11 +15,17 @@ public class PlayerCollider : MonoBehaviour
     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
-        if (hit.collider.tag =="Enemy")
+        HitCheck(hit, "Enemy");
+        HitCheck(hit, "FirePoint");
+    }
+    private void HitCheck(ControllerColliderHit hit,string tag)
+    {
+        if (hit.collider.tag == tag)
         {
             this.hit = hit;
             //isHit = true;
-        } else
+        }
+        else
         {
             this.hit = null;
             //isHit = false;
