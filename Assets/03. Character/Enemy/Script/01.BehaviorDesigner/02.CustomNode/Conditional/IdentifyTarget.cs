@@ -14,9 +14,8 @@ public class IdentifyTarget : Conditional
     [SerializeField] private LayerMask obstructionMask;
     
     [Header("Alert")]
-    [SerializeField] private float maxAlert = 100;
-
-    private float alert;
+    public float maxAlert = 250;
+    public float alert;
 
     public override TaskStatus OnUpdate()
     {
