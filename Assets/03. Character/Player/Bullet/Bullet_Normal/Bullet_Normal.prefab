@@ -19351,6 +19351,7 @@ GameObject:
   - component: {fileID: 812234833019504672}
   - component: {fileID: 3791141052154015985}
   - component: {fileID: 5863245321833868307}
+  - component: {fileID: 6719289997504853123}
   m_Layer: 7
   m_Name: Bullet_Normal
   m_TagString: Untagged
@@ -19490,6 +19491,23 @@ MonoBehaviour:
   addspeedFeedback: {fileID: 654837298402208650}
   hitPrefab: {fileID: 1504606810295820813, guid: a975015598e105c4ca19982436793c90, type: 3}
   hitEnemyPreferb: {fileID: 1499373659572035820, guid: 72e8107574d06234da4047e96a4b1e41, type: 3}
+--- !u!114 &6719289997504853123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681020241941845620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4cb3980d2aec740bf4078bb4836280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TrackLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
+  CheckDistance: 50
+  RotateSpeed: 1
 --- !u!1 &6061993340834460406
 GameObject:
   m_ObjectHideFlags: 0

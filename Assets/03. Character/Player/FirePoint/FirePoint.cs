@@ -12,7 +12,6 @@ public class FirePoint : MonoBehaviour
     [SerializeField] private int recoverTime_ms = 5000;
 
     private bool isRecover;
-    private bool Trigger;
     private int ParticleNumber;
     private void Awake()
     {
@@ -50,7 +49,6 @@ public class FirePoint : MonoBehaviour
         }
         else
         {
-            Trigger = true;
             ParticleNumber = 0;
             SetParticleNumber(0);
         }

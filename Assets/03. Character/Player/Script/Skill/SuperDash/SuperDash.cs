@@ -18,8 +18,6 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private MMF_Player FireDashStart;
     [SerializeField] private MMF_Player FireDashHit;
     [SerializeField] private MMF_Player FireDashEnd;
-    [Header("SuperDash Stop Timer")]
-    [SerializeField] private float MaxStopTimer = 5f;
 
 
     private SuperDashCameraCheck _superDashCameraCheck;
