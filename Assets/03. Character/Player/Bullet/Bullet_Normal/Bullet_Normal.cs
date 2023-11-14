@@ -54,7 +54,7 @@ public class Bullet_Normal : MonoBehaviour
         Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
         Vector3 Direction = (collision.transform.position - BackCoordinate.position).normalized;
         Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
-        rb.AddForce(ForceDirection * force, ForceMode.Impulse);
+        rb.AddForce(ForceDirection * force * collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
     }
     private void CroshairFeedback()
     {

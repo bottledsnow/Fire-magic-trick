@@ -31,6 +31,8 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_Shock;
     [SerializeField] private MMF_Player feedbacks_Boom;
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
+    [Header("KickBack")]
+    public float kickBackRatio;
 
     private BehaviorTree bt;
     private ProgressSystem _progress;
