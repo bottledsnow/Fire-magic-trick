@@ -28,6 +28,7 @@ public class Rush_JumpBack : Action
     {
         if (Time.time - timer > 0.2f && isGrounded())
         {
+            rb.velocity = Vector3.zero;
             return TaskStatus.Success;
         }
         return TaskStatus.Running;
@@ -35,6 +36,7 @@ public class Rush_JumpBack : Action
 
     private void JampBack()
     {
+        rb.velocity = Vector3.zero;
         rb.AddForce(Vector3.up * upForce, ForceMode.Impulse);
         rb.AddForce(-transform.forward * backForce, ForceMode.Impulse);
     }

@@ -1,6 +1,7 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using System.Threading.Tasks;
+using BehaviorDesigner.Runtime;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
@@ -30,7 +31,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_Shock;
     [SerializeField] private MMF_Player feedbacks_Boom;
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
+    [Header("KickBack")]
+    public float kickBackRatio;
 
+    private BehaviorTree bt;
     private ProgressSystem _progress;
     private Transform startPosition;
     private Vector3 StartPosition;
@@ -39,18 +43,18 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private float coolingTimer;
     private bool isCooling;
     private bool isInterval;
+
     public int iHealth
     {
         get { return health; }
         set { health = value; }
     }
-    private void Awake()
-    {
-        health = maxHealth;
-    }
+
     private void Start()
     {
+        health = maxHealth;
         _progress = GameManager.singleton.GetComponent<ProgressSystem>();
+        bt = GetComponent<BehaviorTree>();
         startPosition = this.transform;
         StartPosition = this.transform.position;
         StartRotation = this.transform.rotation;
@@ -58,12 +62,14 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         {
             RebirthScription();
             Debug.Log("Rebirth");
-        }
+        }  
     }
+
     private void Update()
     {
         EnemyCoolingCheck();
     }
+
     #region Cooling
     private void EnemyCoolingCheck()
     {
@@ -90,6 +96,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         hitTimer = Time.time;
 
         healthFeedback(health);
+        bt.SendEvent("Hit");
         Debug.Log("Enemy remain health" + health);
 
         if (health <= 0)
