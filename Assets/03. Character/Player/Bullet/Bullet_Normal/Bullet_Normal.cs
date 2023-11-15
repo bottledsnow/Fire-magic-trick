@@ -6,8 +6,7 @@ public class Bullet_Normal : MonoBehaviour
 {
     [Header("Bullet")]
     [SerializeField] private float lifeTime;
-    [SerializeField] private float speed_Start;
-    [SerializeField] private float speed_Add;
+    [SerializeField] private float speed;
     [Header("Force")]
     [SerializeField] private Transform BackCoordinate;
     [SerializeField] private float force;
@@ -29,7 +28,10 @@ public class Bullet_Normal : MonoBehaviour
         _playerDamage = GetComponent<PlayerDamage>();
         Initialization();
     }
-    
+    private void Update()
+    {
+        GiveSpeed();
+    }
     private void OnCollisionEnter(Collision collision)
     {
         ContactPoint contact = collision.contacts[0];
@@ -70,14 +72,10 @@ public class Bullet_Normal : MonoBehaviour
     private void Initialization()
     {
         DestroyBullet(lifeTime);
-        GiveSpeed();
     }
-    private async void GiveSpeed()
+    private void GiveSpeed()
     {
-        rb.velocity = transform.forward * speed_Start;
-        await Task.Delay(300);
-        rb.velocity = transform.forward * speed_Add;
-        addspeedFeedback.Play();
+        rb.velocity = transform.forward * speed;
     }
     private void DestroyBullet(float lifetime)
     {

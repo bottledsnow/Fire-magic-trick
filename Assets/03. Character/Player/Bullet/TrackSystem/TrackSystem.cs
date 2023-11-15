@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityQuaternion;
 using UnityEngine;
 
 public class TrackSystem : MonoBehaviour
@@ -6,8 +7,10 @@ public class TrackSystem : MonoBehaviour
     [SerializeField] private float CheckDistance;
     [SerializeField] private float RotateSpeed;
 
-    private RaycastHit hit;
+    private RaycastHit HitInfo;
+    private GameObject Target;
     private bool raycastHit;
+    private bool Trigger;
     private void Update()
     {
         ShootRay();
@@ -19,17 +22,23 @@ public class TrackSystem : MonoBehaviour
         Vector3 direction = transform.forward;
         Ray ray = new Ray(origin, direction);
 
-        raycastHit = Physics.Raycast(ray, out hit, CheckDistance, TrackLayerMask);
+        raycastHit = Physics.Raycast(ray, out HitInfo, CheckDistance, TrackLayerMask);
     }
     private void TrackRotate()
     {
         if (raycastHit)
         {
-            Debug.Log("Hit Target");    
-            Vector3 TargetDirection = hit.transform.position - this.transform.position;
+            Trigger = true;
+            Target = HitInfo.collider.gameObject;
+        }
+
+        if (Trigger)
+        {
+            Vector3 TargetDirection = Target.transform.position - this.transform.position;
             float singleStep = RotateSpeed * Time.deltaTime;
-            Vector3 newRotate = Vector3.RotateTowards(this.transform.forward, TargetDirection, singleStep, 0f);
-            this.transform.rotation = Quaternion.Euler(newRotate);
+            Vector3 newDirection = Vector3.RotateTowards(this.transform.forward, TargetDirection, singleStep, 0f);
+            this.transform.rotation = Quaternion.LookRotation(newDirection);
         }
     }
+    
 }
