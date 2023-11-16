@@ -48,7 +48,7 @@ public class FireDash : MonoBehaviour
     }
     private void ButtonClickEvent()
     {
-        if (!IsDash && !dashOnCD)
+        if (!IsDash && !dashOnCD && _Input.LeftStick != Vector2.zero)
         {
             useDash();
         }
@@ -152,7 +152,7 @@ public class FireDash : MonoBehaviour
     #region Dash Systsem
     private void Dash_Start()
     {
-        if (!dashedButton && _Input.LeftStick != Vector2.zero)
+        if (!dashedButton)
         {
             if (!dashOnCD)
             {
