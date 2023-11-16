@@ -61,7 +61,6 @@ public class FireDash : MonoBehaviour
         if (CanUse)
         {
             IsDash = true;
-            _fireDashGhost.GhostPlay();
             OpenCrash();
             SetDashScale(Dash_Normal);
             Dash_Start();
@@ -158,6 +157,7 @@ public class FireDash : MonoBehaviour
             if (!dashOnCD)
             {
                 dashedButton = true;
+                _fireDashGhost.GhostPlay();
                 StartCoroutine(DashMove());
                 DashCD(CdTime);
                 Dash_MaxKeepTime();

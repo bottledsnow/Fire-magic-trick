@@ -58,11 +58,6 @@ public class FireDashGhost : MonoBehaviour
         GameObject gameObject = ghost.gameObject;
         return gameObject;
     }
-    private void UpdatePositionEach(Transform Ghost)
-    {
-        Ghost.transform.position = transform.position;
-        Ghost.transform.rotation = transform.rotation;
-    }
     private void UpdatePositionEach(GameObject Ghost)
     {
         Ghost.transform.position = transform.position;
