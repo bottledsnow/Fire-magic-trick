@@ -168,9 +168,10 @@ public class SuperDash : MonoBehaviour
     {
         if(isSuperDash && _playerCollider.hit !=null)
         {
-                Debug.Log("Fire Point Hit");
+            Debug.Log("A");
             if (_playerCollider.hit.collider.tag == "Enemy")
             {
+            Debug.Log("B");
                 _playerState.TakeControl();
                 isSuperDash = false;
                 superDashTimer = 0;
@@ -190,6 +191,7 @@ public class SuperDash : MonoBehaviour
                     }
                 }
             }
+
             if(_playerCollider.hit.collider.CompareTag("FirePoint"))
             {
                 FirePoint point = _playerCollider.hit.collider.GetComponent<FirePoint>();
