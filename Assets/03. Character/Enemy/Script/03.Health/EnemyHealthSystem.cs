@@ -37,6 +37,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private BehaviorTree bt;
     private ProgressSystem _progress;
     private Transform startPosition;
+    private EnemyFireSystem _fireSystem;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
     private float hitTimer;
@@ -50,6 +51,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         set { health = value; }
     }
 
+    private void Awake()
+    {
+        _fireSystem = GetComponent<EnemyFireSystem>();
+    }
     private void Start()
     {
         health = maxHealth;
@@ -97,7 +102,13 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         healthFeedback(health);
         bt.SendEvent("Hit");
+        
         Debug.Log("Enemy remain health" + health);
+
+        if (_fireSystem != null)
+        {
+            _fireSystem.FireCheck(damageType);
+        }
 
         if (health <= 0)
         {
