@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
-    [SerializeField]
-    private DamageType damageType;
+    [SerializeField] private DamageType damageType;
 
     public int damage;
 
