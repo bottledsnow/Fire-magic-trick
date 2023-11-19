@@ -168,10 +168,8 @@ public class SuperDash : MonoBehaviour
     {
         if(isSuperDash && _playerCollider.hit !=null)
         {
-            Debug.Log("A");
             if (_playerCollider.hit.collider.tag == "Enemy")
             {
-            Debug.Log("B");
                 _playerState.TakeControl();
                 isSuperDash = false;
                 superDashTimer = 0;
@@ -211,6 +209,7 @@ public class SuperDash : MonoBehaviour
     }
     private void HitToKickDown()
     {
+        Debug.Log("KickDown");
         _superDashKickDown.KickDown();
         superDashStop();
     }

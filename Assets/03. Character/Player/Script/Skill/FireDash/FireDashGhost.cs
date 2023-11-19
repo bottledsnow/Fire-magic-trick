@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 
 public class FireDashGhost : MonoBehaviour
 {
+    [SerializeField] private bool useGhost;
     [Header("Ghost")]
     [SerializeField] private int GhostInterval_ms=20;
     [SerializeField] private int GhostIntervalDissapear_ms = 50;
@@ -13,17 +14,24 @@ public class FireDashGhost : MonoBehaviour
     private bool firstGhost;
     public void GhostPlay()
     {
-        if(!firstGhost)
+        if(useGhost)
         {
-            firstGhostPlay();
-        }else
-        {
-            ghostPlay();
+            if (!firstGhost)
+            {
+                firstGhostPlay();
+            }
+            else
+            {
+                ghostPlay();
+            }
         }
     }
     public void GhostStop()
     {
-        ghostStop();
+        if(useGhost)
+        {
+            ghostStop();
+        }
     }
     private async void firstGhostPlay()
     {

@@ -4,6 +4,7 @@ public class EnemyFireSystem : MonoBehaviour
 {
     [SerializeField] private GameObject TrackTarget;
     [SerializeField] private GameObject DashFire;
+    [SerializeField] private GameObject SuperDashFire;
     [Header("Setting")]
     [SerializeField] private float spreadTimer;
 
@@ -29,6 +30,14 @@ public class EnemyFireSystem : MonoBehaviour
         {
             SetIsSpread(true);
             SetDashFire(true);
+            SetTrackTarget(true);
+            SetIsTimer(true);
+            SetTimerNumber(spreadTimer);
+        }
+        if(damageType == PlayerDamage.DamageType.SuperDash || damageType == PlayerDamage.DamageType.Kick)
+        {
+            SetIsSpread(true);
+            SetSuperDashFire(true);
             SetTrackTarget(true);
             SetIsTimer(true);
             SetTimerNumber(spreadTimer);
@@ -61,6 +70,7 @@ public class EnemyFireSystem : MonoBehaviour
             SetTimerNumber(0);
             SetIsSpread(false);
             SetDashFire(false);
+            SetSuperDashFire(false);
         }
     }
     private void SetIsTimer(bool active)
@@ -74,6 +84,10 @@ public class EnemyFireSystem : MonoBehaviour
     private void SetDashFire(bool active)
     {
         DashFire.SetActive(active);
+    }
+    private void SetSuperDashFire(bool active)
+    {
+        SuperDashFire.SetActive(active);
     }
     private void SetIsSpread(bool active)
     {

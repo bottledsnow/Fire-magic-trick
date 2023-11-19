@@ -3,27 +3,44 @@ using System.Threading.Tasks;
 
 public class SuperDashKickTrigger : MonoBehaviour
 {
+    [SerializeField] private float TriggerTime;
+    private PlayerDamage _playerDamage;
+
+    private float timer;
     private bool isKick;
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if(isKick)
+        _playerDamage = GetComponent<PlayerDamage>();
+    }
+    private void Update()
+    {
+        KickTimer();
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (isKick)
         {
-            if (other.CompareTag("Enemy"))
+            if(other.CompareTag("Enemy"))
             {
-                PassCollider(other);
+                _playerDamage.ToDamageEnemy(other);
+                isKick = false;
             }
         }
     }
-    public async void PassCollider(Collider colider)
-    {
-        colider.enabled = false;
-        await Task.Delay(1000);
-        colider.enabled = true;
-    }
-    public async void TriggerKick()
+    public void SetTriggerKickCollider(bool active)
     {
         isKick = true;
-        await Task.Delay(1000);
-        isKick = false;
+    }
+    private void KickTimer()
+    {
+        if(isKick)
+        {
+            timer += Time.deltaTime;
+        }
+        if(timer > TriggerTime)
+        {
+            isKick = false;
+            timer = 0;
+        }
     }
 }

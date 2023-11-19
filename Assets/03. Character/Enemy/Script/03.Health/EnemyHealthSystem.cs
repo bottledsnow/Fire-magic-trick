@@ -248,6 +248,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         if(Boom)
         {
             feedbacks_FlyBoom.PlayFeedbacks();
+            bt.enabled = false;
         }
     }
 }

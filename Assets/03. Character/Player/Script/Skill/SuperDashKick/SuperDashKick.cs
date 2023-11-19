@@ -14,6 +14,7 @@ public class SuperDashKick : MonoBehaviour
     [SerializeField] private MMF_Player SuperDashEnd;
     [Header("Collider")]
     [SerializeField] private SuperDashCollider _superDashCollider;
+    [SerializeField] private SuperDashKickTrigger _superDashKickTrigger;
     private ThirdPersonController _thirdPersonController;
     private ControllerInput _input;
     private EnergySystem _energySystem;
@@ -115,7 +116,6 @@ public class SuperDashKick : MonoBehaviour
     private void kickSuccess()
     {
         KickTriggerCheck();
-        //_superdashKickDown.KickDown();
         SuperJump();
         _playerAnimator.SetTrigger("InputY");
         _playerAnimator.SetBool("isSuperDash", false);
@@ -124,6 +124,7 @@ public class SuperDashKick : MonoBehaviour
         isCheck = false;
         _superDash.SetIsKick(false);
         _superDashCollider.SetKick(false);
+        _superDashKickTrigger.SetTriggerKickCollider(true);
     }
     private async void KickTriggerCheck()
     {
