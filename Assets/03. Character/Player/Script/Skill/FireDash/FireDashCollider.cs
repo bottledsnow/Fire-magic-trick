@@ -43,11 +43,13 @@ public class FireDashCollider : MonoBehaviour
                     Vector3 EnemyPosition = other.transform.position;
                     Vector3 direction = (EnemyPosition - playerposition).normalized;
                     Vector3 Enemyup = other.transform.up;
+
                     if(!isTriggerDamage)
                     {
                         _playerDamage.ToDamageEnemy(other);
                         SetIsTriggerDamage(true);
                     }
+
                     HitFeedbacks.PlayFeedbacks();
                     other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
                 }
