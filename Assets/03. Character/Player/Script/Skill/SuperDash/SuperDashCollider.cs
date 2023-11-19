@@ -11,6 +11,7 @@ public class SuperDashCollider : MonoBehaviour
     private bool IsSuperDash;
     private bool IsSuperDashKick;
     private bool canTrigger;
+    private bool isTriggerDamage;
     public bool EnemyToClose;
     private void Start()
     {
@@ -55,7 +56,12 @@ public class SuperDashCollider : MonoBehaviour
                     Vector3 Enemyup = other.transform.up;
                     HitFeedbacks.PlayFeedbacks();
                     other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
-                    _playerDamage.ToDamageEnemy(other);
+
+                    if(!isTriggerDamage)
+                    {
+                        _playerDamage.ToDamageEnemy(other);
+                        SetIsTriggerDamage(true);
+                    }
                 }
             }
         }
@@ -68,7 +74,6 @@ public class SuperDashCollider : MonoBehaviour
             Debug.Log("Comaper");
         }
     }
-    
     public void SetIsSuperDash(bool value)
     {
         IsSuperDash = value;
@@ -81,5 +86,9 @@ public class SuperDashCollider : MonoBehaviour
     public void SetEnemyToClose(bool Value)
     {
         EnemyToClose = Value;
+    }
+    public void SetIsTriggerDamage(bool active)
+    {
+        isTriggerDamage = active;
     }
 }

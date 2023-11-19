@@ -33,6 +33,8 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
     [Header("KickBack")]
     public float kickBackRatio;
+    [Header("Spread Area")]
+    [SerializeField] private GameObject spreadArea;
 
     private BehaviorTree bt;
     private ProgressSystem _progress;
@@ -247,8 +249,14 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         if(Boom)
         {
+            InstantiateSpreadArea();
             feedbacks_FlyBoom.PlayFeedbacks();
             bt.enabled = false;
         }
+    }
+    private void InstantiateSpreadArea()
+    {
+        GameObject spreadObj = Instantiate(spreadArea, this.transform.position, Quaternion.identity);
+        Destroy(spreadObj, 1.5f);
     }
 }

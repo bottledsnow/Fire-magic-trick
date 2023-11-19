@@ -217,6 +217,7 @@ public class FireDash : MonoBehaviour
     private void CloseCrash()
     {
         _fireDashCollider.SetIsDash(false);
+        _fireDashCollider.SetIsTriggerDamage(false);
     }
     #endregion
 }

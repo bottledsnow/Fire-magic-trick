@@ -124,6 +124,7 @@ public class SuperDashKick : MonoBehaviour
         isCheck = false;
         _superDash.SetIsKick(false);
         _superDashCollider.SetKick(false);
+        _superDashCollider.SetIsSuperDash(false);
         _superDashKickTrigger.SetTriggerKickCollider(true);
     }
     private async void KickTriggerCheck()
@@ -138,6 +139,7 @@ public class SuperDashKick : MonoBehaviour
         isCheck = false;
         _superDash.SetIsKick(false);
         _superDashCollider.SetKick(false);
+        _superDashCollider.SetIsSuperDash(false);
     }
     private void SuperJump()
     {

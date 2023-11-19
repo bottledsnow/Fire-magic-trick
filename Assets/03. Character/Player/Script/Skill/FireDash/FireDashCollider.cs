@@ -8,6 +8,7 @@ public class FireDashCollider : MonoBehaviour
     private float CrashForce;
     private bool IsDash;
     private bool canTriggerDamage;
+    private bool isTriggerDamage;
     private float CrashForceUp;
     private PlayerDamage _playerDamage;
     private void Start()
@@ -42,7 +43,11 @@ public class FireDashCollider : MonoBehaviour
                     Vector3 EnemyPosition = other.transform.position;
                     Vector3 direction = (EnemyPosition - playerposition).normalized;
                     Vector3 Enemyup = other.transform.up;
-                    _playerDamage.ToDamageEnemy(other);
+                    if(!isTriggerDamage)
+                    {
+                        _playerDamage.ToDamageEnemy(other);
+                        SetIsTriggerDamage(true);
+                    }
                     HitFeedbacks.PlayFeedbacks();
                     other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
                 }
@@ -53,5 +58,9 @@ public class FireDashCollider : MonoBehaviour
     {
         IsDash = value;
         canTriggerDamage = value;
+    }
+    public void SetIsTriggerDamage(bool active)
+    {
+        isTriggerDamage = active;
     }
 }
