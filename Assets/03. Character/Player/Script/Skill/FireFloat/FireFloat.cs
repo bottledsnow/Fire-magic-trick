@@ -72,7 +72,6 @@ public class FireFloat : MonoBehaviour
             _playerState.SetGravityToNormal();
             _playerState.SetIsFloat(false);
             fireFloat.StopFeedbacks();
-            Debug.Log("end");
         }
     }
     private void floatTimer()
@@ -99,5 +98,11 @@ public class FireFloat : MonoBehaviour
             isTrigger = false;
             isCheck = false;
         }
+    }
+    public void ResetFloatingTrigger()
+    {
+        needInitialize = false;
+        isTrigger = false;
+        isCheck = false;
     }
 }

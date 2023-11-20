@@ -15,4 +15,8 @@ public class PlayerCollider : MonoBehaviour
             this.hit = null;
         }
     }
+    public void ClearColliderTarget()
+    {
+        hit = null;
+    }
 }

@@ -70,6 +70,7 @@ public class SuperDash : MonoBehaviour
         _playerState.TakeControl();
         _superDashCollider.SetEnemyToClose(false);
         SetTriggerStart(false);
+        _playerCollider.ClearColliderTarget();
     }
     private void GetTarget()
     {
@@ -130,8 +131,8 @@ public class SuperDash : MonoBehaviour
             }
             else
             {
-                EnemyDissapear();
                 Debug.Log("EnemyDissapear");
+                EnemyDissapear();
             }
         }
     }
@@ -173,6 +174,7 @@ public class SuperDash : MonoBehaviour
     {
         if(isSuperDash && _playerCollider.hit !=null)
         {
+
             if (_playerCollider.hit.collider.tag == "Enemy")
             {
                 _playerState.TakeControl();
@@ -183,6 +185,7 @@ public class SuperDash : MonoBehaviour
                 if (_playerState.nearGround)
                 {
                     HitGroundEnemy();
+                    Debug.Log("Hit Ground Enemy");
                 } else
                 {
                     if(_superDashKick.timerCheck(isKick))
@@ -211,8 +214,14 @@ public class SuperDash : MonoBehaviour
                 }
                 else
                 {
-                    superDashToThrough(point);
-                    Debug.Log("Fire Point To Through");
+                    if (_superDashKick.timerCheck(isKick))
+                    {
+                        superDashStop();
+                    }
+                    else
+                    {
+                        superDashToThrough(point);
+                    }
                 }
             }
         }
@@ -224,8 +233,8 @@ public class SuperDash : MonoBehaviour
     private void HitToKickDown()
     {
         Debug.Log("KickDown");
-        _superDashKickDown.KickDown();
         superDashStop();
+        _superDashKickDown.KickDown();
     }
     private void superDashStop()
     {

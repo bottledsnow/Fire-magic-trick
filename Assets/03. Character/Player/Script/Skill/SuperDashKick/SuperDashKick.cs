@@ -20,17 +20,19 @@ public class SuperDashKick : MonoBehaviour
     private EnergySystem _energySystem;
     private PlayerState _playerState;
     private SuperDash _superDash;
+    private FireFloat _fireFloat;
     private Animator _playerAnimator;
 
     private float timer;
     private bool isTimer;
     private bool isInputY;
     private bool isCheck;
-    private void Start()
+    private void Awake()
     {
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
         _superDash = GetComponent<SuperDash>();
+        _fireFloat = GetComponent<FireFloat>();
         _thirdPersonController = _playerState.GetComponent<ThirdPersonController>();
         _playerAnimator = _playerState.GetComponent<Animator>();
         _energySystem = _playerState.GetComponent<EnergySystem>();
@@ -143,6 +145,9 @@ public class SuperDashKick : MonoBehaviour
     }
     private void SuperJump()
     {
+        _thirdPersonController.ResetJump();
+        _fireFloat.ResetFloatingTrigger();
+
         float jumpHeigh = _thirdPersonController.JumpHeight;
         _thirdPersonController.JumpHeight = newJumpHeight;
         _thirdPersonController.Jump();
