@@ -49,6 +49,13 @@ public class SuperDashCollider : MonoBehaviour
                 if (canTrigger)
                 {
                     Debug.Log("SuperDash Damage");
+
+                    if (!isTriggerDamage)
+                    {
+                        _playerDamage.ToDamageEnemy(other);
+                        SetIsTriggerDamage(true);
+                    }
+
                     canTrigger = false;
                     Vector3 playerposition = transform.parent.transform.position;
                     Vector3 EnemyPosition = other.transform.position;
@@ -57,11 +64,7 @@ public class SuperDashCollider : MonoBehaviour
                     HitFeedbacks.PlayFeedbacks();
                     other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
 
-                    if(!isTriggerDamage)
-                    {
-                        _playerDamage.ToDamageEnemy(other);
-                        SetIsTriggerDamage(true);
-                    }
+                    
                 }
             }
         }
