@@ -36,6 +36,9 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [Header("Spread Area")]
     [SerializeField] private GameObject spreadArea;
 
+    public delegate void ToPlayEnemyHit();
+    public event ToPlayEnemyHit OnEnemyHit;
+
     private BehaviorTree bt;
     private ProgressSystem _progress;
     private Transform startPosition;
@@ -104,7 +107,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         healthFeedback(health);
         bt.SendEvent("Hit");
-        
+
+        OnEnemyHit?.Invoke();
+
+
         Debug.Log("Enemy remain health" + health);
 
         if (_fireSystem != null)
