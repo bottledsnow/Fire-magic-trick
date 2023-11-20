@@ -17,23 +17,19 @@ public class FirePoint : MonoBehaviour
     {
         PointCollider = GetComponent<Collider>();
     }
-
-    private void Update()
-    {
-    }
     private void FixedUpdate()
     {
         recoverSystem();
     }
     public async void ToUseFirePoint()
     {
+        SetCollider(false);
         FirePointCoreParticle.Stop();
         isRecover = true;
-        SetCollider(false);
         await Task.Delay(recoverTime_ms);
-        SetCollider(true);
         isRecover = false;
         FirePointCoreParticle.Play();
+        SetCollider(true);
     }
     public void SetCollider(bool active)
     {
