@@ -199,7 +199,16 @@ public class SuperDash : MonoBehaviour
                 isSuperDash = false;
                 superDashTimer = 0;
                 FireDashHit.PlayFeedbacks();
-                superDashStop();
+
+                if (_playerState.nearGround)
+                {
+                    superDashStop();
+                }
+                else
+                {
+                    superDashToThrough(point);
+                    Debug.Log("Fire Point To Through");
+                }
             }
         }
     }
@@ -227,6 +236,12 @@ public class SuperDash : MonoBehaviour
     private void superDashToThrough()
     {
         _playerCollider.hit.collider.gameObject.SetActive(false);
+        isSuperDashThrough = true;
+        superDashSpeed = superDashMaxSpeed;
+    }
+    private void superDashToThrough(FirePoint point)
+    {
+        //point.ToUseFirePoint();
         isSuperDashThrough = true;
         superDashSpeed = superDashMaxSpeed;
     }
