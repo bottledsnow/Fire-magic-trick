@@ -106,7 +106,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         hitTimer = Time.time;
 
         healthFeedback(health);
-        bt.SendEvent("Hit");
+        bt.SendEvent("HitByPlayer");
 
         OnEnemyHit?.Invoke();
 

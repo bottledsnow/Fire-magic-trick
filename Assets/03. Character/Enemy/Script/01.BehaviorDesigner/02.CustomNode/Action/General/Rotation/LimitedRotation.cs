@@ -6,8 +6,9 @@ public class LimitedRotation : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
+
     [Header("Rotate")]
-    [SerializeField] private float rotateSpeed = 200;
+    [SerializeField] private float rotateSpeed = 150;
     
 
     public override void OnStart()
@@ -16,6 +17,12 @@ public class LimitedRotation : Action
     }
 
     public override TaskStatus OnUpdate()
+    {
+        RotateToTarget();
+        return TaskStatus.Success;
+    }
+
+    private void RotateToTarget()
     {
         Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
         Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
@@ -29,6 +36,5 @@ public class LimitedRotation : Action
             rotation = Quaternion.Slerp(transform.rotation, rotation, t);
         }
         transform.rotation = rotation;
-        return TaskStatus.Success;
     }
 }
