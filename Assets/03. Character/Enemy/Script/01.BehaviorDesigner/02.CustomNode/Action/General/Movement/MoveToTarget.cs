@@ -25,9 +25,13 @@ public class MoveToTarget : Action
    public override void OnStart()
    {
       rb = GetComponent<Rigidbody>();
-      animator = modelObject.Value.GetComponent<Animator>();
 
-      if(animator != null)
+        if (modelObject != null)
+        {
+            animator = modelObject.Value.GetComponent<Animator>();
+        }
+
+        if (animator != null)
       {
          animator.SetBool("isMove",true);
       }

@@ -48,7 +48,7 @@ public class SuperDash : MonoBehaviour
         _superDashCameraCheck = GetComponent<SuperDashCameraCheck>();
         _superDashKickDown = GetComponent<SuperDashKickDown>();
         _characterController = _playerState.GetComponent<CharacterController>();
-        _playerCollider = _playerState.GetComponent<PlayerCollider>();
+        _playerCollider = GameManager.singleton.Player.GetComponent<PlayerCollider>();
         _playerAnimator = _playerState.GetComponent<PlayerAnimator>();
         _energySystem = _playerState.GetComponent<EnergySystem>();
         player = _playerState.gameObject;
@@ -196,8 +196,7 @@ public class SuperDash : MonoBehaviour
                         superDashToThrough();
                     }
                 }
-            }
-
+            }else
             if(_playerCollider.hit.collider.CompareTag("FirePoint"))
             {
                 FirePoint point = _playerCollider.hit.collider.GetComponent<FirePoint>();
