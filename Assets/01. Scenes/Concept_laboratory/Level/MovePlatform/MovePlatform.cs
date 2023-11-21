@@ -90,13 +90,11 @@ public class MovePlatform : MonoBehaviour
     }
     private void MoveIndexAdd()
     {
-        int moveIndexNew = moveIndex++;
-        SetMoveIndex(moveIndexNew);
+        moveIndex++;
 
         if (moveIndex >= points.Length)
         {
             SetMoveIndex(0);
-            Debug.Log("000");
         }
     }
     private void Initialization()
