@@ -83,6 +83,10 @@ public class PlayerState : MonoBehaviour
         isFire = false;
         isFloat = false;
     }
+    public void ResetVerticalvelocity()
+    {
+        _controller.SetVerticalVelocity(0);
+    }
     public void SetGravityToFire()
     {
         _controller.Gravity = gravityFire;

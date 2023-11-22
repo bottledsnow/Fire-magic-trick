@@ -483,6 +483,9 @@ namespace StarterAssets
         {
             isJump = false;
         }
-
+        public void SetVerticalVelocity(float value)
+        {
+            _verticalVelocity = value;
+        }
     }
 }

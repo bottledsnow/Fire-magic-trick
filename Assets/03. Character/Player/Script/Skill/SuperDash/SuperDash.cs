@@ -18,6 +18,7 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private MMF_Player FireDashStart;
     [SerializeField] private MMF_Player FireDashHit;
     [SerializeField] private MMF_Player FireDashEnd;
+    [SerializeField] private MMF_Player FireDashEnd_Interrupt;
 
 
     private SuperDashCameraCheck _superDashCameraCheck;
@@ -60,6 +61,7 @@ public class SuperDash : MonoBehaviour
         superDash();
         superDashHit();
         superDashThrough();
+        superDashInterrupt();
     }
     private void Initialization()
     {
@@ -247,6 +249,19 @@ public class SuperDash : MonoBehaviour
         SetTriggerStart(false);
         Initialization();
     }
+    private void superDashInterruptStop()
+    {
+        _superDashCollider.SetIsSuperDash(false);
+        _playerState.SetGravityToNormal();
+        _playerState.ResetVerticalvelocity();
+        _playerAnimator.SuperDashEnd();
+        FireDashEnd_Interrupt.PlayFeedbacks();
+        superDashSpeed = 0;
+        Target = null;
+        _superDashKickDown.NullTarget();
+        SetTriggerStart(false);
+        Initialization();
+    }
     private void superDashToThrough()
     {
         _playerCollider.hit.collider.gameObject.SetActive(false);
@@ -277,7 +292,13 @@ public class SuperDash : MonoBehaviour
         superDashTimer = speedTimer(superDashTimer, SuperDashTimeFall);
         superDashSpeed = superDashReduceSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
     }
-    
+    private void superDashInterrupt()
+    {
+        if(_input.LB && !isSuperDash)
+        {
+            superDashInterruptStop();
+        }
+    }
     public void SetIsKick(bool value)
     {
         //isKick = value;
