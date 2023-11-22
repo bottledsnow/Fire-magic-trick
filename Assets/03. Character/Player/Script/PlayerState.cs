@@ -6,7 +6,7 @@ public class PlayerState : MonoBehaviour
     private ThirdPersonController _controller;
     
     [SerializeField] private LayerMask mask;
-    [SerializeField] private float rayDistance = 1f;
+    [SerializeField] private float groundRayDistance = 1f;
 
     [Header("Gravity")]
     [SerializeField] private float gravityFire;
@@ -41,7 +41,7 @@ public class PlayerState : MonoBehaviour
     }
     private void RayHitCheck(Ray ray, out RaycastHit hit)
     {
-        nearGround = Physics.Raycast(ray, out hit, rayDistance, mask);
+        nearGround = Physics.Raycast(ray, out hit, groundRayDistance, mask);
     }
     private void CheckFloat()
     {
@@ -74,7 +74,7 @@ public class PlayerState : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(this.transform.position, -this.transform.up * rayDistance);
+        Gizmos.DrawRay(this.transform.position, -this.transform.up * groundRayDistance);
     }
     
     public void SetGravityToNormal()
