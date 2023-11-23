@@ -106,7 +106,11 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         hitTimer = Time.time;
 
         healthFeedback(health);
-        bt.SendEvent("HitByPlayer");
+
+        if(damageType == PlayerDamage.DamageType.NormalShoot || damageType == PlayerDamage.DamageType.ChargeShoot)
+        {
+            bt.SendEvent("HitByPlayer");
+        }
 
         OnEnemyHit?.Invoke();
 
