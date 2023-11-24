@@ -21,6 +21,7 @@ public class Shooting : MonoBehaviour
 
         Vector3 aimDir = (_shooting_check.mouseWorldPosition - spawnBulletPosition.position).normalized;
         Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
+
         if(_shooting_magazing.enabled ==true)
         {
             _shooting_magazing.UseBullet();

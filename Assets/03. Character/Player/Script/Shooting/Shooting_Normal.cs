@@ -18,9 +18,10 @@ public class Shooting_Normal : MonoBehaviour
     [SerializeField] private MMF_Player Throw_C;
 
     private PlayerAnimator _playerAnimator;
+    private ControllerInput _Input;
+    private PlayerState _playerState;
     private CrosshairUI _crosshairUI;
     private Shooting _shooting;
-    private ControllerInput _Input;
     private bool shooting;
     private bool pisto;
     private int ThrowFeedbacksIndex;
@@ -28,8 +29,9 @@ public class Shooting_Normal : MonoBehaviour
     {
         _Input = GameManager.singleton._input;
         _crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
-        _shooting = GetComponent<Shooting>();
         _playerAnimator = GameManager.singleton.Player.GetComponent<PlayerAnimator>();
+        _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        _shooting = GetComponent<Shooting>();
     }
     private void Update()
     {
@@ -67,9 +69,13 @@ public class Shooting_Normal : MonoBehaviour
     {
         ThrowFeedbacks();
         _playerAnimator.PlayAnimator("Player@Throw_1");
-
         _shooting.Shoot_Normal(pfBulletProjectile);
         _crosshairUI.CrosshairShooting();
+        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(10f);
         ShootCooldown(shootCooldown);
     }
     private async void ShootCooldown(float shootCooldown)

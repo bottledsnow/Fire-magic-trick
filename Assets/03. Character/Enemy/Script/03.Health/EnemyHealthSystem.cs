@@ -1,6 +1,5 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
-using System.Threading.Tasks;
 using BehaviorDesigner.Runtime;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
@@ -122,10 +121,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
             _fireSystem.FireCheck(damageType);
         }
 
-        if (health <= 0)
-        {
-            EnemyDie();
-        }
         else if (health <= ignitionPoint)
         {
             EnemyIgnite();
@@ -222,15 +217,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     #endregion
     #region
-    private async void EnemyDie()
+    private void RebirthSelf()
     {
-        await Task.Delay(1500);
-        //this.gameObject.SetActive(false);
+        Rebirth(StartPosition, StartRotation);
     }
     private void Initialization()
     {
-        this.transform.position = StartPosition;
-        this.transform.rotation = StartRotation;
         this.gameObject.SetActive(true);
         isIgnite = false;
         isHurt = false;
@@ -245,12 +237,18 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         feedbacks_Boom.StopFeedbacks();
         feedbacks_FlyBoom.StopFeedbacks();
         health = StartHealth;
-    }   
+    }
+    public void Rebirth(Vector3 position,Quaternion rotation)
+    {
+        this.transform.position = position;
+        this.transform.rotation = rotation;
+        Initialization();
+    }
     private void RebirthScription()
     {
         if(isTeachEnemy==false)
         {
-            _progress.OnPlayerDeath += Initialization;
+            _progress.OnPlayerDeath += RebirthSelf;
         }
     }
     #endregion

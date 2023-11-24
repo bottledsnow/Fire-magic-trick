@@ -1,5 +1,5 @@
-using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyAutoSpawn : MonoBehaviour
 {
@@ -33,8 +33,15 @@ public class EnemyAutoSpawn : MonoBehaviour
     {
         if(canSpawn)
         {
-            SpawnEnemy(Center);
-            SetCanSpawn(false);
+            if (enemyCount < MaxEnemyCount)
+            {
+                SpawnEnemy(Center);
+                SetCanSpawn(false);
+            }
+            else
+            {
+                EnemyRebirthCheck();
+            }
         }
     }
     private void spawnEnemyTimerSystme()
@@ -51,18 +58,39 @@ public class EnemyAutoSpawn : MonoBehaviour
         }
     }
     
-    private void SpawnEnemy(Vector3 position)
+    private void SpawnEnemy(Vector3 posi)
     {
+        Vector3 position = newPosition(posi);
+
         Vector3 Direction = (Center - position).normalized;
         Quaternion rotataion = Quaternion.Euler(Direction);
 
-        if(enemyCount < MaxEnemyCount)
+        Enemys[enemyCount] = Instantiate(Enemy, position, rotataion);
+
+        enemyCount++;
+    }
+    private void EnemyRebirthCheck()
+    {
+        for(int i =0;i< Enemys.Length; i++)
         {
-            Enemys[enemyCount] = Instantiate(Enemy,newPosition(position),rotataion);
-            enemyCount++;
+            if (Enemys[i].activeSelf == false)
+            {
+                EnemyRebirth(i);
+                return;
+            }
         }
     }
-    
+    private void EnemyRebirth(int i)
+    {
+        EnemyHealthSystem health = Enemys[i].GetComponent<EnemyHealthSystem>();
+
+        Vector3 position = newPosition(Center);
+        Quaternion rotation = newRotation(Center);
+
+        health.Rebirth(position, rotation);
+
+        SetCanSpawn(false);
+    }
     private Vector3 newPosition(Vector3 position)
     {
         float x = position.x + Random.Range(-spawnRange, spawnRange);
@@ -80,6 +108,13 @@ public class EnemyAutoSpawn : MonoBehaviour
             Vector3 newPosition = new Vector3(x, y2, z);
             return newPosition;
         }
+    }
+    private Quaternion newRotation(Vector3 position)
+    {
+        Vector3 Direction = (Center - position).normalized;
+        Quaternion rotataion = Quaternion.Euler(Direction);
+
+        return rotataion;
     }
     private void SetCanSpawn(bool active)
     {
