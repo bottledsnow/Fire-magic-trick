@@ -8,9 +8,10 @@ public class MovePlatform : MonoBehaviour
 
     private float timer = 0;
     private bool Trigger;
-    private bool triggerTimer;
+    private bool isTimerFinish;
     private bool isTimer;
     private bool isMove = false;
+    private bool isTimerStop;
     private int moveIndex = 0;
 
     private void Update()
@@ -35,28 +36,20 @@ public class MovePlatform : MonoBehaviour
             SetTrigger(false);
         }
 
-        if(!isMove && !Trigger)
+        if(!isMove)
         {
-            SetTrigger(true);
-            MoveIndexAdd();
-            Debug.Log("Stop and Add");
-        }
-
-        /*
-        if (!isMove && !triggerTimer)
-        {
-            if(timer == 0)
+            if(!Trigger)
             {
-                Debug.Log("Stop and Add");
-                MoveIndexAdd();
-                Initialization();
-            }else
-            {
+                SetTrigger(true);
                 SetIsTimer(true);
-                SetIsTriggerTimer(true);
+            }
+
+            if(!isMove && isTimerFinish)
+            {
+                MoveIndexAdd();
+                SetIsTimerFinish(false);
             }
         }
-        */
     }
     private bool MoveCheck(Transform point)
     {
@@ -80,12 +73,8 @@ public class MovePlatform : MonoBehaviour
 
         if(timer > stopTime)
         {
-            Initialization();
-        }
-
-        if(!isTimer && triggerTimer)
-        {
-            MoveIndexAdd();
+            timer = 0;
+            SetIsTimer(false);
         }
     }
     private void MoveIndexAdd()
@@ -97,12 +86,6 @@ public class MovePlatform : MonoBehaviour
             SetMoveIndex(0);
         }
     }
-    private void Initialization()
-    {
-        timer = 0;
-        SetIsTimer(false);
-        SetIsTriggerTimer(false);
-    }
     private void SetMoveIndex(int value)
     {
         moveIndex = value;
@@ -111,13 +94,17 @@ public class MovePlatform : MonoBehaviour
     {
         isTimer = active;
     }
-    private void SetIsTriggerTimer(bool active)
+    private void SetIsTimerFinish(bool active)
     {
-        triggerTimer = active;
+        isTimerFinish = active;
     }
     private void SetTrigger(bool active)
     {
         Trigger = active;
+    }
+    private void SetIsTimerStop(bool active)
+    {
+        isTimerStop = active;
     }
     private void OnDrawGizmosSelected()
     {
