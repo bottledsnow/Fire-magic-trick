@@ -17,24 +17,14 @@ public class MoveToTarget : Action
    [Header("ActEndDistance")]
    [SerializeField] private float actEndDistance  = 3;
 
-   [Header("Animator")]
-   [SerializeField] private Animator animator;
-
+   private Animator animator;
    Rigidbody rb;
 
    public override void OnStart()
    {
       rb = GetComponent<Rigidbody>();
 
-        if (modelObject != null)
-        {
-            animator = modelObject.Value.GetComponent<Animator>();
-        }
-
-        if (animator != null)
-      {
-         animator.SetBool("isMove",true);
-      }
+      AnimationStart();
    }
 
    public override TaskStatus OnUpdate()
@@ -90,6 +80,18 @@ public class MoveToTarget : Action
          return true;
       }
       return false;
+   }
+
+   private void AnimationStart()
+   {
+      if (modelObject != null)
+      {
+         animator = modelObject.Value.GetComponent<Animator>();
+      }
+      if (animator != null)
+      {
+         animator.SetBool("isMove",true);
+      }
    }
 
    public override void OnEnd()
