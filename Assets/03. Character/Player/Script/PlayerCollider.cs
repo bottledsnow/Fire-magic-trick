@@ -6,6 +6,8 @@ public class PlayerCollider : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+        HitGlass(hit);
+
         if (hit.collider.CompareTag("FirePoint") || hit.collider.CompareTag("Enemy"))
         {
             this.hit = hit;
@@ -19,5 +21,11 @@ public class PlayerCollider : MonoBehaviour
     {
         hit = null;
     }
-    
+    private void HitGlass(ControllerColliderHit hit)
+    {
+        if(hit.collider.CompareTag("Glass"))
+        {
+            hit.collider.GetComponent<GlassSystem>().Broken();
+        }
+    }
 }

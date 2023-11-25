@@ -70,7 +70,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         if (isTeachEnemy == false)
         {
             RebirthScription();
-            Debug.Log("Rebirth");
         }  
     }
 
