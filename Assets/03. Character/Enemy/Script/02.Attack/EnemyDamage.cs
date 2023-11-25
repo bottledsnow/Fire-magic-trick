@@ -4,33 +4,43 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
+    [Header("Damage")]
     [SerializeField] private int damage;
+
+    [Header("KickBack")]
     [SerializeField] private float force;
-    public Transform forcePoint;
+    [SerializeField] private Transform BackCoordinate;
+
     Rigidbody rb;
-    Vector3 forceDirection;
 
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Player")
         {
-            EnergySystem energySystem = collider.gameObject.GetComponent<EnergySystem>();
-            energySystem.Energy -= damage;
-
-            if(forcePoint != null)
-            {
-                forceDirection = (forcePoint.position - collider.gameObject.transform.position);
-                forceDirection = new Vector3(forceDirection.x,0,forceDirection.z);
-            }
-            
-
-            ImpactReceiver impactReceiver = collider.gameObject.GetComponent<ImpactReceiver>();
-            impactReceiver.AddImpact(forceDirection , force);
+            DamagePlayer(collider.gameObject);
+            KickBackPlayer(collider.gameObject);
         }
+    }
+
+    private void DamagePlayer(GameObject player)
+    {
+        EnergySystem energySystem = player.GetComponent<EnergySystem>();
+        energySystem.Energy -= damage;
+    }
+
+    private void KickBackPlayer(GameObject player)
+    {
+        Vector3 Direction = (player.transform.position - BackCoordinate.position).normalized;
+        Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
+
+        ImpactReceiver impactReceiver = player.GetComponent<ImpactReceiver>();
+        impactReceiver.AddImpact(ForceDirection * force);
     }
 
     public void PlayerGetDamage()
     {
-        
+
     }
+
+
 }

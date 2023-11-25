@@ -108,12 +108,9 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         healthFeedback(health);
 
-        if(damageType == PlayerDamage.DamageType.NormalShoot || damageType == PlayerDamage.DamageType.ChargeShoot)
+        if(!kickBackGuard)
         {
-            if(!kickBackGuard)
-            {
-                bt.SendEvent("HitByPlayer");
-            }
+            bt.SendEvent("HitByPlayer");
         }
 
         OnEnemyHit?.Invoke();

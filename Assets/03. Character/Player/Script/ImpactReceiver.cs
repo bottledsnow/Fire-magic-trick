@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ImpactReceiver : MonoBehaviour
 {
+    [SerializeField] private float drag;
+
     private Vector3 impact = Vector3.zero;
     private CharacterController characterController;
 
@@ -18,12 +20,11 @@ public class ImpactReceiver : MonoBehaviour
         {
             characterController.Move(impact * Time.deltaTime);
         }
-        impact = Vector3.Lerp(impact, Vector3.zero, 10 * Time.deltaTime);
+        impact = Vector3.Lerp(impact, Vector3.zero, drag * Time.deltaTime);
     }
 
-    public void AddImpact(Vector3 direction, float force)
+    public void AddImpact(Vector3 force)
     {
-        direction.Normalize();
-        impact += direction.normalized * force;
+        impact += force;
     }
 }

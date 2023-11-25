@@ -45241,6 +45241,7 @@ MonoBehaviour:
   FireDashStart: {fileID: 5337558589521680097}
   FireDashHit: {fileID: 5337558589184096788}
   FireDashEnd: {fileID: 5337558588420704670}
+  FireDashEnd_Interrupt: {fileID: 0}
   isSuperDash: 0
 --- !u!114 &5030348827745102238
 MonoBehaviour:
@@ -64973,7 +64974,7 @@ MonoBehaviour:
   mask:
     serializedVersion: 2
     m_Bits: 1
-  rayDistance: 1.5
+  groundRayDistance: 1
   gravityFire: -2.5
   gravityFloat: -3
   nearGround: 0
@@ -65037,6 +65038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9682bf7dc84c42f49bdf0e56a37a4f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drag: 5
 --- !u!1 &5030348826241938730
 GameObject:
   m_ObjectHideFlags: 0

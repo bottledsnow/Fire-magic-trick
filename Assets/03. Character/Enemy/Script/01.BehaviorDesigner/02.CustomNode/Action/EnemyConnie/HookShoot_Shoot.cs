@@ -34,7 +34,7 @@ public class HookShoot_Shoot : Action
         {
             GameObject hook = Object.Instantiate(hookPrefab, hookPoint.position, hookPoint.rotation);
             Rigidbody hookRigidbody = hook.GetComponent<Rigidbody>();
-            hook.GetComponent<EnemyDamage>().forcePoint = transform;
+            //hook.GetComponent<EnemyDamage>().forcePoint = transform;
             if (hookRigidbody != null)
             {
                 Vector3 direction = (new Vector3(0, playerHeight, 0) + targetObject.Value.transform.position - hookPoint.position).normalized;
