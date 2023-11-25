@@ -53,10 +53,13 @@ public class Bullet_Normal : MonoBehaviour
     }
     private void KickBackEnemy(Collision collision)
     {
-        Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-        Vector3 Direction = (collision.transform.position - BackCoordinate.position).normalized;
-        Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
-        rb.AddForce(ForceDirection * force * collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
+        if(collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackGuard != true) // Could be knock back
+        {
+            Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+            Vector3 Direction = (collision.transform.position - BackCoordinate.position).normalized;
+            Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
+            rb.AddForce(ForceDirection * force * collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
+        }
     }
     private void CroshairFeedback()
     {

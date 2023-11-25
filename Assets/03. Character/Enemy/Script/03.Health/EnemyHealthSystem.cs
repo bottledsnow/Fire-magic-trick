@@ -33,6 +33,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
     [Header("KickBack")]
     public float kickBackRatio;
+    public bool kickBackGuard = false;
     [Header("Spread Area")]
     [SerializeField] private GameObject spreadArea;
 
@@ -109,7 +110,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         if(damageType == PlayerDamage.DamageType.NormalShoot || damageType == PlayerDamage.DamageType.ChargeShoot)
         {
-            bt.SendEvent("HitByPlayer");
+            if(!kickBackGuard)
+            {
+                bt.SendEvent("HitByPlayer");
+            }
         }
 
         OnEnemyHit?.Invoke();
