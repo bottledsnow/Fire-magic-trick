@@ -116,7 +116,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         OnEnemyHit?.Invoke();
 
 
-        Debug.Log("Enemy remain health" + health);
+        //Debug.Log("Enemy remain health" + health);
 
         if (_fireSystem != null)
         {

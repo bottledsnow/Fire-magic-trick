@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShield : MonoBehaviour,IHealth
+public class EnergyCan : MonoBehaviour ,IHealth
 {
     public int health;
     public int iHealth
@@ -13,18 +13,17 @@ public class EnemyShield : MonoBehaviour,IHealth
 
     public void TakeDamage(int damage , PlayerDamage.DamageType damageType)
     {
-        if (damageType == PlayerDamage.DamageType.ChargeShoot)
+        health -= damage;
+
+        if(health <= 0)
         {
-            Destroy(gameObject);
-        }
-        else
-        {
-            Debug.Log("沒用的，麗莎。");
+            Broke();
         }
     }
 
-    void OnTriggerEnter(Collider collider)
+    void Broke()
     {
-        print("護盾");
+        print("能量擊破");
+        Destroy(gameObject);
     }
 }

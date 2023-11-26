@@ -25496,6 +25496,7 @@ MonoBehaviour:
   feedbacks_Boom: {fileID: 3140464918404443898}
   feedbacks_FlyBoom: {fileID: 2769156386842757999}
   kickBackRatio: 0.4
+  kickBackGuard: 0
   spreadArea: {fileID: 1655516724492818754}
 --- !u!65 &1754139968727331561
 BoxCollider:
@@ -26005,7 +26006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   force: -40
-  forcePoint: {fileID: 3623152131522224700}
+  BackCoordinate: {fileID: 0}
 --- !u!1 &3623152132140516108
 GameObject:
   m_ObjectHideFlags: 0
@@ -32160,13 +32161,14 @@ GameObject:
   - component: {fileID: 8626999761782418968}
   - component: {fileID: 2132330775777021405}
   - component: {fileID: 5790984646938024659}
+  - component: {fileID: 654749051}
   m_Layer: 14
   m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7490170420053955959
 Transform:
   m_ObjectHideFlags: 0
@@ -32240,7 +32242,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7834502910578003917}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -32259,6 +32261,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
+--- !u!54 &654749051
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834502910578003917}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &8190512593134898874
 GameObject:
   m_ObjectHideFlags: 0

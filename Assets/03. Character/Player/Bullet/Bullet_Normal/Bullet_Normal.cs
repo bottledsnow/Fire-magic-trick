@@ -39,7 +39,7 @@ public class Bullet_Normal : MonoBehaviour
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, -this.transform.forward);
         Vector3 pos = contact.point;
 
-        if(collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
             _playerDamage.ToDamageEnemy(collision);
             GameObject enemyhit = Instantiate(hitEnemyPreferb, pos, rot);
@@ -53,13 +53,17 @@ public class Bullet_Normal : MonoBehaviour
     }
     private void KickBackEnemy(Collision collision)
     {
-        if(collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackGuard != true) // Could be knock back
+        if(collision.gameObject.GetComponent<EnemyHealthSystem>() != null)
         {
-            Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-            Vector3 Direction = (collision.transform.position - BackCoordinate.position).normalized;
-            Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
-            rb.AddForce(ForceDirection * force * collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
+            if(collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackGuard != true) // Could be knock back
+            {
+                Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
+                Vector3 Direction = (collision.transform.position - BackCoordinate.position).normalized;
+                Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
+                rb.AddForce(ForceDirection * force * collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
+            }  
         }
+        
     }
     private void CroshairFeedback()
     {

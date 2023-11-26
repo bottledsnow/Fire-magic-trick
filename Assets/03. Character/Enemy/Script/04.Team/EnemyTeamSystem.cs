@@ -38,7 +38,7 @@ public class EnemyTeamSystem : MonoBehaviour
 
         List<GameObject> nearbyEnemies = new List<GameObject>();
 
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // need fix
         
         foreach (GameObject enemy in enemies)
         {
