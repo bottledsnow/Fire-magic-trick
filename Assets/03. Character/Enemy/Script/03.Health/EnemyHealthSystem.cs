@@ -35,6 +35,9 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public bool kickBackGuard = false;
     [Header("Spread Area")]
     [SerializeField] private GameObject spreadArea;
+    [Header("AtCrash")]
+    public bool atCrash;
+    [SerializeField] private float atCrashTime =3;
 
     public delegate void ToPlayEnemyHit();
     public event ToPlayEnemyHit OnEnemyHit;
@@ -45,6 +48,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private EnemyFireSystem _fireSystem;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
+    private float atCrashTimer;
     private float hitTimer;
     private float coolingTimer;
     private bool isCooling;
@@ -77,8 +81,21 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private void Update()
     {
         EnemyCoolingCheck();
+        atCrashTimerSystem();
     }
+    private void atCrashTimerSystem()
+    {
+        if(atCrash)
+        {
+            atCrashTimer += Time.deltaTime;
+        }
 
+        if(atCrashTimer>atCrashTime)
+        {
+            SetAtCrash(false);
+            atCrashTimer = 0;
+        }
+    }
     #region Cooling
     private void EnemyCoolingCheck()
     {
@@ -108,7 +125,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         if(!kickBackGuard)
         {
-            bt.SendEvent("HitByPlayer");
+            if (damageType == PlayerDamage.DamageType.NormalShoot || damageType == PlayerDamage.DamageType.ChargeShoot)
+            {
+                bt.SendEvent("HitByPlayer");
+            }
         }
 
         OnEnemyHit?.Invoke();
@@ -266,5 +286,9 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         GameObject spreadObj = Instantiate(spreadArea, this.transform.position, Quaternion.identity);
         Destroy(spreadObj, 1.5f);
+    }
+    public void SetAtCrash(bool active)
+    {
+        atCrash = active;
     }
 }

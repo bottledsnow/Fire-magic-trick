@@ -39,7 +39,6 @@ public class GlassSystem : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         BrokenCheck_Charge(collision);
-        BrokenCheck_Crash(collision);
         BrokenCheck_EnemyCrash(collision);
     }
     private void BrokenCheck_Charge(Collision collision)
@@ -48,18 +47,16 @@ public class GlassSystem : MonoBehaviour
         {
             if (collision.collider.CompareTag("ChargeBullet"))
             {
-                SetGlass(false);
+                BrokenSuperFast();
             }
         }
     }
-    private void BrokenCheck_Crash(Collision collision)
+    
+    public void BrokenCheck_Crash()
     {
-        if(canCrash)
+        if (canCrash)
         {
-            if (collision.collider.CompareTag("CrashBullet"))
-            {
-                SetGlass(false);
-            }
+            BrokenSuperFast();
         }
     }
     private void BrokenCheck_EnemyCrash(Collision collision)
@@ -68,7 +65,11 @@ public class GlassSystem : MonoBehaviour
         {
             if(collision.collider.CompareTag("Enemy"))
             {
-                SetGlass(false);
+                EnemyHealthSystem enemy = collision.collider.GetComponent<EnemyHealthSystem>();
+                if(enemy.atCrash)
+                {
+                    BrokenSuperFast();
+                }
             }
         }
     }

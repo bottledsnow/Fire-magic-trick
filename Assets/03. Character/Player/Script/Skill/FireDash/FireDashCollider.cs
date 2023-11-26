@@ -52,6 +52,9 @@ public class FireDashCollider : MonoBehaviour
                         SetIsTriggerDamage(true);
                     }
 
+                    EnemyHealthSystem enemy = other.GetComponent<EnemyHealthSystem>();
+                    enemy.SetAtCrash(true);
+
                     HitFeedbacks.PlayFeedbacks();
                     other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
                 }
@@ -66,7 +69,7 @@ public class FireDashCollider : MonoBehaviour
             {
                 GlassSystem glass = other.GetComponent<GlassSystem>();
                 HitFeedbacks.PlayFeedbacks();
-                glass.BrokenSuperFast();
+                glass.BrokenCheck_Crash();
             }
         }
     }
