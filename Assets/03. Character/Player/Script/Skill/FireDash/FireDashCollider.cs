@@ -25,10 +25,12 @@ public class FireDashCollider : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         ToDashHitEnemy(other);
+        ToHitGlass(other);
     }
     private void OnTriggerStay(Collider other)
     {
         ToDashHitEnemy(other);
+        ToHitGlass(other);
     }
     private void ToDashHitEnemy(Collider other)
     {
@@ -53,6 +55,18 @@ public class FireDashCollider : MonoBehaviour
                     HitFeedbacks.PlayFeedbacks();
                     other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
                 }
+            }
+        }
+    }
+    private void ToHitGlass(Collider other)
+    {
+        if (IsDash)
+        {
+            if (other.CompareTag("Glass"))
+            {
+                GlassSystem glass = other.GetComponent<GlassSystem>();
+                HitFeedbacks.PlayFeedbacks();
+                glass.BrokenSuperFast();
             }
         }
     }

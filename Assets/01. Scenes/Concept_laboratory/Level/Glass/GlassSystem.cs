@@ -8,8 +8,7 @@ public class GlassSystem : MonoBehaviour
     {
         Fast,
         Delay,
-        Charge,
-        Crash
+        unlimited
     }
     public Mode mode;
     [Header("UniversalFeedbacks")]
@@ -19,6 +18,12 @@ public class GlassSystem : MonoBehaviour
     [Header("DelayMode")]
     [SerializeField] private MMF_Player feedbacks_Delay;
     [SerializeField] private float delayTime;
+    [Header("Charge")]
+    [SerializeField] private bool canCharge;
+    [Header("Crash")]
+    [SerializeField] private bool canCrash;
+    [Header("EnemyCrash")]
+    [SerializeField] private bool canEnemyCrash;
 
 
     private Collider glassCollider;
@@ -33,14 +38,43 @@ public class GlassSystem : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        BrokenCheck_Charge(collision);
+        BrokenCheck_Crash(collision);
+        BrokenCheck_EnemyCrash(collision);
+    }
+    private void BrokenCheck_Charge(Collision collision)
+    {
+        if(canCharge)
         {
-            Broken();
+            if (collision.collider.CompareTag("ChargeBullet"))
+            {
+                SetGlass(false);
+            }
+        }
+    }
+    private void BrokenCheck_Crash(Collision collision)
+    {
+        if(canCrash)
+        {
+            if (collision.collider.CompareTag("CrashBullet"))
+            {
+                SetGlass(false);
+            }
+        }
+    }
+    private void BrokenCheck_EnemyCrash(Collision collision)
+    {
+        if(canEnemyCrash)
+        {
+            if(collision.collider.CompareTag("Enemy"))
+            {
+                SetGlass(false);
+            }
         }
     }
     public void Broken()
     {
-        if(!isBroken)
+        if(!isBroken && mode != Mode.unlimited)
         {
             switch (mode)
             {
@@ -50,15 +84,14 @@ public class GlassSystem : MonoBehaviour
                 case Mode.Delay:
                     delayMode();
                     break;
-                case Mode.Charge:
-                    chargeMode();
-                    break;
-                case Mode.Crash:
-                    crashMode();
-                    break;
             }
+
             SetIsBroken(true);
         }
+    }
+    public void  BrokenSuperFast()
+    {
+        SetGlass(false);
     }
     public void GlassRebirth()
     {
