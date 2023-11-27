@@ -290,5 +290,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public void SetAtCrash(bool active)
     {
         atCrash = active;
+        
+        Debug.Log("At Crash¡G" + active+"Time:" + Time.time);
     }
 }
