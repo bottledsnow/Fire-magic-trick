@@ -1,4 +1,5 @@
 using BehaviorDesigner.Runtime.Tasks.Unity.UnityNavMeshAgent;
+using System.Threading;
 using UnityEngine;
 
 public class RotateSystem : MonoBehaviour
@@ -28,15 +29,27 @@ public class RotateSystem : MonoBehaviour
 
     private void Update()
     {
-        if(isRotate)
+        if (usePause)
         {
+            pauseSystem();
+            pauseTimerSystem();
+        }
+
+        if (isRotate)
+        {
+            if(!usePause)
+            {
+                toRotate();
+                SetTimer(0);
+            }
+
             RotateX_Check();
             RotateY_Check();
             RotateZ_Check();
             RotateThis();
         }
-        pauseSystem();
-        pauseTimerSystem();
+
+        
     }
     #region RotateXYZ
     private void RotateX_Check()
