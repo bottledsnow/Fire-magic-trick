@@ -113,4 +113,12 @@ public class PlayerState : MonoBehaviour
             Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 7.5f);
     }
+    public void TurnToAimDirection(float rotationSpeed)
+    {
+        Vector3 worldAimTarget = _shooting_check.mouseWorldPosition;
+        worldAimTarget.y = transform.position.y;
+        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
 }

@@ -20,6 +20,9 @@ public class PlayerAnimator : MonoBehaviour
     {
         _playerAnimator.SetTrigger("InputY");
     }
-
+    public void PlayAnimator(string name)
+    {
+        _playerAnimator.Play(name);
+    }
 
 }

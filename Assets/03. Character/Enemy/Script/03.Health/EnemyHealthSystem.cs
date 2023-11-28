@@ -1,6 +1,5 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
-using System.Threading.Tasks;
 using BehaviorDesigner.Runtime;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
@@ -36,6 +35,9 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public bool kickBackGuard = false;
     [Header("Spread Area")]
     [SerializeField] private GameObject spreadArea;
+    [Header("AtCrash")]
+    public bool atCrash;
+    [SerializeField] private float atCrashTime =3;
 
     public delegate void ToPlayEnemyHit();
     public event ToPlayEnemyHit OnEnemyHit;
@@ -46,6 +48,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private EnemyFireSystem _fireSystem;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
+    private float atCrashTimer;
     private float hitTimer;
     private float coolingTimer;
     private bool isCooling;
@@ -72,15 +75,27 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         if (isTeachEnemy == false)
         {
             RebirthScription();
-            Debug.Log("Rebirth");
         }  
     }
 
     private void Update()
     {
         EnemyCoolingCheck();
+        atCrashTimerSystem();
     }
+    private void atCrashTimerSystem()
+    {
+        if(atCrash)
+        {
+            atCrashTimer += Time.deltaTime;
+        }
 
+        if(atCrashTimer>atCrashTime)
+        {
+            SetAtCrash(false);
+            atCrashTimer = 0;
+        }
+    }
     #region Cooling
     private void EnemyCoolingCheck()
     {
@@ -110,7 +125,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         if(!kickBackGuard)
         {
-            bt.SendEvent("HitByPlayer");
+            if (damageType == PlayerDamage.DamageType.NormalShoot || damageType == PlayerDamage.DamageType.ChargeShoot)
+            {
+                bt.SendEvent("HitByPlayer");
+            }
         }
 
         OnEnemyHit?.Invoke();
@@ -123,10 +141,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
             _fireSystem.FireCheck(damageType);
         }
 
-        if (health <= 0)
-        {
-            EnemyDie();
-        }
         else if (health <= ignitionPoint)
         {
             EnemyIgnite();
@@ -223,15 +237,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     #endregion
     #region
-    private async void EnemyDie()
+    private void RebirthSelf()
     {
-        await Task.Delay(1500);
-        //this.gameObject.SetActive(false);
+        Rebirth(StartPosition, StartRotation);
     }
     private void Initialization()
     {
-        this.transform.position = StartPosition;
-        this.transform.rotation = StartRotation;
         this.gameObject.SetActive(true);
         isIgnite = false;
         isHurt = false;
@@ -246,12 +257,18 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         feedbacks_Boom.StopFeedbacks();
         feedbacks_FlyBoom.StopFeedbacks();
         health = StartHealth;
-    }   
+    }
+    public void Rebirth(Vector3 position,Quaternion rotation)
+    {
+        this.transform.position = position;
+        this.transform.rotation = rotation;
+        Initialization();
+    }
     private void RebirthScription()
     {
         if(isTeachEnemy==false)
         {
-            _progress.OnPlayerDeath += Initialization;
+            _progress.OnPlayerDeath += RebirthSelf;
         }
     }
     #endregion
@@ -269,5 +286,11 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     {
         GameObject spreadObj = Instantiate(spreadArea, this.transform.position, Quaternion.identity);
         Destroy(spreadObj, 1.5f);
+    }
+    public void SetAtCrash(bool active)
+    {
+        atCrash = active;
+        
+        Debug.Log("At Crash¡G" + active+"Time:" + Time.time);
     }
 }
