@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class EnergyCan : MonoBehaviour ,IHealth
 {
-    public int health;
+    [Header("FireEnergyObject")]
+	[SerializeField] private GameObject fireEnergy;
+
+    [Header("EnemyHealth")]
+    [SerializeField] private int health;
     public int iHealth
     {
         get { return health; }
@@ -23,7 +27,7 @@ public class EnergyCan : MonoBehaviour ,IHealth
 
     void Broke()
     {
-        print("能量擊破");
+        Object.Instantiate(fireEnergy, transform.position , Quaternion.identity);
         Destroy(gameObject);
     }
 }
