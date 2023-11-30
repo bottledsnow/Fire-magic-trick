@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class FireEnergy : MonoBehaviour
@@ -16,37 +14,46 @@ public class FireEnergy : MonoBehaviour
     [SerializeField] private float absorbDistance;
 
     private GameObject player;
-
-    void Start()
+    private GameObject EnemrgyBall;
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        EnemrgyBall = this.gameObject.transform.parent.gameObject;
     }
-    void Update()
+    private void Update()
     {
-        if(distanceToPlayer() <= movementStartDistance)
+        CheckBallMoveToPlayerDistance();
+        CheckPlayerAbsorbDistance();
+    }
+    private void CheckBallMoveToPlayerDistance()
+    {
+        if (distanceToPlayer() <= movementStartDistance)
         {
             MoveToPlayer();
         }
-
-        if(distanceToPlayer() <= absorbDistance)
+    }
+    private void CheckPlayerAbsorbDistance()
+    {
+        if (distanceToPlayer() <= absorbDistance)
         {
             GiveEnergyToPlayer();
             Destroy(gameObject);
         }
     }
-    void MoveToPlayer()
+
+    private void MoveToPlayer()
     {
-        Vector3 directionToPlayer = player.transform.position - transform.position;
-        transform.Translate(directionToPlayer.normalized * speed * Time.deltaTime);
+        Vector3 Direction = player.transform.position - EnemrgyBall.transform.position;
+        EnemrgyBall.transform.Translate(Direction.normalized * speed * Time.deltaTime);
         speed += acceleration;
     }
-    float distanceToPlayer()
+    private float distanceToPlayer()
     {
-        Vector3 distanceVector = player.transform.position - transform.position;
+        Vector3 distanceVector = player.transform.position - EnemrgyBall.transform.position;
         float distanceToPlayer = distanceVector.magnitude;
         return distanceToPlayer;
     }
-    void GiveEnergyToPlayer()
+    private void GiveEnergyToPlayer()
     {
         EnergySystem energySystem = player.GetComponent<EnergySystem>();
         energySystem.Energy += recovery;
