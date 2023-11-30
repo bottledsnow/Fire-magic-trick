@@ -75,6 +75,7 @@ public class MovePlatform : MonoBehaviour
         {
             timer = 0;
             SetIsTimer(false);
+            SetIsTimerFinish(true);
         }
     }
     private void MoveIndexAdd()
