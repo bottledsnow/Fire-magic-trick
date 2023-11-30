@@ -43,7 +43,7 @@ public class FireDashCollider : MonoBehaviour
                     canTriggerDamage = false;
                     Vector3 playerposition = transform.parent.transform.position;
                     Vector3 EnemyPosition = other.transform.position;
-                    Vector3 direction = (EnemyPosition - playerposition).normalized;
+                    Vector3 direction = transform.parent.transform.forward;
                     Vector3 Enemyup = other.transform.up;
 
                     if(!isTriggerDamage)
