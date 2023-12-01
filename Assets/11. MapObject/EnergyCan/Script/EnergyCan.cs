@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class EnergyCan : MonoBehaviour ,IHealth
@@ -7,6 +8,9 @@ public class EnergyCan : MonoBehaviour ,IHealth
 
     [Header("EnemyHealth")]
     [SerializeField] private int health;
+
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player Feedbacks_Broken;
     public int iHealth
     {
         get { return health; }
@@ -23,9 +27,10 @@ public class EnergyCan : MonoBehaviour ,IHealth
         }
     }
 
-    void Broke()
+    private void Broke()
     {
+        Feedbacks_Broken.PlayFeedbacks();
         Object.Instantiate(fireEnergy, transform.position , Quaternion.identity);
-        Destroy(gameObject);
+        Destroy(gameObject,0.25f);
     }
 }

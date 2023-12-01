@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class EnergySystem : MonoBehaviour
@@ -10,6 +11,9 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] private float recoverRange;
     [SerializeField] private float recoverTime;
     [SerializeField] private float recover;
+    [Header("GetEnergy")]
+    [SerializeField] private MMF_Player Feedback_GetEnergy;
+
     private float timer;
     private bool isRecover;
 
@@ -56,6 +60,13 @@ public class EnergySystem : MonoBehaviour
     private void Increase(float energy)
     {
         Energy += energy;
+
+        if(Energy>100)
+        {
+            Debug.Log("Increase Energy is over 100");
+            Energy = 100;
+        }
+
         UpdateUI(Energy);
     }
     private void Decrease(float energy)
@@ -188,6 +199,13 @@ public class EnergySystem : MonoBehaviour
     {
         float value = 100-Energy;
         Debug.Log(value);
+        Increase(value);
+    }
+    #endregion
+    #region GetEnergy
+    public void GetEnergy(float value)
+    {
+        Feedback_GetEnergy.PlayFeedbacks();
         Increase(value);
     }
     #endregion
