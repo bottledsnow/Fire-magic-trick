@@ -39,7 +39,7 @@ public class Bullet_Normal : MonoBehaviour
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, -this.transform.forward);
         Vector3 pos = contact.point;
 
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnergyCan"))
         {
             _playerDamage.ToDamageEnemy(collision);
             GameObject enemyhit = Instantiate(hitEnemyPreferb, pos, rot);

@@ -11,6 +11,11 @@ public class EnergyCan : MonoBehaviour ,IHealth
 
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player Feedbacks_Broken;
+
+    [Header("CheckArea")]
+    [SerializeField] private GameObject brokenBoomArea;
+
+    private bool isBroken = false;
     public int iHealth
     {
         get { return health; }
@@ -27,10 +32,15 @@ public class EnergyCan : MonoBehaviour ,IHealth
         }
     }
 
-    private void Broke()
+    public void Broke()
     {
-        Feedbacks_Broken.PlayFeedbacks();
-        Object.Instantiate(fireEnergy, transform.position , Quaternion.identity);
-        Destroy(gameObject,0.25f);
+        if(!isBroken)
+        {
+            isBroken = true;
+            Feedbacks_Broken.PlayFeedbacks();
+            Object.Instantiate(fireEnergy, transform.position, Quaternion.identity);
+            brokenBoomArea.SetActive(true);
+            Destroy(gameObject, 0.25f);
+        }
     }
 }

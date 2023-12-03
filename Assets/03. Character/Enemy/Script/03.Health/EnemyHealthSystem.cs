@@ -4,6 +4,10 @@ using BehaviorDesigner.Runtime;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
+    public delegate void EnemyDeath();
+    public event EnemyDeath OnEnemyDeath;
+
+
     [SerializeField] private bool isTeachEnemy;
     [Header("State")]
     public bool isIgnite;
@@ -233,6 +237,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
             feedbacks_Fire.StopFeedbacks();
             feedbacks_Shock.StopFeedbacks();
             feedbacks_Steam.StopFeedbacks();
+            OnEnemyDeath?.Invoke();
         }
     }
     #endregion
