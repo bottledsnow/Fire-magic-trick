@@ -42,5 +42,8 @@ public class EnemyDamage : MonoBehaviour
 
     }
 
-
+    public void DestroyObject()
+    {
+        Destroy(transform.parent.gameObject);
+    }
 }
