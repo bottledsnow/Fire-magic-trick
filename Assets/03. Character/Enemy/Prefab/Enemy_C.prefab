@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &825817869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 825817870}
+  m_Layer: 14
+  m_Name: GroundSlamPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &825817870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825817869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.54, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3623152132140516109}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &454907367556760161
 GameObject:
   m_ObjectHideFlags: 0
@@ -25343,7 +25374,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true,"TransformmValue":0}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true,"TransformmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"teammateEnemies","IsShared":true,"List`1mValue":[]},{"Type":"BehaviorDesigner.Runtime.SharedAnimationCurve","Name":"GroundSlam","IsShared":true,"AnimationCurvemValue":{"Keys":[[0,0,0,0],[1,1,0,0]],"PreWrapMode":"ClampForever","PostWrapMode":"ClampForever"}}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -25354,8 +25385,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!120 &3623152130248176070
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -25498,6 +25529,8 @@ MonoBehaviour:
   kickBackRatio: 0.4
   kickBackGuard: 0
   spreadArea: {fileID: 1655516724492818754}
+  atCrash: 0
+  atCrashTime: 3
 --- !u!65 &1754139968727331561
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26006,7 +26039,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 50
   force: -40
-  BackCoordinate: {fileID: 0}
+  backCoordinate: {fileID: 0}
+  isVertical: 0
 --- !u!1 &3623152132140516108
 GameObject:
   m_ObjectHideFlags: 0
@@ -26039,6 +26073,7 @@ Transform:
   - {fileID: 7490170420053955959}
   - {fileID: 3623152130816395330}
   - {fileID: 3623152132013770464}
+  - {fileID: 825817870}
   m_Father: {fileID: 3623152130248176069}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32245,7 +32280,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 1
+  m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -1272481795433867914, guid: f026005da3f8c244b8c7be48a8758246, type: 3}
 --- !u!114 &5790984646938024659

@@ -9,7 +9,8 @@ public class EnemyDamage : MonoBehaviour
 
     [Header("KickBack")]
     [SerializeField] private float force;
-    [SerializeField] private Transform BackCoordinate;
+    [SerializeField] private Transform backCoordinate;
+    [SerializeField] private bool isVertical;
 
     Rigidbody rb;
 
@@ -26,15 +27,29 @@ public class EnemyDamage : MonoBehaviour
     {
         EnergySystem energySystem = player.GetComponent<EnergySystem>();
         energySystem.Energy -= damage;
+        
+        print(damage);
     }
 
     private void KickBackPlayer(GameObject player)
     {
-        Vector3 Direction = (player.transform.position - BackCoordinate.position).normalized;
-        Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
+        if (backCoordinate != null)
+        {
+            Vector3 Direction = (player.transform.position - backCoordinate.position).normalized;
+            Vector3 ForceDirection = Direction;
 
-        ImpactReceiver impactReceiver = player.GetComponent<ImpactReceiver>();
-        impactReceiver.AddImpact(ForceDirection * force);
+            if (!isVertical)
+            {
+                ForceDirection = new Vector3(Direction.x, 0, Direction.z);
+            }
+            else
+            {
+                ForceDirection = new Vector3(0, Direction.y, 0);
+            }
+
+            ImpactReceiver impactReceiver = player.GetComponent<ImpactReceiver>();
+            impactReceiver.AddImpact(ForceDirection * force);
+        }
     }
 
     public void PlayerGetDamage()
