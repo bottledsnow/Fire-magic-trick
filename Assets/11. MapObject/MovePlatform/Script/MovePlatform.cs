@@ -1,8 +1,10 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class MovePlatform : MonoBehaviour
 {
     [SerializeField] private Transform[] points;
+    [SerializeField] private float DelayTime;
     [SerializeField] private float speed;
     [SerializeField] private float stopTime;
 
@@ -12,12 +14,24 @@ public class MovePlatform : MonoBehaviour
     private bool isTimer;
     private bool isMove = false;
     private bool isTimerStop;
+    private bool isStart;
     private int moveIndex = 0;
-
+    private void Start()
+    {
+        StartDelay();
+    }
     private void Update()
     {
-        MoveSystem();
-        stopTimerSystem();
+        if(isStart)
+        {
+            MoveSystem();
+            stopTimerSystem();
+        }
+    }
+    private async void StartDelay()
+    {
+        await Task.Delay((int)(DelayTime*1000));
+        isStart = true;
     }
     private void MoveSystem()
     {
