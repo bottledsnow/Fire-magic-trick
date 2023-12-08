@@ -3,6 +3,7 @@ using UnityEngine;
 public class ProgressCheckPoint : MonoBehaviour
 {
     private ProgressSystem _progressSystem;
+    private bool Trigger;
 
     private void Start()
     {
@@ -14,6 +15,18 @@ public class ProgressCheckPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _progressSystem.ProgressCheckPoint = transform;
+            Trigger = true;
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if(!Trigger)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _progressSystem.ProgressCheckPoint = transform;
+            }
+            Trigger = true;
         }
     }
 }
