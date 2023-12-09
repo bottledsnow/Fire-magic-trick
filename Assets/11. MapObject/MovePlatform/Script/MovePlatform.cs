@@ -8,6 +8,12 @@ public class MovePlatform : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float stopTime;
 
+    public bool isReturn;
+
+    private MeshRenderer meshRenderer;
+    private Collider thisCollider;
+
+    private float delayTimer = 0;
     private float timer = 0;
     private bool Trigger;
     private bool isTimerFinish;
@@ -18,7 +24,8 @@ public class MovePlatform : MonoBehaviour
     private int moveIndex = 0;
     private void Start()
     {
-        StartDelay();
+        meshRenderer = GetComponent<MeshRenderer>();
+        thisCollider = GetComponent<Collider>();
     }
     private void Update()
     {
@@ -26,12 +33,18 @@ public class MovePlatform : MonoBehaviour
         {
             MoveSystem();
             stopTimerSystem();
+        }else
+        {
+            delayTimer += Time.deltaTime;
+            delayTimerCheck();
         }
     }
-    private async void StartDelay()
+    private void delayTimerCheck()
     {
-        await Task.Delay((int)(DelayTime*1000));
-        isStart = true;
+        if(delayTimer > DelayTime)
+        {
+            isStart = true;
+        }
     }
     private void MoveSystem()
     {
@@ -94,6 +107,11 @@ public class MovePlatform : MonoBehaviour
     }
     private void MoveIndexAdd()
     {
+        if(moveIndex == 0)
+        {
+            SetisReturn(false);
+        }
+
         moveIndex++;
 
         if (moveIndex >= points.Length)
@@ -104,6 +122,15 @@ public class MovePlatform : MonoBehaviour
     private void SetMoveIndex(int value)
     {
         moveIndex = value;
+
+        if(value ==0)
+        {
+            SetisReturn(true);
+        }
+    }
+    private void SetisReturn(bool active)
+    {
+          isReturn = active;
     }
     private void SetIsTimer(bool active)
     {
@@ -120,6 +147,11 @@ public class MovePlatform : MonoBehaviour
     private void SetIsTimerStop(bool active)
     {
         isTimerStop = active;
+    }
+    public void SetActivePlatform(bool active)
+    {
+        meshRenderer.enabled = active;
+        thisCollider.enabled = active;
     }
     private void OnDrawGizmosSelected()
     {
