@@ -196,6 +196,7 @@ public class SuperDash : MonoBehaviour
                     }else
                     {
                         superDashToThrough();
+                        Debug.Log("Through Enemy");
                     }
                 }
             }else

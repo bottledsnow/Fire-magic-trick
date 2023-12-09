@@ -133,6 +133,11 @@ public class GlassSystem : MonoBehaviour
             feedbacks_Broken.PlayFeedbacks();
         }
     }
+    public void QuickSetGlassFalse()
+    {
+        SetCollider(false);
+        SetColliderRender(false);
+    }
     private void SetIsBroken(bool active)
     {
         isBroken = active;

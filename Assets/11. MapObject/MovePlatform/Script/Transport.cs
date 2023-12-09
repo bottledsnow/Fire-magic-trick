@@ -1,14 +1,19 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Transport : MonoBehaviour
 {
+    
+
     [SerializeField] private GameObject Preferb;
     [SerializeField] private Transform spawnPoint;
+    [Header("Mode")]
+    [SerializeField] private bool isGlass;
 
+    private GlassSystem glass;
     private MovePlatform movePlatform;
     private GameObject clone;
 
+    private bool isSpawn;
     private bool isReturn;
     private bool Trigger;
 
@@ -58,6 +63,10 @@ public class Transport : MonoBehaviour
     }
     private void ClearPreferb()
     {
+        if(isGlass)
+        {
+            glass.QuickSetGlassFalse();
+        }else
         if(clone != null)
         {
             Destroy(clone);
@@ -65,11 +74,34 @@ public class Transport : MonoBehaviour
     }
     private void spawnPreferb()
     {
-        clone = Instantiate(Preferb, spawnPoint.position, Quaternion.identity);
-        clone.transform.parent = spawnPoint;
+        if(isGlass)
+        {
+            if(!isSpawn)
+            {
+                Quaternion rotation = spawnPoint.rotation;
+                clone = Instantiate(Preferb, spawnPoint.position, rotation);
+                clone.transform.parent = spawnPoint;
+                glass = clone.GetComponent<GlassSystem>();
+                SetIsSpawn(true);
+            }else
+            {
+                glass.GlassRebirth();
+            }
+        }else
+        {
+            Quaternion rotation = spawnPoint.rotation;
+            clone = Instantiate(Preferb, spawnPoint.position, rotation);
+            clone.transform.parent = spawnPoint;
+            SetIsSpawn(true);
+        }
+        
     }
     private void SetTrigger(bool active)
     {
         Trigger = active;
+    }
+    private void SetIsSpawn(bool active)
+    {
+        isSpawn = active;
     }
 }
