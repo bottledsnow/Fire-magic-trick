@@ -5813,7 +5813,6 @@ GameObject:
   - component: {fileID: 5846415604897983106}
   - component: {fileID: 4011443442095317673}
   - component: {fileID: 6840958472828959897}
-  - component: {fileID: 3167980105385889448}
   - component: {fileID: 1981442962358467084}
   m_Layer: 0
   m_Name: Glass (1)
@@ -5902,19 +5901,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3167980105385889448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8725489296452326064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b7ae2cf05ba0b44691fab47dbbb5686, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mode: 0
 --- !u!114 &1981442962358467084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5927,7 +5913,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e814aa56885ce5489d4ef97b4629b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mode: 0
   feedbacks_Broken: {fileID: 2976541131043528520}
   fastTime: 0.5
   feedbacks_Delay: {fileID: 3340278235185007740}
   delayTime: 1.5
+  canCharge: 0
+  canCrash: 0
+  canEnemyCrash: 0

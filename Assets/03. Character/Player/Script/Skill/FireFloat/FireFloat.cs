@@ -1,5 +1,6 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
+using System.Threading.Tasks;
 
 public class FireFloat : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class FireFloat : MonoBehaviour
         if(!isCheck)
         {
             isCheck = true;
+            cancelChaeck();
 
             bool CanUse = false;
             _energySystem.UseFloat(out CanUse);
@@ -51,6 +53,11 @@ public class FireFloat : MonoBehaviour
                 floatStart();
             }
         }
+    }
+    private async void cancelChaeck()
+    {
+        await Task.Delay(5000);
+        isCheck = false;
     }
     private void floatStart()
     {
@@ -72,6 +79,7 @@ public class FireFloat : MonoBehaviour
             _playerState.SetGravityToNormal();
             _playerState.SetIsFloat(false);
             fireFloat.StopFeedbacks();
+            isCheck = false;
         }
     }
     private void floatTimer()

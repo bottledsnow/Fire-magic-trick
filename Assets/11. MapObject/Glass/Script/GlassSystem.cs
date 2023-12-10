@@ -11,6 +11,7 @@ public class GlassSystem : MonoBehaviour
         unlimited
     }
     public Mode mode;
+    [SerializeField] private bool isStaticGlass;
     [Header("UniversalFeedbacks")]
     [SerializeField] private MMF_Player feedbacks_Broken;
     [Header("FastMode")]
@@ -26,6 +27,7 @@ public class GlassSystem : MonoBehaviour
     [SerializeField] private bool canEnemyCrash;
 
 
+    private ProgressSystem progressSystem;
     private Collider glassCollider;
     private MeshRenderer glassRender;
     private bool isBroken;
@@ -35,11 +37,19 @@ public class GlassSystem : MonoBehaviour
         glassCollider = GetComponent<Collider>();
         glassRender = GetComponent<MeshRenderer>();
     }
-
+    private void Start()
+    {
+        progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        progressSystem.OnPlayerDeath += OnPlayerDeathToRebirthGlass;
+    }
     private void OnCollisionEnter(Collision collision)
     {
         BrokenCheck_Charge(collision);
         BrokenCheck_EnemyCrash(collision);
+    }
+    private void OnPlayerDeathToRebirthGlass()
+    {
+          GlassRebirth();
     }
     private void BrokenCheck_Charge(Collision collision)
     {
