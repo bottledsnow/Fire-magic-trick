@@ -3,6 +3,10 @@ using UnityEngine;
 public class TeachWordSystem : MonoBehaviour
 {
     private Animator animator;
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     private void Start()
     {
         animator = GetComponent<Animator>();

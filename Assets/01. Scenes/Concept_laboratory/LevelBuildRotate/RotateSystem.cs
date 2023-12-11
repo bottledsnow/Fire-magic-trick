@@ -1,9 +1,9 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityNavMeshAgent;
-using System.Threading;
 using UnityEngine;
 
 public class RotateSystem : MonoBehaviour
 {
+    [Header("Rotate")]
+    [SerializeField] private bool useRotate = true;
     [Header("X Axis")]
     [SerializeField] private bool useRotateX;
     [SerializeField] private float speedX;
@@ -29,27 +29,32 @@ public class RotateSystem : MonoBehaviour
 
     private void Update()
     {
-        if (usePause)
+        if(useRotate)
         {
-            pauseSystem();
-            pauseTimerSystem();
-        }
-
-        if (isRotate)
-        {
-            if(!usePause)
+            if (usePause)
             {
-                toRotate();
-                SetTimer(0);
+                pauseSystem();
+                pauseTimerSystem();
             }
 
-            RotateX_Check();
-            RotateY_Check();
-            RotateZ_Check();
-            RotateThis();
-        }
+            if (isRotate)
+            {
+                if (!usePause)
+                {
+                    toRotate();
+                    SetTimer(0);
+                }
 
-        
+                RotateX_Check();
+                RotateY_Check();
+                RotateZ_Check();
+                RotateThis();
+            }
+        }
+    }
+    public void SetUseRotate(bool value)
+    {
+        useRotate = value;
     }
     #region RotateXYZ
     private void RotateX_Check()
@@ -165,5 +170,6 @@ public class RotateSystem : MonoBehaviour
     {
         isRotate = value;
     }
+    
     #endregion
 }
