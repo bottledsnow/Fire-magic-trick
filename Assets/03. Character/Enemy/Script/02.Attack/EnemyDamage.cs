@@ -27,8 +27,6 @@ public class EnemyDamage : MonoBehaviour
     {
         EnergySystem energySystem = player.GetComponent<EnergySystem>();
         energySystem.Energy -= damage;
-        
-        print(damage);
     }
 
     private void KickBackPlayer(GameObject player)

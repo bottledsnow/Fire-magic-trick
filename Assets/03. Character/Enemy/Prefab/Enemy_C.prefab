@@ -25374,7 +25374,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true,"TransformmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObjectList","Name":"teammateEnemies","IsShared":true,"List`1mValue":[]},{"Type":"BehaviorDesigner.Runtime.SharedAnimationCurve","Name":"GroundSlam","IsShared":true,"AnimationCurvemValue":{"Keys":[[0,0,0,0],[1,1,0,0]],"PreWrapMode":"ClampForever","PostWrapMode":"ClampForever"}}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true,"TransformmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"modelObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"attackingPermissions","IsShared":true,"BooleanmValue":false}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -25556,8 +25556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad798dd4282c8d342b1fc0ba929d3724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 2
-  detectionRadius: 15
+  attackingStyle: 0
 --- !u!114 &8513112351979657483
 MonoBehaviour:
   m_ObjectHideFlags: 0
