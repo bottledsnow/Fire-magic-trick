@@ -12,9 +12,9 @@ public class Bullet_Normal : MonoBehaviour
     [SerializeField] private float force;
     [Header("Feedback")]
     [SerializeField] private ParticleSystem addspeedFeedback;
-    [Header("Preferb")]
-    [SerializeField] private GameObject hitPrefab;
-    [SerializeField] private GameObject hitEnemyPreferb;
+    [Header("VfxPrefab")]
+    [SerializeField] private GameObject cardSlashPrefab;
+    [SerializeField] private GameObject hitEnemyPrefab;
 
     private Collider bulletCollider;
     private Rigidbody rb;
@@ -36,13 +36,13 @@ public class Bullet_Normal : MonoBehaviour
     {
         ContactPoint contact = collision.contacts[0];
         //Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, -this.transform.forward);
+        Quaternion rot = Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal);
         Vector3 pos = contact.point;
 
         if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnergyCan"))
         {
             _playerDamage.ToDamageEnemy(collision);
-            GameObject enemyhit = Instantiate(hitEnemyPreferb, pos, rot);
+            GameObject enemyhit = Instantiate(hitEnemyPrefab, pos, rot);
             KickBackEnemy(collision);
             Destroy(enemyhit, 1f);
         }
@@ -53,17 +53,16 @@ public class Bullet_Normal : MonoBehaviour
     }
     private void KickBackEnemy(Collision collision)
     {
-        if(collision.gameObject.GetComponent<EnemyHealthSystem>() != null)
+        if (collision.gameObject.GetComponent<EnemyHealthSystem>() != null)
         {
-            if(collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackGuard != true) // Could be knock back
+            if (collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackGuard != true) // Could be knock back
             {
                 Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
                 Vector3 Direction = (collision.transform.position - BackCoordinate.position).normalized;
                 Vector3 ForceDirection = new Vector3(Direction.x, 0, Direction.z);
                 rb.AddForce(ForceDirection * force * collision.gameObject.GetComponent<EnemyHealthSystem>().kickBackRatio, ForceMode.Impulse);
-            }  
+            }
         }
-        
     }
     private void CroshairFeedback()
     {
@@ -71,10 +70,9 @@ public class Bullet_Normal : MonoBehaviour
     }
     private void newHit(Vector3 pos, Quaternion rot)
     {
-        var hitVFX = Instantiate(hitPrefab, pos, rot);
+        var hitVFX = Instantiate(cardSlashPrefab, pos, rot);
         var psHit = hitVFX.GetComponent<VisualEffect>();
         Destroy(hitVFX, 1.5f);
-
     }
     private void Initialization()
     {
@@ -92,6 +90,6 @@ public class Bullet_Normal : MonoBehaviour
     {
         bulletCollider.enabled = false;
         rb.drag = 100;
-        Destroy(gameObject,0.3f);
+        Destroy(gameObject, 0.3f);
     }
 }
