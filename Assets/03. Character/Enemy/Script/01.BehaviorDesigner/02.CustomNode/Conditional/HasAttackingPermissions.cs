@@ -2,14 +2,14 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class HasAttackPermissions : Conditional
+public class HasAttackingPermissions : Conditional
 {
 	[Header("SharedVariable")]
-    [SerializeField] private bool attackingPermissions;
+    [SerializeField] private SharedBool attackingPermissions;
 	
 	public override TaskStatus OnUpdate()
 	{
-		if(attackingPermissions)
+		if(attackingPermissions.Value)
 		{
 			return TaskStatus.Success;
 		}
