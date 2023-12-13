@@ -9,7 +9,7 @@ public class EnemyDamage : MonoBehaviour
 
     [Header("KickBack")]
     [SerializeField] private float force;
-    [SerializeField] private Transform backCoordinate;
+    [SerializeField] private Transform knockBackCoordinate;
     [SerializeField] private bool isVertical;
 
     Rigidbody rb;
@@ -31,9 +31,9 @@ public class EnemyDamage : MonoBehaviour
 
     private void KickBackPlayer(GameObject player)
     {
-        if (backCoordinate != null)
+        if (knockBackCoordinate != null)
         {
-            Vector3 Direction = (player.transform.position - backCoordinate.position).normalized;
+            Vector3 Direction = (player.transform.position - knockBackCoordinate.position).normalized;
             Vector3 ForceDirection = Direction;
 
             if (!isVertical)

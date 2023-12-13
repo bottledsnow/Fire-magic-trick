@@ -1,7 +1,6 @@
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using UnityEngine.AI;
 
 public class MoveToTarget : Action
 {
@@ -20,23 +19,19 @@ public class MoveToTarget : Action
 
    private Animator animator;
    Rigidbody rb;
-   private NavMeshAgent agent;
 
    public override void OnStart()
    {
       rb = GetComponent<Rigidbody>();
-      agent = GetComponent<NavMeshAgent>();
-      if (modelObject != null)
-      {
-         animator = modelObject.Value.GetComponent<Animator>();
-      }
 
-      AnimationController(true);
+      AnimationStart();
    }
 
    public override TaskStatus OnUpdate()
    {
       Movement();
+      RotateToTarget();
+      SpeedLimit();
 
       if(NearbyTarget())
       {
@@ -48,7 +43,34 @@ public class MoveToTarget : Action
    private void Movement()
    {
       Vector3 direction = (targetObject.Value.transform.position - transform.position).normalized;
-      agent.SetDestination(targetObject.Value.transform.position);
+      rb.AddForce(direction * moveSpeed * Time.deltaTime);
+   }
+   
+   private void SpeedLimit()
+   {
+      Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+      if (flatVel.magnitude > moveSpeed * Time.deltaTime)
+      {
+         Vector3 limitedVel = flatVel.normalized * moveSpeed  * Time.deltaTime;
+         rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z);
+      }
+   }
+
+   private void RotateToTarget()
+   {
+      Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
+      Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
+
+      float angle = Quaternion.Angle(transform.rotation, rotation);
+
+      float maxRotationSpeed = rotateSpeed * Time.deltaTime;
+      if (angle > maxRotationSpeed)
+      {
+         float t = maxRotationSpeed / angle;
+         rotation = Quaternion.Slerp(transform.rotation, rotation, t);
+      }
+      transform.rotation = rotation;
    }
 
    bool NearbyTarget()
@@ -60,17 +82,25 @@ public class MoveToTarget : Action
       return false;
    }
 
-   private void AnimationController(bool isTrue)
+   private void AnimationStart()
    {
+      if (modelObject != null)
+      {
+         animator = modelObject.Value.GetComponent<Animator>();
+      }
       if (animator != null)
       {
-         animator.SetBool("isMove",isTrue);
+         animator.SetBool("isMove",true);
       }
    }
 
    public override void OnEnd()
    {
       rb.velocity = Vector3.zero;
-      AnimationController(false);   
+
+      if(animator != null)
+      {
+         animator.SetBool("isMove",false);
+      }
    }
 }
