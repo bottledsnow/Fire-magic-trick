@@ -6,57 +6,17 @@ using BehaviorDesigner.Runtime;
 public class EnemyTeamSystem : MonoBehaviour
 {
     [Header("EnemyType")]
-    [SerializeField] private EnemyType enemyType;
+    [SerializeField] public AttackingStyle attackingStyle;
 
-    [Header("DetectNearbyEnemies")]
-	[SerializeField] private float detectionRadius = 15;
-
-    public enum EnemyType{A,B,C,Connie}
-
-    private BehaviorTree bt;
-    private List<GameObject> nearbyEnemies;
+    public enum AttackingStyle { Melee, Ranged }
 
     void Start()
     {
-        bt = GetComponent<BehaviorTree>();
+
     }
 
     void Update()
     {
-        SetTeammate();
-    }
 
-    void SetTeammate()
-    {
-        nearbyEnemies = DetectNearbyEnemies();
-        bt.SetVariableValue("teammateEnemies" , nearbyEnemies);
-    }
-
-    List<GameObject> DetectNearbyEnemies()
-    {
-        Vector3 currentPosition = transform.position;
-
-        List<GameObject> nearbyEnemies = new List<GameObject>();
-
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy"); // need fix
-        
-        foreach (GameObject enemy in enemies)
-        {
-            if (enemy != gameObject)
-            {
-                float distance = Vector3.Distance(currentPosition, enemy.transform.position);
-
-                if (distance < detectionRadius)
-                {
-					EnemyTeamSystem enemyTeamSystem = enemy.GetComponent<EnemyTeamSystem>();
-					if(enemyTeamSystem != null)
-					{
-                    	nearbyEnemies.Add(enemy);
-					}
-                }
-            }
-        }
-
-        return nearbyEnemies;
     }
 }

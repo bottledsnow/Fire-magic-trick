@@ -27,11 +27,7 @@ public class RadiusMovement : Action
       RotateToTarget(targetObject.Value.transform.position);
       SpeedLimit();
 
-      if(NearbyTarget(targetObject.Value.transform.position))
-      {
-         return TaskStatus.Success;
-      }
-      return TaskStatus.Running;
+      return TaskStatus.Success;
    }
 
    Vector3 targetPosition()
@@ -88,15 +84,6 @@ public class RadiusMovement : Action
          rotation = Quaternion.Slerp(transform.rotation, rotation, t);
       }
       transform.rotation = rotation;
-   }
-
-   bool NearbyTarget(Vector3 targetPosition)
-   {
-      if(Vector3.Distance(transform.position, targetPosition) < 3)
-      {
-         return true;
-      }
-      return false;
    }
 
    public override void OnEnd()
