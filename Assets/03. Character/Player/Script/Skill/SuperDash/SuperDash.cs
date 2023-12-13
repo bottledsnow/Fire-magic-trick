@@ -1,5 +1,6 @@
 using UnityEngine;
 using MoreMountains.Feedbacks;
+using System.Threading.Tasks;
 
 public class SuperDash : MonoBehaviour
 {
@@ -19,6 +20,9 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private MMF_Player FireDashHit;
     [SerializeField] private MMF_Player FireDashEnd;
     [SerializeField] private MMF_Player FireDashEnd_Interrupt;
+    [Header("Other")]
+    [SerializeField] private GameObject Model;
+
 
 
     private SuperDashCameraCheck _superDashCameraCheck;
@@ -62,6 +66,18 @@ public class SuperDash : MonoBehaviour
         superDashHit();
         superDashThrough();
         superDashInterrupt();
+        IsSuperDashModelCheck();
+    }
+    private async void IsSuperDashModelCheck()
+    {
+        await Task.Delay(300);
+        if(isSuperDash)
+        {
+            if(Model.activeSelf == true)
+            {
+                Model.SetActive(false);
+            }
+        }
     }
     private void Initialization()
     {
@@ -111,13 +127,13 @@ public class SuperDash : MonoBehaviour
     private void superDashStart()
     {
         isSuperDash = true;
+        FireDashStart.PlayFeedbacks();
 
         SetTriggerStart(true);
         _superDashCollider.SetIsSuperDash(true);
         _superDashKickDown.GetTarget(Target);
         _playerAnimator.SuperDashStart();
         _playerState.SetGravityToFire();
-        FireDashStart.PlayFeedbacks();
     }
     private void superDash()
     {   
@@ -240,15 +256,21 @@ public class SuperDash : MonoBehaviour
     }
     private void superDashStop()
     {
-        _superDashCollider.SetIsSuperDash(false);
-        _playerState.SetGravityToNormal();
-        _playerAnimator.SuperDashEnd();
-        FireDashEnd.PlayFeedbacks();
-        superDashSpeed = 0;
-        Target = null;
-        _superDashKickDown.NullTarget();
-        SetTriggerStart(false);
-        Initialization();
+        if(isSuperDash)
+        {
+            Debug.Log("Stop But IsFire");
+        }else
+        {
+            _superDashCollider.SetIsSuperDash(false);
+            _playerState.SetGravityToNormal();
+            _playerAnimator.SuperDashEnd();
+            FireDashEnd.PlayFeedbacks();
+            superDashSpeed = 0;
+            Target = null;
+            _superDashKickDown.NullTarget();
+            SetTriggerStart(false);
+            Initialization();
+        }
     }
     private void superDashInterruptStop()
     {
