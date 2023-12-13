@@ -70,7 +70,7 @@ public class MoveToTarget : Action
 
    public override void OnEnd()
    {
-      rb.velocity = Vector3.zero;
+      agent.Stop();
       AnimationController(false);   
    }
 }
