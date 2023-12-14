@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
@@ -14,47 +12,39 @@ public class EnemyDamage : MonoBehaviour
 
     Rigidbody rb;
 
+    private void Start()
+    {
+        if(knockBackCoordinate == null)
+        {
+            knockBackCoordinate = this.transform.parent.parent;
+        }
+    }
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject.tag == "Player")
         {
             DamagePlayer(collider.gameObject);
-            KickBackPlayer(collider.gameObject);
         }
     }
 
     private void DamagePlayer(GameObject player)
     {
-        EnergySystem energySystem = player.GetComponent<EnergySystem>();
-        energySystem.Energy -= damage;
-    }
+        HealthSystem healthSystem = player.GetComponent<HealthSystem>();
 
-    private void KickBackPlayer(GameObject player)
-    {
-        if (knockBackCoordinate != null)
+        Vector3 Direction = (player.transform.position - knockBackCoordinate.position).normalized;
+        Vector3 ForceDirection = Direction;
+
+        if (!isVertical)
         {
-            Vector3 Direction = (player.transform.position - knockBackCoordinate.position).normalized;
-            Vector3 ForceDirection = Direction;
-
-            if (!isVertical)
-            {
-                ForceDirection = new Vector3(Direction.x, 0, Direction.z);
-            }
-            else
-            {
-                ForceDirection = new Vector3(0, Direction.y, 0);
-            }
-
-            ImpactReceiver impactReceiver = player.GetComponent<ImpactReceiver>();
-            impactReceiver.AddImpact(ForceDirection * force);
+            ForceDirection = new Vector3(Direction.x, 0, Direction.z);
         }
+        else
+        {
+            ForceDirection = new Vector3(0, Direction.y, 0);
+        }
+
+        healthSystem.ToDamagePlayer(0, ForceDirection * force);
     }
-
-    public void PlayerGetDamage()
-    {
-
-    }
-
     public void DestroyObject()
     {
         Destroy(transform.parent.gameObject);
