@@ -16,10 +16,12 @@ public class Rush_Ready : Action
 
     private float readyTimer;
     private Rigidbody rb;
+    private UnityEventEnemy_A unityEvent;
 
     public override void OnStart()
     {
         readyTimer = Time.time;
+        unityEvent.VFX_RushReady();
     }
 
     public override TaskStatus OnUpdate()
