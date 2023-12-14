@@ -1,6 +1,7 @@
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using UnityEngine.Events;
 
 public class LegSlash_Ready : Action
 {
@@ -21,6 +22,7 @@ public class LegSlash_Ready : Action
     public override void OnStart()
     {
         readyTimer = Time.time;
+        unityEvent = feedbacksObject.Value.GetComponent<UnityEventEnemy_A>();
         unityEvent.VFX_LegSlashStart();
     }
 
