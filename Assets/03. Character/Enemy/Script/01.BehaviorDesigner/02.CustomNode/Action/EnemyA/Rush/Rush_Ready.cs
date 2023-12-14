@@ -6,6 +6,7 @@ public class Rush_Ready : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
+    [SerializeField] private SharedGameObject feedbacksObject;
 
     [Header("Ready")]
     [SerializeField] private float readyDuaction = 2.5f;

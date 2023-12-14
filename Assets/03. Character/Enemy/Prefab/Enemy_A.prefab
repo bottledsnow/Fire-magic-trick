@@ -37152,6 +37152,59 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &7560022313276381276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3940390735512255557}
+  - component: {fileID: 1255182132915139343}
+  m_Layer: 0
+  m_Name: UnityEventEnemy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3940390735512255557
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560022313276381276}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.24656634, z: -0.21809542}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8032919127870789881}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1255182132915139343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7560022313276381276}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7ecf616a7a7c934f8a50763a1970bab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPushStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPushReady:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackStart:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8032919127487653412
 GameObject:
   m_ObjectHideFlags: 0
@@ -37231,6 +37284,7 @@ Transform:
   - {fileID: 4088897034274328080}
   - {fileID: 3578402976100828359}
   - {fileID: 3585522474331065495}
+  - {fileID: 3940390735512255557}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -37257,7 +37311,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8032919127870789858}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3e60f1ade2847544ca7a37749bf62f6b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
@@ -37292,7 +37346,7 @@ MonoBehaviour:
       parentIndex: 
       startIndex: 
       variableStartIndex: 
-      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true,"TransformmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"modelObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"attackingPermissions","IsShared":true,"BooleanmValue":false}]}'
+      JSONSerialization: '{"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"targetObject","IsShared":true},{"Type":"BehaviorDesigner.Runtime.SharedTransform","Name":"behaviorObject","IsShared":true,"TransformmValue":0},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"modelObject","IsShared":true,"GameObjectmValue":1},{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":"attackingPermissions","IsShared":true,"BooleanmValue":false},{"Type":"BehaviorDesigner.Runtime.SharedGameObject","Name":"feedbacks","IsShared":true,"GameObjectmValue":2}]}'
       fieldSerializationData:
         typeName: []
         fieldNameHash: 
@@ -37301,11 +37355,12 @@ MonoBehaviour:
         unityObjects:
         - {fileID: 8032919127487653415}
         - {fileID: 2424645428657033560}
+        - {fileID: 7560022313276381276}
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!114 &8032919127870789860
 MonoBehaviour:
   m_ObjectHideFlags: 0

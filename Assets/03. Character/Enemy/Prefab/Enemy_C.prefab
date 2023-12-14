@@ -25385,8 +25385,8 @@ MonoBehaviour:
         byteData: 
         byteDataArray: 
       Version: 1.7.7
-  gizmoViewMode: 0
-  showBehaviorDesignerGizmo: 0
+  gizmoViewMode: 2
+  showBehaviorDesignerGizmo: 1
 --- !u!120 &3623152130248176070
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -25901,6 +25901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3623152131823566470}
+  - component: {fileID: 8970752713706135923}
   m_Layer: 14
   m_Name: Model
   m_TagString: Untagged
@@ -25926,6 +25927,26 @@ Transform:
   m_Father: {fileID: 3623152130248176069}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!95 &8970752713706135923
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3623152131823566465}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &3623152132013770467
 GameObject:
   m_ObjectHideFlags: 0
@@ -26037,7 +26058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  force: -40
+  force: 150
   knockBackCoordinate: {fileID: 3623152130248176069}
   isVertical: 0
 --- !u!1 &3623152132140516108

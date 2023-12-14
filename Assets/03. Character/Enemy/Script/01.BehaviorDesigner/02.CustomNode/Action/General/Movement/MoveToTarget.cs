@@ -84,6 +84,11 @@ public class MoveToTarget : Action
 
    private void AnimationStart()
    {
+
+      if(modelObject == null)
+        {
+            return;
+        }
       if (modelObject != null)
       {
          animator = modelObject.Value.GetComponent<Animator>();
