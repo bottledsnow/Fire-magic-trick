@@ -24,14 +24,14 @@ public class UnityEventEnemy_A : MonoBehaviour
     }
     public void VFX_LegSlash_A()
     {
-        OnLegSlashStart.Invoke();
+        OnLegSlash_A.Invoke();
     }
     public void VFX_LegSlash_B()
     {
-        OnLegSlashStart.Invoke();
+        OnLegSlash_B.Invoke();
     }
     public void VFX_LegSlash_C()
     {
-        OnLegSlashStart.Invoke();
+        OnLegSlash_C.Invoke();
     }
 }

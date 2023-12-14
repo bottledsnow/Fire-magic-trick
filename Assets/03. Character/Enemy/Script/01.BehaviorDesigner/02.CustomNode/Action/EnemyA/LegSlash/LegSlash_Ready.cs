@@ -2,7 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class Rush_Ready : Action
+public class LegSlash_Ready : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
@@ -21,7 +21,7 @@ public class Rush_Ready : Action
     public override void OnStart()
     {
         readyTimer = Time.time;
-        unityEvent.VFX_RushReady();
+        unityEvent.VFX_LegSlashStart();
     }
 
     public override TaskStatus OnUpdate()
