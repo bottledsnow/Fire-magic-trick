@@ -8,6 +8,9 @@ public class TriggerFunction : MonoBehaviour
     [Header("OnStartTrigger")]
     [SerializeField] private bool OnStartTrigger = false;
     [SerializeField] UnityEvent OnStartTriggerEvent;
+    [Header("OnTriggerStay")]
+    [SerializeField] private bool useTriggerStay = false;
+    [SerializeField] UnityEvent OnTriggerStayEvent;
 
 
     private void Start()
@@ -28,5 +31,17 @@ public class TriggerFunction : MonoBehaviour
             }
         }
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if(useTriggerStay)
+        {
+            if (other.CompareTag("Player"))
+            {
+                if (OnTriggerStayEvent != null)
+                {
+                    OnTriggerStayEvent.Invoke();
+                }
+            }
+        }
+    }
 }

@@ -72,6 +72,13 @@ public class EnergySystem : MonoBehaviour
     private void Decrease(float energy)
     {
         Energy -= energy;
+
+        if (Energy <0)
+        {
+            Debug.Log("Decrease Energy is over 100");
+            Energy = 0;
+        }
+
         UpdateUI(Energy);
     }
     private void UpdateUI(float Value)
@@ -209,4 +216,10 @@ public class EnergySystem : MonoBehaviour
         Increase(value);
     }
     #endregion
+    #region TakeDamage
+    public void DecreaseEnergy(int Energy)
+    {
+        Decrease(Energy);
+    }
+    #endregion 
 }
