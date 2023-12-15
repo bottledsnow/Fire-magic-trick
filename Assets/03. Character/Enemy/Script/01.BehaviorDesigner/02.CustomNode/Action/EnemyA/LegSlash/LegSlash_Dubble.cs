@@ -2,7 +2,7 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class LegSlash_Right : Action
+public class LegSlash_Dubble : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedTransform behaviorObject;
@@ -11,7 +11,8 @@ public class LegSlash_Right : Action
 
 
     [Header("AttackObject")]
-    [SerializeField] private GameObject legSlashObject;
+    [SerializeField] private GameObject legSlashObject_L;
+    [SerializeField] private GameObject legSlashObject_R;
 
     [Header("Movement")]
     [SerializeField] private float forwardForce;
@@ -20,6 +21,7 @@ public class LegSlash_Right : Action
     private Transform legSlashPoint;
     private Rigidbody rb;
     private UnityEventEnemy_A unityEvent;
+
     public override void OnStart()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,7 +31,7 @@ public class LegSlash_Right : Action
         Rotation();
         Movement();
         unityEvent = feedbacksObject.Value.GetComponent<UnityEventEnemy_A>();
-        unityEvent.VFX_LegSlash_A();
+        unityEvent.VFX_LegSlash_C();
     }
 
     public override TaskStatus OnUpdate()
@@ -39,8 +41,10 @@ public class LegSlash_Right : Action
 
     private void InstantiateAttackObject()
     {
-        GameObject slashCollider = Object.Instantiate(legSlashObject, legSlashPoint.position, legSlashPoint.rotation);
-        slashCollider.transform.parent = transform;
+        GameObject slashColliderL = Object.Instantiate(legSlashObject_L, legSlashPoint.position, legSlashPoint.rotation);
+        GameObject slashColliderR = Object.Instantiate(legSlashObject_R, legSlashPoint.position, legSlashPoint.rotation);
+        slashColliderL.transform.parent = transform;
+        slashColliderR.transform.parent = transform;
     }
 
     private void Movement()

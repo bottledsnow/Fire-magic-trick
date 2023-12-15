@@ -3,7 +3,7 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine.Events;
 
-public class Rush_Ready : Action
+public class LegSlash_Ready : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
@@ -23,7 +23,7 @@ public class Rush_Ready : Action
     {
         readyTimer = Time.time;
         unityEvent = feedbacksObject.Value.GetComponent<UnityEventEnemy_A>();
-        unityEvent.VFX_RushReady();
+        unityEvent.VFX_LegSlashStart();
     }
 
     public override TaskStatus OnUpdate()

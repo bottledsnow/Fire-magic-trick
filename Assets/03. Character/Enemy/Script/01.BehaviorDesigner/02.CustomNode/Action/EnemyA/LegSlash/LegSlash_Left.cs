@@ -2,13 +2,12 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class LegSlash_Right : Action
+public class LegSlash_Left : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedTransform behaviorObject;
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedGameObject feedbacksObject;
-
 
     [Header("AttackObject")]
     [SerializeField] private GameObject legSlashObject;
@@ -20,6 +19,7 @@ public class LegSlash_Right : Action
     private Transform legSlashPoint;
     private Rigidbody rb;
     private UnityEventEnemy_A unityEvent;
+
     public override void OnStart()
     {
         rb = GetComponent<Rigidbody>();
@@ -29,7 +29,7 @@ public class LegSlash_Right : Action
         Rotation();
         Movement();
         unityEvent = feedbacksObject.Value.GetComponent<UnityEventEnemy_A>();
-        unityEvent.VFX_LegSlash_A();
+        unityEvent.VFX_LegSlash_B();
     }
 
     public override TaskStatus OnUpdate()
