@@ -6,7 +6,8 @@ public class SideDodge : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
-    
+    [SerializeField] private SharedGameObject UnityEventEnemy;
+
     [Header("Rotate")]
     [SerializeField] private float rotateSpeed = 15;
 
@@ -16,12 +17,16 @@ public class SideDodge : Action
     public float stopVelocity = 0.6f;
     private Rigidbody rb;
     private float timer;
+    private UnityEventEnemy_B unityEvent;
 
     public override void OnStart()
     {
         rb = GetComponent<Rigidbody>();
         timer = Time.time;
         StartDodge();
+
+        unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_B>();
+        unityEvent.VFX_SideDodge();
     }
 
     public override TaskStatus OnUpdate()

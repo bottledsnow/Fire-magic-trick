@@ -6,15 +6,20 @@ public class FlyToTarget : Action
 {
    [Header("SharedVariable")]
    [SerializeField] private SharedGameObject targetObject;
+   [SerializeField] private SharedGameObject UnityEventEnemy;
+
    [Header("Movement")]
    [SerializeField] private float moveSpeed = 850;
    [SerializeField] private float keepHeight = 2.5f;
 
    private Rigidbody rb;
+   private UnityEventEnemy_B unityEvent;
 
    public override void OnStart()
    {
       rb = GetComponent<Rigidbody>();
+
+      unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_B>();
    }
 
    public override TaskStatus OnUpdate()

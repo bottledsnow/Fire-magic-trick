@@ -29,7 +29,7 @@ public class LegSlash_Left : Action
         InstantiateAttackObject();
         Rotation();
         Movement();
-
+        
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_A>();
         unityEvent.VFX_LegSlash_B();
     }

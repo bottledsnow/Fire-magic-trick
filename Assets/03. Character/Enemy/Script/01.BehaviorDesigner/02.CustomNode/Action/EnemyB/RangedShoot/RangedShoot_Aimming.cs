@@ -7,6 +7,7 @@ public class RangedShoot_Aimming : Action
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedTransform behaviorObject;
+    [SerializeField] private SharedGameObject UnityEventEnemy;
     
     [Header("Aimming")]
     [SerializeField] private float aimmingDuaction = 2.5f;
@@ -20,12 +21,16 @@ public class RangedShoot_Aimming : Action
     private Vector3 targetPoint;
     private float aimmingTimer;
     private LineRenderer lineRenderer;
+    private UnityEventEnemy_B unityEvent;
 
     public override void OnStart()
     {
         aimmingLinePoint = behaviorObject.Value.Find("AimmingLinePoint");
         aimmingTimer = Time.time;
         AimmingEnable();
+        
+        unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_B>();
+        unityEvent.VFX_AimingStart();
     }
 
     public override TaskStatus OnUpdate()
@@ -38,6 +43,7 @@ public class RangedShoot_Aimming : Action
         else
         {
             AimmingLineDisable();
+            unityEvent.VFX_AimingFinishReady();
         }
         if (Time.time - aimmingTimer >= aimmingDuaction)
         {

@@ -7,6 +7,7 @@ public class RangedShoot_Shoot : Action
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedTransform behaviorObject;
+    [SerializeField] private SharedGameObject UnityEventEnemy;
 
     [Header("Bullet")]
     [SerializeField] private GameObject bulletPrefab;
@@ -15,12 +16,17 @@ public class RangedShoot_Shoot : Action
     [Header("Player")]
     [SerializeField] private float playerHeight = 0.3f;
 
+
     private Transform firePoint;
+    private UnityEventEnemy_B unityEvent;
 
 
     public override void OnStart()
     {
         firePoint = behaviorObject.Value.Find("FirePoint");
+
+        unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_B>();
+        unityEvent.VFX_ShootingFinishWait();
     }
 
     public override TaskStatus OnUpdate()
