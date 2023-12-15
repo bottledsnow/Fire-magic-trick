@@ -12,9 +12,13 @@ public class SideDodge : Action
     [SerializeField] private float rotateSpeed = 15;
 
     [Header("Dodge")]
-    public float initialMoveSpeed = 40;
-    public float slowdownRate = 0.5f;
-    public float stopVelocity = 0.6f;
+    [SerializeField] private float horizontalForceMin = 80;
+    [SerializeField] private float horizontalForceMax = 160;
+    [SerializeField] private float verticalForceMin = 20;
+    [SerializeField] private float verticalForceMax = 40;
+    [SerializeField] private float slowdownRate = 0.5f;
+    [SerializeField] private float stopVelocity = 0.6f;
+
     private Rigidbody rb;
     private float timer;
     private UnityEventEnemy_B unityEvent;
@@ -45,8 +49,14 @@ public class SideDodge : Action
     {
         rb.velocity = Vector3.zero;
 
-        int randomDirection = (Random.value > 0.5f) ? 1 : -1;
-        rb.AddForce(transform.right * randomDirection * initialMoveSpeed, ForceMode.Impulse);
+        int randomHorizontalDirection = (Random.value > 0.5f) ? 1 : -1;
+        int randomVerticalDirection = (Random.value > 0.5f) ? 1 : -1;
+
+        float horizontalForce = Random.Range(horizontalForceMin , horizontalForceMax);
+        float verticalForce = Random.Range(verticalForceMin , verticalForceMax);
+
+        rb.AddForce(transform.right * randomHorizontalDirection * horizontalForce, ForceMode.Impulse);
+        rb.AddForce(transform.up * randomVerticalDirection * verticalForce, ForceMode.Impulse);
     }
 
     private void LookAtTarget()

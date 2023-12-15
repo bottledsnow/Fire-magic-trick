@@ -12,7 +12,7 @@ public class RangedShoot_Aimming : Action
     [Header("Aimming")]
     [SerializeField] private float aimmingDuaction = 2.5f;
     [SerializeField] private float rotateSpeed = 15;
-    [SerializeField] private float AimmingLineDisableDelay = 0f;
+    [SerializeField] private float AimmingLineDisableDelay = 0.25f;
 
     [Header("Player")]
     [SerializeField] private float playerHeight = 0.3f;
