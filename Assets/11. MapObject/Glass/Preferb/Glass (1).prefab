@@ -539,7 +539,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5690039109375897510}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -836,7 +836,7 @@ ParticleSystem:
     startSizeY:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -889,7 +889,7 @@ ParticleSystem:
     startSizeZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -1101,7 +1101,7 @@ ParticleSystem:
     randomizeRotationDirection: 0
     maxNumParticles: 1000
     customEmitterVelocity: {x: 0, y: 0, z: 0}
-    size3D: 0
+    size3D: 1
     rotation3D: 0
     gravityModifier:
       serializedVersion: 2
@@ -5317,7 +5317,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a02fbb461fd86f147af54e2908f19231, type: 2}
+  - {fileID: 2100000, guid: e1b9b77ab23aa444b8cebd341ed48e7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5338,7 +5338,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_RenderMode: 0
+  m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
@@ -5359,10 +5359,10 @@ ParticleSystemRenderer:
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
   m_VertexStreams: 00010304
-  m_Mesh: {fileID: 0}
-  m_Mesh1: {fileID: 0}
-  m_Mesh2: {fileID: 0}
-  m_Mesh3: {fileID: 0}
+  m_Mesh: {fileID: 2769295263321647247, guid: f65eb2c3d9fcd7b47aea8e6d3f8df19a, type: 3}
+  m_Mesh1: {fileID: -7515627252327006169, guid: f65eb2c3d9fcd7b47aea8e6d3f8df19a, type: 3}
+  m_Mesh2: {fileID: 8403293412411846617, guid: f65eb2c3d9fcd7b47aea8e6d3f8df19a, type: 3}
+  m_Mesh3: {fileID: 6663121141074885146, guid: f65eb2c3d9fcd7b47aea8e6d3f8df19a, type: 3}
   m_MeshWeighting: 1
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
@@ -5914,6 +5914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mode: 0
+  isStaticGlass: 0
   feedbacks_Broken: {fileID: 2976541131043528520}
   fastTime: 0.5
   feedbacks_Delay: {fileID: 3340278235185007740}
