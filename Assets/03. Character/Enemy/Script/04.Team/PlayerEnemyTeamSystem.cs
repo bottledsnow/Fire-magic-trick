@@ -19,12 +19,6 @@ public class PlayerEnemyTeamSystem : MonoBehaviour
 
     GameObject[] enemies;
 
-    void Start()
-    {
-
-    }
-
-
     void Update()
     {
         GetAllEnemy();

@@ -5,11 +5,16 @@ using BehaviorDesigner.Runtime.Tasks;
 public class RotateToTarget : Action
 {
     [Header("SharedVariable")]
-    [SerializeField] private SharedGameObject targetObject;
+    [SerializeField] SharedGameObject targetObject;
     [SerializeField] private SharedGameObject modelObject;
 
     [Header("Rotate")]
     [SerializeField] private float rotateSpeed = 150;
+
+    [Header("PlayerDetect")]
+    [SerializeField] private LayerMask playerMask;
+    [SerializeField] private float radius = 20;
+    [SerializeField] private float angle = 5;
 
     private Animator animator;
 
@@ -22,13 +27,13 @@ public class RotateToTarget : Action
     {
         Rotation();
 
-        if(isLookingAtPlayer())
+        if (isLookingAtPlayer())
         {
             return TaskStatus.Success;
         }
         return TaskStatus.Running;
     }
-    
+
     private void Rotation()
     {
         Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
@@ -47,12 +52,18 @@ public class RotateToTarget : Action
 
     bool isLookingAtPlayer()
     {
-        Vector3 directionToPlayer = targetObject.Value.transform.position - transform.position;
-        float dotProduct = Vector3.Dot(transform.forward, directionToPlayer.normalized);
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, playerMask);
 
-        if(dotProduct > 0.95f)
+        if (rangeChecks.Length != 0)
         {
-            return true;
+            foreach (Collider target in rangeChecks)
+            {
+                Vector3 directionToTarget = (target.gameObject.transform.position - transform.position).normalized;
+                if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+                {
+                    return true;
+                }
+            }
         }
         return false;
     }
@@ -61,19 +72,19 @@ public class RotateToTarget : Action
     {
         if (modelObject != null)
         {
-           animator = modelObject.Value.GetComponent<Animator>();
+            animator = modelObject.Value.GetComponent<Animator>();
         }
         if (animator != null)
         {
-           animator.SetBool("isMove",true);
+            animator.SetBool("isMove", true);
         }
     }
 
     public override void OnEnd()
     {
-       if(animator != null)
-       {
-          animator.SetBool("isMove",false);
-       }
+        if (animator != null)
+        {
+            animator.SetBool("isMove", false);
+        }
     }
 }

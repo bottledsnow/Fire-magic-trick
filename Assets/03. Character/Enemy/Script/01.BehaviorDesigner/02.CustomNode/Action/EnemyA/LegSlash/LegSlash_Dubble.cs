@@ -7,8 +7,6 @@ public class LegSlash_Dubble : Action
     [Header("SharedVariable")]
     [SerializeField] private SharedTransform behaviorObject;
     [SerializeField] private SharedGameObject targetObject;
-    [SerializeField] private SharedGameObject feedbacksObject;
-
 
     [Header("AttackObject")]
     [SerializeField] private GameObject legSlashObject_L;
@@ -30,7 +28,6 @@ public class LegSlash_Dubble : Action
         InstantiateAttackObject();
         Rotation();
         Movement();
-        unityEvent = feedbacksObject.Value.GetComponent<UnityEventEnemy_A>();
         unityEvent.VFX_LegSlash_C();
     }
 
