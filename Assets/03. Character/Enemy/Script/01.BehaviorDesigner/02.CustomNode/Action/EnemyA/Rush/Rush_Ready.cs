@@ -1,12 +1,12 @@
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
-using UnityEngine.Events;
 
 public class Rush_Ready : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
+    [SerializeField] private SharedGameObject UnityEventEnemy;
 
     [Header("Ready")]
     [SerializeField] private float readyDuaction = 2.5f;
@@ -21,6 +21,7 @@ public class Rush_Ready : Action
     public override void OnStart()
     {
         readyTimer = Time.time;
+        unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_A>();
         unityEvent.VFX_RushReady();
     }
 
