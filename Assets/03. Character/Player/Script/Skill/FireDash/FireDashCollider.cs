@@ -56,7 +56,7 @@ public class FireDashCollider : MonoBehaviour
                     enemy.SetAtCrash(true);
 
                     HitFeedbacks.PlayFeedbacks();
-                    other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
+                    other.GetComponent<Rigidbody>().AddForce(direction * CrashForce + Enemyup * CrashForceUp, ForceMode.Impulse);
                 }
             }
         }

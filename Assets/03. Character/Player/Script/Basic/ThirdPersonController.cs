@@ -79,6 +79,7 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         [Header("FireMagic")]
+        public float moveSpeedDebuff = 0;
         public bool isJump;
         public bool useGravity;
         public bool useMove;

@@ -20,6 +20,10 @@ public class HealthSystem : MonoBehaviour
         energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
         impactReceiver = GameManager.singleton.Player.GetComponent<ImpactReceiver>();
     }
+    public void ToPushPlayer(Vector3 ImpactDirection)
+    {
+        toPushPlayer(ImpactDirection);
+    }
     public void ToDamagePlayer(int Damage)
     {
         if(!Invincible)
@@ -33,6 +37,10 @@ public class HealthSystem : MonoBehaviour
         {
             DamagePlayer(Damage, ImpactDirection);
         }
+    }
+    private void toPushPlayer(Vector3 ImpactDirection)
+    {
+        ToImpactPlayer(ImpactDirection);
     }
     private void DamagePlayer(int Damage)
     {

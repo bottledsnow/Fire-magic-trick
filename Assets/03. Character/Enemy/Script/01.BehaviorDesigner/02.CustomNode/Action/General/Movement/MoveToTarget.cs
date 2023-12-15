@@ -17,6 +17,7 @@ public class MoveToTarget : Action
    [Header("ActEndDistance")]
    [SerializeField] private float actEndDistance  = 3;
 
+
    private Animator animator;
    Rigidbody rb;
 
@@ -84,22 +85,21 @@ public class MoveToTarget : Action
 
    private void AnimationStart()
    {
-
-      if(modelObject == null)
+        if (modelObject == null)
         {
             return;
         }
-      if (modelObject != null)
-      {
-         animator = modelObject.Value.GetComponent<Animator>();
-      }
-      if (animator != null)
-      {
-         animator.SetBool("isMove",true);
-      }
-   }
+        if (modelObject != null)
+        {
+            animator = modelObject.Value.GetComponent<Animator>();
+        }
+        if (animator != null)
+        {
+            animator.SetBool("isMove", true);
+        }
+    }
 
-   public override void OnEnd()
+    public override void OnEnd()
    {
       rb.velocity = Vector3.zero;
 

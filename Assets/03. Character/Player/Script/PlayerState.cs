@@ -1,5 +1,7 @@
 using StarterAssets;
 using UnityEngine;
+using System.Threading.Tasks;
+using MoreMountains.Feedbacks;
 
 public class PlayerState : MonoBehaviour
 {
@@ -20,6 +22,9 @@ public class PlayerState : MonoBehaviour
     public bool isFire;
     public bool isFloat;
     public bool canFloat;
+
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player Feedbacks_Debuff;
 
     private void Start()
     {
@@ -120,5 +125,13 @@ public class PlayerState : MonoBehaviour
         Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
+    public async void DebuffPlay(float debuffTime)
+    {
+        OutControl();
+        Feedbacks_Debuff.PlayFeedbacks();
+        await Task.Delay((int)(debuffTime * 1000));
+        Feedbacks_Debuff.StopFeedbacks();
+        TakeControl();
     }
 }
