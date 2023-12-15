@@ -2,11 +2,12 @@ using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 
-public class GroundSlam : Action
+public class GroundSlam_Attack : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedTransform behaviorObject;
     [SerializeField] private SharedGameObject targetObject;
+    [SerializeField] private SharedGameObject UnityEventEnemy;
 
     [Header("AttackObject")]
     [SerializeField] private GameObject groundSlamObject;
@@ -16,6 +17,7 @@ public class GroundSlam : Action
 
     private Transform groundSlamPoint;
     private Rigidbody rb;
+    private UnityEventEnemy_C unityEvent;
 
     public override void OnStart()
     {
@@ -23,6 +25,10 @@ public class GroundSlam : Action
         groundSlamPoint = behaviorObject.Value.Find("GroundSlamPoint");
 
         InstantiateAttackObject();
+        unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_C>();
+        
+        unityEvent.VFX_GroundSlam();
+        unityEvent.VFX_GroundSlamStiff();
     }
 
     public override TaskStatus OnUpdate()

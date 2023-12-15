@@ -7,11 +7,13 @@ public class LazerShoot : Action
 {
     [Header("SharedVariable")]
     [SerializeField] private SharedTransform behaviorObject;
+    [SerializeField] private SharedGameObject UnityEventEnemy;
 
     private VisualEffect lazerVFX;
     private GameObject lazerCollider;
     private float vfxDuration;
     private float timer;
+    private UnityEventEnemy_C unityEvent;
 
     public override void OnStart()
     {
@@ -25,6 +27,9 @@ public class LazerShoot : Action
             lazerVFX.Play();
             lazerCollider.SetActive(true);
         }
+
+        unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_C>();
+        unityEvent.VFX_Lazer();
     }
 
     public override TaskStatus OnUpdate()
@@ -32,6 +37,7 @@ public class LazerShoot : Action
         if (Time.time - timer > vfxDuration)
         {
             lazerCollider.SetActive(false);
+            unityEvent.VFX_LazerStiff();
             return TaskStatus.Success;
         }
         return TaskStatus.Running;

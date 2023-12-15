@@ -7,6 +7,7 @@ public class Lazer_ShieldAimming : Action
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
     [SerializeField] private SharedTransform behaviorObject;
+    [SerializeField] private SharedGameObject UnityEventEnemy;
     
     [Header("Behavior")]
     [SerializeField] private float aimmingDuaction = 3.5f;
@@ -24,6 +25,7 @@ public class Lazer_ShieldAimming : Action
     private Vector3 targetPoint;
     private float aimmingTimer;
     private LineRenderer lineRenderer;
+    private UnityEventEnemy_C unityEvent;
 
     public override void OnStart()
     {
@@ -32,6 +34,9 @@ public class Lazer_ShieldAimming : Action
         aimmingTimer = Time.time;
         AimmingEnable();
         ShieldEnable();
+
+        unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_C>();
+        unityEvent.VFX_AimStart();
     }
 
     public override TaskStatus OnUpdate()
@@ -39,11 +44,13 @@ public class Lazer_ShieldAimming : Action
         LimitedRotation();
         if (Time.time - aimmingTimer <= aimmingDuaction - AimmingEndDelay)
         {
+            unityEvent.VFX_AimKeep();
             AimmingLineRunning();
             ShieldEnable();
         }
         else
         {
+            unityEvent.VFX_AimEnd();
             AimmingLineDisable();
             ShieldDisable();
         }
