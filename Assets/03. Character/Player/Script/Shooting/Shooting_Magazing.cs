@@ -6,6 +6,8 @@ public class Shooting_Magazing : MonoBehaviour
     private ControllerInput _input;
     private EnergySystem _energySystem;
     private MagazingUI _magazingUI;
+    private Shooting_Normal _shooting_Normal;
+    private Shooting _shooting;
     [Range(0,14)]
     public int Bullet;
 
@@ -20,6 +22,8 @@ public class Shooting_Magazing : MonoBehaviour
         _magazingUI = GameManager.singleton.UISystem.GetComponent<MagazingUI>();
         _magazingUI.UpdateBulletsNumber(startBulletNumber);
         _input = GameManager.singleton._input;
+        _shooting_Normal = GetComponent<Shooting_Normal>();
+        _shooting = GetComponent<Shooting>();
 
         Initialization();  
     }
@@ -57,8 +61,14 @@ public class Shooting_Magazing : MonoBehaviour
 
         if (CanUse)
         {
+            SetShootingLimit(false);
             Reloading();
         }
+    }
+    private void SetShootingLimit(bool Active)
+    {
+        _shooting.enabled = Active;
+        _shooting_Normal.enabled = Active;
     }
     public async void Reloading()
     {
@@ -67,6 +77,7 @@ public class Shooting_Magazing : MonoBehaviour
             if (Bullet >= 13)
             {
                 Bullet = 14;
+                SetShootingLimit(true);
                 isReloading = false;
                 return;
             }

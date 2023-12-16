@@ -24,7 +24,8 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] private float FloatCost = 10;
     [SerializeField] private float DashCost = 10;
     [SerializeField] private float KickCost = 10;
-
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player Feedbacks_NoEnegy;
 
     //[Header("Get")]
     //[SerializeField] private float LampGet = 40;
@@ -100,6 +101,7 @@ public class EnergySystem : MonoBehaviour
             Decrease(DashCost);
         } else
         {
+            noEnegyFeedbacks();
             Debug.Log("Energy is not enough");
         }
     }
@@ -112,6 +114,7 @@ public class EnergySystem : MonoBehaviour
             Decrease(SuperDashCost);
         } else
         {
+            noEnegyFeedbacks();
             Debug.Log("Energy is not enough");
         }
     }
@@ -124,6 +127,7 @@ public class EnergySystem : MonoBehaviour
             Decrease(KickCost);
         }else
         {
+            noEnegyFeedbacks();
             Debug.Log("Energy is not enough");
         }
     }
@@ -137,6 +141,7 @@ public class EnergySystem : MonoBehaviour
         }
         else
         {
+            noEnegyFeedbacks();
             Debug.Log("Energy is not enough");
         }
     }
@@ -150,6 +155,7 @@ public class EnergySystem : MonoBehaviour
         }
         else
         {
+            noEnegyFeedbacks();
             Debug.Log("Energy is not enough");
         }
     }
@@ -163,6 +169,7 @@ public class EnergySystem : MonoBehaviour
         }
         else
         {
+            noEnegyFeedbacks();
             Debug.Log("Energy is not enough");
         }
     }
@@ -176,6 +183,10 @@ public class EnergySystem : MonoBehaviour
         {
             return true;
         }
+    }
+    private void noEnegyFeedbacks()
+    {
+        Feedbacks_NoEnegy.PlayFeedbacks();
     }
     #endregion
     #region Recover
