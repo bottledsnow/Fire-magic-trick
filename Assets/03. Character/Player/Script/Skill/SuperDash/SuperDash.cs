@@ -10,6 +10,7 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private float superDashMaxSpeed;
     [SerializeField] private float SuperDashTimeNormal;
     [SerializeField] private float SuperDashTimeFall;
+    [SerializeField] private float SuperDashCollingTime;
     [Header("Crash")]
     [SerializeField] private SuperDashCollider _superDashCollider;
     public float CrashForce;
@@ -20,6 +21,7 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private MMF_Player FireDashHit;
     [SerializeField] private MMF_Player FireDashEnd;
     [SerializeField] private MMF_Player FireDashEnd_Interrupt;
+    [SerializeField] private MMF_Player Feedbacks_SuperDashCooling;
     [Header("Other")]
     [SerializeField] private GameObject Model;
 
@@ -40,6 +42,7 @@ public class SuperDash : MonoBehaviour
     private Vector3 direction;
     private float superDashSpeed = 0;
     private float superDashTimer = 0;
+    private bool isCooling;
     private bool isSuperDashThrough;
     private bool isKick;
     private bool TriggerStart;
@@ -107,7 +110,10 @@ public class SuperDash : MonoBehaviour
                 {
                     if(!TriggerStart)
                     {
-                        EnergyCheck();
+                        if(!isCooling)
+                        {
+                            EnergyCheck();
+                        }
                     }
                 }
             }
@@ -120,8 +126,17 @@ public class SuperDash : MonoBehaviour
 
         if(CanUse)
         {
+            SuperDashColling();
             superDashStart();
         }
+    }
+    private async void SuperDashColling()
+    {
+        SetIsCooling(true);
+        Feedbacks_SuperDashCooling.PlayFeedbacks();
+        await Task.Delay((int)(SuperDashCollingTime*1000));
+        Feedbacks_SuperDashCooling.StopFeedbacks();
+        SetIsCooling(false);
     }
     
     private void superDashStart()
@@ -336,5 +351,9 @@ public class SuperDash : MonoBehaviour
     private void SetTriggerStart(bool active)
     {
         TriggerStart = active;
+    }
+    private void SetIsCooling(bool value)
+    {
+        isCooling = value;
     }
 }
