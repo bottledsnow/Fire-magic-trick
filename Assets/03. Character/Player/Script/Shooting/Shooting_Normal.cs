@@ -18,6 +18,7 @@ public class Shooting_Normal : MonoBehaviour
     [SerializeField] private MMF_Player Throw_C;
 
     private PlayerAnimator _playerAnimator;
+    private Shooting_Magazing _shooting_magazing;
     private ControllerInput _Input;
     private PlayerState _playerState;
     private CrosshairUI _crosshairUI;
@@ -32,6 +33,7 @@ public class Shooting_Normal : MonoBehaviour
         _playerAnimator = GameManager.singleton.Player.GetComponent<PlayerAnimator>();
         _playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
         _shooting = GetComponent<Shooting>();
+        _shooting_magazing = GetComponent<Shooting_Magazing>();
     }
     private void Update()
     {
@@ -67,16 +69,22 @@ public class Shooting_Normal : MonoBehaviour
     }
     private void Shooting()
     {
+        ShootCooldown(shootCooldown);
+        _shooting.Shoot_Normal(pfBulletProjectile);
+
+        if (_shooting_magazing.Bullet <= 0 )
+        {
+            return;
+        }
+
         ThrowFeedbacks();
         _playerAnimator.PlayAnimator("Player@Throw_1");
-        _shooting.Shoot_Normal(pfBulletProjectile);
         _crosshairUI.CrosshairShooting();
         _playerState.TurnToAimDirection(10f);
         _playerState.TurnToAimDirection(10f);
         _playerState.TurnToAimDirection(10f);
         _playerState.TurnToAimDirection(10f);
         _playerState.TurnToAimDirection(10f);
-        ShootCooldown(shootCooldown);
     }
     private async void ShootCooldown(float shootCooldown)
     {

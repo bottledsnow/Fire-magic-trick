@@ -10,6 +10,8 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform spawnBulletPosition;
     [SerializeField] private float shootingEnergyCost;
     [SerializeField] private float FireEnergyCost;
+    [Header("Feedbacks")]
+    [SerializeField] private MMF_Player feedbacks_NoBullet;
     private void Start()
     {
         _shooting_check = GetComponent<Shooting_Check>();
@@ -19,13 +21,21 @@ public class Shooting : MonoBehaviour
     {
         spawnBulletPositionToNew();
 
+        if (_shooting_magazing.enabled == true)
+        {
+            if (_shooting_magazing.Bullet <= 0)
+            {
+                feedbacks_NoBullet.PlayFeedbacks();
+                return;
+            }
+
+            _shooting_magazing.UseBullet();
+        }
+
         Vector3 aimDir = (_shooting_check.mouseWorldPosition - spawnBulletPosition.position).normalized;
         Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(aimDir, Vector3.up));
 
-        if(_shooting_magazing.enabled ==true)
-        {
-            _shooting_magazing.UseBullet();
-        }
+        
     }
     public void Shoot_Normal(Transform preferb)
     {
