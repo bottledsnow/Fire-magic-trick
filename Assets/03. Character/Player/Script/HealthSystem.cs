@@ -45,7 +45,7 @@ public class HealthSystem : MonoBehaviour
     private void DamagePlayer(int Damage)
     {
         energySystem.DecreaseEnergy(Damage);
-        HitInvincible();
+        ToInvincible();
         PlayFeedbacks();
     }
     private void DamagePlayer(int Damage, Vector3 ImpactDirection)
@@ -61,7 +61,7 @@ public class HealthSystem : MonoBehaviour
     {
         Feedbacks.PlayFeedbacks();
     }
-    private async void HitInvincible()
+    public async void ToInvincible()
     {
         SetInvincible(true);
         await Task.Delay((int)(HitInvicibleTime*1000));

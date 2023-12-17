@@ -33,6 +33,7 @@ public class FireDash : MonoBehaviour
     private CharacterController _characterController;
     private EnergySystem _energySystem;
     private FireDashGhost _fireDashGhost;
+    private HealthSystem _healthSystem;
     private void Start()
     {
         _Input = GameManager.singleton._input;
@@ -40,6 +41,7 @@ public class FireDash : MonoBehaviour
         _characterController = _Input.GetComponent<CharacterController>();
         _energySystem = _Input.GetComponent<EnergySystem>();
         _fireDashGhost = GetComponent<FireDashGhost>();
+        _healthSystem = _Input.GetComponent<HealthSystem>();
         Dash_Normal = DashEffect_Explode_End.gameObject.transform.localScale;
     }
     private void Update()
@@ -64,6 +66,7 @@ public class FireDash : MonoBehaviour
             OpenCrash();
             SetDashScale(Dash_Normal);
             Dash_Start();
+            _healthSystem.ToInvincible();
         }
     }
     private void ButtonPressedEndEvent()

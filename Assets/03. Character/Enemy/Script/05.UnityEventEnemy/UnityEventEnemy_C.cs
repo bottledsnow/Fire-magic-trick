@@ -32,7 +32,6 @@ public class UnityEventEnemy_C : MonoBehaviour
     public void VFX_AimStart()
     {
         OnAimStart.Invoke();
-        Debug.Log("AimStart");
     }
     public void VFX_AimKeep()
     {

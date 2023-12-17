@@ -1,6 +1,7 @@
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using Unity.VisualScripting;
 
 public class Lazer_ShieldAimming : Action
 {
@@ -26,7 +27,7 @@ public class Lazer_ShieldAimming : Action
     private float aimmingTimer;
     private LineRenderer lineRenderer;
     private UnityEventEnemy_C unityEvent;
-
+    private bool triggerEnd;
     public override void OnStart()
     {
         aimmingLinePoint = behaviorObject.Value.Find("AimmingLinePoint");
@@ -47,10 +48,15 @@ public class Lazer_ShieldAimming : Action
             unityEvent.VFX_AimKeep();
             AimmingLineRunning();
             ShieldEnable();
+            triggerEnd = false;
         }
         else
         {
-            unityEvent.VFX_AimEnd();
+            if(!triggerEnd)
+            {
+                unityEvent.VFX_AimEnd();
+                triggerEnd = true;
+            }
             AimmingLineDisable();
             ShieldDisable();
         }
