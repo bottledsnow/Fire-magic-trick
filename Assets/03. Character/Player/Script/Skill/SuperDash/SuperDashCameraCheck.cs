@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SuperDashCameraCheck : MonoBehaviour
@@ -5,7 +6,8 @@ public class SuperDashCameraCheck : MonoBehaviour
     [Header("CheckRay")]
     public GameObject Target;
 
-    [SerializeField] private LayerMask mask;
+    [SerializeField] private LayerMask rayMask;
+    [SerializeField] private LayerMask usefullMask;
     [SerializeField] private float rayDistance = 10f;
 
     private SuperDash _superDash;
@@ -32,7 +34,16 @@ public class SuperDashCameraCheck : MonoBehaviour
     }
     private void RayHitCheck(Ray ray,out RaycastHit hit)
     {
-        isHit = Physics.Raycast(ray, out hit, rayDistance, mask);
+        if(Physics.Raycast(ray, out hit, rayDistance, rayMask))
+        {
+            if(hit.collider.gameObject.CompareTag("SuperDashTarget"))
+            {
+                isHit = true;
+            }else
+            {
+                isHit = false;
+            }
+        }
     }
     private void GetTarget(RaycastHit hit)
     {

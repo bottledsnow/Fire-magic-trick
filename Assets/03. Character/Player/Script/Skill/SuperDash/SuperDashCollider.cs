@@ -52,6 +52,7 @@ public class SuperDashCollider : MonoBehaviour
 
                     if (!isTriggerDamage)
                     {
+                        Debug.Log("TriggerDamage");
                         _playerDamage.ToDamageEnemy(other);
                         SetIsTriggerDamage(true);
                     }
