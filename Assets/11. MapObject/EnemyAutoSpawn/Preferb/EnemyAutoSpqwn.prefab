@@ -95,7 +95,7 @@ BoxCollider:
   m_GameObject: {fileID: 6952302141892692922}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -111,10 +111,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cab5d201bdb5d2489e4b4961fb06417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enemy: {fileID: 8032919127870789858, guid: 148bd96f721914d41b38e3a206066776, type: 3}
-  MaxEnemyCount: 5
+  useY: 0
+  Enemy: {fileID: 1402972569165973743, guid: 4dff59ba869a6924d94a653435fbe696, type: 3}
+  MaxEnemyCount: 2
   spawnRange: 8
-  spawnTime: 2
+  spawnTime: 10
   debugBox: {fileID: 6952302143504658106}
 --- !u!1 &6952302143504658107
 GameObject:

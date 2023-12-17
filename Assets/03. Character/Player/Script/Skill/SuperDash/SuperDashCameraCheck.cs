@@ -30,7 +30,11 @@ public class SuperDashCameraCheck : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
         RaycastHit hit;
         RayHitCheck(ray,out hit);
-        GetTarget(hit);
+
+        if(hit.collider != null)
+        {
+            GetTarget(hit);
+        }
     }
     private void RayHitCheck(Ray ray,out RaycastHit hit)
     {
@@ -49,7 +53,17 @@ public class SuperDashCameraCheck : MonoBehaviour
     {
         if(!_superDash.isSuperDash)
         {
-            Target = isHit ? hit.collider.gameObject : null;
+            if(isHit)
+            {
+                if(hit.collider.gameObject !=null)
+                {
+                    Target = hit.collider.gameObject;
+                }
+            }
+            else
+            {
+                Target = null;
+            }
         }
     }
 

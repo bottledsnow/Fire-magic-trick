@@ -14,5 +14,9 @@ public class DeathArea : MonoBehaviour
         {
             _deathSystem.EnterDeathImage();
         }
+        if(other.CompareTag("Enemy"))
+        {
+            other.gameObject.SetActive(false);
+        }
     }
 }
