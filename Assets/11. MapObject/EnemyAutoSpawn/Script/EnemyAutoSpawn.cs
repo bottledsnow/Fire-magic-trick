@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class EnemyAutoSpawn : MonoBehaviour
@@ -81,12 +82,13 @@ public class EnemyAutoSpawn : MonoBehaviour
 
         enemyCount++;
     }
-    private void EnemyRebirthCheck()
+    private async void EnemyRebirthCheck()
     {
         for(int i =0;i< Enemys.Length; i++)
         {
             if (Enemys[i].activeSelf == false)
             {
+                await Task.Delay((int)(spawnTime*1000));
                 EnemyRebirth(i);
                 return;
             }
