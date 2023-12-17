@@ -1,16 +1,17 @@
 using StarterAssets;
 using UnityEngine;
 using System.Threading.Tasks;
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityCharacterController;
 
 public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private float maxPreInputTime = 0.1f;
     [SerializeField] private float JumpTimeout = 0.1f;
-
+    [SerializeField] private float JumpToGroundTime = 0.1f;
     private float preInputTimer = 0f;
     private bool isPreInput = false;
     private bool trigger = false;
-
+    private bool triggerJumpGround = false;
     private ThirdPersonController _thirdPersonController;
     private ControllerInput _input;
 
@@ -23,6 +24,7 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
         preInputSystem();
+        JumpToGround();
     }
     #region PreInput
     #region System
@@ -82,4 +84,26 @@ public class PlayerJump : MonoBehaviour
         await Task.Delay((int)(JumpTimeout *1000f));
         _thirdPersonController.Jump();
     }
+    private void JumpToGround()
+    {
+        if(_thirdPersonController.Grounded)
+        {
+            if(!triggerJumpGround)
+            {
+                Debug.Log("_speed = "+_thirdPersonController._speed);
+                _thirdPersonController.useMove = false;
+                TriggerJumpGround();
+            }
+        }else
+        {
+            triggerJumpGround = false;
+        }
+    }
+    private async void TriggerJumpGround()
+    {
+        await Task.Delay((int)(JumpToGroundTime * 1000f));
+        _thirdPersonController.useMove = true;
+        triggerJumpGround = true;
+    }
+
 }

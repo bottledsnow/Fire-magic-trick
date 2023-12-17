@@ -1,10 +1,10 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class EnemyAutoSpawn : MonoBehaviour
 {
     [Header("Mode")]
     [SerializeField] private bool useY;
+    [SerializeField] private bool DirectionToCenter;
     [Header("Setting")]
     [SerializeField] private GameObject Enemy;
     [SerializeField] private int MaxEnemyCount;
@@ -18,11 +18,15 @@ public class EnemyAutoSpawn : MonoBehaviour
     private float timer;
     private bool canSpawn;
     private int enemyCount;
-
+    Quaternion rotataion;
     private void Awake()
     {
         Enemys = new GameObject[MaxEnemyCount];
         Center = transform.position;
+    }
+    private void Start()
+    {
+        SetCanSpawn(true);
     }
     private void Update()
     {
@@ -63,7 +67,15 @@ public class EnemyAutoSpawn : MonoBehaviour
         Vector3 position = newPosition(posi);
 
         Vector3 Direction = (Center - position).normalized;
-        Quaternion rotataion = Quaternion.Euler(Direction);
+
+        if(DirectionToCenter)
+        {
+            rotataion = this.transform.rotation;
+        }
+        else
+        {
+            rotataion = Quaternion.Euler(Direction);
+        }
 
         Enemys[enemyCount] = Instantiate(Enemy, position, rotataion);
 

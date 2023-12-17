@@ -70,7 +70,7 @@ public class RotateToTarget : Action
 
     private void AnimationStart()
     {
-        if (modelObject != null)
+        if (modelObject.Value != null)
         {
             animator = modelObject.Value.GetComponent<Animator>();
         }

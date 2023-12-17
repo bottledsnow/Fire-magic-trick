@@ -75,7 +75,6 @@ public class SuperDashCollider : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             EnemyToClose = true;
-            Debug.Log("Comaper");
         }
     }
     public void SetIsSuperDash(bool value)
