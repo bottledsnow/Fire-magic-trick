@@ -16,7 +16,8 @@ public class Lazer_ShieldAimming : Action
     [SerializeField] private float AimmingEndDelay = 0.1f;
 
     [Header("AimmingLine")]
-    [SerializeField] private float aimmingLineLength;
+    [SerializeField] private float maxLength;
+    [SerializeField] private LayerMask obstacleLayer;
 
     [Header("Player")]
     [SerializeField] private float playerHeight = 0.3f;
@@ -91,9 +92,20 @@ public class Lazer_ShieldAimming : Action
     }
     private void AimmingLineRunning()
     {
-        targetPoint = aimmingLinePoint.position + aimmingLinePoint.forward * aimmingLineLength;
         lineRenderer.SetPosition(0, aimmingLinePoint.position);
-        lineRenderer.SetPosition(1, targetPoint);
+
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, maxLength , obstacleLayer))
+        {
+            Vector3 hitPoint = hit.point;
+            lineRenderer.SetPosition(1, hitPoint);
+        }
+        else
+        {
+            targetPoint = aimmingLinePoint.position + aimmingLinePoint.forward * maxLength;
+            lineRenderer.SetPosition(1, targetPoint);
+        }
     }
     private void AimmingLineDisable()
     {
