@@ -45,7 +45,7 @@ public class Shooting_Magazing : MonoBehaviour
     }
     private void CheckBulletBumber()
     {
-        if(Bullet >=14)
+        if(Bullet >=13)
         {
             isReloading = false;
             return;
