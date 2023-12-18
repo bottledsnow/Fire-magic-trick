@@ -1,5 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class SuperDashCameraCheck : MonoBehaviour
 {
@@ -30,23 +30,24 @@ public class SuperDashCameraCheck : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0));
         RaycastHit hit;
         RayHitCheck(ray,out hit);
-
-        if(hit.collider != null)
-        {
-            GetTarget(hit);
-        }
+        GetTarget(hit);
     }
     private void RayHitCheck(Ray ray,out RaycastHit hit)
     {
         if(Physics.Raycast(ray, out hit, rayDistance, rayMask))
         {
-            if(hit.collider.gameObject.CompareTag("SuperDashTarget"))
+            Debug.Log(hit.collider.gameObject.name);
+            if(hit.collider.gameObject.name == "CheckArea")
             {
                 isHit = true;
-            }else
+            }
+            else
             {
                 isHit = false;
             }
+        }else
+        {
+            isHit = false;
         }
     }
     private void GetTarget(RaycastHit hit)
@@ -55,9 +56,12 @@ public class SuperDashCameraCheck : MonoBehaviour
         {
             if(isHit)
             {
-                if(hit.collider.gameObject !=null)
+                if(hit.collider != null)
                 {
-                    Target = hit.collider.gameObject;
+                    if (hit.collider.gameObject.activeSelf != false)
+                    {
+                        Target = hit.collider.gameObject;
+                    }
                 }
             }
             else

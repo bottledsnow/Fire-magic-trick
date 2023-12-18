@@ -55848,7 +55848,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  mask:
+  rayMask:
+    serializedVersion: 2
+    m_Bits: 17409
+  usefullMask:
     serializedVersion: 2
     m_Bits: 1024
   rayDistance: 15
@@ -69898,9 +69901,9 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4254292087392101755}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3e60f1ade2847544ca7a37749bf62f6b, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.14746863
   m_Center: {x: 0, y: 0.007468611, z: 0}
@@ -70183,6 +70186,7 @@ MonoBehaviour:
   useGravity: 1
   useMove: 1
   isFloat: 0
+  _speed: 0
   _verticalVelocity: 0
   _jumpTimeoutDelta: 0
   UseOurMove: 1
@@ -70212,6 +70216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxPreInputTime: 0.1
   JumpTimeout: 0.25
+  JumpToGroundTime: 0.005
 --- !u!114 &3012127872698469351
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70284,10 +70289,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeEnemy: []
   rangedEnemy: []
-  maxMeleeEnemies: 2
-  maxRangedEnemies: 2
-  meleeDetectionRadius: 15
-  rangedDetectionRadius: 21
+  maxMeleeEnemies: 50
+  maxRangedEnemies: 50
+  meleeDetectionRadius: 50
+  rangedDetectionRadius: 50
 --- !u!1 &5030348826241938730
 GameObject:
   m_ObjectHideFlags: 0
@@ -109408,15 +109413,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.77646935
+      value: 0.77646816
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2631761
+      value: 1.2631764
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.9999998
+      value: -3.9999962
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -111142,15 +111147,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8669527443974683605, guid: fba373850552dc844bd4c0d6b89a0712, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.40000507
+      value: 0.4000183
       objectReference: {fileID: 0}
     - target: {fileID: 8669527443974683605, guid: fba373850552dc844bd4c0d6b89a0712, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2520003
+      value: 1.253466
       objectReference: {fileID: 0}
     - target: {fileID: 8669527443974683605, guid: fba373850552dc844bd4c0d6b89a0712, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.1000013
+      value: -2.0816312
       objectReference: {fileID: 0}
     - target: {fileID: 8669527443974683605, guid: fba373850552dc844bd4c0d6b89a0712, type: 3}
       propertyPath: m_LocalRotation.w
@@ -116428,15 +116433,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740582, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.77646935
+      value: 0.77646816
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740582, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2631761
+      value: 1.2631764
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740582, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.9999998
+      value: -3.9999962
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740582, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_LocalRotation.w
