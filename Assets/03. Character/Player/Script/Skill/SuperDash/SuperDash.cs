@@ -68,7 +68,6 @@ public class SuperDash : MonoBehaviour
         superDash();
         superDashHit();
         superDashThrough();
-        superDashInterrupt();
         IsSuperDashModelCheck();
     }
     private async void IsSuperDashModelCheck()
@@ -143,6 +142,7 @@ public class SuperDash : MonoBehaviour
     {
         isSuperDash = true;
         FireDashStart.PlayFeedbacks();
+        superDashInterrupt();
 
         SetTriggerStart(true);
         _superDashCollider.SetIsSuperDash(true);
@@ -330,12 +330,10 @@ public class SuperDash : MonoBehaviour
         superDashTimer = speedTimer(superDashTimer, SuperDashTimeFall);
         superDashSpeed = superDashReduceSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
     }
-    private void superDashInterrupt()
+    private async  void superDashInterrupt()
     {
-        if(_input.LB && !isSuperDash)
-        {
-            superDashInterruptStop();
-        }
+        await Task.Delay(7000);
+        superDashInterruptStop();
     }
     public void SetIsKick(bool value)
     {
