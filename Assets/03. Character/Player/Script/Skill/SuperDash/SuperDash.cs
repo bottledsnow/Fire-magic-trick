@@ -332,7 +332,7 @@ public class SuperDash : MonoBehaviour
     }
     private async  void superDashInterrupt()
     {
-        await Task.Delay(7000);
+        await Task.Delay(3000);
         superDashInterruptStop();
     }
     public void SetIsKick(bool value)

@@ -268,6 +268,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         this.transform.position = position;
         this.transform.rotation = rotation;
         Initialization();
+        return;
     }
     private void RebirthScription()
     {
