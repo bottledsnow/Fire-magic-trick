@@ -44,6 +44,7 @@ public class MoveToTarget : Action
    private void Movement()
    {
       Vector3 direction = (targetObject.Value.transform.position - transform.position).normalized;
+      direction.y = 0;
       rb.AddForce(direction * moveSpeed * Time.deltaTime);
    }
    
