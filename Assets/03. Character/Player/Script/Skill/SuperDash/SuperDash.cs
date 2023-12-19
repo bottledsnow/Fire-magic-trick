@@ -46,7 +46,7 @@ public class SuperDash : MonoBehaviour
     private bool isSuperDashThrough;
     private bool isKick;
     private bool TriggerStart;
-    [HideInInspector] public bool isSuperDash;
+    public bool isSuperDash;
 
     private void Start()
     {

@@ -63,6 +63,10 @@ public class Shooting_Magazing : MonoBehaviour
         {
             SetShootingLimit(false);
             Reloading();
+        }else
+        {
+            isReloading = false;
+            //no energy;
         }
     }
     private void SetShootingLimit(bool Active)
