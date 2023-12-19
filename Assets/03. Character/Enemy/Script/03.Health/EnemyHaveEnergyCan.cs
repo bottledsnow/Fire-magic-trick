@@ -16,6 +16,4 @@ public class EnemyHaveEnergyCan : MonoBehaviour
     {
         energyCanSystem.Broke();
     }
-
-
 }
