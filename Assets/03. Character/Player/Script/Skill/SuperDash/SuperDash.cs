@@ -141,11 +141,11 @@ public class SuperDash : MonoBehaviour
     private void superDashStart()
     {
         isSuperDash = true;
+        _superDashCollider.SetIsSuperDash(true);
         FireDashStart.PlayFeedbacks();
         superDashInterrupt();
 
         SetTriggerStart(true);
-        _superDashCollider.SetIsSuperDash(true);
         _superDashKickDown.GetTarget(Target);
         _playerAnimator.SuperDashStart();
         _playerState.SetGravityToFire();

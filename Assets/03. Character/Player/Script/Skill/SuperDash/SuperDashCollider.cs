@@ -1,4 +1,5 @@
 using MoreMountains.Feedbacks;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class SuperDashCollider : MonoBehaviour
@@ -79,6 +80,11 @@ public class SuperDashCollider : MonoBehaviour
     }
     public void SetIsSuperDash(bool value)
     {
+        if(value)
+        {
+            SetIsTriggerDamage(false);
+        }
+
         IsSuperDash = value;
         canTrigger = value;
     }

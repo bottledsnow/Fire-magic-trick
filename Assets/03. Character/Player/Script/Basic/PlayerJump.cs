@@ -90,7 +90,6 @@ public class PlayerJump : MonoBehaviour
         {
             if(!triggerJumpGround)
             {
-                Debug.Log("_speed = "+_thirdPersonController._speed);
                 _thirdPersonController.useMove = false;
                 TriggerJumpGround();
             }
