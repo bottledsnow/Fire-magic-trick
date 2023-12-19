@@ -16,7 +16,8 @@ public class DeathArea : MonoBehaviour
         }
         if(other.CompareTag("Enemy"))
         {
-            other.gameObject.SetActive(false);
+            EnemyHealthSystem enemyHealthSystem = other.GetComponent<EnemyHealthSystem>();
+            enemyHealthSystem.EnemyDeathRightNow();
         }
     }
 }

@@ -302,6 +302,9 @@ public class SuperDash : MonoBehaviour
     }
     private void superDashToThrough()
     {
+        EnemyHealthSystem enemyHealthSystem = _playerCollider.hit.collider.GetComponent<EnemyHealthSystem>();
+        enemyHealthSystem.EnemyDeathRightNow();
+
         _playerCollider.hit.collider.gameObject.SetActive(false);
         isSuperDashThrough = true;
         superDashSpeed = superDashMaxSpeed;
