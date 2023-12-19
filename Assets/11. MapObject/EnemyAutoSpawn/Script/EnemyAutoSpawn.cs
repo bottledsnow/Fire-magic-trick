@@ -85,14 +85,12 @@ public class EnemyAutoSpawn : MonoBehaviour
     }
     private async void EnemyRebirthCheck()
     {
-        Debug.Log("call call Rebirth Enemy");
 
         for (int i =0;i< Enemys.Length; i++)
         {
             if (Enemys[i].activeSelf == false)
             {
                 await Task.Delay((int)(spawnTime*1000));
-                Debug.Log("call Rebirth Enemy");
                 EnemyRebirth(i);
                 return;
             }
@@ -107,7 +105,6 @@ public class EnemyAutoSpawn : MonoBehaviour
 
         health.Rebirth(position, rotation);
 
-        Debug.Log("Rebirth Enemy");
 
         return;
     }

@@ -36,7 +36,6 @@ public class SuperDashCameraCheck : MonoBehaviour
     {
         if(Physics.Raycast(ray, out hit, rayDistance, rayMask))
         {
-            Debug.Log(hit.collider.gameObject.name);
             if(hit.collider.gameObject.name == "CheckArea")
             {
                 isHit = true;

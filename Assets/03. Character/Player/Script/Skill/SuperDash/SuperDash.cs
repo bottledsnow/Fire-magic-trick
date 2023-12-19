@@ -46,7 +46,7 @@ public class SuperDash : MonoBehaviour
     private bool isSuperDashThrough;
     private bool isKick;
     private bool TriggerStart;
-    [HideInInspector] public bool isSuperDash;
+    public bool isSuperDash;
 
     private void Start()
     {
@@ -141,11 +141,11 @@ public class SuperDash : MonoBehaviour
     private void superDashStart()
     {
         isSuperDash = true;
+        _superDashCollider.SetIsSuperDash(true);
         FireDashStart.PlayFeedbacks();
         superDashInterrupt();
 
         SetTriggerStart(true);
-        _superDashCollider.SetIsSuperDash(true);
         _superDashKickDown.GetTarget(Target);
         _playerAnimator.SuperDashStart();
         _playerState.SetGravityToFire();
@@ -302,6 +302,9 @@ public class SuperDash : MonoBehaviour
     }
     private void superDashToThrough()
     {
+        EnemyHealthSystem enemyHealthSystem = _playerCollider.hit.collider.GetComponent<EnemyHealthSystem>();
+        enemyHealthSystem.EnemyDeathRightNow();
+
         _playerCollider.hit.collider.gameObject.SetActive(false);
         isSuperDashThrough = true;
         superDashSpeed = superDashMaxSpeed;

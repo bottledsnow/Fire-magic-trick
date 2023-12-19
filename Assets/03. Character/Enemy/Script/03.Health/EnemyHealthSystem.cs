@@ -299,4 +299,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         
         Debug.Log("At Crash¡G" + active+"Time:" + Time.time);
     }
+    public void EnemyDeathRightNow()
+    {
+        feedbacks_Boom.PlayFeedbacks();
+        feedbacks_Fire.StopFeedbacks();
+        feedbacks_Shock.StopFeedbacks();
+        feedbacks_Steam.StopFeedbacks();
+        OnEnemyDeath?.Invoke();
+    }
 }
