@@ -1,5 +1,4 @@
 using MoreMountains.Feedbacks;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class SuperDashCollider : MonoBehaviour
@@ -38,7 +37,7 @@ public class SuperDashCollider : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            EnemyToClose = false;
+            SetEnemyToClose(false);
         }
     }
     private void ToSuperHitEnemy(Collider other)
@@ -75,7 +74,7 @@ public class SuperDashCollider : MonoBehaviour
     {
         if(other.CompareTag("Enemy"))
         {
-            EnemyToClose = true;
+            SetEnemyToClose(true);
         }
     }
     public void SetIsSuperDash(bool value)

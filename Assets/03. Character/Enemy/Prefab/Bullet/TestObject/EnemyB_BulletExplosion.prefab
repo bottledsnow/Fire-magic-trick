@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1241484329129807966}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -10, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6736046356636765952}
   - component: {fileID: 6736046356636765955}
   - component: {fileID: 6736046356636765954}
-  - component: {fileID: 764667216575939711}
+  - component: {fileID: 4846592816090808114}
   m_Layer: 0
   m_Name: EnemyB_BulletExplosion
   m_TagString: Untagged
@@ -130,7 +130,7 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &764667216575939711
+--- !u!114 &4846592816090808114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -139,10 +139,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6736046356636765981}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22f5f7f3664e50e45972f70e5ea79446, type: 3}
+  m_Script: {fileID: 11500000, guid: d078ffb49b79f49418d8be58d567a700, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 20
-  force: 60
+  force: 25
   knockBackCoordinate: {fileID: 2630696741981007807}
-  isVertical: 0
