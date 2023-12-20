@@ -9,6 +9,7 @@ public class EnemyDamage_BBullet : MonoBehaviour
     [SerializeField] private float force;
     [SerializeField] private Transform knockBackCoordinate;
 
+    bool trigger;
     Rigidbody rb;
 
     private void Start()
@@ -22,12 +23,16 @@ public class EnemyDamage_BBullet : MonoBehaviour
     {
         if (collider.gameObject.tag == "Player")
         {
-            DamagePlayer(collider.gameObject);
+            if(!trigger)
+            {
+                DamagePlayer(collider.gameObject);
+            }
         }
     }
 
     private void DamagePlayer(GameObject player)
     {
+        trigger = true;
         HealthSystem healthSystem = player.GetComponent<HealthSystem>();
 
         Vector3 Direction = (knockBackCoordinate.position- player.transform.position).normalized;
