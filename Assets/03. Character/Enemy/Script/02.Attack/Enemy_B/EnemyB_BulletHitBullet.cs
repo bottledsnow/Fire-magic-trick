@@ -8,6 +8,7 @@ public class EnemyB_BulletHitBullet : MonoBehaviour
         if(collision.gameObject.CompareTag("Bullet"))
         {
             HitByPlayerBullet(collision);
+            Debug.Log("HitBullet");
         }
     }
     private void HitByPlayerBullet(Collision collision)
