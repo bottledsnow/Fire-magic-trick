@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: Project
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 492}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -46,7 +46,7 @@ MonoBehaviour:
     y: 0
     width: 1536
     height: 780.8
-  m_MinSize: {x: 875, y: 492}
+  m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
@@ -73,7 +73,7 @@ MonoBehaviour:
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
-  m_LastLoadedLayoutName: 2 by 3
+  m_LastLoadedLayoutName: 
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_MinSize: {x: 400, y: 200}
   m_MaxSize: {x: 32384, y: 16192}
   vertical: 0
-  controlID: 405
+  controlID: 240
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 406
+  controlID: 241
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -310,7 +310,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: e083ffff
+      m_ExpandedIDs: 9cb1ffff74b60000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -326,7 +326,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 0}
+        m_ClientGUIView: {fileID: 7}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -416,22 +416,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/03. Character/Player/magician_text
+    - Assets/03. Character/Enemy/Model/Enemy A
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/03. Character/Player/magician_text
+  - Assets/03. Character/Enemy/Model/Enemy A
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\USER\Documents\Fire-magic-trick
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 120}
-    m_SelectedIDs: 7c5b0100
-    m_LastClickedID: 88956
-    m_ExpandedIDs: 000000009c230100585b01005a5b01005c5b01005e5b0100605b0100625b0100645b0100665b0100685b01006a5b01006c5b01006e5b0100705b0100725b0100745b0100765b0100785b01007a5b01007c5b01007e5b0100805b0100825b010000ca9a3b
+    m_SelectedIDs: 30190100
+    m_LastClickedID: 71984
+    m_ExpandedIDs: 0000000008910000d0170100d2170100d4170100d6170100d8170100da170100dc170100de170100e0170100e2170100e4170100e6170100e8170100ea170100ec170100ee170100f0170100f2170100f4170100f6170100f8170100fa1701005c18010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -459,7 +459,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000009c230100585b01005a5b01005c5b01005e5b0100605b0100625b0100645b0100665b0100685b01006a5b01006c5b01006e5b0100705b0100725b0100745b0100765b0100785b01007a5b01007c5b01007e5b0100805b0100825b0100
+    m_ExpandedIDs: 0000000008910000d0170100d2170100d4170100d6170100d8170100da170100dc170100de170100e0170100e2170100e4170100e6170100e8170100ea170100ec170100ee170100f0170100f2170100f4170100f6170100f8170100fa170100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -514,7 +514,7 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
-  m_DirectoriesAreaWidth: 126
+  m_DirectoriesAreaWidth: 163
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -920,9 +920,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: 16.490631, y: 3.3501139, z: 27.318401}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: 16.490627, y: 3.350112, z: 27.3184}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -969,13 +969,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    m_Target: {x: -0.0788289, y: 0.86789507, z: -0.14613123, w: -0.46817705}
     speed: 2
-    m_Value: {x: -0.08717229, y: 0.89959055, z: -0.21045254, w: -0.3726226}
+    m_Value: {x: -0.07992266, y: 0.8643594, z: -0.14553592, w: -0.47467303}
   m_Size:
-    m_Target: 12.956853
+    m_Target: 1.2491097
     speed: 2
-    m_Value: 12.398902
+    m_Value: 1.249113
   m_Ortho:
     m_Target: 0
     speed: 2
