@@ -43,6 +43,7 @@ public class IdentifyTarget : Conditional
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2 && !Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
             {
                 targetObject.Value = rangeChecks[0].gameObject;
+                
                 alert = maxAlert;
             }
             else

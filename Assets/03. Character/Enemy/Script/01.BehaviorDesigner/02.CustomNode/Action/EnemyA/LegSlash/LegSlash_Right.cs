@@ -22,6 +22,10 @@ public class LegSlash_Right : Action
     private UnityEventEnemy_A unityEvent;
     public override void OnStart()
     {
+        if(targetObject.Value != null)
+        {
+            return;
+        }
         rb = GetComponent<Rigidbody>();
         legSlashPoint = behaviorObject.Value.Find("LegSlashPoint");
 
