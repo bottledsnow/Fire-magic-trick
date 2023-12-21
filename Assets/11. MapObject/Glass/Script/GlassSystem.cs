@@ -11,7 +11,6 @@ public class GlassSystem : MonoBehaviour
         unlimited
     }
     public Mode mode;
-    [SerializeField] private bool isStaticGlass;
     [Header("UniversalFeedbacks")]
     [SerializeField] private MMF_Player feedbacks_Broken;
     [Header("FastMode")]
@@ -128,11 +127,6 @@ public class GlassSystem : MonoBehaviour
     {
         Debug.Log("chargeMode");
     }
-    private void crashMode()
-    {
-        Debug.Log("crashMode");
-    }
-    
     private void SetGlass(bool active)
     {
         SetCollider(active);
