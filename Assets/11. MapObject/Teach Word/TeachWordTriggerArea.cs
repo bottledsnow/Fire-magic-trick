@@ -9,14 +9,9 @@ public class TeachWordTriggerArea : MonoBehaviour
     [Header("Target")]
     [SerializeField] private TeachWordSystem teachWordSystem;
 
-    private MMF_Player Feedback;
 
     private void Start()
     {
-        if(teachWordSystem != null)
-        {
-            Feedback = teachWordSystem.GetComponent<MMF_Player>();
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,7 +34,6 @@ public class TeachWordTriggerArea : MonoBehaviour
         if(isOpen)
         {
             teachWordSystem.OpenTeachWord();
-            Feedback.PlayFeedbacks();
         }
     }
     private void CloseTriggerTeach()
@@ -47,7 +41,6 @@ public class TeachWordTriggerArea : MonoBehaviour
         if(isClose)
         {
             teachWordSystem.CloseTeachWord();
-            Feedback.StopFeedbacks();
         }
     }
 }
