@@ -35,11 +35,10 @@ public class EnemyDamage_BBullet : MonoBehaviour
         trigger = true;
         HealthSystem healthSystem = player.GetComponent<HealthSystem>();
 
-        Vector3 Direction = (knockBackCoordinate.position- player.transform.position).normalized;
+        Vector3 Direction = (player.transform.position- knockBackCoordinate.position).normalized;
         Vector3 ForceDirection = Direction;
 
-
-        healthSystem.ToDamagePlayer(0, ForceDirection * force);
+        healthSystem.ToDamagePlayer(damage, ForceDirection * force);
     }
     public void DestroyObject()
     {
