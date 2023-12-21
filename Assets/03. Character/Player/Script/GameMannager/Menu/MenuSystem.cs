@@ -1,23 +1,22 @@
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MenuSystem : MonoBehaviour
 {
+    public bool isStartGame;
     [Header("UI")]
     [SerializeField] private GameObject MenuUI;
+    [SerializeField] private GameObject PauseUI;
     [SerializeField] private GameObject Script;
     [SerializeField] private GameObject UI;
     private ThirdPersonController thirdPersonController;
     private EnergySystem energySystem;
     private GameObject MainCamera;
     private GameManager gameManager;
-    private GameObject Player;
 
     private void Start()
     {
         gameManager = GameManager.singleton;
-        Player = GameManager.singleton.Player.gameObject;
         thirdPersonController = GameManager.singleton.Player.GetComponent<ThirdPersonController>();
         energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
         MainCamera = Camera.main.gameObject;
@@ -35,6 +34,7 @@ public class MenuSystem : MonoBehaviour
         NullFatherObj(gameManager.gameObject);
         NullFatherObj(MainCamera.gameObject);
         NullFatherObj(MenuUI);
+        NullFatherObj(PauseUI);
 
         SetPlayMode(false);
         SetMenuInterface(true);
@@ -45,7 +45,7 @@ public class MenuSystem : MonoBehaviour
     }
     #region  playMode
     #endregion
-    private void SetPlayMode(bool active)
+    public void SetPlayMode(bool active)
     {
         thirdPersonController.enabled = active;
         energySystem.enabled = active;
@@ -56,11 +56,16 @@ public class MenuSystem : MonoBehaviour
     {
         MenuUI.gameObject.SetActive(active);
     }
+    public void SetisStartGame(bool active)
+    {
+        isStartGame = active;
+    }
     #region MenuButton
     public void StartGame()
     {
         SetMenuInterface(false);
         SetPlayMode(true);
+        SetisStartGame(true);
     }
     public void GameSetting()
     {

@@ -1,18 +1,25 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseSystem : MonoBehaviour
 {
     private ControllerInput _input;
+    private MenuSystem menuSystem;
 
     public bool isPause = false;
     [Header("UI")]
     [SerializeField] private GameObject pauseUI;
+    [Header("Feedback")]
+    [SerializeField] private MMF_Player feedback_pause;
+    [SerializeField] private MMF_Player feedback_keepGame;
 
     private bool triggerButton = false;
 
     private void Start()
     {
         _input = GameManager.singleton._input;
+        menuSystem = GameManager.singleton.GetComponent<MenuSystem>();
     }
 
     private void Update()
@@ -26,7 +33,7 @@ public class PauseSystem : MonoBehaviour
     }
     private void StartPauseCheck()
     {
-        if (_input.Option)
+        if (_input.Window)
         {
             //Trigger Pause Button.
             if(!triggerButton) 
@@ -47,19 +54,25 @@ public class PauseSystem : MonoBehaviour
     }
     private void Pause()
     {
-        //Pause Game.
-        Time.timeScale = 0;
-        pauseUI.SetActive(true);
+        if(menuSystem.isStartGame)
+        {
+            menuSystem.SetPlayMode(false);
+            feedback_pause.PlayFeedbacks();
+            pauseUI.SetActive(true);
+        }
     }
     private void StopPause()
     {
-        //Stop Pause Game.
-        Time.timeScale = 1;
-        pauseUI.SetActive(false);
+        if(menuSystem.isStartGame)
+        {
+            menuSystem.SetPlayMode(true);
+            feedback_keepGame.PlayFeedbacks();
+            pauseUI.SetActive(false);
+        }
     }
     private void Initialization()
     {
-        if (!_input.Option && triggerButton) 
+        if (!_input.Window && triggerButton) 
         {
             triggerButton = false;
         }
