@@ -93,7 +93,8 @@ public class SuperDashKick : MonoBehaviour
             kickSuccess();
         } else
         {
-            kickFail();
+            kickSuccess();
+            //kickFail();
         }
     }
     public bool timerCheck(bool kickSuccess)
