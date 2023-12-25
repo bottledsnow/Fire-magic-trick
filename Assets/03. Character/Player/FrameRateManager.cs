@@ -10,13 +10,13 @@ public class FrameRateManager : MonoBehaviour
 
     void Start()
     {
-        QualitySettings.vSyncCount = 0; //關閉垂直同步
-        Application.targetFrameRate = targetFrameRate;
-        print("FPS調整為" + targetFrameRate);
+        SetFrameRate(targetFrameRate);
     }
 
-    public void SetFrameRate()
+    public void SetFrameRate(int frameRate)
     {
-
+        QualitySettings.vSyncCount = 0; //關閉垂直同步
+        Application.targetFrameRate = frameRate;
+        print("FPS調整為" + targetFrameRate);
     } 
 }
