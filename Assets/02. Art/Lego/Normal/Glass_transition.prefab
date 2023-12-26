@@ -5830,7 +5830,7 @@ Transform:
   m_GameObject: {fileID: 8725489296452326064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 44.59395, y: -45.739933, z: -38.977375}
-  m_LocalScale: {x: 3, y: 1, z: 3}
+  m_LocalScale: {x: 5.422933, y: 1.03341, z: 6.958352}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4587375800009641594}
@@ -5899,7 +5899,7 @@ BoxCollider:
   m_GameObject: {fileID: 8725489296452326064}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -5915,8 +5915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e814aa56885ce5489d4ef97b4629b86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mode: 1
-  isStaticGlass: 0
+  mode: 0
   feedbacks_Broken: {fileID: 2976541131043528520}
   fastTime: 0.5
   feedbacks_Delay: {fileID: 3340278235185007740}
@@ -5979,6 +5978,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerToPlatform
       objectReference: {fileID: 0}
+    - target: {fileID: 141061234330796507, guid: f850d4321e6670e4c92969280301af0a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f850d4321e6670e4c92969280301af0a, type: 3}
 --- !u!4 &167320742039586687 stripped
@@ -6040,6 +6043,10 @@ PrefabInstance:
     - target: {fileID: 2835117560842655165, guid: 1e72fae448977d84391a4b5d5faf46f7, type: 3}
       propertyPath: m_Name
       value: PlayerLeavePlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 2835117560842655165, guid: 1e72fae448977d84391a4b5d5faf46f7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e72fae448977d84391a4b5d5faf46f7, type: 3}

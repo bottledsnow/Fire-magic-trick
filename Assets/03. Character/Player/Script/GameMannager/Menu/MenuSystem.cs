@@ -35,6 +35,7 @@ public class MenuSystem : MonoBehaviour
         NullFatherObj(MainCamera.gameObject);
         NullFatherObj(MenuUI);
         NullFatherObj(PauseUI);
+        NullFatherObj(UI);
 
         SetPlayMode(false);
         SetMenuInterface(true);

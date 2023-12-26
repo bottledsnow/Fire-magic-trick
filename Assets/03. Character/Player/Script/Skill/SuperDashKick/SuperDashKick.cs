@@ -45,9 +45,12 @@ public class SuperDashKick : MonoBehaviour
     #region KickCheck
     private void GetButtonInput()
     {
-        if(_superDash.isSuperDash && _input.ButtonY)
+        if(_superDash.isSuperDash)
         {
-            EnergyCheck();
+            if (_input.ButtonY ||_input.ButtonA)
+            {
+                EnergyCheck();
+            }
         }
     }
     private void EnergyCheck()

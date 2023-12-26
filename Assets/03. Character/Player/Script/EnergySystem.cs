@@ -115,7 +115,6 @@ public class EnergySystem : MonoBehaviour
         } else
         {
             noEnegyFeedbacks();
-            Debug.Log("Energy is not enough");
         }
     }
     public void UseKick(out bool CanUse)
