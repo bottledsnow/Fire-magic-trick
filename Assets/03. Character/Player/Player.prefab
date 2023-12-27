@@ -46659,9 +46659,7 @@ GameObject:
   - component: {fileID: 4020344256870572598}
   - component: {fileID: 4020344256870572599}
   - component: {fileID: 4020344256870572585}
-  - component: {fileID: 1726532397579935228}
   - component: {fileID: 4020344256870572587}
-  - component: {fileID: 5555797612043937640}
   - component: {fileID: 4020344256870572596}
   m_Layer: 6
   m_Name: ShootingSystem
@@ -46740,20 +46738,6 @@ MonoBehaviour:
   normalSensitivity_y: 0.5
   aimSensitivity_x: 0.5
   aimSensitivity_y: 0.25
---- !u!114 &1726532397579935228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4020344256870572589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96beb52ac97f38d4bb8cc6a08b5a9451, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isNormal: 0
-  isCharge: 0
 --- !u!114 &4020344256870572587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46775,32 +46759,6 @@ MonoBehaviour:
   Throw_A: {fileID: 340457889}
   Throw_B: {fileID: 1566948829}
   Throw_C: {fileID: 1754279513}
---- !u!114 &5555797612043937640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4020344256870572589}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2210d800215821c4397bc9754b476e2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chargeInterval: 0.5
-  MaxDamage: 5
-  repelBase: 5
-  maxLevel: 6
-  fireLevel: 3
-  FirePosition: {fileID: 284743641}
-  chargeSpeed: 10
-  chargeLifeTime: 3
-  pfBullet: {fileID: 114498601500887653, guid: e3e3d98e0e2aa7e4584feb1bac9b55ff, type: 3}
-  pfChargeBall_Normal: {fileID: 1096343083110428078, guid: fbe8d3bee9669f64da8bce522bab05dd, type: 3}
-  pfChargeBall_Fire: {fileID: 1971631905471736768, guid: f58bda3624c6c614e9f756b31830ae2a, type: 3}
-  pfFire: {fileID: 657181758042789809, guid: 1c3ba57d980c1bf4a923d9e3ebf58f19, type: 3}
-  pfHit_Normal: {fileID: 3119227036627229345, guid: c82c6c75563834d40a3b1449b32a1511, type: 3}
-  pfHit_Fire: {fileID: 2647292293908967123, guid: 16f5c2e9396c15046b19d98d4f45a3e2, type: 3}
 --- !u!114 &4020344256870572596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52973,7 +52931,7 @@ MonoBehaviour:
   superDashMaxSpeed: 25
   SuperDashTimeNormal: 0.66
   SuperDashTimeFall: 2.5
-  SuperDashCollingTime: 5
+  SuperDashCollingTime: 3
   _superDashCollider: {fileID: 1430958701}
   CrashForce: 15
   CrashForceUp: 6
@@ -67011,6 +66969,7 @@ GameObject:
   - component: {fileID: 1033187325}
   - component: {fileID: 4690289375808817109}
   - component: {fileID: 773834616}
+  - component: {fileID: 532427657}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -67153,7 +67112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f185ba87740e240826ae7c4fb2ef88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Energy: 0
+  Energy: 50
   StartEnergy: 50
   recoverRange: 50
   recoverTime: 0.25
@@ -67164,7 +67123,7 @@ MonoBehaviour:
   ChargeCost: 3.3
   FloatCost: 10
   DashCost: 5
-  KickCost: 10
+  KickCost: 0
   Feedbacks_NoEnegy: {fileID: 422151704}
 --- !u!114 &4254292087392101647
 MonoBehaviour:
@@ -67198,7 +67157,7 @@ MonoBehaviour:
   _ShootingCheck: {fileID: 4020344256870572599}
   _ShootingAim: {fileID: 4020344256870572585}
   _ShootingNormal: {fileID: 4020344256870572587}
-  _ShootingCharge: {fileID: 5555797612043937640}
+  _ShootingCharge: {fileID: 0}
 --- !u!114 &4020344257176918076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67454,6 +67413,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetFrameRate: 60
+--- !u!114 &532427657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4254292087392101755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8caf46997a2e594199b1490e9e3a0e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  isAimSupport: 0
+  aimSupportTime: 1.5
+  offest_X: -5
+  offest_Y: -5
+  RotateSpeed_Yaw:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  RotateSpeed_Pitch:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  smoothRotateTime: 0.25
 --- !u!1 &5030348826241938730
 GameObject:
   m_ObjectHideFlags: 0
@@ -68375,7 +68400,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 25
+  m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: -1053558941
   m_SortingOrder: 2
   m_TargetDisplay: 0
@@ -83464,6 +83489,7 @@ MonoBehaviour:
   - rid: 7717559078958661635
   - rid: 7717559078958661641
   - rid: 867372360750596100
+  - rid: 3111222681425412096
   KeepPlayModeChanges: 0
   PerformanceMode: 0
   ForceStopFeedbacksOnDisable: 1
@@ -83550,6 +83576,124 @@ MonoBehaviour:
         StateOnReset: 1
         SetStateOnSkip: 0
         StateOnSkip: 1
+    - rid: 3111222681425412096
+      type: {class: MMF_Sound, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks.MMTools}
+      data:
+        Active: 1
+        UniqueID: -1136121847
+        Label: Sound
+        ChannelMode: 0
+        Channel: 0
+        MMChannelDefinition: {fileID: 0}
+        Chance: 100
+        DisplayColor: {r: 0, g: 0, b: 0, a: 1}
+        Timing:
+          TimescaleMode: 0
+          ExcludeFromHoldingPauses: 0
+          ContributeToTotalDuration: 1
+          InitialDelay: 0
+          CooldownDuration: 0
+          InterruptsOnStop: 1
+          NumberOfRepeats: 0
+          RepeatForever: 0
+          DelayBetweenRepeats: 1
+          MMFeedbacksDirectionCondition: 0
+          PlayDirection: 0
+          ConstantIntensity: 0
+          UseIntensityInterval: 0
+          IntensityIntervalMin: 0
+          IntensityIntervalMax: 0
+          Sequence: {fileID: 0}
+          TrackID: 0
+          Quantized: 0
+          TargetBPM: 120
+        AutomatedTargetAcquisition:
+          Mode: 0
+          ChildIndex: 0
+        RandomizeOutput: 0
+        RandomMultiplier: {x: 0.8, y: 1}
+        RandomizeDuration: 0
+        RandomDurationMultiplier: {x: 0.5, y: 2}
+        UseRange: 0
+        RangeDistance: 5
+        UseRangeFalloff: 0
+        RangeFalloff:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        RemapRangeFalloff: {x: 0, y: 1}
+        Owner: {fileID: 5337558588420704670}
+        DebugActive: 0
+        Sfx: {fileID: 8300000, guid: cfb3f31a3e4974faab3ecce1e8eb035f, type: 3}
+        RandomSfx: []
+        TestPlayButton:
+          ButtonText: Debug Play Sound
+        TestStopButton:
+          ButtonText: Debug Stop Sound
+        PlayMethod: 1
+        PoolSize: 10
+        StopSoundOnFeedbackStop: 1
+        MinVolume: 1
+        MaxVolume: 1
+        MinPitch: 1
+        MaxPitch: 1
+        SfxAudioMixerGroup: {fileID: 0}
+        Priority: 128
+        PanStereo: 0
+        SpatialBlend: 0
+        DopplerLevel: 1
+        Spread: 0
+        RolloffMode: 0
+        MinDistance: 1
+        MaxDistance: 500
+        UseCustomRolloffCurve: 0
+        CustomRolloffCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        UseSpatialBlendCurve: 0
+        SpatialBlendCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        UseReverbZoneMixCurve: 0
+        ReverbZoneMixCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        UseSpreadCurve: 0
+        SpreadCurve:
+          serializedVersion: 2
+          m_Curve: []
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
     - rid: 7717559078958661633
       type: {class: MMF_SetActive, ns: MoreMountains.Feedbacks, asm: MoreMountains.Feedbacks}
       data:
@@ -90041,7 +90185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -37.994995, y: 73.25}
+  m_AnchoredPosition: {x: -37.995117, y: 73.25}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 1, y: 0.25}
 --- !u!114 &5337558588813017571
@@ -107171,15 +107315,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.9999998
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2631762
+      value: 1.2631764
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.7841892
+      value: -0.77647424
       objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409503, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
       propertyPath: m_LocalRotation.w
@@ -107319,6 +107463,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7400229183080831249, guid: 614723ed9104f564699870fd5da20667, type: 3}
+      propertyPath: lengthInSec
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400229183080831249, guid: 614723ed9104f564699870fd5da20667, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400229183080831249, guid: 614723ed9104f564699870fd5da20667, type: 3}
       propertyPath: SizeModule.enabled
       value: 0
       objectReference: {fileID: 0}
@@ -107340,7 +107492,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7400229183080831249, guid: 614723ed9104f564699870fd5da20667, type: 3}
       propertyPath: ShapeModule.arc.speed.scalar
-      value: 0.2
+      value: 0.33333
       objectReference: {fileID: 0}
     - target: {fileID: 7400229183080831249, guid: 614723ed9104f564699870fd5da20667, type: 3}
       propertyPath: InitialModule.startSize.scalar
@@ -107352,7 +107504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7400229183080831249, guid: 614723ed9104f564699870fd5da20667, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7400229183080831249, guid: 614723ed9104f564699870fd5da20667, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.atime0
@@ -108470,7 +108622,7 @@ PrefabInstance:
       objectReference: {fileID: 4020344258318298006}
     - target: {fileID: 1854945158825740583, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 50
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740585, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_Name
@@ -109097,15 +109249,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740582, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.9999998
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740582, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.2631762
+      value: 1.2631764
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740582, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.7841892
+      value: -0.77647424
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740582, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_LocalRotation.w

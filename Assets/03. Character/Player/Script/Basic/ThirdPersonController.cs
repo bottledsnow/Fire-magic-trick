@@ -163,7 +163,6 @@ namespace StarterAssets
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
-
             AssignAnimationIDs();
 
             // reset our timeouts on start
@@ -486,6 +485,22 @@ namespace StarterAssets
         public void SetVerticalVelocity(float value)
         {
             _verticalVelocity = value;
+        }
+        public void SetCinemachineTargetPitch(float value)
+        {
+            _cinemachineTargetPitch = value;
+        }
+        public float GetCinemachineTargetPitch()
+        {
+            return _cinemachineTargetPitch;
+        }
+        public void SetCinemachineTargetYaw(float value)
+        {
+            _cinemachineTargetYaw = value;
+        }
+        public float GetCinemachineTargetYaw()
+        {
+            return _cinemachineTargetYaw;
         }
     }
 }
