@@ -1,20 +1,25 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class FireDashCollider : MonoBehaviour
 {
     [SerializeField] private FireDash _fireDash;
     [SerializeField] private MMF_Player HitFeedbacks;
+
     private float CrashForce;
     private bool IsDash;
     private bool canTriggerDamage;
     private bool isTriggerDamage;
     private float CrashForceUp;
     private PlayerDamage _playerDamage;
+    private AimSupportSystem _aimSupportSystem;
     private void Start()
     {
         _fireDash = GameManager.singleton.EnergySystem.GetComponent<FireDash>();
+        _aimSupportSystem = GameManager.singleton.Player.GetComponent<AimSupportSystem>();
         _playerDamage = GetComponent<PlayerDamage>();
+
         Initialization();
     }
     private void Initialization()
@@ -55,6 +60,7 @@ public class FireDashCollider : MonoBehaviour
                     EnemyHealthSystem enemy = other.GetComponent<EnemyHealthSystem>();
                     enemy.SetAtCrash(true);
 
+                    _aimSupportSystem.ToAimSupport(other.gameObject);
                     HitFeedbacks.PlayFeedbacks();
                     other.GetComponent<Rigidbody>().AddForce(direction * CrashForce + Enemyup * CrashForceUp, ForceMode.Impulse);
                 }

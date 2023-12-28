@@ -64,6 +64,15 @@ public class AimSupportSystem : MonoBehaviour
         SetTarget(null);
         SetIsTriggerSmooth(false);
     }
+    public async void ToAimSupport_onlySmooth(GameObject Target)
+    {
+        SetTarget(Target);
+        SetIsAimSupport(true);
+        await Task.Delay((int)(smoothRotateTime * 1000));
+        SetIsAimSupport(false);
+        SetTarget(null);
+        SetIsTriggerSmooth(false);
+    }
     private void ToLookTargetCheck()
     {
         if(isAimSupport)
@@ -100,23 +109,23 @@ public class AimSupportSystem : MonoBehaviour
             SetIsSmoothTimer(true);
             SetIsSmoothRotate(true);
 
-            //Yaw
+            //Start value
             StartYaw = _input.GetCinemachineTargetYaw();
-            angle_X = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg;
-            TargetYaw = angle_X + offest_X;
-            variableYaw = TargetYaw - StartYaw;
-            Debug.Log(variableYaw+":Y");
-
-            //Pitch
             StartPitch = _input.GetCinemachineTargetPitch();
-            angle_Y = Mathf.Asin(Direction.y) * Mathf.Rad2Deg;
-            TargetPitch = angle_Y + offest_Y;
-            variablePitch = TargetPitch - StartPitch;
-            Debug.Log(variablePitch+":P");
         }
 
         if(isSmoothRotate)
         {
+            //Yaw
+            angle_X = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg;
+            TargetYaw = angle_X + offest_X;
+            variableYaw = NormalizeAngle(TargetYaw - StartYaw);
+
+            //Pitch
+            angle_Y = Mathf.Asin(-Direction.y) * Mathf.Rad2Deg;
+            TargetPitch = angle_Y + offest_Y;
+            variablePitch = NormalizeAngle(TargetPitch - StartPitch);
+
             SmoothRotate_Pitch();
             SmoothRotate_Yaw();
         }
@@ -128,7 +137,7 @@ public class AimSupportSystem : MonoBehaviour
             SetCinemachineTargetYaw(_cinemachineTargetYaw);
 
             //Pitch
-            angle_Y = Mathf.Asin(Direction.y) * Mathf.Rad2Deg;
+            angle_Y = Mathf.Asin(-Direction.y) * Mathf.Rad2Deg;
             _cinemachineTargetPitch = angle_Y + offest_Y;
             SetCinemachineTargetPitch(_cinemachineTargetPitch);
         }
@@ -138,7 +147,8 @@ public class AimSupportSystem : MonoBehaviour
         float deltaPitch = RotateSpeed_Pitch.Evaluate(deltaTime) * variablePitch;
         float Pitch = StartPitch + deltaPitch;
         SetCinemachineTargetPitch(Pitch);
-    }private void SmoothRotate_Yaw()
+    }
+    private void SmoothRotate_Yaw()
     {
         float deltaYaw = RotateSpeed_Yaw.Evaluate(deltaTime) * variableYaw;
         float Yaw = StartYaw + deltaYaw;
@@ -156,10 +166,6 @@ public class AimSupportSystem : MonoBehaviour
     {
         _input.SetCinemachineTargetYaw(value);
     }
-    private void SetLockControllerCamera(bool value)
-    {
-          _input.LockCameraPosition = value;
-    }
     private void SetIsAimSupport(bool value)
     {
          isAimSupport = value;
@@ -175,5 +181,17 @@ public class AimSupportSystem : MonoBehaviour
     private void SetIsSmoothRotate(bool value)
     {
         isSmoothRotate = value;
+    }
+    private float NormalizeAngle(float angle)
+    {
+        while (angle > 180f)
+        {
+            angle -= 360f;
+        }
+        while (angle < -180f)
+        {
+            angle += 360f;
+        }
+        return angle;
     }
 }

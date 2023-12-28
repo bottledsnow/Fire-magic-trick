@@ -44,7 +44,6 @@ public class Shooting_XBoxCameraCheck : MonoBehaviour
     {
         if(!isTrigger)
         {
-            Debug.Log("Hit Xbox Target");
             reduceSensitive();
             setIsTrigger(true);
         }
@@ -53,7 +52,6 @@ public class Shooting_XBoxCameraCheck : MonoBehaviour
     {
         if(isTrigger)
         {
-            Debug.Log("Missed Xbox Target");
             recoverSensitive();
             setIsTrigger(false);
         }

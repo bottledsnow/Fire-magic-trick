@@ -6,6 +6,7 @@ public class SuperDashCollider : MonoBehaviour
     [SerializeField] private MMF_Player HitFeedbacks;
     private SuperDash _superDash;
     private PlayerDamage _playerDamage;
+    private AimSupportSystem _aimSupportSystem;
     private float CrashForce;
     private float CrashForceUp;
     private bool IsSuperDash;
@@ -17,6 +18,7 @@ public class SuperDashCollider : MonoBehaviour
     {
         _superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
         _playerDamage = GetComponent<PlayerDamage>();
+        _aimSupportSystem = GameManager.singleton.Player.GetComponent<AimSupportSystem>();
         Initialization();
     }
     private void Initialization()
@@ -48,20 +50,22 @@ public class SuperDashCollider : MonoBehaviour
             {
                 if (canTrigger)
                 {
-                    Debug.Log("SuperDash Damage");
+                    canTrigger = false;
 
                     if (!isTriggerDamage)
                     {
-                        Debug.Log("TriggerDamage");
                         _playerDamage.ToDamageEnemy(other);
                         SetIsTriggerDamage(true);
                     }
 
-                    canTrigger = false;
+                    //Caculate Direction
                     Vector3 playerposition = transform.parent.transform.position;
                     Vector3 EnemyPosition = other.transform.position;
                     Vector3 direction = (EnemyPosition - playerposition).normalized;
                     Vector3 Enemyup = other.transform.up;
+
+                    //atCrash
+                    //_aimSupportSystem.ToAimSupport(other.gameObject);
                     HitFeedbacks.PlayFeedbacks();
                     other.GetComponent<Rigidbody>().velocity = direction * CrashForce + Enemyup * CrashForceUp;
 

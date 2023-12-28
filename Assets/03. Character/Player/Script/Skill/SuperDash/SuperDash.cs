@@ -1,6 +1,7 @@
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using System.Threading.Tasks;
+using UnityEngine.Events;
 
 public class SuperDash : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private MMF_Player Feedbacks_SuperDashCooling;
     [Header("Other")]
     [SerializeField] private GameObject Model;
-
 
 
     private SuperDashCameraCheck _superDashCameraCheck;

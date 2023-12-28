@@ -5,12 +5,17 @@ public class SuperDashKickTrigger : MonoBehaviour
 {
     [SerializeField] private float TriggerTime;
     private PlayerDamage _playerDamage;
+    private AimSupportSystem _aimSupportSystem;
 
     private float timer;
     private bool isKick;
     private void Awake()
     {
         _playerDamage = GetComponent<PlayerDamage>();
+    }
+    private void Start()
+    {
+        _aimSupportSystem = GameManager.singleton.Player.GetComponent<AimSupportSystem>();
     }
     private void Update()
     {
@@ -23,6 +28,7 @@ public class SuperDashKickTrigger : MonoBehaviour
             if(other.CompareTag("Enemy"))
             {
                 _playerDamage.ToDamageEnemy(other);
+                _aimSupportSystem.ToAimSupport(other.gameObject);
                 isKick = false;
             }
         }
