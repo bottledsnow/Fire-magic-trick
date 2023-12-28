@@ -16,6 +16,7 @@ public class Shooting_Aim : MonoBehaviour
     [SerializeField] private float aimSensitivity_x;
     [SerializeField] private float aimSensitivity_y;
 
+    public bool isAiming;
 
 
     private void Start()
@@ -27,37 +28,53 @@ public class Shooting_Aim : MonoBehaviour
 
     private void Update()
     {
-        Aim();
+        aimCheck();
     }
-    private void Aim()
+    private void aimCheck()
     {
-        AimTrigger();
-        AimClose();
-    }
-    private void AimTrigger()
-    {
-        if (_Input.LT)
+        if(_Input.LT)
         {
-            _playerState.TurnToAimDirection();
-            aimVirtualCamera.gameObject.SetActive(true);
-            thirdPersonController.SetSensitivity(aimSensitivity_x,aimSensitivity_y);
-            //thirdPersonController.SetRotateOnMove(false);
-
-            Vector3 worldAimTarget = mouseWorldPosition;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-
-            Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
+            if(!isAiming)
+            {
+                SetisAiming(true);
+                aimOpen();
+                Debug.Log("Aim Open");
+            }
+        }
+        else
+        {
+            if(isAiming)
+            {
+                SetisAiming(false);
+                aimClose();
+                Debug.Log("Aim Close");
+            }
         }
     }
-    private void AimClose()
+    private void aimOpen()
     {
-        if (!_Input.LT) 
-        {
-            aimVirtualCamera.gameObject.SetActive(false);
-            thirdPersonController.SetSensitivity(normalSensitivity_x,normalSensitivity_y);
-            thirdPersonController.SetRotateOnMove(true);
-        }
+        //Initialization
+        _playerState.TurnToAimDirection();
+        aimVirtualCamera.gameObject.SetActive(true);
+        thirdPersonController.SetSensitivity(aimSensitivity_x, aimSensitivity_y);
+
+        //Calculate Aim Direction
+        Vector3 worldAimTarget = mouseWorldPosition;
+        worldAimTarget.y = transform.position.y;
+        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
+
+        //set
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 20f);
+    }
+    private void aimClose()
+    {
+        aimVirtualCamera.gameObject.SetActive(false);
+        thirdPersonController.SetSensitivity(normalSensitivity_x, normalSensitivity_y);
+        thirdPersonController.SetRotateOnMove(true);
+    }
+    private void SetisAiming(bool value)
+    {
+        isAiming = value;
     }
 }

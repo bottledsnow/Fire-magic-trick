@@ -46661,6 +46661,7 @@ GameObject:
   - component: {fileID: 4020344256870572585}
   - component: {fileID: 4020344256870572587}
   - component: {fileID: 4020344256870572596}
+  - component: {fileID: 1384180986}
   m_Layer: 6
   m_Name: ShootingSystem
   m_TagString: Untagged
@@ -46738,6 +46739,7 @@ MonoBehaviour:
   normalSensitivity_y: 0.5
   aimSensitivity_x: 0.5
   aimSensitivity_y: 0.25
+  isAiming: 0
 --- !u!114 &4020344256870572587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46773,6 +46775,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: 14
   startBulletNumber: 10
+--- !u!114 &1384180986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4020344256870572589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48afe3aabd878744b252d52249ec4fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 4194304
+  isXboxSupport: 0
+  isTrigger: 0
+  origionalSensitivity_x: 0
+  origionalSensitivity_y: 0
+  reduceMultiplier: 0.5
 --- !u!1 &4020344256915585549
 GameObject:
   m_ObjectHideFlags: 0
@@ -108622,7 +108644,7 @@ PrefabInstance:
       objectReference: {fileID: 4020344258318298006}
     - target: {fileID: 1854945158825740583, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_Lens.FieldOfView
-      value: 55
+      value: 52.26941
       objectReference: {fileID: 0}
     - target: {fileID: 1854945158825740585, guid: eb4c09f447ce78f4588867c30606b4ad, type: 3}
       propertyPath: m_Name
