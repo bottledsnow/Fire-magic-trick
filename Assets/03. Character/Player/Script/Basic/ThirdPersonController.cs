@@ -397,7 +397,11 @@ namespace StarterAssets
             {
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
-
+            
+            if(_verticalVelocity < Gravity)
+            {
+                _verticalVelocity = Gravity;
+            }
             if(isFloat)
             {
                 _verticalVelocity = Gravity;
