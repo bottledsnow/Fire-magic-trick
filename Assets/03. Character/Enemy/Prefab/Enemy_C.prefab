@@ -25444,10 +25444,10 @@ MonoBehaviour:
   isFire: 0
   isShock: 0
   Boom: 0
-  StartHealth: 6
-  health: 6
-  maxHealth: 6
-  ignitionPoint: 5
+  StartHealth: 4
+  health: 4
+  maxHealth: 4
+  ignitionPoint: 3
   coolingInterval: 2.5
   coolingTime: 3.5
   _eye: {fileID: 2805912013321138728}
@@ -25780,7 +25780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
-  force: 75
+  force: 25
   knockBackCoordinate: {fileID: 3623152130248176069}
   isVertical: 0
 --- !u!1 &3623152132140516108
@@ -37398,6 +37398,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3623152130248176069}
     m_Modifications:
+    - target: {fileID: 41208360461488560, guid: 8b3b580df66f0d64a88819dd7d5cf977, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 41208360461488565, guid: 8b3b580df66f0d64a88819dd7d5cf977, type: 3}
       propertyPath: m_Name
       value: XboxCameraTarget

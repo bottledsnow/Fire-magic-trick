@@ -136,15 +136,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
 
         OnEnemyHit?.Invoke();
 
-
-        //Debug.Log("Enemy remain health" + health);
-
         if (_fireSystem != null)
         {
             _fireSystem.FireCheck(damageType);
         }
 
-        else if (health <= ignitionPoint)
+        if (health <= ignitionPoint)
         {
             EnemyIgnite();
         }

@@ -47,7 +47,7 @@ public class EnemyFireSystem : MonoBehaviour
     {
         if (!isSpread)
         {
-            if (_health.isFire)
+            if (_health.isIgnite)
             {
                 SetTrackTarget(true);
             }
