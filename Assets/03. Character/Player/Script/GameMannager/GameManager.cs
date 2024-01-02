@@ -1,4 +1,3 @@
-using MoreMountains.Feedbacks;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject EnergySystem;
     public GameObject ShootingSystem;
     public Transform Player;
+    public VFX_List VFX_List;
 
     private void Awake()
     {

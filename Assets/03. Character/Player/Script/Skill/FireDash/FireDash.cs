@@ -34,6 +34,9 @@ public class FireDash : MonoBehaviour
     private EnergySystem _energySystem;
     private FireDashGhost _fireDashGhost;
     private HealthSystem _healthSystem;
+
+    public delegate void PlayerDashHandler();
+    public event PlayerDashHandler OnDash;
     private void Start()
     {
         _Input = GameManager.singleton._input;
@@ -63,6 +66,7 @@ public class FireDash : MonoBehaviour
         if (CanUse)
         {
             IsDash = true;
+            OnDash?.Invoke();
             OpenCrash();
             SetDashScale(Dash_Normal);
             Dash_Start();

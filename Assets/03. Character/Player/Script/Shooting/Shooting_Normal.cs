@@ -1,7 +1,6 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
 
 public class Shooting_Normal : MonoBehaviour
 {
@@ -37,8 +36,8 @@ public class Shooting_Normal : MonoBehaviour
     }
     private void Update()
     {
-        ShootingSystem();
-        PistoSystem();
+        //ShootingSystem();
+        //PistoSystem();
     }
     private void ShootingSystem()
     {
@@ -77,6 +76,17 @@ public class Shooting_Normal : MonoBehaviour
             return;
         }
 
+        ThrowFeedbacks();
+        _playerAnimator.PlayAnimator("Player@Throw_1");
+        _crosshairUI.CrosshairShooting();
+        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(10f);
+    }
+    public void PlayShootFeedbacks()
+    {
         ThrowFeedbacks();
         _playerAnimator.PlayAnimator("Player@Throw_1");
         _crosshairUI.CrosshairShooting();
