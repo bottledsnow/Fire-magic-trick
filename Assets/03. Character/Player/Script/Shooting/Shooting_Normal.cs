@@ -15,6 +15,8 @@ public class Shooting_Normal : MonoBehaviour
     [SerializeField] private MMF_Player Throw_A;
     [SerializeField] private MMF_Player Throw_B;
     [SerializeField] private MMF_Player Throw_C;
+    [Header("New Game Play Test")]
+    [SerializeField] private bool useNormal = true;
 
     private PlayerAnimator _playerAnimator;
     private Shooting_Magazing _shooting_magazing;
@@ -36,8 +38,11 @@ public class Shooting_Normal : MonoBehaviour
     }
     private void Update()
     {
-        //ShootingSystem();
-        //PistoSystem();
+        if(useNormal)
+        {
+            ShootingSystem();
+            PistoSystem();
+        }
     }
     private void ShootingSystem()
     {
