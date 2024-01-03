@@ -15,6 +15,10 @@ public class FireFloat : MonoBehaviour
     private bool isTimer;
     private bool needInitialize;
 
+    public delegate void OnFloatStartHandler();
+    public delegate void OnFloatEndHandler();
+    public event OnFloatStartHandler OnFloatStart;
+    public event OnFloatEndHandler OnFloatEnd;
     private void Start()
     {
         _playerState = GameManager.singleton._playerState;
@@ -68,6 +72,7 @@ public class FireFloat : MonoBehaviour
             _playerState.SetGravityToFloat();
             _playerState.SetIsFloat(true);
             fireFloat.PlayFeedbacks();
+            OnFloatStart?.Invoke();
         }
     }
     private void floatEnd()
@@ -80,6 +85,7 @@ public class FireFloat : MonoBehaviour
             _playerState.SetIsFloat(false);
             fireFloat.StopFeedbacks();
             isCheck = false;
+            OnFloatEnd?.Invoke();
         }
     }
     private void floatTimer()

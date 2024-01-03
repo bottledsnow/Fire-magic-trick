@@ -48,6 +48,23 @@ public class SuperDash : MonoBehaviour
     private bool TriggerStart;
     public bool isSuperDash;
 
+    public delegate void SuperDashStartHandler();
+    public delegate void SuperDashHitGroundHandler();
+    public delegate void SuperDashHitKickDownHandler();
+    public delegate void SuperDashHitThroughHandler();
+    public delegate void SuperDashEndHandler();
+    public delegate void SuperDashHitStarThroyghHandler();
+    public delegate void SuperDashHitStarKickDownHandler();
+
+    public event SuperDashStartHandler OnSuperDashStart;
+    public event SuperDashHitGroundHandler OnSuperDashHitGround;
+    public event SuperDashHitKickDownHandler OnSuperDashHitKickDown;
+    public event SuperDashHitThroughHandler OnSuperDashHitThrough;
+    public event SuperDashEndHandler OnSuperDashEnd;
+    public event SuperDashHitStarThroyghHandler OnSuperDashHitStarThrough;
+    public event SuperDashHitStarKickDownHandler OnSuperDashHitStarKickDown;
+
+
     private void Start()
     {
         _superDashKick = GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
@@ -127,6 +144,7 @@ public class SuperDash : MonoBehaviour
         {
             SuperDashColling();
             superDashStart();
+            OnSuperDashStart?.Invoke();
         }
     }
     private async void SuperDashColling()
@@ -218,15 +236,18 @@ public class SuperDash : MonoBehaviour
                 if (_playerState.nearGround)
                 {
                     HitGroundEnemy();
+                    OnSuperDashHitGround?.Invoke();
                     Debug.Log("Hit Ground Enemy");
                 } else
                 {
                     if(_superDashKick.timerCheck(isKick))
                     {
                         HitToKickDown();
+                        OnSuperDashHitKickDown?.Invoke();
                     }else
                     {
                         superDashToThrough();
+                        OnSuperDashHitThrough?.Invoke();
                         Debug.Log("Through Enemy");
                     }
                 }
@@ -250,10 +271,12 @@ public class SuperDash : MonoBehaviour
                     if (_superDashKick.timerCheck(isKick))
                     {
                         superDashStop();
+                        OnSuperDashHitStarKickDown?.Invoke();
                     }
                     else
                     {
                         superDashToThrough(point);
+                        OnSuperDashHitStarThrough?.Invoke();
                     }
                 }
             }

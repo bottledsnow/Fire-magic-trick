@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 {
+    public delegate void ComboShotHandler();
+    public event ComboShotHandler OnUseMaxShot;
+
     private NewGamePlay_Shot shot;
-    private NewGamePlay_Combo combo;
 
     [Header("Charge shot")]
     [SerializeField] private int MaxShotCount;
@@ -26,7 +28,6 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
     {
         base.Start();
         shot = GetComponent<NewGamePlay_Shot>();
-        combo = GetComponent<NewGamePlay_Combo>();
         combo.OnUseSkill += OnUseSkill;
     }
     protected override void Update()
@@ -43,15 +44,18 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
         base.StopCharge();
         combo.ComboChargeStop();
 
-        if (chargeTimer+1> MaxShotCount)
+        if (chargeTimer + 1 > MaxShotCount)
         {
             chargeShot(MaxShotCount);
-            combo.ComboTrigger();
+            OnUseMaxShot?.Invoke();
+        }
+        else if (chargeTimer > 1f)
+        {
+            chargeShot((int)chargeTimer + 1);
         }
         else
         {
-            chargeShot((int)chargeTimer+1);
-            Debug.Log("chargeTimer : " + chargeTimer);
+            shot.Normal_Shot();
         }
     }
     protected override void ComboSkill()
@@ -62,11 +66,12 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
         {
             shotType = ShotType.TripleShot;
             chargeShot(MaxShotCount);
-            combo.ComboTrigger();
             SetIsShotCombo(true);
             shotType = ShotType.ScatterShot;
+            OnUseMaxShot?.Invoke();
+
+            Debug.Log("Shot Combo");
         }
-        Debug.Log("combo Skill");
     }
     private void chargeShot(int count)
     {

@@ -18,6 +18,7 @@ public class EnergySystem : MonoBehaviour
     private bool isRecover;
 
     [Header("Cost")]
+    [SerializeField] private bool isTestMode;
     [SerializeField] private float SuperDashCost = 10;
     [SerializeField] private float ReloadCost = 10;
     [SerializeField] private float ChargeCost = 10;
@@ -174,7 +175,13 @@ public class EnergySystem : MonoBehaviour
     }
     private bool CheckEnergyCanUse(float value)
     {
+        if(isTestMode)
+        {
+            return true;
+        }
+
         float energy = Energy - value;
+
         if(energy<0)
         {
             return false;

@@ -3,7 +3,8 @@ using UnityEngine;
 public class NewGamePlay_Basic_Charge : MonoBehaviour
 {
     private ControllerInput _input;
-    private NewGamePlay_Combo combo;
+    protected NewGamePlay_Combo combo;
+
     [Header("Test")]
     private bool isCharge;
     private bool isButton;
@@ -29,11 +30,12 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
         if(_input.RT && !isButton)
         {
             SetIsButton(true);
-            combo.CanUseCombo(out canUseCombo);
+            combo.CanUseShotToCombo(out canUseCombo);
 
             if(canUseCombo)
             {
                 ComboSkill();
+                Debug.Log("Use Shot To Contunue Combo");
             }
             else
             {

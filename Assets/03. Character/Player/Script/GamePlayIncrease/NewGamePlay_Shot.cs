@@ -6,6 +6,10 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
     public Transform bullet;
     private Shooting_Normal shooting_Normal;
 
+    [Header("test")]
+    public bool isShot;
+    public float shotCoolingTime;
+    public float timer;
 
     public override void Start()
     {
@@ -15,8 +19,32 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
     public override void Update()
     {
         base.Update();
+        shotTimer();
     }
+    private void shotTimer()
+    {
+        if(isShot)
+        {
+            timer += Time.deltaTime;
+        }
 
+        if(timer >= shotCoolingTime)
+        {
+            SetIsShot(false);
+            timer = 0;
+        }
+    }
+    public void Normal_Shot()
+    {
+        if(!isShot)
+        {
+            Shot(0);
+            SetIsShot(true);
+        }else
+        {
+            //is Coolling.
+        }
+    }
     public void Shot()
     {
         Shot(bullet);
@@ -26,5 +54,14 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
     {
         Shot(bullet, rotate_x);
         shooting_Normal.PlayShootFeedbacks();
+    }
+    public void Shot(float rotate_x, float rotate_y)
+    {
+        Shot(bullet, rotate_x, rotate_y);
+        shooting_Normal.PlayShootFeedbacks();
+    }
+    private void SetIsShot(bool value)
+    {
+        this.isShot = value;
     }
 }

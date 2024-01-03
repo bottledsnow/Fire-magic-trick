@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BulletTimeChild : MonoBehaviour
 {
-    private BulletTimeSystem _bulletTimeSystem;
+    private BulletTime _bulletTimeSystem;
     public enum BulletTimeType
     {
         Slow,
@@ -17,7 +17,7 @@ public class BulletTimeChild : MonoBehaviour
 
     private void Start()
     {
-        _bulletTimeSystem = GameManager.singleton.GetComponent<BulletTimeSystem>();
+        _bulletTimeSystem = GameManager.singleton.GetComponent<BulletTime>();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -39,7 +39,7 @@ public class BulletTimeChild : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            _bulletTimeSystem.BulletTimeNormal();
+            _bulletTimeSystem.BulletTime_Normal();
 
             if(!isOneShot)
             {
@@ -52,16 +52,16 @@ public class BulletTimeChild : MonoBehaviour
         switch (bulletTimeType)
         {
             case BulletTimeType.Slow:
-                _bulletTimeSystem.BulletTimeSlow();
+                _bulletTimeSystem.BulletTime_Slow();
                 break;
             case BulletTimeType.Mid:
-                _bulletTimeSystem.BulletTimeMid();
+                _bulletTimeSystem.BulletTime_Mid();
                 break;
             case BulletTimeType.NearNormal:
-                _bulletTimeSystem.BulletTimeNearNormal();
+                _bulletTimeSystem.BulletTime_NearNormal();
                 break;
             case BulletTimeType.Normal:
-                _bulletTimeSystem.BulletTimeNormal();
+                _bulletTimeSystem.BulletTime_Normal();
                 break;
         }
     }

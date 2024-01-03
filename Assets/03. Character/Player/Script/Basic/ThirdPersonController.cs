@@ -122,6 +122,7 @@ namespace StarterAssets
         private ControllerInput _controllerInput;
         private GameObject _mainCamera;
         private bool _rotateOnMove = true;
+        private bool isFireFloatTrigger;
 
         private const float _threshold = 0.01f;
 
@@ -398,15 +399,27 @@ namespace StarterAssets
                 _verticalVelocity += Gravity * Time.deltaTime;
             }
             
-            if(_verticalVelocity < Gravity)
+            if(_verticalVelocity < Gravity*3)
             {
-                _verticalVelocity = Gravity;
+                _verticalVelocity = Gravity*3;
             }
+
             if(isFloat)
             {
                 _verticalVelocity = Gravity;
+
+                if(!isFireFloatTrigger)
+                {
+                    SetIsFireFloatTrigger(true);
+                }
+            }else
+            {
+                if (isFireFloatTrigger)
+                {
+                    SetIsFireFloatTrigger(false);
+                    _verticalVelocity = 0;
+                }
             }
-            
         }
         public void Jump()
         {
@@ -505,6 +518,10 @@ namespace StarterAssets
         public float GetCinemachineTargetYaw()
         {
             return _cinemachineTargetYaw;
+        }
+        private void SetIsFireFloatTrigger(bool value)
+        {
+            isFireFloatTrigger = value;
         }
     }
 }
