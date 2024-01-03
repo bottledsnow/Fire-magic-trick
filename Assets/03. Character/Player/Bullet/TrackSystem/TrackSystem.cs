@@ -1,4 +1,3 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityQuaternion;
 using UnityEngine;
 
 public class TrackSystem : MonoBehaviour
@@ -6,17 +5,25 @@ public class TrackSystem : MonoBehaviour
     [SerializeField] private LayerMask TrackLayerMask;
     [SerializeField] private float CheckDistance;
     [SerializeField] private float RotateSpeed;
+    [SerializeField] private AnimationCurve TrackCurve;
 
     private RaycastHit HitInfo;
     private GameObject Target;
     private bool raycastHit;
-    private bool Trigger;
+    private bool isRotate;
+
+    [Header("test")]
+    private float deltaTime;
+    private float rotateTimer;
+    [SerializeField] private float smoothRotateTime;
+    [SerializeField] private float MaxRotateSpeed;
     private void Update()
     {
-        ShootRay();
-        TrackRotate();
+        shootRay();
+        trackRotate();
+        trackRotateTimer();
     }
-    private void ShootRay()
+    private void shootRay()
     {
         Vector3 origin = transform.position;
         Vector3 direction = transform.forward;
@@ -24,15 +31,31 @@ public class TrackSystem : MonoBehaviour
 
         raycastHit = Physics.Raycast(ray, out HitInfo, CheckDistance, TrackLayerMask);
     }
-    private void TrackRotate()
+    private void trackRotateTimer()
+    {
+        if (isRotate)
+        {
+            rotateTimer += Time.deltaTime;
+            deltaTime = rotateTimer / smoothRotateTime;
+        }
+
+        if(smoothRotateTime <= rotateTimer)
+        {
+            RotateSpeed = MaxRotateSpeed;
+        }else
+        {
+            RotateSpeed = TrackCurve.Evaluate(deltaTime) * MaxRotateSpeed;
+        }
+    }
+    private void trackRotate()
     {
         if (raycastHit)
         {
-            Trigger = true;
+            SetIsRotate(true);
             Target = HitInfo.collider.gameObject;
         }
 
-        if (Trigger)
+        if (isRotate)
         {
             Vector3 TargetDirection = Target.transform.position - this.transform.position;
             float singleStep = RotateSpeed * Time.deltaTime;
@@ -40,5 +63,8 @@ public class TrackSystem : MonoBehaviour
             this.transform.rotation = Quaternion.LookRotation(newDirection);
         }
     }
-    
+    private void SetIsRotate(bool value)
+    {
+        isRotate = value;
+    }
 }

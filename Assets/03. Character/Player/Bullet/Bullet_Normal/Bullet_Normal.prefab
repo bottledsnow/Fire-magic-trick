@@ -29105,7 +29105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b3a50463d27bb44a70750f118cee5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 12.5
+  lifeTime: 0.5
   speed: 50
   BackCoordinate: {fileID: 9164246563085282913}
   force: 10
@@ -29127,8 +29127,34 @@ MonoBehaviour:
   TrackLayerMask:
     serializedVersion: 2
     m_Bits: 4096
-  CheckDistance: 25
-  RotateSpeed: 7.5
+  CheckDistance: 5
+  RotateSpeed: 0
+  TrackCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  smoothRotateTime: 0.5
+  MaxRotateSpeed: 250
 --- !u!1 &5501533513888138474
 GameObject:
   m_ObjectHideFlags: 0

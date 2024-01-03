@@ -2332,7 +2332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxShotCount: 3
-  scatterShotAngle: 10
+  scatterShotAngle: 15
   tripleShotIntervalTime: 0.15
 --- !u!114 &256506318
 MonoBehaviour:
@@ -13442,6 +13442,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 263626223}
     m_Modifications:
+    - target: {fileID: 2866262659304794722, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2866262659304794750, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4179766234123313775, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -13452,7 +13460,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4179766234123313775, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4179766234123313775, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13492,7 +13500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7005406879392593516, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
@@ -49246,6 +49254,10 @@ PrefabInstance:
     - target: {fileID: 4020344256870572587, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4020344256870572587, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: useNormal
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4020344257410031660, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: VFX_List
