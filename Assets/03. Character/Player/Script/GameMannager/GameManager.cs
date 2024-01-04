@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public GameObject ShootingSystem;
     public Transform Player;
     public VFX_List VFX_List;
+    public Feedbacks_List Feedbacks_List;
+    public Collider_List Collider_List;
 
     private void Awake()
     {

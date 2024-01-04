@@ -3,8 +3,10 @@ using UnityEngine;
 
 public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 {
-    public delegate void ComboShotHandler();
-    public event ComboShotHandler OnUseMaxShot;
+    public delegate void ChargeShotHandler();
+    public event ChargeShotHandler OnUseMaxShot;
+    public delegate void ChargeShotHandler2();
+    public event ChargeShotHandler OnUseMinShot;
 
     private NewGamePlay_Shot shot;
 
@@ -46,12 +48,13 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 
         if (chargeTimer + 1 > MaxShotCount)
         {
-            chargeShot(MaxShotCount);
+            TripleShot(MaxShotCount);
             OnUseMaxShot?.Invoke();
         }
         else if (chargeTimer > 1f)
         {
-            chargeShot((int)chargeTimer + 1);
+            TripleShot((int)chargeTimer + 1);
+            OnUseMinShot?.Invoke();
         }
         else
         {
@@ -64,13 +67,11 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 
         if(!isShotCombo)
         {
-            shotType = ShotType.TripleShot;
+            shotType = ShotType.ScatterShot;
             chargeShot(MaxShotCount);
             SetIsShotCombo(true);
-            shotType = ShotType.ScatterShot;
+            shotType = ShotType.TripleShot;
             OnUseMaxShot?.Invoke();
-
-            Debug.Log("Shot Combo");
         }
     }
     private void chargeShot(int count)

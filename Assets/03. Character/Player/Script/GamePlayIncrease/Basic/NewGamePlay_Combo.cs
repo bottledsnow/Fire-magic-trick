@@ -5,6 +5,8 @@ public class NewGamePlay_Basic_Combo : MonoBehaviour
     private ParticleSystem VFX_ComboCharge;
     private ParticleSystem VFX_CanCombo_Shot;
     private ParticleSystem VFX_CanCombo_Skill;
+    private ParticleSystem VFX_Foot_L;
+    private ParticleSystem VFX_Foot_R;
 
     protected bool isCombo_Shot;
     protected bool isCombo_Skill;
@@ -24,6 +26,8 @@ public class NewGamePlay_Basic_Combo : MonoBehaviour
         VFX_ComboCharge = GameManager.singleton.VFX_List.VFX_ComboCharge;
         VFX_CanCombo_Shot = GameManager.singleton.VFX_List.VFX_CanCombo_Shot;
         VFX_CanCombo_Skill = GameManager.singleton.VFX_List.VFX_CanCombo_Skill;
+        VFX_Foot_L = GameManager.singleton.VFX_List.VFX_Foot_L;
+        VFX_Foot_R = GameManager.singleton.VFX_List.VFX_Foot_R;
     }
     protected virtual void Update()
     {
@@ -52,7 +56,7 @@ public class NewGamePlay_Basic_Combo : MonoBehaviour
         SetIsCombo_Skill(true);
         if ( isCombo_Skill) comboTimer = 0;
     }
-    public void CanUseShotToCombo(out bool canUse)
+    public void CanUseShotToContinueCombo(out bool canUse)
     {
         canUse = isCombo_Skill;
 
@@ -60,11 +64,19 @@ public class NewGamePlay_Basic_Combo : MonoBehaviour
         {
             SetIsCombo_Skill(false);
         }
-        else
-        {
-        }
     }
-    public void CanUseSkillToCombo(out bool canUse)
+    public bool CanUseShotToContinueCombo()
+    {
+        bool CanUse = isCombo_Skill;
+
+        if(isCombo_Skill)
+        {
+            SetIsCombo_Skill(false);
+        }
+
+        return CanUse;
+    }
+    public void CanUseSkillToContinueCombo(out bool canUse)
     {
         canUse = isCombo_Shot;
 
@@ -72,9 +84,18 @@ public class NewGamePlay_Basic_Combo : MonoBehaviour
         {
             SetIsCombo_Shot(false);
         }
-        else
+    }
+    
+    public bool CanUseSkillToContinueCombo()
+    {
+        bool canUse = isCombo_Shot;
+
+        if (isCombo_Shot)
         {
+            SetIsCombo_Shot(false);
         }
+
+        return canUse;
     }
     public virtual void ComboChargeStart()
     {
@@ -87,12 +108,22 @@ public class NewGamePlay_Basic_Combo : MonoBehaviour
     protected virtual void ComboStart(ComboType comboType)
     {
         if (comboType == ComboType.Shot) VFX_CanCombo_Shot.Play();
-        if (comboType == ComboType.Skill) VFX_CanCombo_Skill.Play();
+        if (comboType == ComboType.Skill)
+        {
+            //VFX_CanCombo_Skill.Play();
+            VFX_Foot_L.Play();
+            VFX_Foot_R.Play();
+        }
     }
     protected virtual void ComboEnd(ComboType comboType)
     {
         if (comboType == ComboType.Shot) VFX_CanCombo_Shot.Stop();
-        if (comboType == ComboType.Skill) VFX_CanCombo_Skill.Stop();
+        if (comboType == ComboType.Skill)
+        { 
+            //VFX_CanCombo_Skill.Stop();
+            VFX_Foot_L.Stop();
+            VFX_Foot_R.Stop();
+        } 
     }
     protected void SetIsCombo_Shot(bool value)
     {

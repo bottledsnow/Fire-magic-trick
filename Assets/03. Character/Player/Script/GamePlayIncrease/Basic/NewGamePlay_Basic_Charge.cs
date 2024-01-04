@@ -25,17 +25,14 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
     
     private void ChargePower()
     {
-        bool canUseCombo;
 
         if(_input.RT && !isButton)
         {
             SetIsButton(true);
-            combo.CanUseShotToCombo(out canUseCombo);
 
-            if(canUseCombo)
+            if(combo.CanUseShotToContinueCombo())
             {
                 ComboSkill();
-                Debug.Log("Use Shot To Contunue Combo");
             }
             else
             {

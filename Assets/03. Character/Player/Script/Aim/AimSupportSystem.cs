@@ -11,6 +11,7 @@ public class AimSupportSystem : MonoBehaviour
     [SerializeField] private bool isAimSupport;
     [SerializeField] private float aimSupportTime;
     [Header("offset")]
+    [SerializeField] private float delayTime;
     [SerializeField] private float offest_X;
     [SerializeField] private float offest_Y;
     [Header("Smooth Rotate")]
@@ -35,13 +36,18 @@ public class AimSupportSystem : MonoBehaviour
 
     //Timer
     private bool isSmoothTimer;
+    private bool isDelay;
     private float smoothTimer;
+    private float delayTimer;
 
     // cinemachine
     private float _cinemachineTargetYaw;
     private float _cinemachineTargetPitch;
     private float angle_X;
     private float angle_Y;
+
+    //foolproof
+    private bool isToClose;
 
     private void Start()
     {
@@ -50,6 +56,8 @@ public class AimSupportSystem : MonoBehaviour
     private void Update()
     {
         smoothRotateTimer();
+        delayTimerSystem();
+        ToSloseCheck();
     }
     private void LateUpdate()
     {
@@ -57,9 +65,11 @@ public class AimSupportSystem : MonoBehaviour
     }
     public async void ToAimSupport(GameObject Target)
     {
+        SetIsDelay(true);
+
         SetTarget(Target);
         SetIsAimSupport(true);
-        await Task.Delay((int)(aimSupportTime*1000));
+        await Task.Delay((int)(aimSupportTime * 1000));
         SetIsAimSupport(false);
         SetTarget(null);
         SetIsTriggerSmooth(false);
@@ -78,6 +88,11 @@ public class AimSupportSystem : MonoBehaviour
         if(isAimSupport)
         {
             ToLookTarget();
+
+            if(isToClose)
+            {
+                SetIsAimSupport(false);
+            }
         }
     }
     private void smoothRotateTimer()
@@ -94,52 +109,96 @@ public class AimSupportSystem : MonoBehaviour
             SetIsSmoothRotate(false);
         }
     }
+    private void delayTimerSystem()
+    {
+        if(isDelay)
+        {
+            delayTimer += Time.deltaTime;
+
+            if(delayTimer >= delayTime)
+            {
+                SetIsDelay(false);
+            }
+        }
+    }
+    private void ToSloseCheck()
+    {
+        if(this.target != null)
+        {
+            Vector3 target = this.target.transform.position;
+            Vector3 player = this.transform.position;
+
+            Vector3 target_xz = new Vector3(target.x, 0, target.z);
+            Vector3 player_xz = new Vector3(player.x, 0, player.z);
+
+            Vector3 distance = target_xz - player_xz;
+
+
+            Debug.Log(distance.magnitude);
+
+            if (distance.magnitude < 0.5f)
+            {
+                SetIsSoClose(true);
+            }
+            else
+            {
+                SetIsSoClose(false);
+            }
+        }
+    }
     private void ToLookTarget()
     {
         Vector3 Direction = (target.transform.position - this.transform.position).normalized;
 
-        if (!isTriggerSmooth)
+        if (isDelay || isToClose)
         {
-            //Initialization
-            deltaTime = 0;
-            smoothTimer = 0;
 
-            //trigger
-            SetIsTriggerSmooth(true);
-            SetIsSmoothTimer(true);
-            SetIsSmoothRotate(true);
-
-            //Start value
-            StartYaw = _input.GetCinemachineTargetYaw();
-            StartPitch = _input.GetCinemachineTargetPitch();
-        }
-
-        if(isSmoothRotate)
-        {
-            //Yaw
-            angle_X = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg;
-            TargetYaw = angle_X + offest_X;
-            variableYaw = NormalizeAngle(TargetYaw - StartYaw);
-
-            //Pitch
-            angle_Y = Mathf.Asin(-Direction.y) * Mathf.Rad2Deg;
-            TargetPitch = angle_Y + offest_Y;
-            variablePitch = NormalizeAngle(TargetPitch - StartPitch);
-
-            SmoothRotate_Pitch();
-            SmoothRotate_Yaw();
         }
         else
         {
-            //Yaw
-            angle_X = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg;
-            _cinemachineTargetYaw = angle_X + offest_X;
-            SetCinemachineTargetYaw(_cinemachineTargetYaw);
+            if (!isTriggerSmooth)
+            {
+                //Initialization
+                deltaTime = 0;
+                smoothTimer = 0;
 
-            //Pitch
-            angle_Y = Mathf.Asin(-Direction.y) * Mathf.Rad2Deg;
-            _cinemachineTargetPitch = angle_Y + offest_Y;
-            SetCinemachineTargetPitch(_cinemachineTargetPitch);
+                //trigger
+                SetIsTriggerSmooth(true);
+                SetIsSmoothTimer(true);
+                SetIsSmoothRotate(true);
+
+                //Start value
+                StartYaw = _input.GetCinemachineTargetYaw();
+                StartPitch = _input.GetCinemachineTargetPitch();
+            }
+
+            if (isSmoothRotate)
+            {
+                //Yaw
+                angle_X = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg;
+                TargetYaw = angle_X + offest_X;
+                variableYaw = NormalizeAngle(TargetYaw - StartYaw);
+
+                //Pitch
+                angle_Y = Mathf.Asin(-Direction.y) * Mathf.Rad2Deg;
+                TargetPitch = angle_Y + offest_Y;
+                variablePitch = NormalizeAngle(TargetPitch - StartPitch);
+
+                SmoothRotate_Pitch();
+                SmoothRotate_Yaw();
+            }
+            else
+            {
+                //Yaw
+                angle_X = Mathf.Atan2(Direction.x, Direction.z) * Mathf.Rad2Deg;
+                _cinemachineTargetYaw = angle_X + offest_X;
+                SetCinemachineTargetYaw(_cinemachineTargetYaw);
+
+                //Pitch
+                angle_Y = Mathf.Asin(-Direction.y) * Mathf.Rad2Deg;
+                _cinemachineTargetPitch = angle_Y + offest_Y;
+                SetCinemachineTargetPitch(_cinemachineTargetPitch);
+            }
         }
     }
     private void SmoothRotate_Pitch()
@@ -182,6 +241,19 @@ public class AimSupportSystem : MonoBehaviour
     {
         isSmoothRotate = value;
     }
+    private void SetIsDelay(bool value)
+    {
+        isDelay = value;
+
+        if (isDelay)
+        {
+            delayTimer = 0;
+        }
+    }
+    private void SetIsSoClose(bool value)
+    {
+        isToClose = value;
+    }   
     private float NormalizeAngle(float angle)
     {
         while (angle > 180f)
