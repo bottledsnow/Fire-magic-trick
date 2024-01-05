@@ -1,14 +1,20 @@
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 {
+    //Script
+    private PlayerState playerState;
+    private NewGamePlay_Shot shot;
+    private NewGamePlay_Hover hover;
+    private BulletTime bulletTime;
+
+    //delegate
     public delegate void ChargeShotHandler();
     public event ChargeShotHandler OnUseMaxShot;
     public delegate void ChargeShotHandler2();
     public event ChargeShotHandler OnUseMinShot;
-
-    private NewGamePlay_Shot shot;
 
     [Header("Charge shot")]
     [SerializeField] private int MaxShotCount;
@@ -29,7 +35,11 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
     public override void Start()
     {
         base.Start();
+        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
         shot = GetComponent<NewGamePlay_Shot>();
+        hover = GetComponent<NewGamePlay_Hover>();
+        bulletTime = GameManager.singleton.GetComponent<BulletTime>();
+
         combo.OnUseSkill += OnUseSkill;
     }
     protected override void Update()
@@ -48,6 +58,11 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 
         if (chargeTimer + 1 > MaxShotCount)
         {
+            if (!playerState.isGround)
+            {
+                ToHover();
+            }
+
             TripleShot(MaxShotCount);
             OnUseMaxShot?.Invoke();
         }
@@ -67,6 +82,11 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 
         if(!isShotCombo)
         {
+            if (!playerState.isGround)
+            {
+                ToHover();
+            }
+
             shotType = ShotType.ScatterShot;
             chargeShot(MaxShotCount);
             SetIsShotCombo(true);
@@ -117,6 +137,13 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
         {
             shot.Shot(0);
             await Task.Delay((int)(tripleShotIntervalTime*1000));
+        }
+    }
+    private void ToHover()
+    {
+        if(!playerState.isGround)
+        {
+            hover.ToHover();
         }
     }
     private void SetIsShotCombo(bool value)

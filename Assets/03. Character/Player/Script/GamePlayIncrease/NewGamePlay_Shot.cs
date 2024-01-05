@@ -3,13 +3,21 @@ using UnityEngine;
 public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
 {
     [Space(20)]
-    public Transform bullet;
+    [Header("Bullet")]
+    [SerializeField] private Transform bullet;
+    [SerializeField] private Transform boomCard;
+    [SerializeField] private Transform fireCard;
+    [SerializeField] private Transform windCard;
+
+    [Header("Shot")]
+    [SerializeField] private float shotCoolingTime;
+
+    //Script
     private Shooting_Normal shooting_Normal;
 
-    [Header("test")]
-    public bool isShot;
-    public float shotCoolingTime;
-    public float timer;
+    //Variable
+    private bool isShot;
+    private float timer;
 
     public override void Start()
     {

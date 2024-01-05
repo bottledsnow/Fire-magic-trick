@@ -102,6 +102,10 @@ public class PlayerState : MonoBehaviour
         _controller.Gravity = gravityFloat;
         isFloat = true;
     }
+    public void SetGravity(float value)
+    {
+        _controller.Gravity = value;
+    }
     private void getIsGround()
     {
         isGround = _controller.Grounded;
@@ -109,6 +113,10 @@ public class PlayerState : MonoBehaviour
     public void SetIsFloat(bool active)
     {
         _controller.isFloat = active;
+    }
+    public void SetVerticalVelocity(float value)
+    {
+        _controller.SetVerticalVelocity(value);
     }
     public void TurnToAimDirection()
     {

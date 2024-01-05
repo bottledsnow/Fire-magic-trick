@@ -10,12 +10,10 @@ public class ShootingSystem : MonoBehaviour
     public Shooting_Check _ShootingCheck;
     public Shooting_Aim _ShootingAim;
     public Shooting_Normal _ShootingNormal;
-    public Shooting_Charge _ShootingCharge;
     private void Awake()
     {
         _ShootingCheck = _Shooting.GetComponent<Shooting_Check>();
         _ShootingAim = _Shooting.GetComponent<Shooting_Aim>();
         _ShootingNormal = _Shooting.GetComponent<Shooting_Normal>();
-        _ShootingCharge = _Shooting.GetComponent<Shooting_Charge>(); 
     }
 }

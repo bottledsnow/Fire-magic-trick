@@ -15,6 +15,8 @@ public class SuperDashKick : MonoBehaviour
     [Header("Collider")]
     [SerializeField] private SuperDashCollider _superDashCollider;
     [SerializeField] private SuperDashKickTrigger _superDashKickTrigger;
+
+    //Script
     private ThirdPersonController _thirdPersonController;
     private ControllerInput _input;
     private EnergySystem _energySystem;
@@ -23,6 +25,11 @@ public class SuperDashKick : MonoBehaviour
     private FireFloat _fireFloat;
     private Animator _playerAnimator;
 
+    //delegate
+    public delegate void OnKickHandler();
+    public event OnKickHandler OnKick;
+
+    //Variable
     private float timer;
     private bool isTimer;
     private bool isInputY;
@@ -121,6 +128,7 @@ public class SuperDashKick : MonoBehaviour
     #region Kick
     private void kickSuccess()
     {
+        OnKick?.Invoke();
         KickTriggerCheck();
         SuperJump();
         _playerAnimator.SetTrigger("InputY");

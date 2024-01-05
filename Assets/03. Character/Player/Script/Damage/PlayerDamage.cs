@@ -6,6 +6,32 @@ public class PlayerDamage : MonoBehaviour
 
     public int damage;
 
+    //interface
+    IHitNotifier[] hitNotifier;
+    ITriggerNotifier[] triggerNotifier;
+
+    private void Start()
+    {
+        hitNotifier = GetComponents<IHitNotifier>();
+        triggerNotifier = GetComponents<ITriggerNotifier>();
+
+        for (int i = 0; i < hitNotifier.Length; i++)
+        {
+            if (hitNotifier[i] != null)
+            {
+                hitNotifier[i].OnHit += ToDamageEnemy;
+            }
+        }
+
+        for (int i = 0; i < triggerNotifier.Length; i++)
+        {
+            if (triggerNotifier[i] != null)
+            {
+                triggerNotifier[i].OnTrigger += ToDamageEnemy;
+            }
+        }
+    }
+
     public enum DamageType
     {
         NormalShoot,

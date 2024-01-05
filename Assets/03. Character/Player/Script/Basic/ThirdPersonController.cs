@@ -417,7 +417,7 @@ namespace StarterAssets
                 if (isFireFloatTrigger)
                 {
                     SetIsFireFloatTrigger(false);
-                    _verticalVelocity = 0;
+                    SetVerticalVelocity(0);
                 }
             }
         }

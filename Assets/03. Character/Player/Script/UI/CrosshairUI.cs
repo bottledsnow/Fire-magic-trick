@@ -9,6 +9,9 @@ public class CrosshairUI : MonoBehaviour
     private Material CrosshairMaterial;
     private Animator CrosshairAnimator;
 
+    //interface
+    private IHitNotifier hitNotifier;
+
     private void Start()
     {
         CrosshairAnimator = Crosshair.GetComponent<Animator>();

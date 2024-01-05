@@ -6,7 +6,6 @@ public class Shooting_Mode : MonoBehaviour
     [SerializeField] private bool isCharge;
     private ControllerInput _input;
     private Shooting_Normal _shooting_Normal;
-    private Shooting_Charge _shooting_Charge;
     private ShootingModeUI _shootingModeUI;
     private bool needChoose;
 
@@ -23,7 +22,6 @@ public class Shooting_Mode : MonoBehaviour
     {
         _input = GameManager.singleton._input;
         _shooting_Normal = GetComponent<Shooting_Normal>();
-        _shooting_Charge = GetComponent<Shooting_Charge>();
         _shootingModeUI = GameManager.singleton.UISystem.GetComponent<ShootingModeUI>();
 
         ShootingMode(Mode.Normal);
@@ -97,6 +95,5 @@ public class Shooting_Mode : MonoBehaviour
     private void Mode_Charge(bool Active)
     {
         isCharge = Active;
-        _shooting_Charge.enabled = isCharge ? true : false;
     }
 }
