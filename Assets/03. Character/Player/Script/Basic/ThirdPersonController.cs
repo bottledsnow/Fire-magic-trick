@@ -503,6 +503,10 @@ namespace StarterAssets
         {
             _verticalVelocity = value;
         }
+        public void AddVerticalVelocity(float value)
+        {
+            _verticalVelocity += value;
+        }
         public void SetCinemachineTargetPitch(float value)
         {
             _cinemachineTargetPitch = value;

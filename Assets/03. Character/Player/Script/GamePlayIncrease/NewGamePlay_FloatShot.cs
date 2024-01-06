@@ -43,4 +43,10 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
 
         bulletTime.BulletTime_Normal();
     }
+    protected override void OnFloatShotStop()
+    {
+        base.OnFloatShotStop();
+
+        bulletTime.BulletTime_Normal();
+    }
 }

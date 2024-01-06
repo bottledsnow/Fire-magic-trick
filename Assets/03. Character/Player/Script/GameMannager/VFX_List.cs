@@ -9,4 +9,5 @@ public class VFX_List : MonoBehaviour
     public ParticleSystem VFX_DashLine;
     public ParticleSystem VFX_Foot_L;
     public ParticleSystem VFX_Foot_R;
+    public ParticleSystem VFX_Float;
 }

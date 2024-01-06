@@ -4,26 +4,33 @@ using System.Threading.Tasks;
 
 public class FireFloat : MonoBehaviour
 {
+    [SerializeField] private float maxFloatTime;
+
+    //delegate
+    public delegate void OnFloatStartHandler();
+    public delegate void OnFloatEndHandler();
+    public event OnFloatStartHandler OnFloatStart;
+    public event OnFloatEndHandler OnFloatEnd;
+
+    //script
     private ControllerInput _input;
     private EnergySystem _energySystem;
     private PlayerState _playerState;
-    [SerializeField] private float maxFloatTime;
-    [SerializeField] private MMF_Player fireFloat;
+    private ParticleSystem vfx_float;
+
+    //variable
     private float timer;
     private bool isTrigger;
     private bool isCheck;
     private bool isTimer;
     private bool needInitialize;
 
-    public delegate void OnFloatStartHandler();
-    public delegate void OnFloatEndHandler();
-    public event OnFloatStartHandler OnFloatStart;
-    public event OnFloatEndHandler OnFloatEnd;
     private void Start()
     {
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
         _energySystem = _playerState.GetComponent<EnergySystem>();
+        vfx_float = GameManager.singleton.VFX_List.VFX_Float;
     }
     private void Update()
     {
@@ -33,13 +40,19 @@ public class FireFloat : MonoBehaviour
     }
     private void FloatSystem()
     {
-        if(_input.ButtonA && _playerState.canFloat && !_playerState.nearGround)
+        if(_input.ButtonA && _playerState.canFloat)
         {
-            EnergyCheck();
+            if(!_playerState.nearGround)
+            {
+                EnergyCheck();
+            }
         }
         else
         {
-            floatEnd();
+            if (_playerState.isGround || !_input.ButtonA)
+            {
+                floatEnd();
+            }
         }
     }
     private void EnergyCheck()
@@ -71,7 +84,7 @@ public class FireFloat : MonoBehaviour
             isTimer = true;
             _playerState.SetGravityToFloat();
             _playerState.SetIsFloat(true);
-            fireFloat.PlayFeedbacks();
+            vfx_float.Play();
             OnFloatStart?.Invoke();
         }
     }
@@ -79,11 +92,12 @@ public class FireFloat : MonoBehaviour
     {
         if(isTimer)
         {
+            Debug.Log("Float End");
             isTimer = false;
             timer = 0;
             _playerState.SetGravityToNormal();
             _playerState.SetIsFloat(false);
-            fireFloat.StopFeedbacks();
+            vfx_float.Stop();
             isCheck = false;
             OnFloatEnd?.Invoke();
         }

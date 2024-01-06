@@ -312,16 +312,19 @@ public class SuperDash : MonoBehaviour
     }
     private void superDashInterruptStop()
     {
-        _superDashCollider.SetIsSuperDash(false);
-        _playerState.SetGravityToNormal();
-        _playerState.ResetVerticalvelocity();
-        _playerAnimator.SuperDashEnd();
-        FireDashEnd_Interrupt.PlayFeedbacks();
-        superDashSpeed = 0;
-        Target = null;
-        _superDashKickDown.NullTarget();
-        SetTriggerStart(false);
-        Initialization();
+        if(isSuperDash)
+        {
+            _superDashCollider.SetIsSuperDash(false);
+            _playerState.SetGravityToNormal();
+            _playerState.ResetVerticalvelocity();
+            _playerAnimator.SuperDashEnd();
+            FireDashEnd_Interrupt.PlayFeedbacks();
+            superDashSpeed = 0;
+            Target = null;
+            _superDashKickDown.NullTarget();
+            SetTriggerStart(false);
+            Initialization();
+        }
     }
     private void superDashToThrough()
     {

@@ -84,6 +84,7 @@ public class PlayerState : MonoBehaviour
     
     public void SetGravityToNormal()
     {
+        Debug.Log("Set Gravity Normal");
         _controller.Gravity = gravityNormal;
         isFire = false;
         isFloat = false;
@@ -94,16 +95,19 @@ public class PlayerState : MonoBehaviour
     }
     public void SetGravityToFire()
     {
+        Debug.Log("Set Gravity Fire");
         _controller.Gravity = gravityFire;
         isFire = true;
     }
     public void SetGravityToFloat()
     {
+        Debug.Log("Set Gravity Flaot");
         _controller.Gravity = gravityFloat;
         isFloat = true;
     }
     public void SetGravity(float value)
     {
+        Debug.Log("Set Gravity");
         _controller.Gravity = value;
     }
     private void getIsGround()
@@ -117,6 +121,10 @@ public class PlayerState : MonoBehaviour
     public void SetVerticalVelocity(float value)
     {
         _controller.SetVerticalVelocity(value);
+    }
+    public void AddVerticalVelocity(float Value)
+    {
+        _controller.AddVerticalVelocity(Value);
     }
     public void TurnToAimDirection()
     {

@@ -14,15 +14,26 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
 
     //Script
     private Shooting_Normal shooting_Normal;
+    private NewGamePlay_Combo combo;
 
     //Variable
     private bool isShot;
     private float timer;
 
+    public enum ShotType
+    {
+        Normal,
+        Boom,
+        Fire,
+        Wind,
+    }
+    
+
     public override void Start()
     {
         base.Start();
         shooting_Normal = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Normal>();
+        combo = GetComponent<NewGamePlay_Combo>();
     }
     public override void Update()
     {
@@ -58,9 +69,16 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
         Shot(bullet);
         shooting_Normal.PlayShootFeedbacks();
     }
+
     public void Shot(float rotate_x)
     {
         Shot(bullet, rotate_x);
+        shooting_Normal.PlayShootFeedbacks();
+    }
+    public void Shot(float rotate_x,ShotType shotType)
+    {
+        Transform preferb = ChooseBullet(shotType);
+        Shot(preferb, rotate_x);
         shooting_Normal.PlayShootFeedbacks();
     }
     public void Shot(float rotate_x, float rotate_y)
@@ -68,8 +86,39 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
         Shot(bullet, rotate_x, rotate_y);
         shooting_Normal.PlayShootFeedbacks();
     }
+    public void Shot(float rotate_x, float rotate_y, ShotType shotType)
+    {
+        Transform preferb = ChooseBullet(shotType);
+        Shot(preferb, rotate_x, rotate_y);
+        shooting_Normal.PlayShootFeedbacks();
+    }
     private void SetIsShot(bool value)
     {
         this.isShot = value;
+    }
+    private Transform ChooseBullet(ShotType shotType)
+    {
+        Transform shotPreferb = null;
+
+        switch (shotType)
+        {
+            case ShotType.Normal:
+                shotPreferb = this.bullet;
+                break;
+
+            case ShotType.Boom:
+                shotPreferb = boomCard;
+                break;
+
+            case ShotType.Fire:
+                shotPreferb = fireCard;
+                break;
+
+            case ShotType.Wind:
+                shotPreferb = windCard;
+                break;
+        }
+
+        return shotPreferb;
     }
 }

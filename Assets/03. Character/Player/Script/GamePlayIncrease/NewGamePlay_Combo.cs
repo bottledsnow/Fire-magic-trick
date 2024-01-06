@@ -15,6 +15,7 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
 
     [Header("Combo Colling")]
     [SerializeField] private float comboCollingTime;
+    [SerializeField] private float comboCardCollingTime;
 
     [Header("Combo")]
     public bool isComboScatterShot;
@@ -23,6 +24,11 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
     public bool isComboSuperDash;
     public bool isComboKick;
     public bool isComboFloat;
+
+    [Header("Combo Card")]
+    public bool isUseFireCard;
+    public bool isUseWindCard;
+    public bool isUseBoomCard;
 
     protected override void Start()
     {
@@ -38,6 +44,11 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
 
         //Subscribe Combo
         dash.OnDashCombo += UseComboDash;
+
+        //Subscribe Card
+        chargeShot.OnUseFireCard += UseComboFireCard;
+        chargeShot.OnUseWindCard += UseComboWindCard;
+        chargeShot.OnUseBoomCard += UseComboBoomCard;
     }
     private void UseSkill()
     {
@@ -86,6 +97,24 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
         await Task.Delay((int)(comboCollingTime * 1000));
         SetIsComboTripleShot(false);
     }
+    private async void UseComboFireCard()
+    {
+        SetIsUseFireCard(true);
+        await Task.Delay((int)(comboCardCollingTime * 1000));
+        SetIsUseFireCard(false);
+    }
+    private async void UseComboWindCard()
+    {
+        SetIsUseWindCard(true);
+        await Task.Delay((int)(comboCardCollingTime * 1000));
+        SetIsUseWindCard(false);
+    }
+    private async void UseComboBoomCard()
+    {
+        SetIsUseBoomCard(true);
+        await Task.Delay((int)(comboCardCollingTime * 1000));
+        SetIsUseBoomCard(false);
+    }
     #endregion
     #region Set
     private void SetIsComboDash(bool value)
@@ -111,6 +140,18 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
     private void SetIsComboTripleShot(bool value)
     {
         isComboTripleShot = value;
+    }
+    private void SetIsUseBoomCard(bool value)
+    {
+        isUseBoomCard = value;
+    }
+    private void SetIsUseFireCard(bool value)
+    {
+        isUseFireCard = value;
+    }
+    private void SetIsUseWindCard(bool value)
+    {
+        isUseWindCard = value;
     }
     #endregion
 }

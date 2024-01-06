@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Playables;
 
 public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 {
@@ -8,13 +7,18 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
     private PlayerState playerState;
     private NewGamePlay_Shot shot;
     private NewGamePlay_Hover hover;
-    private BulletTime bulletTime;
 
     //delegate
     public delegate void ChargeShotHandler();
+    public delegate void FireCardHandler();
+    public delegate void BoomCardHandler();
+    public delegate void WindCardHandler();
     public event ChargeShotHandler OnUseMaxShot;
-    public delegate void ChargeShotHandler2();
     public event ChargeShotHandler OnUseMinShot;
+    public event FireCardHandler OnUseFireCard;
+    public event BoomCardHandler OnUseBoomCard;
+    public event WindCardHandler OnUseWindCard;
+
 
     [Header("Charge shot")]
     [SerializeField] private int MaxShotCount;
@@ -38,8 +42,6 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
         shot = GetComponent<NewGamePlay_Shot>();
         hover = GetComponent<NewGamePlay_Hover>();
-        bulletTime = GameManager.singleton.GetComponent<BulletTime>();
-
         combo.OnUseSkill += OnUseSkill;
     }
     protected override void Update()
@@ -114,28 +116,29 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
             float angle = scatterShotAngle / 2;
             for (int i = 0; i < count / 2; i++)
             {
-                shot.Shot( angle* (i + 1));
-                shot.Shot(-angle* (i + 1));
+                shot.Shot( angle* (i + 1), NewGamePlay_Shot.ShotType.Boom);
+                shot.Shot(-angle* (i + 1), NewGamePlay_Shot.ShotType.Boom);
             }
         }
         else
         {
             //odd
-            shot.Shot(0);
+            shot.Shot(0, NewGamePlay_Shot.ShotType.Boom);
 
             for (int i = 0; i < (count - 1) / 2; i++)
             {
-                shot.Shot(scatterShotAngle * (i + 1));
-                shot.Shot(-scatterShotAngle * (i + 1));
+                shot.Shot(scatterShotAngle * (i + 1), NewGamePlay_Shot.ShotType.Boom);
+                shot.Shot(-scatterShotAngle * (i + 1), NewGamePlay_Shot.ShotType.Boom);
             }
         }
-        
+        OnUseBoomCard?.Invoke();
     }
     private async void TripleShot(int count)
     {
         for(int i = 0; i < count; i++)
         {
-            shot.Shot(0);
+            shot.Shot(0,NewGamePlay_Shot.ShotType.Wind);
+            OnUseWindCard?.Invoke();
             await Task.Delay((int)(tripleShotIntervalTime*1000));
         }
     }

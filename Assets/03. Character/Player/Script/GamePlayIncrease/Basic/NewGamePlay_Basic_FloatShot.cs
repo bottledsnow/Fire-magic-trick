@@ -7,7 +7,7 @@ public class NewGamePlay_Basic_FloatShot : MonoBehaviour
 
     private bool isFloat = false;
     private bool isShot = false;
-    private bool isFloatShotStart = false;
+    private bool isFloatShot = false;
 
     [Header("Setting")]
     [SerializeField] private float shotInterval = 0.1f;
@@ -48,22 +48,32 @@ public class NewGamePlay_Basic_FloatShot : MonoBehaviour
             {
                 floatShot();
 
-                if(!isFloatShotStart)
+                if(!isFloatShot)
                 {
                     OnFloatShotStart();
-                    SetIsFloatShotStart(true);
+                    SetIsFloatShot(true);
                 }
             }
         }else
         {
-            if(isFloatShotStart)
+            if(isFloatShot)
             {
-                SetIsFloatShotStart(false);
+                SetIsFloatShot(false);
+                OnFloatShotStop();
+            }
+        }
+
+        if(!input.RT)
+        {
+            if(isFloatShot)
+            {
+                SetIsFloatShot(false);
+                OnFloatShotStop();
             }
         }
     }
     protected virtual void OnFloatShotStart() { }
-    
+    protected virtual void OnFloatShotStop() { }
     protected virtual void floatShot()
     { 
         SetIsShot(true);
@@ -84,8 +94,8 @@ public class NewGamePlay_Basic_FloatShot : MonoBehaviour
     {
         isShot = Value;
     }
-    private void SetIsFloatShotStart(bool value)
+    private void SetIsFloatShot(bool value)
     {
-        isFloatShotStart = value;
+        isFloatShot = value;
     }
 }

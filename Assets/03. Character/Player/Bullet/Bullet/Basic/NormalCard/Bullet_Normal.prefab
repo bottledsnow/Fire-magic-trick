@@ -28972,8 +28972,9 @@ GameObject:
   - component: {fileID: 6077979604380879128}
   - component: {fileID: 812234833019504672}
   - component: {fileID: 3791141052154015985}
-  - component: {fileID: 5863245321833868307}
   - component: {fileID: 6719289997504853123}
+  - component: {fileID: 7820640505101677248}
+  - component: {fileID: 5975966362396437239}
   m_Layer: 7
   m_Name: Bullet_Normal
   m_TagString: Bullet
@@ -29093,25 +29094,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageType: 0
   damage: 1
---- !u!114 &5863245321833868307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4681020241941845620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66b3a50463d27bb44a70750f118cee5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 0.5
-  speed: 40
-  BackCoordinate: {fileID: 9164246563085282913}
-  force: 10
-  addspeedFeedback: {fileID: 654837298402208650}
-  cardSlashPrefab: {fileID: 7966352229167342560, guid: 8eaa4e0e527b85a4aa75debdb29d5f12, type: 3}
-  hitEnemyPrefab: {fileID: 1499373659572035820, guid: 72e8107574d06234da4047e96a4b1e41, type: 3}
 --- !u!114 &6719289997504853123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29155,6 +29137,36 @@ MonoBehaviour:
     m_RotationOrder: 4
   smoothRotateTime: 0.5
   MaxRotateSpeed: 250
+--- !u!114 &7820640505101677248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681020241941845620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18d8d36a6a4964241bb801afaa512e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitEnemyPrefab: {fileID: 1499373659572035820, guid: 72e8107574d06234da4047e96a4b1e41, type: 3}
+  cardSlashPrefab: {fileID: 7966352229167342560, guid: 8eaa4e0e527b85a4aa75debdb29d5f12, type: 3}
+  lifeTime: 0.5
+  speed: 40
+--- !u!114 &5975966362396437239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4681020241941845620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d9a0ded04b7f7848bc86b5764d38b97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BackCoordinate: {fileID: 9164246563085282913}
+  force: 10
 --- !u!1 &5501533513888138474
 GameObject:
   m_ObjectHideFlags: 0

@@ -4529,9 +4529,9 @@ MonoBehaviour:
   spawnBulletPositionOrigin: {fileID: 1229039126}
   spawnBulletPosition: {fileID: 316464955}
   bullet: {fileID: 2585087723916746599, guid: f4b84ab6a0e8abf41b458b785fcdb2f7, type: 3}
-  boomCard: {fileID: 0}
-  fireCard: {fileID: 0}
-  windCard: {fileID: 0}
+  boomCard: {fileID: 2585087723916746599, guid: f4b84ab6a0e8abf41b458b785fcdb2f7, type: 3}
+  fireCard: {fileID: 2585087723916746599, guid: 2a10de5c7a50e13498328cceb57f518e, type: 3}
+  windCard: {fileID: 2585087723916746599, guid: 2a10de5c7a50e13498328cceb57f518e, type: 3}
   shotCoolingTime: 0.35
 --- !u!114 &256506316
 MonoBehaviour:
@@ -4562,12 +4562,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ComboTime: 3
   comboCollingTime: 3
+  comboCardCollingTime: 1.5
   isComboScatterShot: 0
   isComboTripleShot: 0
   isComboDash: 0
   isComboSuperDash: 0
   isComboKick: 0
   isComboFloat: 0
+  isUseFireCard: 0
+  isUseWindCard: 0
+  isUseBoomCard: 0
 --- !u!114 &256506319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27752,6 +27756,7 @@ MonoBehaviour:
   VFX_DashLine: {fileID: 549772413}
   VFX_Foot_L: {fileID: 1889307425}
   VFX_Foot_R: {fileID: 1424879462}
+  VFX_Float: {fileID: 1641712312}
 --- !u!4 &1521481201 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8009750367602023914, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
@@ -29033,6 +29038,11 @@ Transform:
   m_Father: {fileID: 792690397}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 60}
+--- !u!198 &1641712312 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1964018485771208793, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+  m_PrefabInstance: {fileID: 3037685562015442476}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1648435794
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63524,6 +63534,10 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: yMuti
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: impactTime
       value: 0.25
       objectReference: {fileID: 0}
@@ -63585,7 +63599,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: smoothCurve.m_Curve.Array.data[0].value
-      value: -0.0000019073486
+      value: 1.0001798
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: smoothCurve.m_Curve.Array.data[1].value
@@ -63593,27 +63607,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: smoothCurve.m_Curve.Array.data[0].inSlope
-      value: 4.023688
+      value: -0.013074752
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: smoothCurve.m_Curve.Array.data[1].inSlope
-      value: -3.958986
+      value: -2.834551
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: smoothCurve.m_Curve.Array.data[0].outSlope
-      value: 4.023688
+      value: -0.013074752
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: smoothCurve.m_Curve.Array.data[1].inWeight
-      value: 0.028000118
+      value: 0.044000145
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: smoothCurve.m_Curve.Array.data[1].outSlope
-      value: -3.958986
+      value: -2.834551
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: smoothCurve.m_Curve.Array.data[0].outWeight
-      value: 0.033999994
+      value: 0.18711016
       objectReference: {fileID: 0}
     - target: {fileID: 1343204415, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: EmissionModule.rateOverTime.scalar
@@ -63770,6 +63784,10 @@ PrefabInstance:
     - target: {fileID: 1849767559574911937, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964018485771208794, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: m_Name
+      value: VFX_Float
       objectReference: {fileID: 0}
     - target: {fileID: 2489079240154414116, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: m_AnchorMax.y
@@ -64001,7 +64019,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5337558588166125596, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: maxFloatTime
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5337558588506050765, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: isTestMode
