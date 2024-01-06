@@ -84,7 +84,6 @@ public class PlayerState : MonoBehaviour
     
     public void SetGravityToNormal()
     {
-        Debug.Log("Set Gravity Normal");
         _controller.Gravity = gravityNormal;
         isFire = false;
         isFloat = false;
@@ -95,13 +94,11 @@ public class PlayerState : MonoBehaviour
     }
     public void SetGravityToFire()
     {
-        Debug.Log("Set Gravity Fire");
         _controller.Gravity = gravityFire;
         isFire = true;
     }
     public void SetGravityToFloat()
     {
-        Debug.Log("Set Gravity Flaot");
         _controller.Gravity = gravityFloat;
         isFloat = true;
     }

@@ -1,4 +1,3 @@
-using UnityEditor.U2D;
 using UnityEngine;
 
 public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
@@ -30,6 +29,8 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
     protected override void DashForwardSetting()
     {
         base.DashForwardSetting();
+
+        combo.SetComboShotType(NewGamePlay_Combo.ComboShotType.ScatterShot);
 
         speed = forwardDashSpeed;
         dashDistance = forwardDashDistance;

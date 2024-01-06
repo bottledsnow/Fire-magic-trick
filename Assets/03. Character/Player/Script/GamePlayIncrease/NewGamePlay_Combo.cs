@@ -1,21 +1,15 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
 {
-    //Script
-    private NewGamePlay_Dash dash;
-    private NewGamePlay_ChargeShot chargeShot;
-
-    //delegate
-    public delegate void ComboSkillHandler();
-    public delegate void ComboShotHandler();
-    public event ComboSkillHandler OnUseSkill;
-    public event ComboShotHandler OnUseShot;
-
     [Header("Combo Colling")]
     [SerializeField] private float comboCollingTime;
     [SerializeField] private float comboCardCollingTime;
+
+    [Header("ShotCombo")]
+    public ComboShotType comboShotType;
 
     [Header("Combo")]
     public bool isComboScatterShot;
@@ -30,6 +24,26 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
     public bool isUseWindCard;
     public bool isUseBoomCard;
 
+    //Script
+    private NewGamePlay_Dash dash;
+    private NewGamePlay_ChargeShot chargeShot;
+    private SuperDashKick kick;
+
+    //delegate
+    public delegate void ComboSkillHandler();
+    public delegate void ComboShotHandler();
+    public event ComboSkillHandler OnUseSkill;
+    public event ComboShotHandler OnUseShot;
+
+    public enum ComboShotType
+    {
+        defaultShot,
+        TripleShot,
+        ScatterShot,
+        FireCard,
+        FireCard_Fast,
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -37,9 +51,11 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
         //Script
         chargeShot = GetComponent<NewGamePlay_ChargeShot>();
         dash = GetComponent<NewGamePlay_Dash>();
+        kick = GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
 
         //Subscribe
         dash.OnDash += UseSkill;
+        kick.OnKick += UseSkill;
         chargeShot.OnUseMaxShot += UseShot;
 
         //Subscribe Combo
@@ -59,6 +75,10 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
     {
         OnUseShot?.Invoke();
         ComboTrigger_Shot();
+    }
+    public void SetComboShotType(ComboShotType comboShotType)
+    {
+        this.comboShotType = comboShotType;
     }
     #region Use Combo
     private async void UseComboDash()

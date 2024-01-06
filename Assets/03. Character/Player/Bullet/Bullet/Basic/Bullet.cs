@@ -22,6 +22,8 @@ public class Bullet : MonoBehaviour, IHitNotifier
         rb = GetComponent<Rigidbody>();
         coli = GetComponent<Collider>();
         crosshairUI = GameManager.singleton.UISystem.GetComponent<CrosshairUI>();
+
+        Destroy(gameObject, lifeTime);
     }
     protected virtual void Update()
     {

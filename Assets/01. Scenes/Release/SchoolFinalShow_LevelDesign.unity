@@ -4492,6 +4492,8 @@ GameObject:
   - component: {fileID: 256506319}
   - component: {fileID: 256506320}
   - component: {fileID: 256506321}
+  - component: {fileID: 256506322}
+  - component: {fileID: 256506323}
   m_Layer: 6
   m_Name: GamePlayIncrease
   m_TagString: Untagged
@@ -4528,9 +4530,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnBulletPositionOrigin: {fileID: 1229039126}
   spawnBulletPosition: {fileID: 316464955}
-  bullet: {fileID: 2585087723916746599, guid: f4b84ab6a0e8abf41b458b785fcdb2f7, type: 3}
+  bullet: {fileID: 2585087723916746599, guid: 2a10de5c7a50e13498328cceb57f518e, type: 3}
   boomCard: {fileID: 2585087723916746599, guid: f4b84ab6a0e8abf41b458b785fcdb2f7, type: 3}
-  fireCard: {fileID: 2585087723916746599, guid: 2a10de5c7a50e13498328cceb57f518e, type: 3}
+  fireCard: {fileID: 2585087723916746599, guid: d34e7e7a451cf03478f1b00a9316f0a5, type: 3}
+  fireCard_Fast: {fileID: 2585087723916746599, guid: aa873e4b307d13840bccd97f3599f32c, type: 3}
   windCard: {fileID: 2585087723916746599, guid: 2a10de5c7a50e13498328cceb57f518e, type: 3}
   shotCoolingTime: 0.35
 --- !u!114 &256506316
@@ -4563,6 +4566,7 @@ MonoBehaviour:
   ComboTime: 3
   comboCollingTime: 3
   comboCardCollingTime: 1.5
+  comboShotType: 0
   isComboScatterShot: 0
   isComboTripleShot: 0
   isComboDash: 0
@@ -4601,13 +4605,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaab333cdb0087d4498593196f6d5a14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashCooling: 0
+  dashCooling: 1.5
   forwardDashSpeed: 10
   forwardDashDistance: 1.5
   backwardDashSpeed: 20
   backwardDashDistance: 1.5
   dashComboSpeed: 20
-  dashComboDistance: 5
+  dashComboDistance: 3
   dahsComboCooling: 0.5
 --- !u!114 &256506321
 MonoBehaviour:
@@ -4647,6 +4651,30 @@ MonoBehaviour:
     m_RotationOrder: 4
   distance: 1.25
   speed: 7.5
+--- !u!114 &256506322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256506313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7b5f230f1df284a8aa6d245a0611f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &256506323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 256506313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f436b2a924dad324eadcd3eb9cce8033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &263626222
 GameObject:
   m_ObjectHideFlags: 0
@@ -63535,7 +63563,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: yMuti
-      value: 2.5
+      value: 4.8
       objectReference: {fileID: 0}
     - target: {fileID: 1033187325, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: impactTime
@@ -63923,7 +63951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4020344257176918069, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: Gravity
-      value: -15
+      value: -22
       objectReference: {fileID: 0}
     - target: {fileID: 4020344257410031660, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: VFX_List

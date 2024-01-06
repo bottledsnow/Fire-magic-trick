@@ -133,9 +133,6 @@ public class AimSupportSystem : MonoBehaviour
 
             Vector3 distance = target_xz - player_xz;
 
-
-            Debug.Log(distance.magnitude);
-
             if (distance.magnitude < 0.5f)
             {
                 SetIsSoClose(true);

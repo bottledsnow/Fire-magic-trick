@@ -7,6 +7,7 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
     [SerializeField] private Transform bullet;
     [SerializeField] private Transform boomCard;
     [SerializeField] private Transform fireCard;
+    [SerializeField] private Transform fireCard_Fast;
     [SerializeField] private Transform windCard;
 
     [Header("Shot")]
@@ -25,6 +26,7 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
         Normal,
         Boom,
         Fire,
+        FireFast,
         Wind,
     }
     
@@ -112,6 +114,9 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
 
             case ShotType.Fire:
                 shotPreferb = fireCard;
+                break;
+            case ShotType.FireFast:
+                shotPreferb = fireCard_Fast;
                 break;
 
             case ShotType.Wind:

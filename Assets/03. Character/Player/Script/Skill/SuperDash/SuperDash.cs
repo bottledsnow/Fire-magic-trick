@@ -50,19 +50,19 @@ public class SuperDash : MonoBehaviour
 
     public delegate void SuperDashStartHandler();
     public delegate void SuperDashHitGroundHandler();
-    public delegate void SuperDashHitKickDownHandler();
+    public delegate void SuperDashHitKickHandler();
     public delegate void SuperDashHitThroughHandler();
     public delegate void SuperDashEndHandler();
     public delegate void SuperDashHitStarThroyghHandler();
-    public delegate void SuperDashHitStarKickDownHandler();
+    public delegate void SuperDashHitStarKickHandler();
 
     public event SuperDashStartHandler OnSuperDashStart;
     public event SuperDashHitGroundHandler OnSuperDashHitGround;
-    public event SuperDashHitKickDownHandler OnSuperDashHitKickDown;
+    public event SuperDashHitKickHandler OnSuperDashHitKick;
     public event SuperDashHitThroughHandler OnSuperDashHitThrough;
     public event SuperDashEndHandler OnSuperDashEnd;
     public event SuperDashHitStarThroyghHandler OnSuperDashHitStarThrough;
-    public event SuperDashHitStarKickDownHandler OnSuperDashHitStarKickDown;
+    public event SuperDashHitStarKickHandler OnSuperDashHitStarKick;
 
 
     private void Start()
@@ -243,7 +243,8 @@ public class SuperDash : MonoBehaviour
                     if(_superDashKick.timerCheck(isKick))
                     {
                         HitToKickDown();
-                        OnSuperDashHitKickDown?.Invoke();
+                        OnSuperDashHitKick?.Invoke();
+                        Debug.Log("Kick Enemy SuperDash");
                     }else
                     {
                         superDashToThrough();
@@ -271,7 +272,8 @@ public class SuperDash : MonoBehaviour
                     if (_superDashKick.timerCheck(isKick))
                     {
                         superDashStop();
-                        OnSuperDashHitStarKickDown?.Invoke();
+                        OnSuperDashHitStarKick?.Invoke();
+                        Debug.Log("Kick Star SuperDash");
                     }
                     else
                     {
@@ -366,7 +368,7 @@ public class SuperDash : MonoBehaviour
     }
     public void SetIsKick(bool value)
     {
-        //isKick = value;
+        isKick = value;
     }
     public void EnemyDissapear()
     {

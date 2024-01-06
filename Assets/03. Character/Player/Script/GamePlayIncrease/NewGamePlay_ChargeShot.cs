@@ -80,7 +80,7 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
     }
     protected override void ComboSkill()
     {
-        base.ComboSkill();
+        base.ComboSkill(); //Can Use Shot To Continue Combo.
 
         if(!isShotCombo)
         {
@@ -89,11 +89,55 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
                 ToHover();
             }
 
-            shotType = ShotType.ScatterShot;
-            chargeShot(MaxShotCount);
-            SetIsShotCombo(true);
-            shotType = ShotType.TripleShot;
-            OnUseMaxShot?.Invoke();
+            if (combo.comboShotType == NewGamePlay_Combo.ComboShotType.ScatterShot)
+            {
+                ComboShot(NewGamePlay_Combo.ComboShotType.ScatterShot);
+            }
+            else if(combo.comboShotType == NewGamePlay_Combo.ComboShotType.TripleShot)
+            {
+                ComboShot(NewGamePlay_Combo.ComboShotType.TripleShot);
+            }
+            else if(combo.comboShotType == NewGamePlay_Combo.ComboShotType.FireCard)
+            {
+                ComboShot(NewGamePlay_Combo.ComboShotType.FireCard);
+            }
+            else if(combo.comboShotType == NewGamePlay_Combo.ComboShotType.FireCard_Fast)
+            {
+                ComboShot(NewGamePlay_Combo.ComboShotType.FireCard_Fast);
+            }
+            
+        }
+    }
+    private void ComboShot(NewGamePlay_Combo.ComboShotType comboShotType)
+    {
+        switch (comboShotType)
+        {
+            case NewGamePlay_Combo.ComboShotType.ScatterShot:
+                shotType = ShotType.ScatterShot;
+                chargeShot(MaxShotCount);
+                SetIsShotCombo(true);
+                shotType = ShotType.TripleShot;
+                OnUseMaxShot?.Invoke();
+                break;
+
+            case NewGamePlay_Combo.ComboShotType.TripleShot:
+                shotType = ShotType.TripleShot;
+                chargeShot(MaxShotCount);
+                SetIsShotCombo(true);
+                shotType = ShotType.TripleShot;
+                break;
+
+            case NewGamePlay_Combo.ComboShotType.FireCard:
+                shot.Shot(0,NewGamePlay_Shot.ShotType.Fire);
+                SetIsShotCombo(true);
+                OnUseFireCard?.Invoke();
+                break;
+
+            case NewGamePlay_Combo.ComboShotType.FireCard_Fast:
+                shot.Shot(0,NewGamePlay_Shot.ShotType.FireFast);
+                SetIsShotCombo(true);
+                OnUseFireCard?.Invoke();
+                break;
         }
     }
     private void chargeShot(int count)

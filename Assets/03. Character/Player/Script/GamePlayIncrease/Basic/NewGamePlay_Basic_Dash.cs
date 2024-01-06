@@ -10,7 +10,7 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
     private CharacterController characterController;
     private ThirdPersonController thirdPersonController;
     private FireDashCollider fireDashCollider;
-    private NewGamePlay_Combo combo;
+    protected NewGamePlay_Combo combo;
 
     //Feedbacks
     private MMF_Player Feedbacks_Dash;
