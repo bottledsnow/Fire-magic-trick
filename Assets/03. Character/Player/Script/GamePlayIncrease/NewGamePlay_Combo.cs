@@ -92,6 +92,13 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
         VFX_UseShot.gameObject.SetActive(true);
         VFX_UseSkill.gameObject.SetActive(false);
     }
+    protected override void ComboEnd(ComboType comboType)
+    {
+        base.ComboEnd(comboType);
+
+        VFX_UseSkill.gameObject.SetActive(false);
+        VFX_UseShot.gameObject.SetActive(false);
+    }
     public void SetComboShotType(ComboShotType comboShotType)
     {
         this.comboShotType = comboShotType;
