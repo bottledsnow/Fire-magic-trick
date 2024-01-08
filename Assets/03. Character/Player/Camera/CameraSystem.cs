@@ -11,14 +11,19 @@ public class CameraSystem : MonoBehaviour
     [Header("CameraLookPlayerForward")]
     [SerializeField] private GameObject Target;
 
+    //Script
     private AimSupportSystem _aimSupportSystem;
     private ControllerInput _input;
+    private SuperDashCameraCheck superDashCameraCheck;
+
+    //variable
     private bool isTriggerButton;
 
     private void Start()
     {
         _input = GameManager.singleton.Player.GetComponent<ControllerInput>();
         _aimSupportSystem =GameManager.singleton.Player.GetComponent<AimSupportSystem>();
+        superDashCameraCheck = GameManager.singleton.EnergySystem.GetComponent<SuperDashCameraCheck>();
     }
 
     private void Update()
@@ -32,7 +37,18 @@ public class CameraSystem : MonoBehaviour
             if (_input.RSB)
             {
                 SetIsTriggerButton(true);
-                TrunCameraToPlayerForward();
+
+                if(_aimSupportSystem.target != null)
+                {
+                    TurnCameraToTarget(null);
+                }else if (superDashCameraCheck.Target != null)
+                {
+                    TurnCameraToTarget(superDashCameraCheck.Target);
+                }
+                else
+                {
+                    TrunCameraToPlayerForward();
+                }
             }
         }
 
@@ -44,11 +60,8 @@ public class CameraSystem : MonoBehaviour
             }
         }
     }
-    private void TrunCameraToPlayerForward()
-    {
-        _aimSupportSystem.ToAimSupport_onlySmooth(Target);
-    }
-
+    protected virtual void TurnCameraToTarget(GameObject Target) { _aimSupportSystem.ToAimSupport(Target); }
+    protected virtual void TrunCameraToPlayerForward() { _aimSupportSystem.ToAimSupport_onlySmooth(Target); }
     public void useCamera_Death()
     {
         Camera_Death.gameObject.SetActive(true);

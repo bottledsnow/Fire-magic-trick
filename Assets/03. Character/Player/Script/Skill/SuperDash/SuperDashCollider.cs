@@ -6,7 +6,7 @@ public class SuperDashCollider : MonoBehaviour
     [SerializeField] private MMF_Player HitFeedbacks;
     private SuperDash _superDash;
     private PlayerDamage _playerDamage;
-    private AimSupportSystem _aimSupportSystem;
+    private Basic_AimSupportSystem _aimSupportSystem;
     private float CrashForce;
     private float CrashForceUp;
     private bool IsSuperDash;
@@ -18,7 +18,7 @@ public class SuperDashCollider : MonoBehaviour
     {
         _superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
         _playerDamage = GetComponent<PlayerDamage>();
-        _aimSupportSystem = GameManager.singleton.Player.GetComponent<AimSupportSystem>();
+        _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
         Initialization();
     }
     private void Initialization()

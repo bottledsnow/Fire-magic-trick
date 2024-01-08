@@ -32,11 +32,13 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
     protected float collingTime;
     protected float speed;
     protected float dashDistance;
+    protected float coolingTimer;
 
+    //value
     private bool isDash;
     private bool isCooling;
+    private bool isButton;
     private float dashTime;
-    protected float coolingTimer;
     
     protected virtual void Start()
     {
@@ -61,8 +63,10 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
     }
     private void button()
     {
-        if(input.ButtonB)
+        if(input.ButtonB && !isButton)
         {
+            SetIsButton(true);
+            
             if (!isCooling && !isDash)
             {
                 if (input.LeftStick == new Vector2(0, 0))
@@ -80,6 +84,12 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
 
                 OnDash?.Invoke();
                 ToDash();
+            }
+        } else
+        {
+            if(!input.ButtonB && isButton)
+            {
+                SetIsButton(false);
             }
         }
     }
@@ -175,5 +185,9 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
 
         if(dashType == DashType.DashForward)  DashForwardSetting();
         if(dashType == DashType.DashBackward) DashBackwardSetting();
+    }
+    private void SetIsButton(bool value)
+    {
+        isButton = value;
     }
 }

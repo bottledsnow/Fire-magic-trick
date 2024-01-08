@@ -32,11 +32,7 @@ public class NewGamePlay_Basic_WindSkill : NewGamePlay_Basic_Charge
     {
         base.ChargeStart();
 
-        if(wind.isWind)
-        {
-            wind.UseWind();
-            SetCanUseWindSkill(true);
-        }
+        
     }
     protected override void ChargeStop()
     {
@@ -59,11 +55,19 @@ public class NewGamePlay_Basic_WindSkill : NewGamePlay_Basic_Charge
             SetCanUseWindSkill(false);
         }
     }
-    protected virtual void SuperJump() { }
-    protected virtual void CircleCard() { }
-    protected virtual void CircleCardFloat() { }
-    protected virtual void CircleCardBoom() { }
+    protected virtual void SuperJump() { useWind(); }
+    protected virtual void CircleCard() { useWind(); }
+    protected virtual void CircleCardFloat() { useWind(); }
+    protected virtual void CircleCardBoom() { useWind(); }
     
+    private void useWind()
+    {
+        if (wind.isWind)
+        {
+            wind.UseWind();
+            SetCanUseWindSkill(true);
+        }
+    }
     private void SetCanUseWindSkill(bool value)
     {
         canUseWindSkill = value;
