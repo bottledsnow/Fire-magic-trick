@@ -29,6 +29,10 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
     private NewGamePlay_ChargeShot chargeShot;
     private SuperDashKick kick;
 
+    //VFX
+    private ParticleSystem VFX_UseSkill;
+    private ParticleSystem VFX_UseShot;
+
     //delegate
     public delegate void ComboSkillHandler();
     public delegate void ComboShotHandler();
@@ -54,10 +58,15 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
         chargeShot = GetComponent<NewGamePlay_ChargeShot>();
         dash = GetComponent<NewGamePlay_Dash>();
 
+        //VFX
+        VFX_UseSkill = GameManager.singleton.VFX_List.VFX_UseSkill;
+        VFX_UseShot = GameManager.singleton.VFX_List.VFX_UseShot;
+
         //Subscribe
         dash.OnDash += UseSkill;
         kick.OnKick += UseSkill;
         chargeShot.OnUseMaxShot += UseShot;
+        chargeShot.OnUseFireCard += UseShot;
 
         //Subscribe Combo
         dash.OnDashCombo += UseComboDash;
@@ -73,11 +82,15 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
     {
         OnUseSkill?.Invoke();
         ComboTrigger_Skill();
+        VFX_UseSkill.gameObject.SetActive(true);
+        VFX_UseShot.gameObject.SetActive(false);
     }
     private void UseShot()
     {
         OnUseShot?.Invoke();
         ComboTrigger_Shot();
+        VFX_UseShot.gameObject.SetActive(true);
+        VFX_UseSkill.gameObject.SetActive(false);
     }
     public void SetComboShotType(ComboShotType comboShotType)
     {

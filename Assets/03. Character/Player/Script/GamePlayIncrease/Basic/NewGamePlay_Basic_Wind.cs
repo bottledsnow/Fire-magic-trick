@@ -33,7 +33,7 @@ public class NewGamePlay_Basic_Wind : MonoBehaviour
     {
         WindTimer();
     }
-    public void AddWindPower()
+    public virtual void AddWindPower()
     {
         if(!isWind)
         {

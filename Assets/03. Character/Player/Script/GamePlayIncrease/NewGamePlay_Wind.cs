@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class NewGamePlay_Wind : NewGamePlay_Basic_Wind
 {
@@ -14,17 +14,22 @@ public class NewGamePlay_Wind : NewGamePlay_Basic_Wind
 
     //VFX
     private ParticleSystem VFX_WindStart;
-
+    private ParticleSystem VFX_UI_Wind;
 
     protected override void Start()
     {
         base.Start();
 
         VFX_WindStart = GameManager.singleton.VFX_List.VFX_WindStart;
+        VFX_UI_Wind = GameManager.singleton.VFX_List.VFX_UI_Wind;
     }
     protected override void Update()
     {
         base.Update();
+    }
+    public override void AddWindPower()
+    {
+        base.AddWindPower();
     }
     public void UseWind()
     {
@@ -48,6 +53,7 @@ public class NewGamePlay_Wind : NewGamePlay_Basic_Wind
 
         //vfx
         VFX_WindStart.Play();
+        VFX_UI_Wind.Play();
 
         //Set
         SetEmmision(WindPower * _powerParticle * multiple);
@@ -56,6 +62,9 @@ public class NewGamePlay_Wind : NewGamePlay_Basic_Wind
     protected override void WindStop()
     {
         base.WindStop();
+
+        //vfx
+        VFX_UI_Wind.Stop();
 
         //event
         OnWindStop?.Invoke();

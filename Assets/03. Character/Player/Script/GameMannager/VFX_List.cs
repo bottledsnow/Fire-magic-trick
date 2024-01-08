@@ -13,4 +13,7 @@ public class VFX_List : MonoBehaviour
     public ParticleSystem VFX_WindPower;
     public ParticleSystem VFX_WindStart;
     public ParticleSystem VFX_SuperJump;
+    public ParticleSystem VFX_UseSkill;
+    public ParticleSystem VFX_UseShot;
+    public ParticleSystem VFX_UI_Wind;
 }
