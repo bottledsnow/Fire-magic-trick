@@ -3,7 +3,7 @@ using UnityEngine;
 public class NewGamePlay_Basic_SuperDash : MonoBehaviour
 {
     //Script
-    private SuperDash superDash;
+    protected SuperDash superDash;
     protected NewGamePlay_Combo combo;
     protected virtual void Start()
     {

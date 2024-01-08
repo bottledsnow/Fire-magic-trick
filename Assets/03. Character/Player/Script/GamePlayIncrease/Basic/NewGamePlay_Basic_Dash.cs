@@ -11,6 +11,7 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
     private ThirdPersonController thirdPersonController;
     private FireDashCollider fireDashCollider;
     protected NewGamePlay_Combo combo;
+    protected PlayerState playerState;
 
     //Feedbacks
     private MMF_Player Feedbacks_Dash;
@@ -35,6 +36,7 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
     private bool isDash;
     private bool isCooling;
     private float dashTime;
+    protected float coolingTimer;
     
     protected virtual void Start()
     {
@@ -44,6 +46,7 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
         thirdPersonController = input.GetComponent<ThirdPersonController>();
         fireDashCollider = GameManager.singleton.Collider_List.DashCrash.GetComponent<FireDashCollider>();
         combo = GetComponent<NewGamePlay_Combo>();
+        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
 
         //Feedbacks
         Feedbacks_Dash = GameManager.singleton.Feedbacks_List.Dash;
@@ -62,10 +65,18 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
         {
             if (!isCooling && !isDash)
             {
-                SetIsDash(true);
+                if (input.LeftStick == new Vector2(0, 0))
+                {
+                    SetIsDashType(DashType.DashBackward);
+                }
+                else
+                {
+                    SetIsDashType(DashType.DashForward);
+                }
 
-                if (input.LeftStick == new Vector2(0, 0)) SetIsDashType(DashType.DashBackward);
                 if (combo.CanUseSkillToContinueCombo() && !combo.isComboDash) DashComboSetting();
+
+                SetIsDash(true);
 
                 OnDash?.Invoke();
                 ToDash();
@@ -79,22 +90,26 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
             if(dashType == DashType.DashForward)  Dash(DashType.DashForward);
             if(dashType == DashType.DashBackward) Dash(DashType.DashBackward);
         }
+
+        if(isCooling)
+        {
+            coolingTimer -= Time.deltaTime;
+        }
+
+        if(coolingTimer <= 0)
+        {
+            SetIsCooling(false);
+            coolingTimer = collingTime;
+        }
     }
     private async void ToDash()
     {
         CaculateDashTime();
         SetIsDash(true);
-        ToCooling();
+        SetIsCooling(true);
         await Task.Delay((int)(dashTime*1000));
         SetIsDash(false);
     }
-    private async void ToCooling()
-    {
-        SetIsCooling(true);
-        await Task.Delay((int)(collingTime * 1000));
-        SetIsCooling(false);
-    }
-    
     private void CaculateDashTime()
     {
         dashTime = dashDistance / speed;
@@ -102,15 +117,29 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
     protected virtual void Dash(DashType dashType)
     {
         Vector3 direction = Vector3.zero;
-        if(dashType == DashType.DashForward) direction = Vector3.forward;
-        if (dashType == DashType.DashBackward) direction = Vector3.back;
+        Vector3 dir = Vector3.zero;
 
-        Vector3 Dir = Quaternion.Euler(0, thirdPersonController.PlayerRotation, 0) * direction;
-        characterController.Move(Dir * speed * Time.deltaTime);
+        if (dashType == DashType.DashForward)
+        {
+            direction = Vector3.forward;
+            dir = Quaternion.Euler(0, thirdPersonController.PlayerRotation, 0) * direction;
+        }
+        if (dashType == DashType.DashBackward) 
+        {
+            direction = Camera.main.transform.forward * -1;
+            dir = new Vector3(direction.x, 0, direction.z).normalized;
+            playerState.TurnToNewDirection(-dir);
+        }
+        characterController.Move(dir * speed * Time.deltaTime);
+    }
+    public void DecreaseDashCooling(float value)
+    {
+        coolingTimer -= value;
     }
     protected virtual void DashForwardSetting() { }
     protected virtual void DashBackwardSetting() { }
     protected virtual void DashComboSetting() { OnDashCombo?.Invoke(); }
+    protected virtual void DashStop() { }
     private void OpenCrash()
     {
         fireDashCollider.SetIsDash(true);
@@ -130,8 +159,9 @@ public class NewGamePlay_Basic_Dash : MonoBehaviour
             OpenCrash();
         }else
         {
-            SetIsDashType(DashType.DashForward);
+            
             Feedbacks_Dash.StopFeedbacks();
+            DashStop();
             CloseCrash();
         }
     }

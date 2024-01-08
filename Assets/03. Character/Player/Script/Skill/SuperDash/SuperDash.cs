@@ -1,7 +1,6 @@
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using System.Threading.Tasks;
-using UnityEngine.Events;
 
 public class SuperDash : MonoBehaviour
 {
@@ -26,7 +25,7 @@ public class SuperDash : MonoBehaviour
     [Header("Other")]
     [SerializeField] private GameObject Model;
 
-
+    //Script
     private SuperDashCameraCheck _superDashCameraCheck;
     private CharacterController _characterController;
     private SuperDashKickDown _superDashKickDown;
@@ -38,16 +37,7 @@ public class SuperDash : MonoBehaviour
     private PlayerState _playerState;
     private GameObject player;
 
-
-    private Vector3 direction;
-    private float superDashSpeed = 0;
-    private float superDashTimer = 0;
-    private bool isCooling;
-    private bool isSuperDashThrough;
-    private bool isKick;
-    private bool TriggerStart;
-    public bool isSuperDash;
-
+    //delegate
     public delegate void SuperDashStartHandler();
     public delegate void SuperDashHitGroundHandler();
     public delegate void SuperDashHitKickHandler();
@@ -64,6 +54,18 @@ public class SuperDash : MonoBehaviour
     public event SuperDashHitStarThroyghHandler OnSuperDashHitStarThrough;
     public event SuperDashHitStarKickHandler OnSuperDashHitStarKick;
 
+    //variable
+    private Vector3 direction;
+    private float superDashSpeed = 0;
+    private float superDashTimer = 0;
+    private float superDashCoolingtimer;
+    private float superDashInterruptTimer;
+    private bool isCooling;
+    private bool isSuperDashThrough;
+    private bool isKick;
+    private bool TriggerStart;
+    private bool isSuperDashStart;
+    public bool isSuperDash;
 
     private void Start()
     {
@@ -77,6 +79,11 @@ public class SuperDash : MonoBehaviour
         _playerAnimator = _playerState.GetComponent<PlayerAnimator>();
         _energySystem = _playerState.GetComponent<EnergySystem>();
         player = _playerState.gameObject;
+
+        if (Model.activeSelf == false)
+        {
+            Model.SetActive(true);
+        }
     }
     private void Update()
     {
@@ -86,6 +93,28 @@ public class SuperDash : MonoBehaviour
         superDashHit();
         superDashThrough();
         IsSuperDashModelCheck();
+        superDashCoolingTimer();
+        InterruptTimer();
+    }
+    public void SetIsKick(bool value)
+    {
+        isKick = value;
+    }
+    public void EnemyDissapear()
+    {
+        if (Target == null)
+        {
+            superDashStop();
+        }
+    }
+    public void ToThroughEnemy()
+    {
+        _playerState.TakeControl();
+        isSuperDash = false;
+        superDashTimer = 0;
+        FireDashHit.PlayFeedbacks();
+        superDashToThrough();
+        OnSuperDashHitThrough?.Invoke();
     }
     private async void IsSuperDashModelCheck()
     {
@@ -96,6 +125,9 @@ public class SuperDash : MonoBehaviour
             {
                 Model.SetActive(false);
             }
+        }else
+        {
+            
         }
     }
     private void Initialization()
@@ -147,21 +179,35 @@ public class SuperDash : MonoBehaviour
             OnSuperDashStart?.Invoke();
         }
     }
-    private async void SuperDashColling()
+    private void superDashCoolingTimer()
+    {
+        if(isCooling)
+        {
+            superDashCoolingtimer -= Time.deltaTime;
+        }
+
+        if(superDashCoolingtimer <0)
+        {
+            Feedbacks_SuperDashCooling.StopFeedbacks();
+            SetIsCooling(false);
+        }
+    }
+    private void SuperDashColling()
     {
         SetIsCooling(true);
+        superDashCoolingtimer = SuperDashCollingTime;
         Feedbacks_SuperDashCooling.PlayFeedbacks();
-        await Task.Delay((int)(SuperDashCollingTime*1000));
-        Feedbacks_SuperDashCooling.StopFeedbacks();
-        SetIsCooling(false);
     }
-    
+    public void DecreaseSuperDashTimer(float time)
+    {
+        superDashCoolingtimer -= time;
+    }
     private void superDashStart()
     {
         isSuperDash = true;
         _superDashCollider.SetIsSuperDash(true);
         FireDashStart.PlayFeedbacks();
-        superDashInterrupt();
+        superDashInterruptStart();
 
         SetTriggerStart(true);
         _superDashKickDown.GetTarget(Target);
@@ -225,7 +271,6 @@ public class SuperDash : MonoBehaviour
     {
         if(isSuperDash && _playerCollider.hit !=null)
         {
-
             if (_playerCollider.hit.collider.tag == "Enemy")
             {
                 _playerState.TakeControl();
@@ -233,27 +278,24 @@ public class SuperDash : MonoBehaviour
                 superDashTimer = 0;
                 FireDashHit.PlayFeedbacks();
 
-                if (_playerState.nearGround)
+                if (_superDashKick.timerCheck(isKick))
+                {
+                    HitToKickDown();
+                    OnSuperDashHitKick?.Invoke();
+                }
+                else if (_playerState.nearGround)
                 {
                     HitGroundEnemy();
                     OnSuperDashHitGround?.Invoke();
-                    Debug.Log("Hit Ground Enemy");
-                } else
-                {
-                    if(_superDashKick.timerCheck(isKick))
-                    {
-                        HitToKickDown();
-                        OnSuperDashHitKick?.Invoke();
-                        Debug.Log("Kick Enemy SuperDash");
-                    }else
-                    {
-                        superDashToThrough();
-                        OnSuperDashHitThrough?.Invoke();
-                        Debug.Log("Through Enemy");
-                    }
                 }
-            }else
-            if(_playerCollider.hit.collider.CompareTag("FirePoint"))
+                else
+                {
+                    superDashToThrough();
+                    OnSuperDashHitThrough?.Invoke();
+                }
+            }
+            else
+            if (_playerCollider.hit.collider.CompareTag("FirePoint"))
             {
                 FirePoint point = _playerCollider.hit.collider.GetComponent<FirePoint>();
                 point.ToUseFirePoint();
@@ -263,23 +305,19 @@ public class SuperDash : MonoBehaviour
                 superDashTimer = 0;
                 FireDashHit.PlayFeedbacks();
 
-                if (_playerState.nearGround)
+                if (_superDashKick.timerCheck(isKick))
+                {
+                    superDashStop();
+                    OnSuperDashHitStarKick?.Invoke();
+                }
+                else if (_playerState.nearGround)
                 {
                     superDashStop();
                 }
                 else
                 {
-                    if (_superDashKick.timerCheck(isKick))
-                    {
-                        superDashStop();
-                        OnSuperDashHitStarKick?.Invoke();
-                        Debug.Log("Kick Star SuperDash");
-                    }
-                    else
-                    {
-                        superDashToThrough(point);
-                        OnSuperDashHitStarThrough?.Invoke();
-                    }
+                    superDashToThrough(point);
+                    OnSuperDashHitStarThrough?.Invoke();
                 }
             }
         }
@@ -296,6 +334,7 @@ public class SuperDash : MonoBehaviour
     }
     private void superDashStop()
     {
+        Debug.Log("Stop");
         if(isSuperDash)
         {
             Debug.Log("Stop But IsFire");
@@ -309,31 +348,20 @@ public class SuperDash : MonoBehaviour
             Target = null;
             _superDashKickDown.NullTarget();
             SetTriggerStart(false);
+            StopInterruptTimer();
             Initialization();
         }
     }
-    private void superDashInterruptStop()
-    {
-        if(isSuperDash)
-        {
-            _superDashCollider.SetIsSuperDash(false);
-            _playerState.SetGravityToNormal();
-            _playerState.ResetVerticalvelocity();
-            _playerAnimator.SuperDashEnd();
-            FireDashEnd_Interrupt.PlayFeedbacks();
-            superDashSpeed = 0;
-            Target = null;
-            _superDashKickDown.NullTarget();
-            SetTriggerStart(false);
-            Initialization();
-        }
-    }
+    
     private void superDashToThrough()
     {
-        EnemyHealthSystem enemyHealthSystem = _playerCollider.hit.collider.GetComponent<EnemyHealthSystem>();
-        enemyHealthSystem.EnemyDeathRightNow();
-
-        _playerCollider.hit.collider.gameObject.SetActive(false);
+        if(_playerCollider.hit != null)
+        {
+            EnemyHealthSystem enemyHealthSystem = _playerCollider.hit.collider.GetComponent<EnemyHealthSystem>();
+            enemyHealthSystem.EnemyDeathRightNow();
+            _playerCollider.hit.collider.gameObject.SetActive(false);
+        }
+       
         isSuperDashThrough = true;
         superDashSpeed = superDashMaxSpeed;
     }
@@ -361,22 +389,45 @@ public class SuperDash : MonoBehaviour
         superDashTimer = speedTimer(superDashTimer, SuperDashTimeFall);
         superDashSpeed = superDashReduceSpeed.Evaluate(superDashTimer) * superDashMaxSpeed;
     }
-    private async  void superDashInterrupt()
+    private void superDashInterruptStart()
     {
-        await Task.Delay(3000);
-        superDashInterruptStop();
+        SetIsSuperDashStart(true);
     }
-    public void SetIsKick(bool value)
+    private void InterruptTimer()
     {
-        isKick = value;
-    }
-    public void EnemyDissapear()
-    {
-        if(Target ==null)
+        if (isSuperDashStart)
         {
-            superDashStop();
+            superDashInterruptTimer += Time.deltaTime;
+        }
+
+        if (superDashInterruptTimer > 3f)
+        {
+            superDashInterruptStop();
+            superDashInterruptTimer = 0;
         }
     }
+    private void StopInterruptTimer()
+    {
+        SetIsSuperDashStart(false);
+        superDashInterruptTimer = 0;
+    }
+    private void superDashInterruptStop()
+    {
+        if (isSuperDash)
+        {
+            _superDashCollider.SetIsSuperDash(false);
+            _playerState.SetGravityToNormal();
+            _playerState.ResetVerticalvelocity();
+            _playerAnimator.SuperDashEnd();
+            FireDashEnd_Interrupt.PlayFeedbacks();
+            superDashSpeed = 0;
+            Target = null;
+            _superDashKickDown.NullTarget();
+            SetTriggerStart(false);
+            Initialization();
+        }
+    }
+
     private void SetTriggerStart(bool active)
     {
         TriggerStart = active;
@@ -384,5 +435,9 @@ public class SuperDash : MonoBehaviour
     private void SetIsCooling(bool value)
     {
         isCooling = value;
+    }
+    private void SetIsSuperDashStart(bool vaule)
+    {
+        isSuperDashStart = vaule;
     }
 }

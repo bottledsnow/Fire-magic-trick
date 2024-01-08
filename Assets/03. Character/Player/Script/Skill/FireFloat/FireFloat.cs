@@ -92,7 +92,6 @@ public class FireFloat : MonoBehaviour
     {
         if(isTimer)
         {
-            Debug.Log("Float End");
             isTimer = false;
             timer = 0;
             _playerState.SetGravityToNormal();

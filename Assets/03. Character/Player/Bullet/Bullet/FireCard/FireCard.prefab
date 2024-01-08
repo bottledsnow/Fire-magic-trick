@@ -24264,7 +24264,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4681020241941845620}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef4cb3980d2aec740bf4078bb4836280, type: 3}
   m_Name: 
@@ -24272,8 +24272,6 @@ MonoBehaviour:
   TrackLayerMask:
     serializedVersion: 2
     m_Bits: 4096
-  CheckDistance: 1.5
-  RotateSpeed: 0
   TrackCurve:
     serializedVersion: 2
     m_Curve:
@@ -24298,8 +24296,11 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  onTrackSpeed: 30
+  CheckDistance: 1.5
   smoothRotateTime: 0.5
   MaxRotateSpeed: 250
+  RotateSpeed: 0
 --- !u!114 &3437747978111712821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24318,6 +24319,7 @@ MonoBehaviour:
   speed: 10
   fireBall: {fileID: 3459563332594935184, guid: 34cb7d3f816fea549abea5882d977b4b, type: 3}
   moveTime: 5
+  ThroughDistance: 1
 --- !u!114 &5975966362396437239
 MonoBehaviour:
   m_ObjectHideFlags: 0

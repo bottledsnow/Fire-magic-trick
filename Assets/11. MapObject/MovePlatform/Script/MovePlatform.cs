@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Threading.Tasks;
 
 public class MovePlatform : MonoBehaviour
 {
@@ -8,18 +7,21 @@ public class MovePlatform : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float stopTime;
 
+    //public
+    public Vector3 updateMove;
     public bool isReturn;
+    public bool isMove = false;
 
+    //Script
     private MeshRenderer meshRenderer;
     private Collider thisCollider;
 
+    //variable
     private float delayTimer = 0;
     private float timer = 0;
     private bool Trigger;
     private bool isTimerFinish;
     private bool isTimer;
-    private bool isMove = false;
-    private bool isTimerStop;
     private bool isStart;
     private int moveIndex = 0;
     private void Start()
@@ -59,7 +61,8 @@ public class MovePlatform : MonoBehaviour
 
         if (isMove)
         {
-            this.transform.position += Direction * speed * Time.deltaTime;
+            updateMove = Direction * speed * Time.deltaTime;
+            this.transform.position += updateMove;
             SetTrigger(false);
         }
 
@@ -143,10 +146,6 @@ public class MovePlatform : MonoBehaviour
     private void SetTrigger(bool active)
     {
         Trigger = active;
-    }
-    private void SetIsTimerStop(bool active)
-    {
-        isTimerStop = active;
     }
     public void SetActivePlatform(bool active)
     {

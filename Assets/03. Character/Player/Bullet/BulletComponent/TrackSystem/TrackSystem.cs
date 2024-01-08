@@ -2,21 +2,34 @@ using UnityEngine;
 
 public class TrackSystem : MonoBehaviour
 {
+    [Header("Track System")]
     [SerializeField] private LayerMask TrackLayerMask;
-    [SerializeField] private float CheckDistance;
-    [SerializeField] private float RotateSpeed;
     [SerializeField] private AnimationCurve TrackCurve;
-
-    private RaycastHit HitInfo;
-    private GameObject Target;
-    private bool raycastHit;
-    private bool isRotate;
-
-    [Header("test")]
-    private float deltaTime;
-    private float rotateTimer;
+    [SerializeField] private float onTrackSpeed;
+    [SerializeField] private float CheckDistance;
+    
+    [Header("Rotate")]
     [SerializeField] private float smoothRotateTime;
     [SerializeField] private float MaxRotateSpeed;
+    [SerializeField] private float RotateSpeed;
+
+    //Script
+    private RaycastHit HitInfo;
+    private GameObject Target;
+    private Bullet bullet;
+    private BulletRotation bulletRotation;
+
+    //variable
+    private bool raycastHit;
+    private bool isRotate;
+    private float deltaTime;
+    private float rotateTimer;
+
+    private void Start()
+    {
+        bullet = GetComponent<Bullet>();
+        bulletRotation = GetComponent<BulletRotation>();
+    }
     private void Update()
     {
         shootRay();
@@ -52,6 +65,9 @@ public class TrackSystem : MonoBehaviour
         if (raycastHit)
         {
             SetIsRotate(true);
+            this.transform.parent = null;
+            bullet.SetSpeed(onTrackSpeed);
+            if(bulletRotation != null) bulletRotation.OnTrack();
             Target = HitInfo.collider.gameObject;
         }
 

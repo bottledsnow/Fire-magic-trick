@@ -52,6 +52,12 @@ public class RotateSystem : MonoBehaviour
             }
         }
     }
+    public void SetRotateSpeed(Vector3 speed)
+    {
+        speedX = speed.x;
+        speedY = speed.y;
+        speedZ = speed.z;
+    }
     public void SetUseRotate(bool value)
     {
         useRotate = value;

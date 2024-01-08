@@ -94,6 +94,12 @@ public class NewGamePlay_Shot : NewGamePlay_Basic_Shot
         Shot(preferb, rotate_x, rotate_y);
         shooting_Normal.PlayShootFeedbacks();
     }
+    public void Shot(Vector3 positionOffset,float rotate_x, float rotate_y, ShotType shotType)
+    {
+        Transform preferb = ChooseBullet(shotType);
+        Shot(preferb, positionOffset, rotate_x, rotate_y);
+        shooting_Normal.PlayShootFeedbacks();
+    }
     private void SetIsShot(bool value)
     {
         this.isShot = value;

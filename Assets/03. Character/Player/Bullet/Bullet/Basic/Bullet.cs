@@ -1,7 +1,8 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class Bullet : MonoBehaviour, IHitNotifier
+public class Bullet : MonoBehaviour, IHitNotifier,ITriggerNotifier
 {
     [Header("Bullet")]
     [SerializeField] protected GameObject hitEnemyPrefab;
@@ -16,6 +17,10 @@ public class Bullet : MonoBehaviour, IHitNotifier
 
     //delegate
     public event MyDelegates.OnHitHandler OnHit;
+    public event MyDelegates.OnTriggerHandler OnTrigger;
+
+    //variable
+    protected bool useTriggerEnter = false;
 
     protected virtual void Start()
     {
@@ -30,25 +35,45 @@ public class Bullet : MonoBehaviour, IHitNotifier
         GiveSpeed();
     }
     private void OnCollisionEnter(Collision collision)
-    {
-        //Contact 
-        ContactPoint contact = collision.contacts[0];
-        Quaternion rot = Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal);
-        Vector3 pos = contact.point;
-
-        //Hit
-        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnergyCan"))
+    {   
+        if(!useTriggerEnter)
         {
-            OnHit?.Invoke(collision);
-            OnHitEnemy();
-            GameObject enemyhit = Instantiate(hitEnemyPrefab, pos, rot);
-            Destroy(enemyhit, 1f);
-        }
-        OnHitSomething();
+            //Contact 
+            ContactPoint contact = collision.contacts[0];
+            Quaternion rot = Quaternion.FromToRotation(Vector3.up, collision.contacts[0].normal);
+            Vector3 pos = contact.point;
 
-        newHit(pos, rot);
-        CroshairFeedback();
-        DestroyBullet();
+            //Hit
+            if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("EnergyCan"))
+            {
+                OnHit?.Invoke(collision);
+                OnHitEnemy();
+                GameObject enemyhit = Instantiate(hitEnemyPrefab, pos, rot);
+                Destroy(enemyhit, 1f);
+            }
+            OnHitSomething();
+
+            newHit(pos, rot);
+            CroshairFeedback();
+            DestroyBullet();
+        }
+    }
+    protected virtual void OnTriggerEnter(Collider other)
+    {
+        if (useTriggerEnter)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                OnTrigger?.Invoke(other);
+                OnHitEnemy();
+                GameObject enemyhit = Instantiate(hitEnemyPrefab,other.transform.position, Quaternion.identity);
+                Destroy(enemyhit, 1f);
+            }
+            OnHitSomething();
+
+            newHit(other.transform.position, Quaternion.identity);
+            CroshairFeedback();
+        }
     }
     protected virtual void OnHitEnemy() { }
     protected virtual void OnHitSomething() { }
@@ -71,5 +96,9 @@ public class Bullet : MonoBehaviour, IHitNotifier
         coli.enabled = false;
         rb.drag = 100;
         Destroy(gameObject, 0.3f);
+    }
+    public void SetSpeed(float value)
+    {
+        speed = value;
     }
 }

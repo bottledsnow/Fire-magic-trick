@@ -36,6 +36,15 @@ public class NewGamePlay_Basic_Shot : MonoBehaviour
         Vector3 newDir = Quaternion.Euler(rotate) * aimDir;
         Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(newDir, Vector3.up));
     }
+    public void Shot(Transform preferb, Vector3 positionOffset, float rotate_Xaxis, float rotate_Yaxis)
+    {
+        spawnBulletPositionToNew();
+
+        Vector3 aimDir = (_shooting_check.mouseWorldPosition - spawnBulletPosition.position).normalized;
+        Vector3 rotate = new Vector3(rotate_Xaxis, rotate_Yaxis, 0);
+        Vector3 newDir = Quaternion.Euler(rotate) * aimDir;
+        Instantiate(preferb, spawnBulletPosition.position+ positionOffset, Quaternion.LookRotation(newDir, Vector3.up));
+    }
     private void spawnBulletPositionToNew()
     {
         Vector3 Direction = (_shooting_check.mouseWorldPosition - spawnBulletPositionOrigin.position).normalized;

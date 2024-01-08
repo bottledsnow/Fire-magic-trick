@@ -10,11 +10,14 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 
     //delegate
     public delegate void ChargeShotHandler();
+    public delegate void TripleShotHandler();
     public delegate void FireCardHandler();
     public delegate void BoomCardHandler();
     public delegate void WindCardHandler();
     public event ChargeShotHandler OnUseMaxShot;
     public event ChargeShotHandler OnUseMinShot;
+    public event ChargeShotHandler OnUseScatterShotCombo;
+    public event TripleShotHandler OnUseTripleShotCombo;
     public event FireCardHandler OnUseFireCard;
     public event BoomCardHandler OnUseBoomCard;
     public event WindCardHandler OnUseWindCard;
@@ -27,6 +30,8 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
 
     [Header("Triple Shot")]
     [SerializeField] private float tripleShotIntervalTime;
+    [SerializeField] private Vector3 positionOffset_min;
+    [SerializeField] private Vector3 positionOffset_max;
 
     private bool isShotCombo;
     public enum ShotType
@@ -48,15 +53,27 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
     {
         base.Update();
     }
-    protected override void Charge()
+    protected override void ComboCheck()
     {
-        base.Charge();
+        base.ComboCheck();
+
+        if(combo.CanUseShotToContinueCombo())
+        {
+            SetCanUseShotToContinueCombo(true);
+        }else
+        {
+            SetCanUseShotToContinueCombo(false);
+        }
+    }
+    protected override void ChargeStart()
+    {
+        base.ChargeStart();
         combo.ComboChargeStart();
     }
-    protected override void StopCharge()
+    protected override void ChargeStop()
     {
-        base.StopCharge();
-        combo.ComboChargeStop();
+        base.ChargeStop();
+        combo.ComboChargeStop(); //for Shot Combo
 
         if (chargeTimer + 1 > MaxShotCount)
         {
@@ -104,8 +121,10 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
             else if(combo.comboShotType == NewGamePlay_Combo.ComboShotType.FireCard_Fast)
             {
                 ComboShot(NewGamePlay_Combo.ComboShotType.FireCard_Fast);
+            }else if(combo.comboShotType == NewGamePlay_Combo.ComboShotType.WindCard)
+            {
+                ComboShot(NewGamePlay_Combo.ComboShotType.WindCard);
             }
-            
         }
     }
     private void ComboShot(NewGamePlay_Combo.ComboShotType comboShotType)
@@ -118,6 +137,7 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
                 SetIsShotCombo(true);
                 shotType = ShotType.TripleShot;
                 OnUseMaxShot?.Invoke();
+                OnUseScatterShotCombo?.Invoke();
                 break;
 
             case NewGamePlay_Combo.ComboShotType.TripleShot:
@@ -125,6 +145,8 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
                 chargeShot(MaxShotCount);
                 SetIsShotCombo(true);
                 shotType = ShotType.TripleShot;
+                OnUseMaxShot?.Invoke();
+                OnUseTripleShotCombo?.Invoke();
                 break;
 
             case NewGamePlay_Combo.ComboShotType.FireCard:
@@ -137,6 +159,13 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
                 shot.Shot(0,NewGamePlay_Shot.ShotType.FireFast);
                 SetIsShotCombo(true);
                 OnUseFireCard?.Invoke();
+                break;
+            case NewGamePlay_Combo.ComboShotType.WindCard:
+                TripleShot(MaxShotCount);
+                SetIsShotCombo(true);
+                OnUseWindCard?.Invoke();
+                OnUseMaxShot?.Invoke();
+                OnUseTripleShotCombo?.Invoke();
                 break;
         }
     }
@@ -181,7 +210,12 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
     {
         for(int i = 0; i < count; i++)
         {
-            shot.Shot(0,NewGamePlay_Shot.ShotType.Wind);
+            float x = Random.Range(positionOffset_min.x, positionOffset_max.x);
+            float y = Random.Range(positionOffset_min.y, positionOffset_max.y);
+            float z = Random.Range(positionOffset_min.z, positionOffset_max.z);
+            Vector3 positionOffset = new Vector3(x, y, z);
+
+            shot.Shot(positionOffset,0,0,NewGamePlay_Shot.ShotType.Wind);
             OnUseWindCard?.Invoke();
             await Task.Delay((int)(tripleShotIntervalTime*1000));
         }

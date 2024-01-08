@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Threading.Tasks;
-using System.ComponentModel;
 
 public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
 {
     [Header("Combo Colling")]
+    [SerializeField] private float comboShotCollingTime =0.5f;
     [SerializeField] private float comboCollingTime;
     [SerializeField] private float comboCardCollingTime;
 
@@ -42,6 +42,7 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
         ScatterShot,
         FireCard,
         FireCard_Fast,
+        WindCard,
     }
 
     protected override void Start()
@@ -49,9 +50,9 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
         base.Start();
 
         //Script
+        kick = GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
         chargeShot = GetComponent<NewGamePlay_ChargeShot>();
         dash = GetComponent<NewGamePlay_Dash>();
-        kick = GameManager.singleton.EnergySystem.GetComponent<SuperDashKick>();
 
         //Subscribe
         dash.OnDash += UseSkill;
@@ -60,6 +61,8 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
 
         //Subscribe Combo
         dash.OnDashCombo += UseComboDash;
+        chargeShot.OnUseScatterShotCombo += UseComboScatterShot;
+        chargeShot.OnUseTripleShotCombo += UseComboTripleShot;
 
         //Subscribe Card
         chargeShot.OnUseFireCard += UseComboFireCard;
@@ -108,13 +111,16 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
     private async void UseComboScatterShot()
     {
         SetIsComboScatterShot(true);
-        await Task.Delay((int)(comboCollingTime * 1000));
+        dash.DecreaseDashCooling(dash.ShotToDecreaseCoolingTime);
+        await Task.Delay((int)(comboShotCollingTime * 1000));
         SetIsComboScatterShot(false);
     }
     private async void UseComboTripleShot()
     {
         SetIsComboTripleShot(true);
-        await Task.Delay((int)(comboCollingTime * 1000));
+        Debug.Log("UseComboTripleShot");
+        dash.DecreaseDashCooling(dash.ShotToDecreaseCoolingTime);
+        await Task.Delay((int)(comboShotCollingTime * 1000));
         SetIsComboTripleShot(false);
     }
     private async void UseComboFireCard()

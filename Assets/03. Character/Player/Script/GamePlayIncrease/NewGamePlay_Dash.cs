@@ -1,4 +1,6 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
 {
@@ -13,14 +15,27 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
     [SerializeField] private float backwardDashSpeed;
     [SerializeField] private float backwardDashDistance;
 
+
     [Header("Dash Combo")]
     [SerializeField] private float dashComboSpeed;
     [SerializeField] private float dashComboDistance;
-    [SerializeField] private float dahsComboCooling;
+    [SerializeField] private float dahsComboCoolingDecrease;
 
+    //feedbacks
+    private MMF_Player Feedback_DashBack;
+
+    //public 
+    public float ShotToDecreaseCoolingTime = 0.1f;
     protected override void Start()
     {
         base.Start();
+
+        //Script
+        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+
+        //feedbacks
+        Feedback_DashBack = GameManager.singleton.Feedbacks_List.DashBack;
+
     }
     protected override void Update()
     {
@@ -30,16 +45,30 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
     {
         base.DashForwardSetting();
 
+        //combo
         combo.SetComboShotType(NewGamePlay_Combo.ComboShotType.ScatterShot);
 
+        //variable
+        coolingTimer= dashCooling;
         speed = forwardDashSpeed;
         dashDistance = forwardDashDistance;
-        collingTime = dashCooling;
     }
     protected override void DashBackwardSetting()
     {
         base.DashBackwardSetting();
 
+        //Combo
+        combo.SetComboShotType(NewGamePlay_Combo.ComboShotType.WindCard);
+
+        //feedbacks
+        Feedback_DashBack.PlayFeedbacks();
+
+        //Gravity
+        playerState.SetGravity(0);
+        playerState.SetVerticalVelocity(0);
+
+        //variable
+        coolingTimer = dashCooling;
         speed = backwardDashSpeed;
         dashDistance = backwardDashDistance;
     }
@@ -49,6 +78,19 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
 
         speed = dashComboSpeed;
         dashDistance = dashComboDistance;
-        collingTime = dahsComboCooling;
+        coolingTimer -= dahsComboCoolingDecrease;
+    }
+    protected override void DashStop()
+    {
+        base.DashStop();
+
+        //feedbacks
+        Feedback_DashBack.StopFeedbacks();
+
+        //Gravity
+        playerState.SetGravityToNormal();
+
+        //variable
+        collingTime = dashCooling;
     }
 }

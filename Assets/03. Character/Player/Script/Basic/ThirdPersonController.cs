@@ -38,6 +38,7 @@ namespace StarterAssets
         [Space(10)]
         [Tooltip("The height the player can jump")]
         public float JumpHeight = 1.2f;
+        public float JumpNormal = 1.2f;
 
         [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
         public float Gravity = -15.0f;
@@ -436,6 +437,15 @@ namespace StarterAssets
                 }
             }
         }
+        public void Jump(float jumpHeight)
+        {
+            _verticalVelocity = Mathf.Sqrt(jumpHeight * -2f * Gravity);
+
+            if (_hasAnimator)
+            {
+                _animator.SetBool(_animIDJump, true);
+            }
+        }
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
         {
             if (lfAngle < -360f) lfAngle += 360f;
@@ -498,6 +508,14 @@ namespace StarterAssets
         public void ResetJump()
         {
             isJump = false;
+        }
+        public void SetJumpNormal()
+        {
+            JumpHeight = JumpNormal;
+        }
+        public void SetJumpHeight(float jumpheight)
+        {
+            JumpHeight = jumpheight;
         }
         public void SetVerticalVelocity(float value)
         {

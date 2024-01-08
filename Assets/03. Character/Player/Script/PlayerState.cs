@@ -104,7 +104,6 @@ public class PlayerState : MonoBehaviour
     }
     public void SetGravity(float value)
     {
-        Debug.Log("Set Gravity");
         _controller.Gravity = value;
     }
     private void getIsGround()
@@ -125,11 +124,12 @@ public class PlayerState : MonoBehaviour
     }
     public void TurnToAimDirection()
     {
-            Vector3 worldAimTarget = _shooting_check.mouseWorldPosition;
-            worldAimTarget.y = transform.position.y;
-            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-            Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 7.5f);
+        Vector3 worldAimTarget = _shooting_check.mouseWorldPosition;
+        worldAimTarget.y = transform.position.y;
+        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+        Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
+        transform.rotation = targetRotation;
+        //transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * 7.5f);
     }
     public void TurnToAimDirection(float rotationSpeed)
     {
@@ -138,6 +138,11 @@ public class PlayerState : MonoBehaviour
         Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+    }
+    public void TurnToNewDirection(Vector3 direction)
+    {
+        Quaternion targetRotation = Quaternion.LookRotation(direction, transform.up);
+        transform.rotation = targetRotation;
     }
     public async void DebuffPlay(float debuffTime)
     {

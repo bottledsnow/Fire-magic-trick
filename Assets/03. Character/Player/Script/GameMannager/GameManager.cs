@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public VFX_List VFX_List;
     public Feedbacks_List Feedbacks_List;
     public Collider_List Collider_List;
-
+    public GameObject NewGamePlay;
     private void Awake()
     {
         if(singleton == null)

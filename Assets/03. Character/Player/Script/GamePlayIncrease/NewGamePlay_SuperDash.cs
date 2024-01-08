@@ -34,6 +34,7 @@ public class NewGamePlay_SuperDash : NewGamePlay_Basic_SuperDash
         base.OnSuperDashHitStarKick();
 
         combo.SetComboShotType(NewGamePlay_Combo.ComboShotType.FireCard_Fast);
+        superDash.DecreaseSuperDashTimer(3f);
         Debug.Log("Kick Star");
     }
 

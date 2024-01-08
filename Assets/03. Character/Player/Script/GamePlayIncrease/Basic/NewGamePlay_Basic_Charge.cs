@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 
 public class NewGamePlay_Basic_Charge : MonoBehaviour
@@ -5,7 +6,7 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
     private ControllerInput _input;
     protected NewGamePlay_Combo combo;
 
-    [Header("Test")]
+    protected bool canUseCombo;
     private bool isCharge;
     private bool isButton;
     private ParticleSystem chargeParticle;
@@ -25,28 +26,29 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
     
     private void ChargePower()
     {
-
         if(_input.RT && !isButton)
         {
             SetIsButton(true);
 
-            if(combo.CanUseShotToContinueCombo())
+
+            ComboCheck();
+
+            if(canUseCombo)
             {
                 ComboSkill();
             }
             else
             {
                 SetIsCharge(true);
-                Charge();
+                ChargeStart();
             }
         }
-
         if (!_input.RT)
         {
             if(isCharge)
             {
                 SetIsCharge(false);
-                StopCharge();
+                ChargeStop();
             }
             if(isButton)
             {
@@ -54,16 +56,17 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
             }
         }
     }
-    protected virtual void Charge()
+    protected virtual void ChargeStart()
     {
         chargeParticle.Play();
         chargeTimer = 0;
     }
-    protected virtual void StopCharge()
+    protected virtual void ChargeStop()
     {
         chargeParticle.Stop();
     }
     protected virtual void ComboSkill() { }
+    protected virtual void ComboCheck() { }
     private void ChargeTimer()
     {
         if(isCharge)
@@ -71,7 +74,6 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
             chargeTimer += Time.deltaTime;
         }
     }
-    
     private void SetIsCharge(bool value)
     {
         isCharge = value;
@@ -79,5 +81,9 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
     private void SetIsButton(bool value)
     {
         isButton = value;
+    }
+    protected void SetCanUseShotToContinueCombo(bool value)
+    {
+        canUseCombo = value;
     }
 }

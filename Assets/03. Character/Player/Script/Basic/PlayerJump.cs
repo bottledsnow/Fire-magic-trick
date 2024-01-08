@@ -1,19 +1,26 @@
 using StarterAssets;
 using UnityEngine;
 using System.Threading.Tasks;
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityCharacterController;
 
 public class PlayerJump : MonoBehaviour
 {
     [SerializeField] private float maxPreInputTime = 0.1f;
     [SerializeField] private float JumpTimeout = 0.1f;
     [SerializeField] private float JumpToGroundTime = 0.1f;
+    
+    //delegate 
+    public delegate void JumpEvent();
+    public event JumpEvent OnJump;
+
+    //Script
+    private ThirdPersonController _thirdPersonController;
+    private ControllerInput _input;
+
+    //value
     private float preInputTimer = 0f;
     private bool isPreInput = false;
     private bool trigger = false;
     private bool triggerJumpGround = false;
-    private ThirdPersonController _thirdPersonController;
-    private ControllerInput _input;
 
     private void Start()
     {
@@ -83,6 +90,13 @@ public class PlayerJump : MonoBehaviour
     {
         await Task.Delay((int)(JumpTimeout *1000f));
         _thirdPersonController.Jump();
+    }
+    public async void Jump(float jumheight)
+    {
+        await Task.Delay((int)(JumpTimeout * 1000f));
+        _thirdPersonController.Jump(jumheight);
+
+        OnJump?.Invoke(); //super jump;
     }
     private void JumpToGround()
     {

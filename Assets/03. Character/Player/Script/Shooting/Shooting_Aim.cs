@@ -54,7 +54,6 @@ public class Shooting_Aim : MonoBehaviour
     private void aimOpen()
     {
         //Initialization
-        _playerState.TurnToAimDirection();
         aimVirtualCamera.gameObject.SetActive(true);
         thirdPersonController.SetSensitivity(aimSensitivity_x, aimSensitivity_y);
 
