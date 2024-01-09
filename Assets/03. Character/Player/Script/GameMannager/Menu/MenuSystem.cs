@@ -9,11 +9,16 @@ public class MenuSystem : MonoBehaviour
     [SerializeField] private GameObject PauseUI;
     [SerializeField] private GameObject Script;
     [SerializeField] private GameObject UI;
+    [SerializeField] private GameObject CameraPakage;
     private ThirdPersonController thirdPersonController;
     private EnergySystem energySystem;
     private GameObject MainCamera;
     private GameManager gameManager;
 
+    private void Awake()
+    {
+        NullFatherObj(CameraPakage);
+    }
     private void Start()
     {
         gameManager = GameManager.singleton;
@@ -36,6 +41,7 @@ public class MenuSystem : MonoBehaviour
         NullFatherObj(MenuUI);
         NullFatherObj(PauseUI);
         NullFatherObj(UI);
+        NullFatherObj(CameraPakage);
 
         SetPlayMode(false);
         SetMenuInterface(true);

@@ -83,11 +83,6 @@ public class AimSupportSystem : Basic_AimSupportSystem
             }
         }
     }
-
-    public override void ToAimSupport_onlySmooth(GameObject Target)
-    {
-        base.ToAimSupport_onlySmooth(Target);
-    }
     private void NullTarget()
     {
         if(isLocckTarget)

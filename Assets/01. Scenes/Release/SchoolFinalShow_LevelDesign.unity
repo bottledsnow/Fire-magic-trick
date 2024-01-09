@@ -14746,6 +14746,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5164644667056023859, guid: 96d694aad7efe214d8733aa07f23bd32, type: 3}
   m_PrefabInstance: {fileID: 1005090043}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &902599874 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7005406879392593516, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
+  m_PrefabInstance: {fileID: 1234162904}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &905447613
 GameObject:
   m_ObjectHideFlags: 0
@@ -21100,7 +21105,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4179766234123313775, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 4179766234123313775, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
       propertyPath: m_LocalPosition.z
@@ -21153,6 +21158,18 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4179766234123313775, guid: 7bdc68a1253eb864988766b1e1653d85, type: 3}
   m_PrefabInstance: {fileID: 1234162904}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1234162911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 902599874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9493c5d78c2b4b442a23aa8f99b38840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1235549201 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5164644667056023859, guid: 96d694aad7efe214d8733aa07f23bd32, type: 3}
@@ -33752,6 +33769,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5164644667056023859, guid: 96d694aad7efe214d8733aa07f23bd32, type: 3}
   m_PrefabInstance: {fileID: 1408010927}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1980989849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4020344256991754042, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+  m_PrefabInstance: {fileID: 3037685562015442476}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1982859508 stripped
 Transform:
@@ -61954,6 +61976,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1374405840, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1374405840, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: isStartGame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1374405840, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: CameraPakage
+      value: 
+      objectReference: {fileID: 1980989849}
     - target: {fileID: 761219070126851176, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -62218,6 +62252,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5337558588873953686, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: m_XDamping
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337558588873953686, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: m_YDamping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5337558588873953686, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: m_ZDamping
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 5539744462857175194, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -62241,6 +62287,22 @@ PrefabInstance:
     - target: {fileID: 5539744462857175194, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5980865808724086049, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: offest_X
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453346003387103091, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: m_XDamping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453346003387103091, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: m_YDamping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453346003387103091, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
+      propertyPath: m_ZDamping
+      value: 0.35
       objectReference: {fileID: 0}
     - target: {fileID: 7883801342766291947, guid: da786b777861ef244bb29d3120e89c1e, type: 3}
       propertyPath: m_AnchorMax.y

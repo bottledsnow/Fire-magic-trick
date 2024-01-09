@@ -14,8 +14,15 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private float gravityFire;
     [SerializeField] private float gravityFloat;
 
+    //Script
     private Shooting_Check _shooting_check;
+
+    //variable
     private float gravityNormal;
+    private float aimTimer;
+    private bool isToAim;
+    private float toAimTime = 0.15f;
+    private float targetRotationSpeed;
 
     public bool nearGround;
     public bool isGround;
@@ -36,7 +43,32 @@ public class PlayerState : MonoBehaviour
     {
         CheckGround();
         CheckFloat();
-        getIsGround();  
+        getIsGround();
+        turnToAimDirection();
+        toAimTimerSystem();
+    }
+    private void toAimTimerSystem()
+    {
+        if(isToAim)
+        {
+            aimTimer += Time.deltaTime;
+        }
+        if(aimTimer >= toAimTime)
+        {
+            SetIsToAim(false);
+            aimTimer = 0;
+        }
+    }
+    private void turnToAimDirection()
+    {
+        if(isToAim)
+        {
+            Vector3 worldAimTarget = _shooting_check.mouseWorldPosition;
+            worldAimTarget.y = transform.position.y;
+            Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * targetRotationSpeed);
+        }
     }
     private void CheckGround()
     {
@@ -133,11 +165,8 @@ public class PlayerState : MonoBehaviour
     }
     public void TurnToAimDirection(float rotationSpeed)
     {
-        Vector3 worldAimTarget = _shooting_check.mouseWorldPosition;
-        worldAimTarget.y = transform.position.y;
-        Vector3 aimDirection = (worldAimTarget - transform.position).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(aimDirection, transform.up);
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        targetRotationSpeed = rotationSpeed;
+        SetIsToAim(true);
     }
     public void TurnToNewDirection(Vector3 direction)
     {
@@ -151,5 +180,9 @@ public class PlayerState : MonoBehaviour
         await Task.Delay((int)(debuffTime * 1000));
         Feedbacks_Debuff.StopFeedbacks();
         TakeControl();
+    }
+    private void SetIsToAim(bool active)
+    {
+        isToAim = active;
     }
 }

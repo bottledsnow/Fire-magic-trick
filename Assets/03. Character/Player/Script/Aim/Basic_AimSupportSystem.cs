@@ -60,7 +60,13 @@ public class Basic_AimSupportSystem : MonoBehaviour
         smoothRotateTimer();
         delayTimerSystem();
         ToSloseCheck(); 
-        ToLookTargetCheck();
+    }
+    protected virtual void LateUpdate()
+    {
+        if (isAimSupport)
+        {
+            ToLookTargetCheck();
+        }
     }
     public virtual void ToAimSupport(GameObject Target)
     {
@@ -147,7 +153,6 @@ public class Basic_AimSupportSystem : MonoBehaviour
 
             Vector3 distance = target_xz - player_xz;
 
-            Debug.Log(distance.magnitude);
 
             if(isLocckTarget)
             {

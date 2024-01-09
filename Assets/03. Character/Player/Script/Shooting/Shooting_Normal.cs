@@ -84,22 +84,18 @@ public class Shooting_Normal : MonoBehaviour
         ThrowFeedbacks();
         _playerAnimator.PlayAnimator("Player@Throw_1");
         _crosshairUI.CrosshairShooting();
-        _playerState.TurnToAimDirection(10f);
-        _playerState.TurnToAimDirection(10f);
-        _playerState.TurnToAimDirection(10f);
-        _playerState.TurnToAimDirection(10f);
-        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(50f);
+        _playerState.TurnToAimDirection(50f);
+        _playerState.TurnToAimDirection(50f);
+        _playerState.TurnToAimDirection(50f);
+        _playerState.TurnToAimDirection(50f);
     }
     public void PlayShootFeedbacks()
     {
         ThrowFeedbacks();
         _playerAnimator.PlayAnimator("Player@Throw_1");
         _crosshairUI.CrosshairShooting();
-        _playerState.TurnToAimDirection(10f);
-        _playerState.TurnToAimDirection(10f);
-        _playerState.TurnToAimDirection(10f);
-        _playerState.TurnToAimDirection(10f);
-        _playerState.TurnToAimDirection(10f);
+        _playerState.TurnToAimDirection(500f);
     }
     private async void ShootCooldown(float shootCooldown)
     {
