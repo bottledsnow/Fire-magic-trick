@@ -39,7 +39,7 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
         ScatterShot,
         TripleShot,
     }
-    private ShotType shotType;
+    public ShotType shotType;
 
     public override void Start()
     {
@@ -82,12 +82,12 @@ public class NewGamePlay_ChargeShot : NewGamePlay_Basic_Charge
                 ToHover();
             }
 
-            TripleShot(MaxShotCount);
+            chargeShot(MaxShotCount);
             OnUseMaxShot?.Invoke();
         }
         else if (chargeTimer > 1f)
         {
-            TripleShot((int)chargeTimer + 1);
+            chargeShot((int)chargeTimer + 1);
             OnUseMinShot?.Invoke();
         }
         else

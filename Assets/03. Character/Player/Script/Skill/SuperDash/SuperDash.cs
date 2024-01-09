@@ -140,6 +140,8 @@ public class SuperDash : MonoBehaviour
         _superDashCollider.SetEnemyToClose(false);
         SetTriggerStart(false);
         _playerCollider.ClearColliderTarget();
+        superDashTimer = 0;
+        superDashSpeed = 0;
     }
     private void GetTarget()
     {
