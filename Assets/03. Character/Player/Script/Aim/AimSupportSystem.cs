@@ -6,6 +6,7 @@ public class AimSupportSystem : Basic_AimSupportSystem
     [Header("Camera")]
     [SerializeField] private CinemachineVirtualCamera Normal;
     [SerializeField] private CinemachineVirtualCamera Run;
+    [SerializeField] private float LockDamping = 0.5f;
 
     //Script 
     private CinemachineFramingTransposer transposer_Normal;
@@ -53,17 +54,18 @@ public class AimSupportSystem : Basic_AimSupportSystem
 
         if(Target != null)
         {
+            
             if (transposer_Normal != null)
             {
-                transposer_Normal.m_XDamping = 0;
-                transposer_Normal.m_YDamping = 0;
-                transposer_Normal.m_ZDamping = 0;
+                transposer_Normal.m_XDamping = LockDamping;
+                transposer_Normal.m_YDamping = LockDamping;
+                transposer_Normal.m_ZDamping = LockDamping;
             }
             if (transposer_Run != null)
             {
-                transposer_Run.m_XDamping = 0;
-                transposer_Run.m_YDamping = 0;
-                transposer_Run.m_ZDamping = 0;
+                transposer_Run.m_XDamping = LockDamping;
+                transposer_Run.m_YDamping = LockDamping;
+                transposer_Run.m_ZDamping = LockDamping;
             }
         }else
         {
