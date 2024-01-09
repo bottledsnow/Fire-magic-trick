@@ -11,7 +11,7 @@ public class AimSupportSystem : Basic_AimSupportSystem
     //Script 
     private CinemachineFramingTransposer transposer_Normal;
     private CinemachineFramingTransposer transposer_Run;
-    private NewGamePlay_Combo combo;
+    private SuperDash superDash;
 
     //value
     private float Normal_origin_XDamping;
@@ -26,10 +26,10 @@ public class AimSupportSystem : Basic_AimSupportSystem
         base.Start();
 
         //script
-        combo = GameManager.singleton.NewGamePlay.GetComponent<NewGamePlay_Combo>();
+        superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
 
         //subscribe
-        combo.OnUseSkill += NullTarget;
+        superDash.OnSuperDashStart += NullTarget;
 
         if(Normal != null) transposer_Normal = Normal.GetCinemachineComponent<CinemachineFramingTransposer>();
         if(Run != null)    transposer_Run    = Run.   GetCinemachineComponent<CinemachineFramingTransposer>();
