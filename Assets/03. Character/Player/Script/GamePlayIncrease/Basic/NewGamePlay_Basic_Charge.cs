@@ -41,7 +41,9 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
                 SetIsCharge(true);
                 ChargeStart();
             }
-        }else
+        }
+
+        if(!_input.RT)
         {
             if(isCharge)
             {
