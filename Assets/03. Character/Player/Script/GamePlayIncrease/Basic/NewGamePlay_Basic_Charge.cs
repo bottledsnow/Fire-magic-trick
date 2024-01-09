@@ -30,7 +30,6 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
         {
             SetIsButton(true);
 
-
             ComboCheck();
 
             if(canUseCombo)
@@ -42,8 +41,7 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
                 SetIsCharge(true);
                 ChargeStart();
             }
-        }
-        if (!_input.RT)
+        }else
         {
             if(isCharge)
             {

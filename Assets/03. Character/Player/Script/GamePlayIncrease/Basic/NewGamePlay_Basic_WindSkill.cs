@@ -37,7 +37,7 @@ public class NewGamePlay_Basic_WindSkill : NewGamePlay_Basic_Charge
     protected override void ChargeStop()
     {
         base.ChargeStop();
-
+        Debug.Log("Stop");
         if(canUseWindSkill)
         {
             if (chargeTimer + 1 > 3)
@@ -65,7 +65,7 @@ public class NewGamePlay_Basic_WindSkill : NewGamePlay_Basic_Charge
         if (wind.isWind)
         {
             wind.UseWind();
-            SetCanUseWindSkill(true);
+            SetCanUseWindSkill(false);
         }
     }
     private void SetCanUseWindSkill(bool value)
