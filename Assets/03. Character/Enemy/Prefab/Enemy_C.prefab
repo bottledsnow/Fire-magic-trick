@@ -25226,6 +25226,7 @@ GameObject:
   - component: {fileID: 1370649908}
   - component: {fileID: 8513112351979657483}
   - component: {fileID: 902302109954226711}
+  - component: {fileID: 1381733992}
   m_Layer: 14
   m_Name: Enemy_C
   m_TagString: Enemy
@@ -25516,6 +25517,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyCanSystem: {fileID: 1803746093969118363}
+--- !u!114 &1381733992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3623152130248176064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46e076f7b4d66b4281c20527e192319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAggro: 500
+  aggroValue: 0
+  radius: 35
+  angle: 120
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &3623152130816395343
 GameObject:
   m_ObjectHideFlags: 0

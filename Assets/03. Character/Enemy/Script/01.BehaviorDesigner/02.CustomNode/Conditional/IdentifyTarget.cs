@@ -17,16 +17,22 @@ public class IdentifyTarget : Conditional
     public float maxAlert = 250;
     public float alert;
 
+    EnemyAggroSystem enemyAggroSystem;
+
+    public override void OnStart()
+    {
+        
+    }
+
     public override TaskStatus OnUpdate()
     {
-        FieldOfView();
-        if (alert > 0)
+        //FieldOfView();
+        if (targetObject.Value != null)
         {
             return TaskStatus.Success;
         }
         else
         {
-            targetObject.Value = null;
             return TaskStatus.Failure;
         }
     }

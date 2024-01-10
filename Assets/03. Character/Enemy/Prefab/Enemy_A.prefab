@@ -39282,6 +39282,7 @@ GameObject:
   - component: {fileID: 1549227355}
   - component: {fileID: 606570046}
   - component: {fileID: 167774824}
+  - component: {fileID: 1160720738}
   m_Layer: 14
   m_Name: Enemy_A
   m_TagString: Enemy
@@ -39500,6 +39501,28 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &1160720738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032919127870789858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f46e076f7b4d66b4281c20527e192319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAggro: 450
+  aggroValue: 0
+  radius: 12
+  angle: 120
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 64
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &8032919128011008211
 GameObject:
   m_ObjectHideFlags: 0
@@ -40252,11 +40275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7999175142345140654, guid: d15da664572c04548ae1247031c32029, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.638
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7999175142345140654, guid: d15da664572c04548ae1247031c32029, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.282
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7999175142345140654, guid: d15da664572c04548ae1247031c32029, type: 3}
       propertyPath: m_LocalRotation.w
