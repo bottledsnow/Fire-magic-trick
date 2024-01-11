@@ -1,21 +1,19 @@
 using UnityEngine;
 
-public class NGP_ChargeShot : NGP_Charge
+public class NGP_ChargeShot : NGP_Basic_Charge
 {
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
+        chargeType = ChargeType.Shot;
     }
     protected override void Update()
     {
         base.Update();
     }
-    protected override void ChargeStart()
+    protected override void ChargePower(int power)
     {
-        base.ChargeStart();
-    }
-    protected override void ChargeStop()
-    {
-        base.ChargeStop();
+        base.ChargePower(power);
+        Debug.Log("ChargePower : " + power);
     }
 }
