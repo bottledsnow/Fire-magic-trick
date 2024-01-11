@@ -1,56 +1,45 @@
-using System.ComponentModel;
 using UnityEngine;
 
-public class NewGamePlay_Basic_Charge : MonoBehaviour
+public class NGP_Charge : MonoBehaviour
 {
+    //Script
     private ControllerInput _input;
-    protected NewGamePlay_Combo combo;
+    private ParticleSystem chargeParticle;
 
+    //variable
+    protected float chargeTimer;
     protected bool canUseCombo;
     private bool isCharge;
     private bool isButton;
-    private ParticleSystem chargeParticle;
 
-    protected float chargeTimer;
     public virtual void Start()
     {
         _input = GameManager.singleton.Player.GetComponent<ControllerInput>();
         chargeParticle = GameManager.singleton.VFX_List.VFX_Charge;
-        combo = GetComponent<NewGamePlay_Combo>();
     }
     protected virtual void Update()
     {
         ChargePower();
         ChargeTimer();
     }
-    
+
     private void ChargePower()
     {
-        if(_input.RT && !isButton)
+        if (_input.RT && !isButton)
         {
             SetIsButton(true);
-
-            ComboCheck();
-
-            if(canUseCombo)
-            {
-                ComboSkill();
-            }
-            else
-            {
-                SetIsCharge(true);
-                ChargeStart();
-            }
+            SetIsCharge(true);
+            ChargeStart();
         }
 
-        if(!_input.RT)
+        if (!_input.RT)
         {
-            if(isCharge)
+            if (isCharge)
             {
                 SetIsCharge(false);
                 ChargeStop();
             }
-            if(isButton)
+            if (isButton)
             {
                 SetIsButton(false);
             }
@@ -65,11 +54,9 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
     {
         chargeParticle.Stop();
     }
-    protected virtual void ComboSkill() { }
-    protected virtual void ComboCheck() { }
     private void ChargeTimer()
     {
-        if(isCharge)
+        if (isCharge)
         {
             chargeTimer += Time.deltaTime;
         }
@@ -81,9 +68,5 @@ public class NewGamePlay_Basic_Charge : MonoBehaviour
     private void SetIsButton(bool value)
     {
         isButton = value;
-    }
-    protected void SetCanUseShotToContinueCombo(bool value)
-    {
-        canUseCombo = value;
     }
 }
