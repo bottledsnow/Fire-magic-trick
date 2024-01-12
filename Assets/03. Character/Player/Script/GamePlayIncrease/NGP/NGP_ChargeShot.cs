@@ -1,34 +1,20 @@
 using UnityEngine;
 
-public class NGP_ChargeShot : NGP_Basic_Charge
+public class NGP_ChargeShot : NGP_Basic_ChargeShot
 {
-    //shot
-    private Transform bullet;
-
-    protected override void Start()
+    protected override void ChargeShot(int power)
     {
-        base.Start();
-        chargeType = ChargeType.Shot;
+        NormalShot(power + 1);
+        shot.SetShotType(NGP_Shot.ShotType.Normal);
     }
-    protected override void Update()
+    protected override void ChargeShot_Wind(int power)
     {
-        base.Update();
+        TripleShot(power + 1);
+        shot.SetShotType(NGP_Shot.ShotType.Wind);
     }
-    protected override void ChargePower(int power)
+    protected override void ChargeShot_Fire(int power)
     {
-        base.ChargePower(power);
-        Debug.Log("ChargePower : " + power);
-    }
-    private void ChargeShot(int power)
-    {
-        switch (power)
-        {
-            case 0:
-                break;
-            case 1:
-                break;
-            case 2:
-                break;
-        }
+        scatterShot(power + 1);
+        shot.SetShotType(NGP_Shot.ShotType.Boom);
     }
 }

@@ -26,6 +26,7 @@ public class NGP_Shot : NGP_Basic_Shot
         Fire,
         Wind,
     }
+    public ShotType shotType;
     public override void Start()
     {
         base.Start();
@@ -124,5 +125,9 @@ public class NGP_Shot : NGP_Basic_Shot
         }
 
         return shotPreferb;
+    }
+    public void SetShotType(ShotType shotType)
+    {
+        this.shotType = shotType;
     }
 }
