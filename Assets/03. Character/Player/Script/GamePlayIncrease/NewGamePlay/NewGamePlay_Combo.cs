@@ -59,7 +59,7 @@ public class NewGamePlay_Combo : NewGamePlay_Basic_Combo
         dash = GetComponent<NewGamePlay_Dash>();
 
         //VFX
-        VFX_UseSkill = GameManager.singleton.VFX_List.VFX_UseSkill;
+        VFX_UseSkill = GameManager.singleton.VFX_List.VFX_UseSkill_Wind;
         VFX_UseShot = GameManager.singleton.VFX_List.VFX_UseShot;
 
         //Subscribe

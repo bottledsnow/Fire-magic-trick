@@ -1,7 +1,7 @@
 using MoreMountains.Feedbacks;
 using UnityEngine;
 
-public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
+public class NGP_Dash : NGP_Basic_Dash
 {
     [Header("Setting")]
     [SerializeField] private float dashCooling;
@@ -20,11 +20,17 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
     [SerializeField] private float dashComboDistance;
     [SerializeField] private float dahsComboCoolingDecrease;
 
+    //delegate
+    public delegate void DashDelegateHandler();
+    public event DashDelegateHandler OnDashForward;
+    public event DashDelegateHandler OnDashBackward;
+    public event DashDelegateHandler OnDashCombo;
     //feedbacks
     private MMF_Player Feedback_DashBack;
 
     //public 
     public float ShotToDecreaseCoolingTime = 0.1f;
+
     protected override void Start()
     {
         base.Start();
@@ -35,19 +41,32 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
         //feedbacks
         Feedback_DashBack = GameManager.singleton.Feedbacks_List.DashBack;
     }
+
     protected override void Update()
     {
         base.Update();
+    }
+    protected override bool FireButton()
+    {
+        return base.FireButton();
+    }
+    protected override bool WindButton()
+    {
+        return base.WindButton();
+    }
+    protected override bool CanCombo()
+    {
+        return base.CanCombo();
     }
     protected override void DashForwardSetting()
     {
         base.DashForwardSetting();
 
-        //combo
-        combo.SetComboShotType(NewGamePlay_Combo.ComboShotType.ScatterShot);
+        //event
+        OnDashForward?.Invoke();
 
         //variable
-        coolingTimer= dashCooling;
+        coolingTimer = dashCooling;
         speed = forwardDashSpeed;
         dashDistance = forwardDashDistance;
     }
@@ -55,8 +74,8 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
     {
         base.DashBackwardSetting();
 
-        //Combo
-        combo.SetComboShotType(NewGamePlay_Combo.ComboShotType.WindCard);
+        //event
+        OnDashBackward?.Invoke();
 
         //feedbacks
         Feedback_DashBack.PlayFeedbacks();
@@ -74,6 +93,10 @@ public class NewGamePlay_Dash : NewGamePlay_Basic_Dash
     {
         base.DashComboSetting();
 
+        //event
+        OnDashCombo?.Invoke();
+
+        //Set
         speed = dashComboSpeed;
         dashDistance = dashComboDistance;
         coolingTimer -= dahsComboCoolingDecrease;

@@ -7,7 +7,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public delegate void EnemyDeath();
     public event EnemyDeath OnEnemyDeath;
 
-
     [SerializeField] private bool isTeachEnemy;
     [Header("State")]
     public bool isIgnite;
@@ -34,11 +33,14 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_Shock;
     [SerializeField] private MMF_Player feedbacks_Boom;
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
+
     [Header("KickBack")]
     public float kickBackRatio;
     public bool kickBackGuard = false;
+
     [Header("Spread Area")]
     [SerializeField] private GameObject spreadArea;
+
     [Header("AtCrash")]
     public bool atCrash;
     [SerializeField] private float atCrashTime =3;
@@ -244,6 +246,9 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     private void Initialization()
     {
+        EnemyAggroSystem aggroSystem = GetComponent<EnemyAggroSystem>();
+        aggroSystem.CleanAggroTarget();
+
         this.gameObject.SetActive(true);
         isIgnite = false;
         isHurt = false;
