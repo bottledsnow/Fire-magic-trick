@@ -8,9 +8,9 @@ public class VFX_List : MonoBehaviour
     public ParticleSystem VFX_ChargeFinish;
     public ParticleSystem VFX_ChargeFinish_Wind;
     public ParticleSystem VFX_ChargeFinish_Fire;
-    public ParticleSystem VFX_ComboCharge;
-    public ParticleSystem VFX_CanCombo_Shot;
-    public ParticleSystem VFX_CanCombo_Skill;
+    public ParticleSystem VFX_ChargePower;
+    public ParticleSystem VFX_ComboDashCooling;
+    public ParticleSystem VFX_WindState;
     public ParticleSystem VFX_DashLine;
     public ParticleSystem VFX_Foot_L;
     public ParticleSystem VFX_Foot_R;

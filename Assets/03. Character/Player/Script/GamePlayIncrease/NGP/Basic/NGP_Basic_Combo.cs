@@ -4,46 +4,59 @@ public class NGP_Basic_Combo : MonoBehaviour
 {
     //Script
     protected NGP_Dash dash;
-
+    protected NGP_ChargeShot chargeShot;
     //variable
     public bool CanComboShot
     {
         get { return canComboShot; }
     }
-    public bool CanComboSkill
+    public bool CanComboDash
     {
-        get { return canComboSkill; }
+        get { return canComboDash; }
     }
     [Header("Combo")]
     [SerializeField] private bool canComboShot;
-    [SerializeField] private bool canComboSkill;
+    [SerializeField] private bool canComboDash;
 
     [Header("ComboTime")]
     [SerializeField] private float dashComboTime;
-    private float timer_DashCombo;
+    protected float timer_DashCombo;
     private bool isTimer_DashCombo;
 
     protected virtual void Start() 
     {
         //Script
         dash = GameManager.singleton.NewGamePlay.GetComponent<NGP_Dash>();
+        chargeShot = GameManager.singleton.NewGamePlay.GetComponent<NGP_ChargeShot>();
 
         //Initialize
         setCanComboShot(false);
-        setCanComboSkill(false);
+        setCanComboDash(false);
 
         //Subscribe
         dash.OnDash += UseDash;
+        chargeShot.OnChargeMaxShot += UseMaxChargeShot;
+        dash.OnDashCombo += UseComboDash;
     }
     protected virtual void Update() 
     {
         dashComboTimer();
     }
     public void UseComboShot() { setCanComboShot(false); }
-    public void UseComboSkill() { setCanComboSkill(false); }
-    public virtual void UseDash() 
-    {
-        setCanComboShot(true);
+    public void UseComboDash() 
+    { 
+        setCanComboDash(false); 
+        setIsTimer_DashCombo(true);
+    }
+    public virtual void UseDash() { setCanComboShot(true); }
+    public virtual void UseMaxChargeShot() 
+    { 
+        if(!isTimer_DashCombo)
+        {
+            setCanComboDash(true);
+            timer_DashCombo = dashComboTime;
+            dash.CoolingStopRightNow();
+        }
     }
     public virtual void UseSuperDash() { setCanComboShot(true); }
     private void dashComboTimer()
@@ -55,6 +68,6 @@ public class NGP_Basic_Combo : MonoBehaviour
             setIsTimer_DashCombo(false);
     }
     private void setCanComboShot(bool value) { canComboShot = value; }
-    private void setCanComboSkill(bool value) { canComboSkill = value; }
+    private void setCanComboDash(bool value) { canComboDash = value; }
     private void setIsTimer_DashCombo(bool value) { isTimer_DashCombo = value; }
 }

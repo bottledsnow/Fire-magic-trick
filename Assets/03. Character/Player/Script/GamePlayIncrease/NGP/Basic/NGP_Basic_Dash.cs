@@ -7,6 +7,7 @@ public class NGP_Basic_Dash : MonoBehaviour
 {
     //Script
     protected PlayerState playerState;
+    protected NGP_Combo combo;
     private ThirdPersonController thirdPersonController;
     private CharacterController characterController;
     private FireDashCollider fireDashCollider;
@@ -31,11 +32,11 @@ public class NGP_Basic_Dash : MonoBehaviour
     protected float dashDistance;
     protected float coolingTimer;
 
-    //value
+    [Header("variable")]
+    [SerializeField] private bool isCooling;
     private bool isDash;
-    private bool isCooling;
     private bool isButton;
-    private float dashTime;
+    protected float dashTime;
 
     protected virtual void Start()
     {
@@ -45,6 +46,7 @@ public class NGP_Basic_Dash : MonoBehaviour
         thirdPersonController = input.GetComponent<ThirdPersonController>();
         fireDashCollider = GameManager.singleton.Collider_List.DashCrash.GetComponent<FireDashCollider>();
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        combo = GameManager.singleton.NewGamePlay.GetComponent<NGP_Combo>();
 
         //Feedbacks
         Feedbacks_Dash = GameManager.singleton.Feedbacks_List.Dash;
@@ -121,6 +123,11 @@ public class NGP_Basic_Dash : MonoBehaviour
             SetIsCooling(false);
             coolingTimer = collingTime;
         }
+    }
+    public void CoolingStopRightNow()
+    {
+        SetIsCooling(false);
+        coolingTimer = collingTime;
     }
     private async void ToDash()
     {

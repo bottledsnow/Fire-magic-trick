@@ -11,6 +11,10 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
     [SerializeField] private Vector3 positionOffset_min;
     [SerializeField] private Vector3 positionOffset_max;
 
+    //Delegate
+    public delegate void ChargeShotDelegateHandler();
+    public event ChargeShotDelegateHandler OnChargeMaxShot;
+
     //Script
     protected NGP_Shot shot;
     protected NGP_SkillState skillState;
@@ -49,6 +53,7 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
                     ChargeShot_Fire(power);
                     break;
             }
+            if (power >= 2) OnChargeMaxShot?.Invoke();
         }
     }
     private NGP_SkillState.SkillState skillType() { return skillState.State; }

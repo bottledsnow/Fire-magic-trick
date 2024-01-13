@@ -21,6 +21,9 @@ public class NGP_Basic_SkillState : MonoBehaviour
     private ParticleSystem.VelocityOverLifetimeModule orbital_fire;
     private ParticleSystem VFX_UseSkill_Wind;
     private ParticleSystem.VelocityOverLifetimeModule orbital_wind;
+    private ParticleSystem VFX_Foot_L;
+    private ParticleSystem VFX_Foot_R;
+    private ParticleSystem VFX_WindState;
     public enum SkillState
     {
         None,
@@ -37,6 +40,9 @@ public class NGP_Basic_SkillState : MonoBehaviour
         orbital_wind = VFX_UseSkill_Wind.velocityOverLifetime;
         VFX_UseSkill_Fire = GameManager.singleton.VFX_List.VFX_UseSkill_Fire;
         orbital_fire = VFX_UseSkill_Fire.velocityOverLifetime;
+        VFX_Foot_L = GameManager.singleton.VFX_List.VFX_Foot_L;
+        VFX_Foot_R = GameManager.singleton.VFX_List.VFX_Foot_R;
+        VFX_WindState = GameManager.singleton.VFX_List.VFX_WindState;
 
         //Initialize
         OnDashNone();
@@ -68,8 +74,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
         timer = 0;
 
         //vfx
-        VFX_UseSkill_Wind.gameObject.SetActive(false);
-        VFX_UseSkill_Fire.gameObject.SetActive(false);
+        VFX_ToNone();
         orbital_wind.orbitalZ = -orbitalSpeed;
     }
     private void OnDashForward()
@@ -79,8 +84,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
         timer = stateKeepTime;
 
         //vfx
-        VFX_UseSkill_Wind.gameObject.SetActive(false);
-        VFX_UseSkill_Fire.gameObject.SetActive(true);
+        VFX_ToFire();
         orbital_fire.orbitalZ = -orbitalSpeed;
     }
     private void OnDashBackward()
@@ -90,8 +94,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
         timer = stateKeepTime;
 
         //vfx
-        VFX_UseSkill_Wind.gameObject.SetActive(true);
-        VFX_UseSkill_Fire.gameObject.SetActive(false);
+        VFX_ToWind();
         orbital_wind.orbitalZ = -orbitalSpeed;
     }
     private void setSkillState(SkillState state)
@@ -109,5 +112,40 @@ public class NGP_Basic_SkillState : MonoBehaviour
     private void setIsSkill(bool value)
     {
         isSkill = value;
+    }
+    private void VFX_ToWind()
+    {
+        VFX_Foot_L.Stop();
+        VFX_Foot_L.Clear();
+        VFX_Foot_R.Stop();
+        VFX_Foot_R.Clear();
+        VFX_WindState.Clear();
+        VFX_WindState.Play();
+        VFX_UseSkill_Wind.gameObject.SetActive(true);
+        VFX_UseSkill_Wind.Clear();
+        VFX_UseSkill_Wind.Play();
+        VFX_UseSkill_Fire.gameObject.SetActive(false);
+    }
+    private void VFX_ToFire()
+    {
+        VFX_Foot_L.Play();
+        VFX_Foot_R.Play();
+        VFX_WindState.Stop();
+        VFX_WindState.Clear();
+        VFX_UseSkill_Wind.gameObject.SetActive(false);
+        VFX_UseSkill_Fire.gameObject.SetActive(true);
+        VFX_UseSkill_Fire.Clear();
+        VFX_UseSkill_Fire.Play();
+    }
+    private void VFX_ToNone()
+    {
+        VFX_Foot_L.Stop();
+        VFX_Foot_L.Clear();
+        VFX_Foot_R.Stop();
+        VFX_Foot_R.Clear();
+        VFX_WindState.Stop();
+        VFX_WindState.Clear();
+        VFX_UseSkill_Wind.gameObject.SetActive(false);
+        VFX_UseSkill_Fire.gameObject.SetActive(false);
     }
 }

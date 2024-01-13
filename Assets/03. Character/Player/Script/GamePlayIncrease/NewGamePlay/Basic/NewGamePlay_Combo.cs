@@ -23,9 +23,8 @@ public class NewGamePlay_Basic_Combo : MonoBehaviour
     
     protected virtual void Start()
     {
-        VFX_ComboCharge = GameManager.singleton.VFX_List.VFX_ComboCharge;
-        VFX_CanCombo_Shot = GameManager.singleton.VFX_List.VFX_CanCombo_Shot;
-        VFX_CanCombo_Skill = GameManager.singleton.VFX_List.VFX_CanCombo_Skill;
+        VFX_ComboCharge = GameManager.singleton.VFX_List.VFX_ChargePower;
+        VFX_CanCombo_Shot = GameManager.singleton.VFX_List.VFX_WindState;
         VFX_Foot_L = GameManager.singleton.VFX_List.VFX_Foot_L;
         VFX_Foot_R = GameManager.singleton.VFX_List.VFX_Foot_R;
     }

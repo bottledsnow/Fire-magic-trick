@@ -21,14 +21,13 @@ public class NGP_Dash : NGP_Basic_Dash
     [SerializeField] private float dahsComboCoolingDecrease;
 
     //delegate
-    public delegate void DashDelegateHandler();
     public event DashDelegateHandler OnDashForward;
     public event DashDelegateHandler OnDashBackward;
     public event DashDelegateHandler OnDashCombo;
     //feedbacks
     private MMF_Player Feedback_DashBack;
 
-    //public 
+    //variable
     public float ShotToDecreaseCoolingTime = 0.1f;
 
     protected override void Start()
@@ -61,7 +60,7 @@ public class NGP_Dash : NGP_Basic_Dash
     }
     protected override bool CanCombo()
     {
-        return base.CanCombo();
+        return combo.CanComboDash;
     }
     protected override void DashForwardSetting()
     {
@@ -98,13 +97,12 @@ public class NGP_Dash : NGP_Basic_Dash
     {
         base.DashComboSetting();
 
-        //event
-        OnDashCombo?.Invoke();
+        //combo
+        combo.UseComboDash();
 
         //Set
         speed = dashComboSpeed;
         dashDistance = dashComboDistance;
-        coolingTimer -= dahsComboCoolingDecrease;
     }
     protected override void DashStop()
     {
