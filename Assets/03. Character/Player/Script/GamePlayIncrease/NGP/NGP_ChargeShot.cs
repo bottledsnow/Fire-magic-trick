@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class NGP_ChargeShot : NGP_Basic_ChargeShot
 {
-    protected override void ChargeShot(int power)
+    //variable
+    private int comboShotCount = 3;
+    protected override void ChargeShot_Normal(int power)
     {
         NormalShot(power + 1);
         shot.SetShotType(NGP_Shot.ShotType.Normal);
@@ -16,5 +18,17 @@ public class NGP_ChargeShot : NGP_Basic_ChargeShot
     {
         scatterShot(power + 1);
         shot.SetShotType(NGP_Shot.ShotType.Boom);
+    }
+    protected override bool isCombo()
+    { 
+        return combo.CanComboShot; 
+    }
+    protected override void Combo()
+    {
+        if(combo.CanComboShot)
+        {
+            ChargeShot(comboShotCount-1);
+            combo.UseComboShot();
+        }
     }
 }

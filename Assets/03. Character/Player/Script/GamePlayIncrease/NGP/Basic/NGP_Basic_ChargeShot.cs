@@ -13,7 +13,8 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
 
     //Script
     protected NGP_Shot shot;
-    private NGP_SkillState skillState;
+    protected NGP_SkillState skillState;
+    protected NGP_Combo combo;
 
     protected override void Start()
     {
@@ -21,6 +22,7 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
         //Script
         skillState = GetComponent<NGP_SkillState>();
         shot = GetComponent<NGP_Shot>();
+        combo = GetComponent<NGP_Combo>();
 
         chargeType = ChargeType.Shot;
     }
@@ -29,12 +31,16 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
     {
         base.ChargePower(power);
 
-        if(skillState != null)
+        ChargeShot(power);
+    }
+    protected virtual void ChargeShot(int power)
+    {
+        if (skillState != null)
         {
             switch (skillType())
             {
                 case NGP_SkillState.SkillState.None:
-                    ChargeShot(power);
+                    ChargeShot_Normal(power);
                     break;
                 case NGP_SkillState.SkillState.Wind:
                     ChargeShot_Wind(power);
@@ -46,9 +52,11 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
         }
     }
     private NGP_SkillState.SkillState skillType() { return skillState.State; }
-    protected virtual void ChargeShot(int power) { }
+    protected virtual void ChargeShot_Normal(int power) { }
     protected virtual void ChargeShot_Wind(int power) { }
     protected virtual void ChargeShot_Fire(int power) { }
+    protected override bool isCombo() { return false; }
+    protected override void Combo() { }
     protected async void NormalShot(int count)
     {
         for (int i = 0; i < count; i++)

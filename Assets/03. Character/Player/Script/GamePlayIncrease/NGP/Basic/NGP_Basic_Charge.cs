@@ -64,11 +64,29 @@ public class NGP_Basic_Charge : MonoBehaviour
         return false;
     }
     protected virtual void ChargePower(int power) { }
+    
     private void ChargeStart()
     {
         VFX_Charge_Play();
         chargeTimer = 0;
+
+        if(isCombo()) ChargeStopRightNow();
     }
+    protected virtual bool isCombo()
+    {
+        return false;
+    }
+    private void ChargeStopRightNow()
+    {
+        if (isCharge)
+        {
+            SetIsCharge(false);
+            VFX_Charge_Stop();
+            chargeCount = 0;
+            Combo();
+        }
+    }
+    protected virtual void Combo() { }
     private void ChargeStop()
     {
         VFX_Charge_Stop();

@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class NGP_Basic_SkillState : MonoBehaviour
 {
-    //protect
+    [Header("Skill State")]
+    public SkillState State;
+
+    //variable
     protected float stateKeepTime = 5f;
     protected float orbitalSpeed = 5f;
+
     //Script 
     private NGP_Dash dash;
+
     //skill state
     private bool isSkill;
     private float timer;
+
     //VFX
     private ParticleSystem VFX_UseSkill_Fire;
     private ParticleSystem.VelocityOverLifetimeModule orbital_fire;
@@ -21,7 +27,6 @@ public class NGP_Basic_SkillState : MonoBehaviour
         Wind,
         Fire,
     }
-    public SkillState State;
     protected virtual void Start()
     {
         //Script
@@ -44,6 +49,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
     {
         skillTimer();
     }
+    public bool GetIsSkill() { return isSkill; }
     private void skillTimer()
     {
         if(isSkill)
@@ -52,9 +58,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
         }
         if(timer < 0)
         {
-            timer = 0;
             timerStop();
-            setIsSkill(false);
         }
     }
     private void OnDashNone()
@@ -96,6 +100,8 @@ public class NGP_Basic_SkillState : MonoBehaviour
     }
     protected virtual void timerStop() 
     {
+        timer = 0;
+        setIsSkill(false);
         setSkillState(SkillState.None);
         VFX_UseSkill_Fire.gameObject.SetActive(false);
         VFX_UseSkill_Wind.gameObject.SetActive(false);

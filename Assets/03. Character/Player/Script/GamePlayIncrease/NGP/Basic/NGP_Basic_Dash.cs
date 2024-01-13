@@ -15,6 +15,10 @@ public class NGP_Basic_Dash : MonoBehaviour
     //Feedbacks
     private MMF_Player Feedbacks_Dash;
 
+    //delegate
+    public delegate void DashDelegateHandler();
+    public event DashDelegateHandler OnDash;
+
     protected enum DashType
     {
         DashForward,
@@ -123,6 +127,7 @@ public class NGP_Basic_Dash : MonoBehaviour
         CaculateDashTime();
         SetIsDash(true);
         SetIsCooling(true);
+        OnDash?.Invoke();
         await Task.Delay((int)(dashTime * 1000));
         SetIsDash(false);
     }
