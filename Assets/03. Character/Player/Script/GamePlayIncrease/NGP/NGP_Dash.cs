@@ -40,6 +40,11 @@ public class NGP_Dash : NGP_Basic_Dash
 
         //feedbacks
         Feedback_DashBack = GameManager.singleton.Feedbacks_List.DashBack;
+
+        //Initialize
+        coolingTimer = dashCooling;
+        speed = forwardDashSpeed;
+        dashDistance = forwardDashDistance;
     }
 
     protected override void Update()

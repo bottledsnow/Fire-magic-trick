@@ -33,6 +33,9 @@ public class NGP_Basic_SkillState : MonoBehaviour
         VFX_UseSkill_Fire = GameManager.singleton.VFX_List.VFX_UseSkill_Fire;
         orbital_fire = VFX_UseSkill_Fire.velocityOverLifetime;
 
+        //Initialize
+        OnDashNone();
+
         //Subscribe
         dash.OnDashForward += OnDashForward;
         dash.OnDashBackward += OnDashBackward;
@@ -53,6 +56,17 @@ public class NGP_Basic_SkillState : MonoBehaviour
             timerStop();
             setIsSkill(false);
         }
+    }
+    private void OnDashNone()
+    {
+        setSkillState(SkillState.None);
+        setIsSkill(false);
+        timer = 0;
+
+        //vfx
+        VFX_UseSkill_Wind.gameObject.SetActive(false);
+        VFX_UseSkill_Fire.gameObject.SetActive(false);
+        orbital_wind.orbitalZ = -orbitalSpeed;
     }
     private void OnDashForward()
     {

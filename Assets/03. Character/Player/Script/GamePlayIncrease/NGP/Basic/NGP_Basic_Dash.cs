@@ -44,9 +44,6 @@ public class NGP_Basic_Dash : MonoBehaviour
 
         //Feedbacks
         Feedbacks_Dash = GameManager.singleton.Feedbacks_List.Dash;
-
-        //Initialize
-        DashForwardSetting();
     }
     protected virtual void Update()
     {
