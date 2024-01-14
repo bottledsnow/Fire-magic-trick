@@ -19,6 +19,10 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     {
         base.Update();
     }
+    public override int GetChargeCount()
+    {
+        return base.GetChargeCount();
+    }
     protected override void FireSkillStart()
     {
         base.FireSkillStart();

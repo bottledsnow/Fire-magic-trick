@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Beacon : Bullet
 {
-    private GameObject[] targets = new GameObject[5];
+    private GameObject[] targets = new GameObject[4];
     protected override void Start() { base.Start(); }
     protected override void Update()
     {
@@ -16,7 +16,7 @@ public class Beacon : Bullet
     private void OnDestroy()
     {
         NGP_FireSkill_BeaconTPDash tpdash = GameManager.singleton.NewGamePlay.GetComponentInParent<NGP_FireSkill_BeaconTPDash>();
-        tpdash.ToUpdateTarget(targets);
+        tpdash.ToTPDash(targets);
         for(int i = 0; i < targets.Length;i++ )
         {
             Debug.Log(targets.Length);

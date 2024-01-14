@@ -43,6 +43,10 @@ public class NGP_Basic_Charge : MonoBehaviour
         ChargePower();
         ChargeTimer();
     }
+    public virtual int GetChargeCount()
+    {
+        return chargeCount;
+    }
     protected virtual void ChargePower()
     {
         if(ChargeButton() && !isButton)
