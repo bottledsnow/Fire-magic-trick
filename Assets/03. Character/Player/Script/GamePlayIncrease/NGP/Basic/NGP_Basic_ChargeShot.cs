@@ -112,7 +112,7 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
             }
         }
     }
-    private NGP_Shot.ShotType getShotType()
+    protected NGP_Shot.ShotType getShotType()
     {
         return shot.shotType;
     }

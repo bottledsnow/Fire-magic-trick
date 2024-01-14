@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class NewGamePlay_Basic_SuperDash : MonoBehaviour
+public class NGP_Basic_SuperDash : MonoBehaviour
 {
     //Script
     protected SuperDash superDash;
-    protected NewGamePlay_Combo combo;
+    protected NGP_Combo combo;
     protected virtual void Start()
     {
         superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
-        combo = GetComponent<NewGamePlay_Combo>();
+        combo = GameManager.singleton.NewGamePlay.GetComponent<NGP_Combo>();
 
         superDash.OnSuperDashStart += OnSuperDashStart;
         superDash.OnSuperDashHitGround += OnSuperDashHitGround;

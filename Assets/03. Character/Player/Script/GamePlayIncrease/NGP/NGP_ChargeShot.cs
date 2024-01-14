@@ -2,22 +2,34 @@ using UnityEngine;
 
 public class NGP_ChargeShot : NGP_Basic_ChargeShot
 {
+    protected override void Update()
+    {
+        base.Update();
+    }
     //variable
     private int comboShotCount = 3;
     protected override void ChargeShot_Normal(int power)
     {
-        NormalShot(power + 1);
         shot.SetShotType(NGP_Shot.ShotType.Normal);
+        if(power>0)
+        {
+            NormalShot(power + 1);
+        }
+        else
+        {
+            shot.Normal_Shot();
+        }
+        
     }
     protected override void ChargeShot_Wind(int power)
     {
-        TripleShot(power + 1);
         shot.SetShotType(NGP_Shot.ShotType.Wind);
+        TripleShot(power + 1);
     }
     protected override void ChargeShot_Fire(int power)
     {
-        scatterShot(power + 1);
         shot.SetShotType(NGP_Shot.ShotType.Boom);
+        scatterShot(power + 1);
     }
     protected override bool isCombo()
     { 
@@ -29,7 +41,23 @@ public class NGP_ChargeShot : NGP_Basic_ChargeShot
         {
             if(!playerState.isGround) hover.ToHover();
 
-            ChargeShot(comboShotCount-1);
+            if(combo.CanSuperDashShot)
+            {
+                if(skillState.State == NGP_SkillState.SkillState.Fire)
+                {
+                    shot.SetShotType(NGP_Shot.ShotType.Fire);
+                }
+                else
+                {
+                    shot.SetShotType(NGP_Shot.ShotType.Money);
+                }
+                scatterShot(1);
+            }
+            else
+            {
+                ChargeShot(comboShotCount - 1);
+            }
+            
             combo.UseComboShot();
         }
     }

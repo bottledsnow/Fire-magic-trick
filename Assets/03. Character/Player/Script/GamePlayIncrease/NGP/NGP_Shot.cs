@@ -8,6 +8,7 @@ public class NGP_Shot : NGP_Basic_Shot
     [SerializeField] private Transform boomCard;
     [SerializeField] private Transform fireCard;
     [SerializeField] private Transform windCard;
+    [SerializeField] private Transform MoneyCard;
 
     [Header("Shot")]
     [SerializeField] private float shotCoolingTime;
@@ -25,6 +26,7 @@ public class NGP_Shot : NGP_Basic_Shot
         Boom,
         Fire,
         Wind,
+        Money
     }
     public ShotType shotType;
     public override void Start()
@@ -55,7 +57,7 @@ public class NGP_Shot : NGP_Basic_Shot
     {
         if (!isShot)
         {
-            Shot(0);
+            Shot(0f);
             SetIsShot(true);
         }
         else
@@ -68,7 +70,12 @@ public class NGP_Shot : NGP_Basic_Shot
         Shot(normalCard);
         shooting_Normal.PlayShootFeedbacks();
     }
-
+    public void Shot(ShotType shotType)
+    {
+        Transform preferb = ChooseBullet(shotType);
+        Shot(preferb);
+        shooting_Normal.PlayShootFeedbacks();
+    }
     public void Shot(float rotate_x)
     {
         Shot(normalCard, rotate_x);
@@ -121,6 +128,10 @@ public class NGP_Shot : NGP_Basic_Shot
 
             case ShotType.Wind:
                 shotPreferb = windCard;
+                break;
+
+            case ShotType.Money:
+                shotPreferb = MoneyCard;
                 break;
         }
 

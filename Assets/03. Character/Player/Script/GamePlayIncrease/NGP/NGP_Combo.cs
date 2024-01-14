@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class NGP_Combo : NGP_Basic_Combo
 {
+    //vfx
     private ParticleSystem VFX_ComboDashCooling;
 
+    //variable
+    
     protected override void Start()
     {
         base.Start();
@@ -13,6 +16,19 @@ public class NGP_Combo : NGP_Basic_Combo
     protected override void Update()
     {
         base.Update();
-
     }
+    
+    public override void UseDash()
+    {
+        base.UseDash();
+    }
+    public override void UseMaxChargeShot()
+    {
+        base.UseMaxChargeShot();
+    }
+    public override void UseSuperDashKick()
+    {
+        base.UseSuperDashKick();
+    }
+    
 }
