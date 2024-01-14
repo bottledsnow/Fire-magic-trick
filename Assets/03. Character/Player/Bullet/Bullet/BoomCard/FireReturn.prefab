@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3586485086161171718}
   - component: {fileID: 8250290607017811796}
   m_Layer: 7
-  m_Name: VFX_Wind
+  m_Name: VFX_Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,16 +227,16 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 1, b: 1, a: 1}
-        key1: {r: 0.9888128, g: 1, b: 0.2688679, a: 1}
-        key2: {r: 0.47450984, g: 0.85450864, b: 1, a: 0}
+        key0: {r: 0, g: 0, b: 0, a: 1}
+        key1: {r: 0.9626169, g: 0, b: 1, a: 1}
+        key2: {r: 1, g: 0, b: 0.55099344, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 21781
-        ctime1: 43754
+        ctime0: 29876
+        ctime1: 52621
         ctime2: 65535
         ctime3: 0
         ctime4: 0
@@ -4883,7 +4883,7 @@ GameObject:
   - component: {fileID: 3760931981227870014}
   - component: {fileID: 8185520673845835945}
   m_Layer: 7
-  m_Name: VFX_Wind (1)
+  m_Name: VFX_Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9695,7 +9695,7 @@ GameObject:
   - component: {fileID: 3906267456808391740}
   - component: {fileID: 1419423250795814415}
   m_Layer: 0
-  m_Name: WindReturn
+  m_Name: FireReturn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9731,3 +9731,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   absorbDistance: 0.5
+  type: 1

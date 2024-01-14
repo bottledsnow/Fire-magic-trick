@@ -4,9 +4,11 @@ public class BoomCard : Bullet
 {
     [Header("Boom Card")]
     [SerializeField] private Transform boomArea;
+    [SerializeField] private Transform fireRetrun;
     protected override void OnHitEnemy()
     {
         base.OnHitEnemy();
+        Instantiate(fireRetrun, transform.position, Quaternion.identity);
     }
     protected override void OnHitSomething()
     {

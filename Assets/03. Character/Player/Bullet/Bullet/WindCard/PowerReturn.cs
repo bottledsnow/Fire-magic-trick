@@ -1,20 +1,27 @@
 using UnityEngine;
 
-public class WindReturn : MonoBehaviour
+public class PowerReturn : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private float absorbDistance = 0.5f;
 
     //Scritp
-    private NewGamePlay_Basic_Wind newGamePlay_Wind;
+    private NGP_SkillPower skillPower;
 
     //variable
     private Transform player;
 
+    public enum Type
+    {
+        Wind,
+        Fire,
+    }
+    public Type type;
+
     private void Start()
     {
         player = GameManager.singleton.Player.transform;
-        newGamePlay_Wind = GameManager.singleton.NewGamePlay.GetComponent<NewGamePlay_Basic_Wind>();
+        skillPower = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillPower>();
     }
 
     private void Update()
@@ -32,7 +39,15 @@ public class WindReturn : MonoBehaviour
 
         if (distance < absorbDistance)
         {
-            newGamePlay_Wind.AddWindPower();
+            if(type == Type.Fire)
+            {
+                if (skillPower != null) skillPower.AddFirePower();
+            }
+            else
+            if (type == Type.Wind)
+            {
+                if (skillPower != null) skillPower.AddWindPower();
+            }
             Destroy(gameObject);
         }
     }

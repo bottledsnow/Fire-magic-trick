@@ -64,7 +64,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
         }
         if(timer < 0)
         {
-            timerStop();
+            stateTimerStop();
         }
     }
     private void OnDashNone()
@@ -101,7 +101,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
     {
         State = state;
     }
-    protected virtual void timerStop() 
+    protected virtual void stateTimerStop() 
     {
         timer = 0;
         setIsSkill(false);

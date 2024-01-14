@@ -4,6 +4,8 @@ public class NGP_Basic_Charge : MonoBehaviour
 {
     //Script
     private ControllerInput _input;
+
+    //VFX
     protected ParticleSystem VFX_Charge;
     protected ParticleSystem VFX_ChargeFinish;
     protected ParticleSystem VFX_ChargePower;
@@ -25,11 +27,15 @@ public class NGP_Basic_Charge : MonoBehaviour
     protected ChargeType chargeType;
     protected virtual void Start()
     {
+        //Script
         _input = GameManager.singleton.Player.GetComponent<ControllerInput>();
+
+        //vfx
         VFX_Charge = GameManager.singleton.VFX_List.VFX_Charge;
         VFX_ChargeFinish = GameManager.singleton.VFX_List.VFX_ChargeFinish;
         VFX_ChargePower = GameManager.singleton.VFX_List.VFX_ChargePower;
 
+        //set
         chargeType = ChargeType.Shot;
     }
     protected virtual void Update()
@@ -37,7 +43,7 @@ public class NGP_Basic_Charge : MonoBehaviour
         ChargePower();
         ChargeTimer();
     }
-    private void ChargePower()
+    protected virtual void ChargePower()
     {
         if(ChargeButton() && !isButton)
         {
