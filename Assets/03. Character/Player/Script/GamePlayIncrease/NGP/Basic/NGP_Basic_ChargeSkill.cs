@@ -6,6 +6,7 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
 {
     //Script
     protected NGP_SkillPower skillPower;
+    protected NGP_Shot shot;
     //VFX
     private ParticleSystem VFX_Charge_Wind;
     private ParticleSystem VFX_Charge_Fire;
@@ -25,6 +26,7 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
 
         //Script
         skillPower = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillPower>();
+        shot = GameManager.singleton.NewGamePlay.GetComponent<NGP_Shot>();
 
         //Initialize
         chargeType = ChargeType.Skill;

@@ -21,7 +21,8 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     protected override void FireSkillStart()
     {
         base.FireSkillStart();
-        Instantiate(beacom, this.transform.forward, Quaternion.identity);
+        shot.Shot(beacom);
+        Debug.Log("Fire Skill Start");
     }
     protected override void ChargeSkillFire(int power)
     {

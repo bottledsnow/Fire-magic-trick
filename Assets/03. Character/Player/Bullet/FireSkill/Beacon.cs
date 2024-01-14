@@ -3,8 +3,6 @@ using UnityEngine;
 public class Beacon : Bullet
 {
     private GameObject[] target = new GameObject[5];
-    private float timer;
-    private bool isBeacon;
     protected override void Start() { base.Start(); }
     protected override void Update()
     {
@@ -33,6 +31,6 @@ public class Beacon : Bullet
     }
     private void addBeaconScale()
     {
-        if(isBeacon) this.transform.localScale += new Vector3(0.1f, 0, 0);
+        this.transform.localScale += new Vector3(0.1f, 0, 0);
     }
 }
