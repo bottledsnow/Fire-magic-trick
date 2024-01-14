@@ -10,6 +10,10 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
     {
         base.Update();
     }
+    protected override void TPDashStartSetting()
+    {
+        base.TPDashStartSetting();
+    }
     protected override void MoveToTarget(int index)
     {
         base.MoveToTarget(index);

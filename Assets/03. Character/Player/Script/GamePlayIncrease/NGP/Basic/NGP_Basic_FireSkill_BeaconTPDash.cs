@@ -29,10 +29,12 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
     public void ToTPDash(GameObject[] targets)
     {
         this.targets = targets; //Update targets
-        setIsTPDash(true); //Trigger TPDash
         HitCount = chargeSkill.GetChargeCount() + 2;  //caculate HitCount
+        TPDashStartSetting(); //Setting for TPDash
+        setIsTPDash(true); //Trigger TPDash
         skillPwer.UseFire(); //Use Fire
     }
+    protected virtual void TPDashStartSetting() { }
     private void TPDashSystem()
     {
         if(isTPDash)
