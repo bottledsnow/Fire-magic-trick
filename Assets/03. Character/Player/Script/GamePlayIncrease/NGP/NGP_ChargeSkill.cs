@@ -7,7 +7,6 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     [SerializeField] private Transform circleCard;
     [SerializeField] private Transform circleCardFloat;
     [SerializeField] private Transform circleCardBoom;
-    [SerializeField] private Transform cardPlatform;
     protected override void Start()
     {
         base.Start();
@@ -22,6 +21,17 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     }
     protected override void ChargeSkillWind(int power)
     {
-        Debug.Log("Wind Skill power");
+        switch (power)
+        {
+            case 0:
+                Instantiate(circleCard, spawn.position, Quaternion.identity);
+                break;
+            case 1:
+                Instantiate(circleCardFloat, spawn.position, Quaternion.identity);
+                break;
+            case 2:
+                Instantiate(circleCardBoom, spawn.position, Quaternion.identity);
+                break;
+        }
     }
 }
