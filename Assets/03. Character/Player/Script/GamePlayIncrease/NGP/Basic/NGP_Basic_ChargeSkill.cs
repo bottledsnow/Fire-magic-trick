@@ -1,4 +1,5 @@
 using UniGLTF;
+using Unity.XR.OpenVR;
 using UnityEngine;
 
 public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
@@ -42,6 +43,16 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
     {
         base.Update();
     }
+    protected override void ChargeStart()
+    {
+        base.ChargeStart(); 
+
+        if(fireOrWind == FireOrWind.Fire)
+        {
+            FireSkillStart();
+        }
+    }
+    protected virtual void FireSkillStart() { }
     protected override void ChargePower()
     {
         if (CanSkill())

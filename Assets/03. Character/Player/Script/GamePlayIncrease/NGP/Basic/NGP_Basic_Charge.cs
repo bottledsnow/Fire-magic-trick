@@ -73,7 +73,7 @@ public class NGP_Basic_Charge : MonoBehaviour
     }
     protected virtual void ChargePower(int power) { }
     
-    private void ChargeStart()
+    protected virtual void ChargeStart()
     {
         VFX_Charge_Play();
         chargeTimer = 0;

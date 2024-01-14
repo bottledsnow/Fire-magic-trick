@@ -7,6 +7,9 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     [SerializeField] private Transform circleCard;
     [SerializeField] private Transform circleCardFloat;
     [SerializeField] private Transform circleCardBoom;
+
+    [Header("Fire Skill")]
+    [SerializeField] private Transform beacom;
     protected override void Start()
     {
         base.Start();
@@ -14,6 +17,11 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     protected override void Update()
     {
         base.Update();
+    }
+    protected override void FireSkillStart()
+    {
+        base.FireSkillStart();
+        Instantiate(beacom, this.transform.forward, Quaternion.identity);
     }
     protected override void ChargeSkillFire(int power)
     {
