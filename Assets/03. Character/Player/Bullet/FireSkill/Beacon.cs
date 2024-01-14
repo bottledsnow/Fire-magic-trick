@@ -2,28 +2,36 @@ using UnityEngine;
 
 public class Beacon : Bullet
 {
-    private GameObject[] target = new GameObject[5];
+    private GameObject[] targets = new GameObject[5];
     protected override void Start() { base.Start(); }
     protected override void Update()
     {
         base.Update();
         addBeaconScale();
     }
+    public void StopRightNow()
+    {
+        Destroy(this.gameObject);
+    }
     private void OnDestroy()
     {
         NGP_FireSkill_BeaconTPDash tpdash = GameManager.singleton.NewGamePlay.GetComponentInParent<NGP_FireSkill_BeaconTPDash>();
-        tpdash.ToUpdateTarget(target);
+        tpdash.ToUpdateTarget(targets);
+        for(int i = 0; i < targets.Length;i++ )
+        {
+            Debug.Log(targets.Length);
+        }
     }
     protected override void OnTriggerEnter(Collider other)
     {
         base.OnTriggerEnter(other);
         if(other.CompareTag("Enemy"))
         {
-            for(int i = 0; i < target.Length; i++)
+            for(int i = 0; i < targets.Length; i++)
             {
-                if (target[i] == null)
+                if (targets[i] == null)
                 {
-                    target[i] = other.gameObject;
+                    targets[i] = other.gameObject;
                     break;
                 }
             }

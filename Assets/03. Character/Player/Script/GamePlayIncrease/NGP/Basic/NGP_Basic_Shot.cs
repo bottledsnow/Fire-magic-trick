@@ -18,6 +18,17 @@ public class NGP_Basic_Shot : MonoBehaviour
     {
         Shot(preferb, 0);
     }
+    public GameObject Shot_Gameobj(Transform preferb, float rotate_Yaxis)
+    {
+        spawnBulletPositionToNew();
+
+        Vector3 aimDir = (_shooting_check.mouseWorldPosition - spawnBulletPosition.position).normalized;
+        Vector3 rotate = new Vector3(0, rotate_Yaxis, 0);
+        Vector3 newDir = Quaternion.Euler(rotate) * aimDir;
+        Transform bullet = Instantiate(preferb, spawnBulletPosition.position, Quaternion.LookRotation(newDir, Vector3.up));
+
+        return bullet.gameObject;
+    }
     public void Shot(Transform preferb, float rotate_Yaxis)
     {
         spawnBulletPositionToNew();

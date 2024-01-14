@@ -10,6 +10,7 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
 
     [Header("Fire Skill")]
     [SerializeField] private Transform beacom;
+    private GameObject beacomTarget;
     protected override void Start()
     {
         base.Start();
@@ -21,12 +22,18 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
     protected override void FireSkillStart()
     {
         base.FireSkillStart();
-        shot.Shot(beacom);
+        beacomTarget = shot.Shot_Gameobj(beacom,0);
         Debug.Log("Fire Skill Start");
     }
     protected override void ChargeSkillFire(int power)
     {
         Debug.Log("Fire Skill power");
+        
+        if(beacomTarget != null)
+        {
+            Beacon beacon = beacomTarget.GetComponent<Beacon>();
+            beacon.StopRightNow();
+        }
     }
     protected override void ChargeSkillWind(int power)
     {

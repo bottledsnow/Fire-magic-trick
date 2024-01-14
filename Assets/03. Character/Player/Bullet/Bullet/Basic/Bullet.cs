@@ -83,7 +83,7 @@ public class Bullet : MonoBehaviour, IHitNotifier,ITriggerNotifier
         var psHit = hitVFX.GetComponent<VisualEffect>();
         Destroy(hitVFX, 1.5f);
     }
-    private void GiveSpeed()
+    protected virtual void GiveSpeed()
     {
         rb.velocity = transform.forward * speed;
     }
