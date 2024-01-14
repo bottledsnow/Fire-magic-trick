@@ -33,6 +33,7 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
         {
             Beacon beacon = beacomTarget.GetComponent<Beacon>();
             beacon.StopRightNow();
+            skillPower.UseFire();
         }
     }
     protected override void ChargeSkillWind(int power)

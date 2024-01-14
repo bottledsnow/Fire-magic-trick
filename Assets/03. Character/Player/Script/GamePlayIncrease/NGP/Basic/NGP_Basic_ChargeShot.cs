@@ -90,6 +90,7 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
     }
     protected void scatterShot(int count)
     {
+
         if (count % 2 == 0)
         {
             //even

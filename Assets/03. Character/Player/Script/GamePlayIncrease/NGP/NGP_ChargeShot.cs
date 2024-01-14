@@ -57,8 +57,8 @@ public class NGP_ChargeShot : NGP_Basic_ChargeShot
             {
                 ChargeShot(comboShotCount - 1);
             }
-            
             combo.UseComboShot();
+
         }
     }
 }

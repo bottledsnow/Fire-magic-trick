@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MoneyCard : Bullet
 {
+    private bool isHit = false;
     [SerializeField] private Transform Money;
     protected override void Start()
     {
@@ -23,7 +24,10 @@ public class MoneyCard : Bullet
     protected override void OnHitSomething()
     {
         base.OnHitSomething();
-        Instantiate(Money, this.transform.position, Quaternion.identity);
+        if (isHit)  
+        {
+            Instantiate(Money, this.transform.position, Quaternion.identity);
+        }
     }
 
     protected override void OnTriggerEnter(Collider other)

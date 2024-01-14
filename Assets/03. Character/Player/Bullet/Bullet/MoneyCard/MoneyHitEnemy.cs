@@ -2,20 +2,26 @@ using UnityEngine;
 
 public class MoneyHitEnemy : MonoBehaviour
 {
+    private bool isHit = false;
     private void Start()
     {
         Destroy(this.gameObject, 5f);
     }
     private void OnParticleCollision(GameObject other)
     {
-        if(other.gameObject.CompareTag("Enemy"))
+        if(!isHit)
         {
-            EnemyDebuff enemyDebuff = other.gameObject.GetComponent<EnemyDebuff>();
-
-            if(enemyDebuff != null)
+            if (other.gameObject.CompareTag("Enemy"))
             {
-                enemyDebuff.Hit(EnemyDebuff.DebuffType.Money);
+                EnemyDebuff enemyDebuff = other.gameObject.GetComponent<EnemyDebuff>();
+
+                if (enemyDebuff != null)
+                {
+                    enemyDebuff.Hit(EnemyDebuff.DebuffType.Money);
+                    isHit = true;
+                }
             }
         }
+        
     }
 }
