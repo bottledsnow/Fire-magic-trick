@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class NGP_SkillPower : NGP_Basic_SkillPower
 {
-    [Header("Skill")]
-    public bool isMax;
-
+    
     [Header("Wind")]
     [SerializeField] private int powerParticle_wind = 5;
     [SerializeField] private float lifeTime_wind = 0.5f;
@@ -21,6 +19,12 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
     private ParticleSystem VFX_UI_Wind;
     private ParticleSystem VFX_UI_Fire;
 
+    //variable
+    public bool IsMax
+    {
+        get { return isMax; }
+    }
+    private bool isMax;
 
 
     protected override void Start()
@@ -57,7 +61,7 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
     }
     public override void AddWindPower()
     {
-        if(!isMax)
+        if(!IsMax)
         {
             base.AddWindPower();
             if (FirePower > 0) InitializeFirePower();
@@ -65,7 +69,7 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
     }
     public override void AddFirePower()
     {
-        if(!isMax)
+        if(!IsMax)
         {
             base.AddFirePower();
             if (FirePower > 0) InitializeWindPower();

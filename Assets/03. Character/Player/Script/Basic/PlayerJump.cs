@@ -10,7 +10,7 @@ public class PlayerJump : MonoBehaviour
     
     //delegate 
     public delegate void JumpEvent();
-    public event JumpEvent OnJump;
+    public event JumpEvent OnSuperJump;
 
     //Script
     private ThirdPersonController _thirdPersonController;
@@ -91,12 +91,12 @@ public class PlayerJump : MonoBehaviour
         await Task.Delay((int)(JumpTimeout *1000f));
         _thirdPersonController.Jump();
     }
-    public async void Jump(float jumheight)
+    public async void SuperJump(float jumheight)
     {
         await Task.Delay((int)(JumpTimeout * 1000f));
         _thirdPersonController.Jump(jumheight);
 
-        OnJump?.Invoke(); //super jump;
+        OnSuperJump?.Invoke(); //super jump;
     }
     private void JumpToGround()
     {

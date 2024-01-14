@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using UnityEngine.Playables;
 
 public class NGP_Basic_ChargeShot : NGP_Basic_Charge
 {
@@ -16,6 +17,8 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
     public event ChargeShotDelegateHandler OnChargeMaxShot;
 
     //Script
+    protected NewGamePlay_Hover hover;
+    protected PlayerState playerState;
     protected NGP_Shot shot;
     protected NGP_SkillState skillState;
     protected NGP_Combo combo;
@@ -24,6 +27,8 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
     {
         base.Start();
         //Script
+        hover = GameManager.singleton.NewGamePlay.GetComponent<NewGamePlay_Hover>();
+        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
         skillState = GetComponent<NGP_SkillState>();
         shot = GetComponent<NGP_Shot>();
         combo = GetComponent<NGP_Combo>();

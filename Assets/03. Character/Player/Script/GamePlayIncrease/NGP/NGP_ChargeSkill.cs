@@ -2,6 +2,12 @@ using UnityEngine;
 
 public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
 {
+    [Header("Wind Skill")]
+    [SerializeField] private Transform spawn;
+    [SerializeField] private Transform circleCard;
+    [SerializeField] private Transform circleCardFloat;
+    [SerializeField] private Transform circleCardBoom;
+    [SerializeField] private Transform cardPlatform;
     protected override void Start()
     {
         base.Start();

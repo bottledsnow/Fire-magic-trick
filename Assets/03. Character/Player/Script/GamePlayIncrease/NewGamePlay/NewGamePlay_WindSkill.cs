@@ -22,10 +22,10 @@ public class NewGamePlay_WindSkill : NewGamePlay_Basic_WindSkill
         base.Start();
 
         jump = GameManager.singleton.Player.GetComponent<PlayerJump>();
-        VFX_SuperJump = GameManager.singleton.VFX_List.VFX_SuperJump;
+        VFX_SuperJump = GameManager.singleton.VFX_List.VFX_SuperJump_Wind;
 
         //Event
-        jump.OnJump += VFX_superJump;
+        jump.OnSuperJump += VFX_superJump;
     }
     protected override void Update()
     {
@@ -35,7 +35,7 @@ public class NewGamePlay_WindSkill : NewGamePlay_Basic_WindSkill
     {
         base.SuperJump();
 
-        jump.Jump(SuperJumpHeight);
+        jump.SuperJump(SuperJumpHeight);
         Debug.Log("Super Jump");
     }
     private void VFX_superJump()

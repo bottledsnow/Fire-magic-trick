@@ -18,9 +18,6 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
         Fire
     }
     public FireOrWind fireOrWind;
-
-    //variable
-    private bool canSkill;
     protected override void Start()
     {
         base.Start();
@@ -47,16 +44,15 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
     }
     protected override void ChargePower()
     {
-        if(canSkill)
+        if (CanSkill())
         {
             base.ChargePower();
         }
     }
     protected override void ChargePower(int power)
     {
-        if(canSkill)
+        if (CanSkill())
         {
-            setCanSkill(false);
             if (fireOrWind == FireOrWind.Wind)
             {
                 ChargeSkillWind(power);
@@ -75,7 +71,6 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
     public void PowerMax(FireOrWind ForW)
     {
         this.fireOrWind = ForW;
-        setCanSkill(true);
 
         if (fireOrWind == FireOrWind.Wind)
         {
@@ -88,5 +83,8 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
             VFX_ChargeFinish = VFX_ChargeFinish_Fire;
         }
     }
-    public void setCanSkill(bool value) { canSkill = value; }
+    private bool CanSkill()
+    {
+        return skillPower.IsMax;
+    }
 }

@@ -27,6 +27,8 @@ public class NGP_ChargeShot : NGP_Basic_ChargeShot
     {
         if(combo.CanComboShot)
         {
+            if(!playerState.isGround) hover.ToHover();
+
             ChargeShot(comboShotCount-1);
             combo.UseComboShot();
         }
