@@ -9,11 +9,12 @@ public class PlayerState : MonoBehaviour
     
     [SerializeField] private LayerMask mask;
     [SerializeField] private float groundRayDistance = 1f;
-
     [Header("Gravity")]
     [SerializeField] private float gravityFire;
     [SerializeField] private float gravityFloat;
 
+    [Header("Model")]
+    [SerializeField] private GameObject model;
     //Script
     private Shooting_Check _shooting_check;
 
@@ -94,11 +95,31 @@ public class PlayerState : MonoBehaviour
     {
         _controller.useGravity = true;
         _controller.useMove = true;
+        Debug.Log("Take Control");
     }
     public void OutControl()
     {
         _controller.useGravity = false;
         _controller.useMove = false;
+    }
+    public void SetUseGravity(bool value)
+    {
+        _controller.useGravity = value;
+    }
+    public void SetUseMove(bool value)
+    {
+        _controller.useMove = value;
+    }
+    public void SetCollider(bool value)
+    {
+        if(value ==true)
+        {
+            this.gameObject.layer = 6;
+        }
+        if(value == false)
+        {
+            this.gameObject.layer = 17;
+        }
     }
     public void SetGravityActive(bool active)
     {
@@ -108,12 +129,7 @@ public class PlayerState : MonoBehaviour
     {
         _controller.useMove = active;
     }   
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(this.transform.position, -this.transform.up * groundRayDistance);
-    }
-    
+    public void setModel(bool active) { model.SetActive(active); }
     public void SetGravityToNormal()
     {
         _controller.Gravity = gravityNormal;
@@ -184,5 +200,10 @@ public class PlayerState : MonoBehaviour
     private void SetIsToAim(bool active)
     {
         isToAim = active;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(this.transform.position, -this.transform.up * groundRayDistance);
     }
 }

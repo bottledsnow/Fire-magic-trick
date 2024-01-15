@@ -17,10 +17,6 @@ public class Beacon : Bullet
     {
         NGP_FireSkill_BeaconTPDash tpdash = GameManager.singleton.NewGamePlay.GetComponentInParent<NGP_FireSkill_BeaconTPDash>();
         tpdash.ToTPDash(targets);
-        for(int i = 0; i < targets.Length;i++ )
-        {
-            Debug.Log(targets.Length);
-        }
     }
     protected override void OnTriggerEnter(Collider other)
     {

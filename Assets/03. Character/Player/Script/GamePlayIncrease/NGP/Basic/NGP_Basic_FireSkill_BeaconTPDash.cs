@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Networking.Types;
 
 public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
     }
     public void ToTPDash(GameObject[] targets)
     {
+        index = 0; //Reset index
         this.targets = targets; //Update targets
         HitCount = chargeSkill.GetChargeCount() + 2;  //caculate HitCount
         TPDashStartSetting(); //Setting for TPDash
@@ -39,20 +41,32 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
     {
         if(isTPDash)
         {
-            MoveToTarget(index);
-        }
-        if(distance() <= 0.5f)
-        {
-            ToNextTarget();
-        }
-        if(index >= HitCount)
-        {
-            TPDashEnd();
+            if (targets[index] != null) MoveToTarget(index);
+
+            if (distance() <= 0.5f)
+            {
+                ToNextTarget(); //index++ and HitCount--
+
+                if (targets[index] == null)
+                {
+                    index--;
+                    if(HitCount < 0)
+                    {
+                        TPDashEnd();
+                        Debug.Log("Hitcoun:"+ HitCount+"TEPDashEnd");
+                    }
+                    else
+                    {
+                        ToNewPosition();
+                    }
+                }
+            }
         }
     }
     protected virtual void MoveToTarget(int index) { }
-    protected virtual void ToNextTarget() { index++; }
+    protected virtual void ToNextTarget() { index++; HitCount--; }
+    protected virtual void ToNewPosition() { }
     protected virtual void TPDashEnd() { setIsTPDash(false); }
-    protected float distance() { return 0; }
+    protected virtual float distance() { return 0; }
     private void setIsTPDash(bool value) { isTPDash = value; }
 }
