@@ -4,6 +4,7 @@ using UnityEngine.InputSystem.Controls;
 public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
 {
     [Header("TPDash")]
+    [SerializeField] TPDashCollider tpCollider;
     [SerializeField] private float TPDashSpeed;
     [SerializeField] private float newHitCountAddY;
     [SerializeField] private float newHitCountAddXZ;
@@ -44,6 +45,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
         speed = TPDashSpeed;
         NewPosition = Vector3.zero;
         setIsToNewPosition(false);
+        tpCollider.gameObject.SetActive(true);
     }
     
     protected override void MoveToTarget(int index)
@@ -113,6 +115,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
         VFX_TPDash.Stop();
         VFX_TPDash.Clear();
         if(nullTargetTarget!=null) Destroy(nullTargetTarget.gameObject);
+        tpCollider.gameObject.SetActive(false);
         Debug.Log("TPDashEnd");
     }
     private void setIsToNewPosition(bool value) { isToNewPosition = value; }
