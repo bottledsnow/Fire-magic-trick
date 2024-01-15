@@ -31,7 +31,7 @@ public class PlayerJump : MonoBehaviour
     private void Update()
     {
         preInputSystem();
-        JumpToGround();
+        //JumpToGround();
     }
     #region PreInput
     #region System

@@ -88,7 +88,7 @@ public class NGP_Basic_Charge : MonoBehaviour
     {
         return false;
     }
-    private void ChargeStopRightNow()
+    public void ChargeStopRightNow()
     {
         if (isCharge)
         {

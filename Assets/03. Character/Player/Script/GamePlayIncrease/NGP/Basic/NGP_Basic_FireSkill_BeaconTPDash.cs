@@ -29,6 +29,12 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
     }
     public void ToTPDash(GameObject[] targets)
     {
+        if (targets == null)
+        {
+            Debug.LogError("Targets array is null!");
+            return;
+        }
+
         index = 0; //Reset index
         this.targets = targets; //Update targets
         HitCount = chargeSkill.GetChargeCount() + 2;  //caculate HitCount
@@ -41,23 +47,32 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
     {
         if(isTPDash)
         {
-            if (targets[index] != null) MoveToTarget(index);
-
-            if (distance() <= 0.5f)
+            if (targets.Length <= index)
             {
-                ToNextTarget(); //index++ and HitCount--
+                TPDashEnd();
+                Debug.Log("TOOOOEND");
+            }
+            else
+            {
+                if (targets[index] != null) MoveToTarget(index);
 
-                if (targets[index] == null)
+                if (distance() <= 0.5f)
                 {
-                    index--;
-                    if(HitCount < 0)
+                    ToNextTarget(); //index++ and HitCount--
+
+
+                    if (index >= 0 && index < targets.Length && targets[index] == null)
                     {
-                        TPDashEnd();
-                        Debug.Log("Hitcoun:"+ HitCount+"TEPDashEnd");
-                    }
-                    else
-                    {
-                        ToNewPosition();
+                        index--;
+                        if (HitCount < 0)
+                        {
+                            TPDashEnd();
+                            Debug.Log("Hitcoun:" + HitCount + "TEPDashEnd");
+                        }
+                        else
+                        {
+                            ToNewPosition();
+                        }
                     }
                 }
             }

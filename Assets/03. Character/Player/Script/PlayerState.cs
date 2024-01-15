@@ -109,6 +109,7 @@ public class PlayerState : MonoBehaviour
     public void SetUseMove(bool value)
     {
         _controller.useMove = value;
+        Debug.Log("use Move :" + value);
     }
     public void SetCollider(bool value)
     {

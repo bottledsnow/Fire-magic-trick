@@ -17,6 +17,8 @@ public class Beacon : Bullet
     {
         NGP_FireSkill_BeaconTPDash tpdash = GameManager.singleton.NewGamePlay.GetComponentInParent<NGP_FireSkill_BeaconTPDash>();
         tpdash.ToTPDash(targets);
+        NGP_ChargeSkill skill = GameManager.singleton.NewGamePlay.GetComponent<NGP_ChargeSkill>();
+        skill.ChargeStopRightNow();
     }
     protected override void OnTriggerEnter(Collider other)
     {
@@ -35,6 +37,6 @@ public class Beacon : Bullet
     }
     private void addBeaconScale()
     {
-        this.transform.localScale += new Vector3(0.1f, 0, 0);
+        this.transform.localScale += new Vector3(0.1f, 0.1f, 0);
     }
 }

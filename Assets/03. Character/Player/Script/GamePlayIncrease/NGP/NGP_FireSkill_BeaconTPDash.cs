@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem.Controls;
 
 public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
 {
@@ -16,6 +17,8 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
     //varaible
     private bool isToNewPosition;
     private Vector3 NewPosition;
+    private float deltaSpeed;
+    private float deltaStartDistance;
     protected override void Start()
     {
         base.Start();
@@ -23,10 +26,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
         VFX_TPDash = GameManager.singleton.VFX_List.VFX_TPDash;
         Player = GameManager.singleton.Player;
     }
-    protected override void Update()
-    {
-        base.Update();
-    }
+    protected override void Update() { base.Update(); }
     protected override void TPDashStartSetting()
     {
         base.TPDashStartSetting();
@@ -47,8 +47,10 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
             Vector3 player = this.Player.transform.position;
             Vector3 target = NewPosition;
             Vector3 dire = (player - target).normalized;
-
-            this.Player.transform.position = Vector3.MoveTowards(player, target, speed * Time.deltaTime);
+            float dis = (player - target).magnitude;
+            float distance = dis / deltaStartDistance;
+            deltaSpeed = speed * distance;
+            this.Player.transform.position = Vector3.MoveTowards(player, target, deltaSpeed * Time.deltaTime);
             return;
         }else
         {
@@ -75,12 +77,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
             return distance;
         }
     }
-    protected override void ToNextTarget()
-    { 
-        base.ToNextTarget();
-
-        
-    }
+    protected override void ToNextTarget() { base.ToNextTarget(); }
     protected override void ToNewPosition()
     {
         if (isToNewPosition)
@@ -96,7 +93,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
             float y = newHitCountAddY;
             float z = Random.Range(-newHitCountAddXZ, newHitCountAddXZ);
             Vector3 newPosition = new Vector3(Player.position.x + x, Player.position.y + y, Player.position.z + z);
-
+            deltaStartDistance = (Player.position - newPosition).magnitude;
             NewPosition = newPosition;
         }
     }
@@ -109,6 +106,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
         state.SetVerticalVelocity(12);
         VFX_TPDash.Stop();
         VFX_TPDash.Clear();
+        Debug.Log("TPDashEnd");
     }
     private void setIsToNewPosition(bool value) { isToNewPosition = value; }
 }

@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿using System.Runtime.CompilerServices;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -83,7 +84,12 @@ namespace StarterAssets
         public float moveSpeedDebuff = 0;
         public bool isJump;
         public bool useGravity;
-        public bool useMove;
+        public bool useMove
+        {
+            get { return useGravity; }
+            set { useGravity = value;
+                Debug.Log("set use move To :"+ value); }
+        }
         public bool isFloat;
 
         private Move_Our _move_Our;
