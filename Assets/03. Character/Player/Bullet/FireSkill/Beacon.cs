@@ -17,6 +17,9 @@ public class Beacon : Bullet
     {
         NGP_FireSkill_BeaconTPDash tpdash = GameManager.singleton.NewGamePlay.GetComponentInParent<NGP_FireSkill_BeaconTPDash>();
         tpdash.ToTPDash(targets);
+        GameObject obj = new GameObject();
+        obj.transform.position = this.transform.position;
+        tpdash.setNullTarget(obj.transform);
         NGP_ChargeSkill skill = GameManager.singleton.NewGamePlay.GetComponent<NGP_ChargeSkill>();
         skill.ChargeStopRightNow();
     }

@@ -47,6 +47,11 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
     {
         if(isTPDash)
         {
+            if (targets[0] == null)
+            {
+                targets[0] = NullTarget().gameObject;
+                HitCount = 0;
+            }else
             if (targets.Length <= index)
             {
                 TPDashEnd();
@@ -77,6 +82,10 @@ public class NGP_Basic_FireSkill_BeaconTPDash : MonoBehaviour
                 }
             }
         }
+    }
+    protected virtual Transform NullTarget()
+    {
+        return null;
     }
     protected virtual void MoveToTarget(int index) { }
     protected virtual void ToNextTarget() { index++; HitCount--; }

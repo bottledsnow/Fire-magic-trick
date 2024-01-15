@@ -7,6 +7,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
     [SerializeField] private float TPDashSpeed;
     [SerializeField] private float newHitCountAddY;
     [SerializeField] private float newHitCountAddXZ;
+
     //Script
     private PlayerState state;
     private Transform Player;
@@ -15,6 +16,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
     private ParticleSystem VFX_TPDash;
 
     //varaible
+    private Transform nullTargetTarget;
     private bool isToNewPosition;
     private Vector3 NewPosition;
     private float deltaSpeed;
@@ -27,6 +29,10 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
         Player = GameManager.singleton.Player;
     }
     protected override void Update() { base.Update(); }
+    protected override Transform NullTarget()
+    {
+        return nullTargetTarget;
+    }
     protected override void TPDashStartSetting()
     {
         base.TPDashStartSetting();
@@ -106,7 +112,9 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
         state.SetVerticalVelocity(12);
         VFX_TPDash.Stop();
         VFX_TPDash.Clear();
+        if(nullTargetTarget!=null) Destroy(nullTargetTarget.gameObject);
         Debug.Log("TPDashEnd");
     }
     private void setIsToNewPosition(bool value) { isToNewPosition = value; }
+    public void setNullTarget(Transform value) { nullTargetTarget = value; }
 }
