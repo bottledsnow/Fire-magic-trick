@@ -8,20 +8,18 @@ using UnityEngine.Events;
 
 public class AgentMover : MonoBehaviour
 {
-    [SerializeField]
-    private NavMeshAgent _Agent;
-
     public event Action<float> OnSpeedChanged;
 
     private bool _onNavMeshLink = false;
-
-    [SerializeField]
-    private float _jumpDuration = 0.8f;
+    private NavMeshAgent _Agent;
 
     public UnityEvent OnLand, OnStartJump;
 
     private void Start()
     {
+        if(GetComponent<NavMeshAgent>() != null)_Agent = GetComponent<NavMeshAgent>();
+        else Debug.Log(gameObject.name + "Without Nav Mesh Agent");
+
         _Agent.autoTraverseOffMeshLink = false;
     }
 

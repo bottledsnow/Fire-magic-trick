@@ -39283,6 +39283,7 @@ GameObject:
   - component: {fileID: 606570046}
   - component: {fileID: 167774824}
   - component: {fileID: 1160720738}
+  - component: {fileID: 289808737}
   m_Layer: 14
   m_Name: Enemy_A
   m_TagString: Enemy
@@ -39523,6 +39524,24 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 512
+--- !u!114 &289808737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032919127870789858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589688ca86fe56f4e8d12f2a3e02fcdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnLand:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStartJump:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8032919128011008211
 GameObject:
   m_ObjectHideFlags: 0
