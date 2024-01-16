@@ -16,16 +16,15 @@ public class LegSlash_Left : Action
     [SerializeField] private float forwardForce;
     [SerializeField] private float maxRotateAngle = 30;
 
-    [Header("Time")]
+    [Header("Rotation")]
+    [SerializeField] private float rotateSpeed;
+
+    [Header("WaitTime")]
     [SerializeField] private float duration = 0.5f;
 
     private Transform legSlashPoint;
     private Rigidbody rb;
     private UnityEventEnemy_A unityEvent;
-
-    public AnimationCurve rotationCurve = AnimationCurve.Linear(0f, 0f, 1f, 360f);
-
-    private float rotateTimer;
     private float timer;
 
     public override void OnStart()
@@ -63,11 +62,17 @@ public class LegSlash_Left : Action
 
     private void Rotation()
     {
-        float normalizedTime = Mathf.Clamp01((Time.time - timer) / duration);
+        Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
+        Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
 
-        float targetRotationValue = rotationCurve.Evaluate(normalizedTime);
+        float angle = Quaternion.Angle(transform.rotation, rotation);
 
-        Quaternion targetRotation = Quaternion.Euler(0f, targetRotationValue * 3, 0f);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
+        float maxRotationSpeed = rotateSpeed * Time.deltaTime;
+        if (angle > maxRotationSpeed)
+        {
+            float t = maxRotationSpeed / angle;
+            rotation = Quaternion.Slerp(transform.rotation, rotation, t);
+        }
+        transform.rotation = rotation;
     }
 }

@@ -14,7 +14,7 @@ public class LegSlash_Ready : Action
     [SerializeField] private float readyDuaction = 2.5f;
 
     [Header("LookAtPlayer")]
-    [SerializeField] private float rotateSpeed = 5;
+    [SerializeField] private float rotateSpeed = 70;
 
     private float readyTimer;
     private Rigidbody rb;
@@ -31,7 +31,7 @@ public class LegSlash_Ready : Action
     {
         if (Time.time - readyTimer <= readyDuaction)
         {
-            LookAtTarget();
+            Rotation();
         }
         if (Time.time - readyTimer >= readyDuaction)
         {
@@ -40,12 +40,19 @@ public class LegSlash_Ready : Action
         return TaskStatus.Running;
     }
 
-    private void LookAtTarget()
+    private void Rotation()
     {
-        if(targetObject.Value != null)
+        Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
+        Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
+
+        float angle = Quaternion.Angle(transform.rotation, rotation);
+
+        float maxRotationSpeed = rotateSpeed * Time.deltaTime;
+        if (angle > maxRotationSpeed)
         {
-            Quaternion rotation = Quaternion.LookRotation(new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z) - transform.position);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+            float t = maxRotationSpeed / angle;
+            rotation = Quaternion.Slerp(transform.rotation, rotation, t);
         }
+        transform.rotation = rotation;
     }
 }
