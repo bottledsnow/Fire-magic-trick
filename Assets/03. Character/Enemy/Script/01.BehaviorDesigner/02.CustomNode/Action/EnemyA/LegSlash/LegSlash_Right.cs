@@ -17,17 +17,23 @@ public class LegSlash_Right : Action
     [SerializeField] private float forwardForce;
     [SerializeField] private float maxRotateAngle = 30;
 
+    [Header("Time")]
+    [SerializeField] private float duration = 0.5f;
+
     private Transform legSlashPoint;
     private Rigidbody rb;
     private UnityEventEnemy_A unityEvent;
+
+    public AnimationCurve rotationCurve = AnimationCurve.Linear(0f, 0f, 1f, 360f);
+
+    private float rotateTimer;
+    private float timer;
+
     public override void OnStart()
     {
-        if(targetObject.Value != null)
-        {
-            return;
-        }
         rb = GetComponent<Rigidbody>();
         legSlashPoint = behaviorObject.Value.Find("LegSlashPoint");
+        timer = Time.time;
 
         InstantiateAttackObject();
         Rotation();
@@ -38,7 +44,10 @@ public class LegSlash_Right : Action
 
     public override TaskStatus OnUpdate()
     {
-        return TaskStatus.Success;
+        Rotation();
+
+        if(Time.time - timer > duration) return TaskStatus.Success;
+        return TaskStatus.Running;
     }
 
     private void InstantiateAttackObject()
@@ -55,23 +64,11 @@ public class LegSlash_Right : Action
 
     private void Rotation()
     {
-        // 获取敌人到玩家的方向
-        Vector3 directionToPlayer = targetObject.Value.transform.position - transform.position;
-        directionToPlayer.y = 0;
-        // 使用Quaternion.LookRotation直接设置敌人的朝向
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer, Vector3.up);
+        float normalizedTime = Mathf.Clamp01((Time.time - timer) / duration);
 
-        // 限制转动角度不超过15度
-        float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
-        if (angleDifference <= maxRotateAngle)
-        {
-            // 如果当前角度差在限定范围内，直接设置朝向
-            transform.rotation = targetRotation;
-        }
-        else
-        {
-            // 如果超过限定范围，根据最大角度进行插值
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, maxRotateAngle / angleDifference);
-        }
+        float targetRotationValue = rotationCurve.Evaluate(normalizedTime);
+
+        Quaternion targetRotation = Quaternion.Euler(0f, targetRotationValue * 3, 0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime);
     }
 }

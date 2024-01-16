@@ -1,6 +1,7 @@
 using UnityEngine;
 using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
+using UnityEngine.AI;
 
 public class Rush_Attack : Action
 {
@@ -17,6 +18,7 @@ public class Rush_Attack : Action
     private GameObject rushCollider;
     private Rigidbody rb;
     private float timer;
+    NavMeshAgent navMeshAgent;
 
     public override void OnStart()
     {
@@ -26,6 +28,7 @@ public class Rush_Attack : Action
         }
         rb = GetComponent<Rigidbody>();
         timer = Time.time;
+        navMeshAgent = GetComponent<NavMeshAgent>();
         Jump();
     }
 

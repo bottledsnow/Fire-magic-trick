@@ -78,5 +78,6 @@ public class NavMovement : Action
       {
          animator.SetBool("isMove",false);
       }
+      navMeshAgent.ResetPath();
    }
 }
