@@ -29,12 +29,16 @@ public class NavMovement : Action
 
    public override TaskStatus OnUpdate()
    {
-      Movement();
-
-      if(NearbyTarget())
+      if(targetObject.Value != null)
       {
-         return TaskStatus.Success;
+         Movement();
       }
+      else
+      {
+         navMeshAgent.ResetPath();
+         return TaskStatus.Failure;
+      }
+      if(NearbyTarget()) return TaskStatus.Success;
       return TaskStatus.Running;
    }
 
