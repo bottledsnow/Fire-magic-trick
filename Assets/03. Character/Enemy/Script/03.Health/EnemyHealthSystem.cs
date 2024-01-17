@@ -242,12 +242,19 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     #region
     private void RebirthSelf()
     {
-        Rebirth(StartPosition, StartRotation);
+        if(this.transform.gameObject !=  null)
+        {
+            Rebirth(StartPosition, StartRotation);
+        }
     }
     private void Initialization()
     {
         EnemyAggroSystem aggroSystem = GetComponent<EnemyAggroSystem>();
-        aggroSystem.CleanAggroTarget();
+        if (aggroSystem != null)
+        {
+            aggroSystem.CleanAggroTarget();
+        }
+        
 
         this.gameObject.SetActive(true);
         isIgnite = false;
