@@ -11,7 +11,7 @@ public class NGP_Basic_Dash : MonoBehaviour
     private ThirdPersonController thirdPersonController;
     private CharacterController characterController;
     private FireDashCollider fireDashCollider;
-    private ControllerInput input;
+    protected ControllerInput input;
 
     //Feedbacks
     private MMF_Player Feedbacks_Dash;

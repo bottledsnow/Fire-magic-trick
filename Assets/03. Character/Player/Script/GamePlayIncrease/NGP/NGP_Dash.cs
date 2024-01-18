@@ -52,11 +52,11 @@ public class NGP_Dash : NGP_Basic_Dash
     }
     protected override bool FireButton()
     {
-        return base.FireButton();
+        return input.LeftStick.y > 0;
     }
     protected override bool WindButton()
     {
-        return base.WindButton();
+        return input.LeftStick.y < 0;
     }
     protected override bool CanCombo()
     {
