@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 8134099540864529751}
   - component: {fileID: 7133606226298439721}
   - component: {fileID: 6847783566245113636}
+  - component: {fileID: 408231468}
   m_Layer: 0
   m_Name: Collider
   m_TagString: Untagged
@@ -192,12 +193,28 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2389510805681240252}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &408231468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2389510805681240252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f5f7f3664e50e45972f70e5ea79446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  force: 20
+  knockBackCoordinate: {fileID: 1405854706024038076}
+  isVertical: 0
 --- !u!1 &3077362946999958517
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,6 +227,7 @@ GameObject:
   - component: {fileID: 6646840025482356648}
   - component: {fileID: 7724920275164556931}
   - component: {fileID: 8789862911625486607}
+  - component: {fileID: 837352553}
   m_Layer: 0
   m_Name: Collider (1)
   m_TagString: Untagged
@@ -290,12 +308,28 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3077362946999958517}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+--- !u!114 &837352553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3077362946999958517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22f5f7f3664e50e45972f70e5ea79446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 25
+  force: 20
+  knockBackCoordinate: {fileID: 1405854706024038076}
+  isVertical: 0
 --- !u!1001 &1516862611
 PrefabInstance:
   m_ObjectHideFlags: 0

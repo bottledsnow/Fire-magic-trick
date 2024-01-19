@@ -29,8 +29,22 @@ public class Mortar : Action
 
         for (int i = 0; i < 3; i++)
         {
-            Vector3 positions = ChooseTargetPosition();
-            InstantiateAttackObject(positions);
+            Vector3 positions;
+            switch(i)
+            {
+                case 0:
+                    positions = ChooseTargetPosition(0,1);
+                    InstantiateAttackObject(positions);
+                    break;
+                case 1:
+                    positions = ChooseTargetPosition(4,5);
+                    InstantiateAttackObject(positions);
+                    break;
+                case 2:
+                    positions = ChooseTargetPosition(6,7);
+                    InstantiateAttackObject(positions);
+                    break;
+            }
         }
 
 
@@ -50,9 +64,10 @@ public class Mortar : Action
         return TaskStatus.Running;
     }
 
-    private Vector3 ChooseTargetPosition()
+    private Vector3 ChooseTargetPosition(float minRadius, float maxRadius)
     {
-        Vector2 randomCircle = Random.insideUnitCircle.normalized * 5;
+        float randomRadius = Random.Range(minRadius * 10, maxRadius * 10) / 10;
+        Vector2 randomCircle = Random.insideUnitCircle.normalized * randomRadius;
         Vector3 randomDirection = new Vector3(randomCircle.x, 0f, randomCircle.y);
         Vector3 randomPosition = targetObject.Value.transform.position + randomDirection;
         bool foundValidPosition = false;
