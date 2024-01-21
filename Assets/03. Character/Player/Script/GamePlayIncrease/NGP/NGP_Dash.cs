@@ -56,7 +56,14 @@ public class NGP_Dash : NGP_Basic_Dash
     }
     protected override bool WindButton()
     {
-        return input.LeftStick.y < 0;
+        if(input.LeftStick == Vector2.zero)
+        {
+            return true;
+        }
+        else
+        {
+            return input.LeftStick.y < 0;
+        }
     }
     protected override bool CanCombo()
     {

@@ -1,8 +1,8 @@
+using TMPro;
 using UnityEngine;
 
 public class NGP_SkillPower : NGP_Basic_SkillPower
 {
-    
     [Header("Wind")]
     [SerializeField] private int powerParticle_wind = 5;
     [SerializeField] private float lifeTime_wind = 0.5f;
@@ -13,6 +13,9 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
     [SerializeField] private float lifeTime_fire = 0.5f;
     [SerializeField] private float multiple_fire = 2;
 
+    [Header("Debug UI")]
+    [SerializeField] private TextMeshProUGUI firePower_UI;
+    [SerializeField] private TextMeshProUGUI windPower_UI; 
     //VFX
     private ParticleSystem VFX_WindStart;
     private ParticleSystem VFX_FireStart;
@@ -38,53 +41,37 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
         VFX_UI_Fire = GameManager.singleton.VFX_List.VFX_UI_Fire;
     }
     protected override void Update() { base.Update(); }
-    protected override bool IsFire()
-    {
-        if(skillState.State == NGP_SkillState.SkillState.Fire)
-        {
-            return true;
-        }else
-        {
-            return false;
-        }
-    }
-    protected override bool IsWind()
-    {
-        if (skillState.State == NGP_SkillState.SkillState.Wind)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
     public override void AddWindPower()
     {
-        if(!IsMax)
-        {
-            base.AddWindPower();
-            if (FirePower > 0) InitializeFirePower();
-        }
+        base.AddWindPower();
+        windPower_UI.text = WindPower.ToString()+"/6";
     }
     public override void AddFirePower()
     {
-        if(!IsMax)
-        {
-            base.AddFirePower();
-            if (FirePower > 0) InitializeWindPower();
-        }
-        
+        base.AddFirePower();
+        firePower_UI.text = FirePower.ToString()+"/6";
     }
     public void UseWind()
     {
-        WindStop();
-        setIsMax(false);
+        //vfx
+        VFX_UI_Wind.Stop();
+
+        //Set
+        SetWinPower(0);
+        SetIsWindMax(false);
+        SetEmmision_wind(WindPower * _powerParticle);
+        SetLifeTime_wind(_lifeTime);
     }
     public void UseFire()
     {
-        FireStop();
-        setIsMax(false);
+        //vfx
+        VFX_UI_Fire.Stop();
+
+        //Set
+        SetFirePower(0);
+        SetIsFireMax(false);
+        SetEmmision_fire(FirePower * _powerParticle);
+        SetLifeTime_fire(_lifeTime);
     }
     protected override void InitializeWindPower()
     {
@@ -103,13 +90,12 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
         base.WindStar();
 
         //Initialize
-        setIsMax(true);
-        InitializeWindPower();
-        InitializeFirePower();
         chargeSkill.PowerMax(NGP_ChargeSkill.FireOrWind.Wind);
 
         //vfx
+        VFX_WindStart.Clear();
         VFX_WindStart.Play();
+        VFX_UI_Wind.Clear();
         VFX_UI_Wind.Play();
 
         //Set
@@ -119,23 +105,12 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
     protected override void WindStop()
     {
         base.WindStop();
-
-        //vfx
-        VFX_UI_Wind.Stop();
-
-        //Set
-        SetWinPower(0);
-        SetEmmision_wind(WindPower * _powerParticle);
-        SetLifeTime_wind(_lifeTime);
     }
     protected override void FireStar()
     {
         base.FireStar();
 
         //Initialize
-        setIsMax(true);
-        InitializeWindPower();
-        InitializeFirePower();
         chargeSkill.PowerMax(NGP_ChargeSkill.FireOrWind.Fire);
 
         //vfx
@@ -150,16 +125,6 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
     {
         base.FireStop();
 
-        //vfx
-        VFX_UI_Fire.Stop();
-
-        //Set
-        SetFirePower(0);
-        SetEmmision_fire(FirePower * _powerParticle);
-        SetLifeTime_fire(_lifeTime);
-    }
-    private void setIsMax(bool isMax)
-    {
-        this.isMax = isMax;
+        
     }
 }

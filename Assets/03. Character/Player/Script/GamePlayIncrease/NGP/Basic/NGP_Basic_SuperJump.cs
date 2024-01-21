@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class NGP_Basic_SuperJump : MonoBehaviour
 {
@@ -17,6 +15,8 @@ public class NGP_Basic_SuperJump : MonoBehaviour
     private ParticleSystem VFX_SuperJump_Wind;
     private ParticleSystem VFX_SuperJump_Fire;
 
+    //variable
+    private bool buttonTrigger;
     protected virtual void Start()
     {
         skillPower = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillPower>();
@@ -38,22 +38,34 @@ public class NGP_Basic_SuperJump : MonoBehaviour
         {
             if(input.ButtonY)
             {
-                if(skillPower.isWindMax)
+                if(!buttonTrigger)
                 {
-                    jump.OnSuperJump += VFX_superJump_wind;
-                    jump.OnSuperJump -= VFX_superJump_fire;
+                    buttonTrigger = true;
 
-                    SuperJump_wind();
-                    skillPower.UseWind();
-                }
-                else if (skillPower.isFireMax)
-                {
-                    jump.OnSuperJump += VFX_superJump_fire;
-                    jump.OnSuperJump -= VFX_superJump_wind;
+                    if (skillPower.isWindMax)
+                    {
+                        jump.OnSuperJump += VFX_superJump_wind;
+                        jump.OnSuperJump -= VFX_superJump_fire;
 
-                    SuperJump_fire();
-                    skillPower.UseFire();
+                        SuperJump_wind();
+                        skillPower.UseWind();
+                        Debug.Log("Wind Super Jump");
+                    }
+                    else if (skillPower.isFireMax)
+                    {
+                        jump.OnSuperJump += VFX_superJump_fire;
+                        jump.OnSuperJump -= VFX_superJump_wind;
+
+                        SuperJump_fire();
+                        skillPower.UseFire();
+                        Debug.Log("Fire Super Jump");
+                    }
                 }
+                
+            }
+            if(!input.ButtonY)
+            {
+                buttonTrigger = false;
             }
         }
     }

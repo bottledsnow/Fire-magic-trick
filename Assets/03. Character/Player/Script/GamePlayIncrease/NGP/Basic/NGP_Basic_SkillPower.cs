@@ -46,7 +46,7 @@ public class NGP_Basic_SkillPower : MonoBehaviour
     protected virtual void Update() { }
     public virtual void AddWindPower()
     {
-        if (IsWind())
+        if(!isWindMax)
         {
             WindPower++;
 
@@ -54,13 +54,20 @@ public class NGP_Basic_SkillPower : MonoBehaviour
 
             if (WindPower >= MaxPower)
             {
+                WindPower = MaxPower;
                 WindStar();
+                SetIsWindMax(true);
+            }
+            else
+            if (WindPower > MaxPower / 2)
+            {
+                ToHalfWindPower();
             }
         }
     }
     public virtual void AddFirePower()
     {
-        if (IsFire())
+        if (!isFireMax)
         {
             FirePower++;
 
@@ -68,26 +75,26 @@ public class NGP_Basic_SkillPower : MonoBehaviour
 
             if (FirePower >= MaxPower)
             {
+                FirePower = MaxPower;
                 FireStar();
+                SetIsFireMax(true);
+            }
+            else
+            if (FirePower > MaxPower / 2)
+            {
+                ToHalfFirePower();
             }
         }
     }
-    protected virtual bool IsWind() { return false; }
-    protected virtual bool IsFire() { return false; }
     protected virtual void InitializeWindPower() { }
     protected virtual void InitializeFirePower() { }
-    protected virtual void WindStar() { SetIsWindMax(true); }
-    protected virtual void WindStop() { SetIsWindMax(false); }
-    protected virtual void FireStar() { SetIsFireMax(true); }
-    protected virtual void FireStop() { SetIsFireMax(false); }
-    private void SetIsWindMax(bool isWind)
-    {
-        this.isWindMax = isWind;
-    }
-    private void SetIsFireMax(bool isFire)
-    {
-        this.isFireMax = isFire;
-    }
+    protected virtual void ToHalfWindPower() { }
+    protected virtual void ToHalfFirePower() { }
+    protected virtual void WindStar() {  }
+    protected virtual void WindStop() {  }
+    protected virtual void FireStar() { }
+    protected virtual void FireStop() {  }
+    
     protected void SetEmmision_wind(float rate)
     {
         emissionModule_wind.rateOverTime = rate;
@@ -111,5 +118,13 @@ public class NGP_Basic_SkillPower : MonoBehaviour
     protected void SetFirePower(int power)
     {
         FirePower = power;
+    }
+    protected void SetIsFireMax(bool isMax)
+    {
+        isFireMax = isMax;
+    }
+    protected void SetIsWindMax(bool isMax)
+    {
+        isWindMax = isMax;
     }
 }

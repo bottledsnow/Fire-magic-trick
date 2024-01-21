@@ -1,5 +1,3 @@
-using UniGLTF;
-using Unity.XR.OpenVR;
 using UnityEngine;
 
 public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
@@ -98,6 +96,19 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
     }
     private bool CanSkill()
     {
-        return skillPower.IsMax;
+        if(skillPower.isWindMax)
+        {
+            fireOrWind = FireOrWind.Wind;
+            return true;
+        }else
+        if(skillPower.isFireMax)
+        {
+            fireOrWind = FireOrWind.Fire;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

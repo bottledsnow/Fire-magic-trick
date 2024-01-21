@@ -12,7 +12,13 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     }
     protected override bool canUseSuperJump()
     {
-        return skillPower.IsMax;
+        if(skillPower.isFireMax || skillPower.isWindMax)
+        {
+            return true;
+        }else
+        {
+            return false;
+        }
     }
     protected override void SuperJump_wind()
     {
