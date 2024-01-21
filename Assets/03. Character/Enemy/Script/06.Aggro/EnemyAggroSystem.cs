@@ -44,8 +44,8 @@ public class EnemyAggroSystem : MonoBehaviour
 
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2 && !Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
             {
-                SetAggroTarget(rangeChecks[0].gameObject);
                 if (aggroValue <= 0) CallNearbyEnemy(rangeChecks[0].gameObject);
+                SetAggroTarget(rangeChecks[0].gameObject);
             }
             else
             {

@@ -30,9 +30,7 @@ public class EnemyB_Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-
-            Explosion();
-
+        Explosion();
     }
 
     private void Explosion()
