@@ -2,9 +2,24 @@ using UnityEngine;
 
 public class NGP_SuperJump : NGP_Basic_SuperJump
 {
+    [SerializeField] private float heavyPressureGravity = 1f;
+    [SerializeField] private Transform VFX_SuperDashJump_Wind;
+    [SerializeField] private Transform VFX_SuperDashJump_Fire;
+
+    //VFX
+    private ParticleSystem VFX_FireCircle;
+    private ParticleSystem VFX_WindCricle;
+
+    //variable
+    private bool isFire;
+    private bool isWind;
     protected override void Start()
     {
         base.Start();
+
+        //vfx
+        VFX_FireCircle = GameManager.singleton.VFX_List.VFX_FireCircle;
+        VFX_WindCricle = GameManager.singleton.VFX_List.VFX_WindCricle;
     }
     protected override void Update()
     {
@@ -23,10 +38,31 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     protected override void SuperJump_wind()
     {
         jump.SuperJump(SuperJumpHeight);
+        Instantiate(VFX_SuperDashJump_Wind, transform.position, Quaternion.identity);
+        isWind = true;
     }
     protected override void SuperJump_fire()
     {
         jump.SuperJump(SuperJumpHeight);
+        Instantiate(VFX_SuperDashJump_Fire, transform.position, Quaternion.identity);
+        isFire = true;
     }
-    
+    protected override void heavy()
+    {
+        state.SetGravity(heavyPressureGravity);
+    }
+    protected override void heavyEnd()
+    {
+        state.SetGravityToNormal();
+        if(isFire)
+        {
+            VFX_FireCircle.Play();
+            Instantiate(VFX_SuperDashJump_Fire, transform.position, Quaternion.identity);
+        }
+        if(isWind)
+        {
+            VFX_WindCricle.Play();
+            Instantiate(VFX_SuperDashJump_Wind, transform.position, Quaternion.identity);
+        }
+    }
 }

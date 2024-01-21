@@ -27,4 +27,6 @@ public class VFX_List : MonoBehaviour
     public ParticleSystem VFX_UseShot;
     public ParticleSystem VFX_UI_Wind;
     public ParticleSystem VFX_UI_Fire;
+    public ParticleSystem VFX_FireCircle;
+    public ParticleSystem VFX_WindCricle;
 }
