@@ -98,12 +98,13 @@ public class NGP_Basic_ChargeSkill : NGP_Basic_Charge
     {
         if(skillPower.isWindMax)
         {
-            fireOrWind = FireOrWind.Wind;
+            PowerMax(FireOrWind.Wind);
             return true;
-        }else
+        }
+        else
         if(skillPower.isFireMax)
         {
-            fireOrWind = FireOrWind.Fire;
+            PowerMax(FireOrWind.Fire);
             return true;
         }
         else
