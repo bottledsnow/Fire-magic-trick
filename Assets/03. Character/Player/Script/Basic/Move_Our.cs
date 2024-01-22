@@ -33,7 +33,10 @@ public class Move_Our : MonoBehaviour
 
         Initialization();
     }
-
+    public void ToRun()
+    {
+        SetCameraRun();
+    }
     private void Initialization()
     {
         if(UseOurMove)

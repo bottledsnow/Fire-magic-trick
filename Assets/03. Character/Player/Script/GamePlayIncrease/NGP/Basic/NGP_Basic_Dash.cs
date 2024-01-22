@@ -12,6 +12,7 @@ public class NGP_Basic_Dash : MonoBehaviour
     private CharacterController characterController;
     private FireDashCollider fireDashCollider;
     protected ControllerInput input;
+    protected Move_Our move_Our;
 
     //Feedbacks
     private MMF_Player Feedbacks_Dash;
@@ -46,6 +47,7 @@ public class NGP_Basic_Dash : MonoBehaviour
         thirdPersonController = input.GetComponent<ThirdPersonController>();
         fireDashCollider = GameManager.singleton.Collider_List.DashCrash.GetComponent<FireDashCollider>();
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        move_Our =GameManager.singleton.Player.GetComponent<Move_Our>();
         combo = GameManager.singleton.NewGamePlay.GetComponent<NGP_Combo>();
 
         //Feedbacks
@@ -134,6 +136,7 @@ public class NGP_Basic_Dash : MonoBehaviour
         CaculateDashTime();
         SetIsDash(true);
         SetIsCooling(true);
+        move_Our.ToRun();
         OnDash?.Invoke();
         await Task.Delay((int)(dashTime * 1000));
         SetIsDash(false);
