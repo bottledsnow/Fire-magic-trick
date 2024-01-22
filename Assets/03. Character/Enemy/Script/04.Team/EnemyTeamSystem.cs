@@ -5,18 +5,26 @@ using BehaviorDesigner.Runtime;
 
 public class EnemyTeamSystem : MonoBehaviour
 {
-    [Header("EnemyType")]
-    [SerializeField] public AttackingStyle attackingStyle;
+    public enum EnemyType { A, B, C, D, Connie }
 
-    public enum AttackingStyle { Melee, Ranged }
+    [Header("EnemyType")]
+    [SerializeField] public EnemyType enemyType;
+
+    BehaviorTree behaviorTree;
 
     void Start()
     {
-
+        behaviorTree = GetComponent<BehaviorTree>();
     }
 
     void Update()
     {
+        
+    }
 
+    public void CoordinatedAttack()
+    {
+        Debug.Log("協同攻擊");
+        behaviorTree.SendEvent("CoordinatedAttack");
     }
 }

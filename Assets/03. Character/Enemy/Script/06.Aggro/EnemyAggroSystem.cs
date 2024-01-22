@@ -9,11 +9,17 @@ public class EnemyAggroSystem : MonoBehaviour
     [SerializeField] float maxAggro;
     [SerializeField] float aggroValue;
 
-    [Header("DetectArea")]
-    [SerializeField] private float radius;
-    [SerializeField] private float angle;
-    [SerializeField] private LayerMask targetMask;
-    [SerializeField] private LayerMask obstructionMask;
+    [Header("ViewArea")]
+    [SerializeField] float radius;
+    [SerializeField] float angle;
+    [SerializeField] LayerMask targetMask;
+    [SerializeField] LayerMask obstructionMask;
+
+    [Header("Teammate")]
+    [SerializeField] bool isCallNearbyEnemy;
+    [SerializeField] float nearbyRange;
+    [SerializeField] LayerMask enemyMask;
+    [SerializeField] [Range(0, 0.2f)] float callingDelay = 0.05f;
 
     BehaviorTree behaviorTree;
 
@@ -38,6 +44,7 @@ public class EnemyAggroSystem : MonoBehaviour
 
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2 && !Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
             {
+                if (aggroValue <= 0) CallNearbyEnemy(rangeChecks[0].gameObject);
                 SetAggroTarget(rangeChecks[0].gameObject);
             }
             else
@@ -51,6 +58,30 @@ public class EnemyAggroSystem : MonoBehaviour
         }
     }
 
+    public void CallNearbyEnemy(GameObject target)
+    {
+        if (isCallNearbyEnemy)
+        {
+            foreach (GameObject enemy in NearbyEnemy())
+            {
+                StartCoroutine(SetAggroWithDistanceDelay(target));
+            }
+        }
+    }
+
+    IEnumerator SetAggroWithDistanceDelay(GameObject target)
+    {
+        foreach (GameObject enemy in NearbyEnemy())
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
+
+            yield return new WaitForSeconds(distanceToEnemy * callingDelay);
+
+            enemy.GetComponent<EnemyAggroSystem>().SetAggroTarget(target);
+        }
+    }
+
+    #region AggroSetting
     public void SetAggroTarget(GameObject target)
     {
         behaviorTree.SetVariableValue("targetObject", target);
@@ -60,8 +91,8 @@ public class EnemyAggroSystem : MonoBehaviour
     public void ReduceAggro()
     {
         aggroValue--;
-        
-        if(aggroValue<=0)
+
+        if (aggroValue <= 0)
         {
             CleanAggroTarget();
         }
@@ -71,5 +102,24 @@ public class EnemyAggroSystem : MonoBehaviour
     {
         behaviorTree.SetVariableValue("targetObject", null);
         aggroValue = 0;
+    }
+    #endregion
+
+    GameObject[] NearbyEnemy()
+    {
+        Collider[] i = Physics.OverlapSphere(transform.position, nearbyRange, enemyMask);
+        List<GameObject> nearbyEnemy = new List<GameObject>();
+
+        foreach (Collider collider in i)
+        {
+            EnemyAggroSystem aggroSystem = collider.GetComponent<EnemyAggroSystem>();
+
+            if (aggroSystem != null && collider != GetComponent<Collider>())
+            {
+                nearbyEnemy.Add(collider.gameObject);
+            }
+        }
+
+        return nearbyEnemy.ToArray();
     }
 }

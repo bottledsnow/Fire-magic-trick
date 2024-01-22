@@ -5078,7 +5078,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 904889987493014788}
   - {fileID: 6054423429828912985}
   m_Father: {fileID: 1402972569165973730}
   m_RootOrder: 1
@@ -5405,6 +5404,12 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 512
+  isCallNearbyEnemy: 1
+  nearbyRange: 10
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 16384
+  callingDelay: 0.05
 --- !u!1 &1402972569454198479
 GameObject:
   m_ObjectHideFlags: 0
@@ -34778,37 +34783,6 @@ MonoBehaviour:
         MinPitch: 1
         MaxPitch: 1
         SfxAudioMixerGroup: {fileID: 0}
---- !u!1 &9214024412784157590
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 904889987493014788}
-  m_Layer: 0
-  m_Name: 'Emey B (Missing Prefab with guid: 069ddb9e2b6774b4585b3d5c5ed6f616)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &904889987493014788
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9214024412784157590}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1402972568735582779}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &27951669769262923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35414,7 +35388,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 6fcd44f55674ccc49af0828affc42296, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6fcd44f55674ccc49af0828affc42296, type: 3}
       propertyPath: m_LocalPosition.x

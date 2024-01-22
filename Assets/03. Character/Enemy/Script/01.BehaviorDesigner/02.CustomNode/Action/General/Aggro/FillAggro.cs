@@ -13,7 +13,9 @@ public class FillAggro : Action
 
    public override TaskStatus OnUpdate()
    {
-      enemyAggroSystem.SetAggroTarget(GameObject.Find("Player"));
+      GameObject player = GameObject.Find("Player");
+      enemyAggroSystem.SetAggroTarget(player);
+      enemyAggroSystem.CallNearbyEnemy(player);
       return TaskStatus.Success;
    }
 }
