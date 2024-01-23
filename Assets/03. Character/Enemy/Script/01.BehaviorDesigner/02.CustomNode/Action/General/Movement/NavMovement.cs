@@ -29,7 +29,7 @@ public class NavMovement : Action
 
    public override TaskStatus OnUpdate()
    {
-      if(targetObject.Value != null)
+      if(targetObject.Value != null && navMeshAgent != null)
       {
          Movement();
       }
