@@ -11,6 +11,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
 
     //Script 
     private NGP_Dash dash;
+    protected NGP_Basic_UI UI;
 
     //skill state
     private bool isSkill;
@@ -34,6 +35,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
     {
         //Script
         dash = GetComponent<NGP_Dash>();
+        UI = GameManager.singleton.NewGamePlay.GetComponent<NGP_Basic_UI>();
 
         //VFX
         VFX_UseSkill_Wind = GameManager.singleton.VFX_List.VFX_UseSkill_Wind;
@@ -104,6 +106,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
     protected virtual void stateTimerStop() 
     {
         timer = 0;
+        UI.ToNone();
         setIsSkill(false);
         setSkillState(SkillState.None);
         VFX_UseSkill_Fire.gameObject.SetActive(false);
@@ -115,6 +118,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
     }
     private void VFX_ToWind()
     {
+        UI.ToWind();
         VFX_Foot_L.Stop();
         VFX_Foot_L.Clear();
         VFX_Foot_R.Stop();
@@ -128,6 +132,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
     }
     private void VFX_ToFire()
     {
+        UI.ToFire();
         VFX_Foot_L.Play();
         VFX_Foot_R.Play();
         VFX_WindState.Stop();
@@ -139,6 +144,7 @@ public class NGP_Basic_SkillState : MonoBehaviour
     }
     private void VFX_ToNone()
     {
+        UI.ToNone();
         VFX_Foot_L.Stop();
         VFX_Foot_L.Clear();
         VFX_Foot_R.Stop();
