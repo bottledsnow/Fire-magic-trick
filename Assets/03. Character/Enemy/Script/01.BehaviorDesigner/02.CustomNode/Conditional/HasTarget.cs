@@ -7,15 +7,33 @@ public class HasTarget : Conditional
     [Header("SharedVariable")]
     [SerializeField] private SharedGameObject targetObject;
 
+    [Header("Reverse")]
+    [SerializeField] private bool reverse;
+
     public override TaskStatus OnUpdate()
     {
-        if (targetObject.Value != null)
+        if (!reverse)
         {
-            return TaskStatus.Success;
+            if (targetObject.Value != null)
+            {
+                return TaskStatus.Success;
+            }
+            else
+            {
+                return TaskStatus.Failure;
+            }
         }
         else
         {
-            return TaskStatus.Failure;
+            if (targetObject.Value != null)
+            {
+                return TaskStatus.Failure;
+            }
+            else
+            {
+                return TaskStatus.Success;
+            }
         }
+
     }
 }
