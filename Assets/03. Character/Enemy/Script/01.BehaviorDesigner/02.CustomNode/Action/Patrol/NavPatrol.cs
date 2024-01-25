@@ -18,8 +18,10 @@ public class NavPatrol : Action
    public override void OnStart()   
    {
       navMeshAgent = GetComponent<NavMeshAgent>();
-      enemyPatrolSystem = GetComponent<EnemyPatrolSystem>();
       navMeshAgent.speed = moveSpeed;
+
+      enemyPatrolSystem = GetComponent<EnemyPatrolSystem>();
+      enemyPatrolSystem.InitializationPatrol();
 
       AnimationStart();
    }

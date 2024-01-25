@@ -55,6 +55,13 @@ public class EnemyPatrolSystem : MonoBehaviour
         }
     }
 
+    public void InitializationPatrol()
+    {
+        currentWaypointIndex = NearestWaypointIndex();
+        currentWaypoint = waypoints[currentWaypointIndex];
+    }
+
+    #region SelectWayPoint
     private void SelectNextWaypoint()
     {
         if (isForth)
@@ -72,5 +79,31 @@ public class EnemyPatrolSystem : MonoBehaviour
     {
         currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
         currentWaypoint = waypoints[currentWaypointIndex];
+    }
+    #endregion
+
+    int NearestWaypointIndex()
+    {
+        if (waypoints == null || waypoints.Length == 0)
+        {
+            return -1;
+        }
+
+        int nearestWaypointIndex = -1;
+        float shortestDistance = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        for (int i = 0; i < waypoints.Length; i++)
+        {
+            float distanceToWaypoint = Vector3.Distance(currentPosition, waypoints[i].position);
+
+            if (distanceToWaypoint < shortestDistance)
+            {
+                shortestDistance = distanceToWaypoint;
+                nearestWaypointIndex = i;
+            }
+        }
+
+        return nearestWaypointIndex;
     }
 }
