@@ -39284,6 +39284,7 @@ GameObject:
   - component: {fileID: 167774824}
   - component: {fileID: 1160720738}
   - component: {fileID: 289808737}
+  - component: {fileID: 93287539795549730}
   m_Layer: 14
   m_Name: Enemy_A
   m_TagString: Enemy
@@ -39549,6 +39550,23 @@ MonoBehaviour:
   OnStartJump:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &93287539795549730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032919127870789858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92845c69b2ac42345806179fca43c7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waypoints: []
+  stoppingDistance: 0.2
+  looping: 0
+  currentWaypointIndex: 0
+  currentWaypoint: {fileID: 0}
 --- !u!1 &8032919128011008211
 GameObject:
   m_ObjectHideFlags: 0
