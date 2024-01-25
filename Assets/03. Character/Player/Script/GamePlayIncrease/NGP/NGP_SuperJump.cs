@@ -27,10 +27,31 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     }
     protected override bool canUseSuperJump()
     {
-        if(skillPower.isFireMax || skillPower.isWindMax)
+        if(skillPower.FirePower >= 3 || skillPower.WindPower >= 3)
         {
             return true;
         }else
+        {
+            return false;
+        }
+    }
+    protected override bool isFireJump()
+    {
+        if ( skillPower.FirePower >= 3)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
+    }
+    protected override bool isWindJump()
+    {
+        if (skillPower.WindPower>= 3)
+        {
+            return true;
+        }
+        else
         {
             return false;
         }

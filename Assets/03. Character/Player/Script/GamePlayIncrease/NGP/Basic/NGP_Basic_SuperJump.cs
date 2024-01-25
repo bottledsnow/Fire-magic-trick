@@ -72,6 +72,8 @@ public class NGP_Basic_SuperJump : MonoBehaviour
         setIsHeavyPrepare(true);
     }
     protected virtual bool canUseSuperJump() { return false; }
+    protected virtual bool isWindJump() { return skillPower.isWindMax; }
+    protected virtual bool isFireJump() { return skillPower.isFireMax; }
     private void ButtonCheck()
     {
         if(canUseSuperJump())
@@ -83,7 +85,7 @@ public class NGP_Basic_SuperJump : MonoBehaviour
                     buttonTrigger = true;
 
                     ToHeavy();
-                    if (skillPower.isWindMax)
+                    if (isWindJump())
                     {
                         jump.OnSuperJump += VFX_superJump_wind;
                         jump.OnSuperJump -= VFX_superJump_fire;
@@ -92,7 +94,7 @@ public class NGP_Basic_SuperJump : MonoBehaviour
                         skillPower.UseWind();
                         Debug.Log("Wind Super Jump");
                     }
-                    else if (skillPower.isFireMax)
+                    else if (isFireJump())
                     {
                         jump.OnSuperJump += VFX_superJump_fire;
                         jump.OnSuperJump -= VFX_superJump_wind;
