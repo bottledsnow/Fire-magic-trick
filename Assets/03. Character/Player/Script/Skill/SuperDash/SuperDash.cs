@@ -330,16 +330,13 @@ public class SuperDash : MonoBehaviour
     }
     private void HitToKickDown()
     {
-        Debug.Log("KickDown");
         superDashStop();
         _superDashKickDown.KickDown();
     }
     private void superDashStop()
     {
-        Debug.Log("Stop");
         if(isSuperDash)
         {
-            Debug.Log("Stop But IsFire");
         }else
         {
             _superDashCollider.SetIsSuperDash(false);

@@ -11,6 +11,7 @@ public class NGP_Basic_SkillPower : MonoBehaviour
     //Script
     protected NGP_SkillState skillState;
     protected NGP_ChargeSkill chargeSkill;
+    protected NGP_Basic_UI UI;
 
     //VFX
     protected ParticleSystem VFX_WindPower;
@@ -33,6 +34,7 @@ public class NGP_Basic_SkillPower : MonoBehaviour
         VFX_FirePower = GameManager.singleton.VFX_List.VFX_FirePower;
         skillState = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillState>();
         chargeSkill = GameManager.singleton.NewGamePlay.GetComponent<NGP_ChargeSkill>();
+        UI = GameManager.singleton.NewGamePlay.GetComponent<NGP_Basic_UI>();
 
         //VFX
         emissionModule_wind = VFX_WindPower.emission;

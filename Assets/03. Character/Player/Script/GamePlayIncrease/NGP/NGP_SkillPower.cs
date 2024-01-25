@@ -21,6 +21,11 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
     private ParticleSystem VFX_FireStart;
     private ParticleSystem VFX_UI_Wind;
     private ParticleSystem VFX_UI_Fire;
+    private ParticleSystem VFX_UI_State_Fire;
+    private ParticleSystem VFX_UI_State_Wind;
+
+    private ParticleSystem.MainModule VFX_main_StateFire;
+    private ParticleSystem.MainModule VFX_main_StateWind;
 
     //variable
     public bool IsMax
@@ -39,17 +44,21 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
         VFX_FireStart = GameManager.singleton.VFX_List.VFX_FireMaxStart;
         VFX_UI_Wind = GameManager.singleton.VFX_List.VFX_UI_Wind;
         VFX_UI_Fire = GameManager.singleton.VFX_List.VFX_UI_Fire;
+        VFX_UI_State_Fire = GameManager.singleton.VFX_List.VFX_UI_State_Fire;
+        VFX_main_StateFire = VFX_UI_State_Fire.main;
+        VFX_UI_State_Wind = GameManager.singleton.VFX_List.VFX_UI_State_Wind;
+        VFX_main_StateWind = VFX_UI_State_Wind.main;
     }
     protected override void Update() { base.Update(); }
     public override void AddWindPower()
     {
         base.AddWindPower();
-        windPower_UI.text = WindPower.ToString()+"/6";
+        UpdateWindUI();
     }
     public override void AddFirePower()
     {
         base.AddFirePower();
-        firePower_UI.text = FirePower.ToString()+"/6";
+        UpdateFireUI();
     }
     public void UseWind()
     {
@@ -61,6 +70,9 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
         SetIsWindMax(false);
         SetEmmision_wind(WindPower * _powerParticle);
         SetLifeTime_wind(_lifeTime);
+
+        //UI
+        UpdateWindUI();
     }
     public void UseFire()
     {
@@ -72,6 +84,9 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
         SetIsFireMax(false);
         SetEmmision_fire(FirePower * _powerParticle);
         SetLifeTime_fire(_lifeTime);
+
+        //UI
+        UpdateFireUI();
     }
     protected override void InitializeWindPower()
     {
@@ -126,5 +141,34 @@ public class NGP_SkillPower : NGP_Basic_SkillPower
         base.FireStop();
 
         
+    }
+    private void UpdateWindUI()
+    {
+        windPower_UI.text = WindPower.ToString() + "/6";
+        UI.ToUpdateWind(WindPower);
+
+        if (WindPower >= 3)
+        {
+            UI.ToRe();
+        }
+        else
+        {
+            UI.ToUp();
+        }
+    }
+    private void UpdateFireUI()
+    {
+        firePower_UI.text = FirePower.ToString() + "/6";
+        UI.ToUpdateFire(FirePower);
+
+        if (FirePower >= 3)
+        {
+            UI.ToRe();
+        }
+        else
+        {
+            UI.ToUp();
+        }
+
     }
 }
