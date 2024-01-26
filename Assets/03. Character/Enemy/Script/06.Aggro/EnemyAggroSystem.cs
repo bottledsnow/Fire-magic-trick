@@ -9,9 +9,10 @@ public class EnemyAggroSystem : MonoBehaviour
     [SerializeField] float maxAggro;
     [SerializeField] float aggroValue;
 
-    [Header("ViewArea")]
-    [SerializeField] float radius;
-    [SerializeField] float angle;
+    [Header("FieldOfView")]
+    [SerializeField] public bool showFovEditor;
+    [SerializeField] public float fovRadius;
+    [SerializeField] [Range(0, 360)] public float fovAngle;
     [SerializeField] LayerMask targetMask;
     [SerializeField] LayerMask obstructionMask;
 
@@ -35,14 +36,14 @@ public class EnemyAggroSystem : MonoBehaviour
 
     void FieldOfView()
     {
-        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, fovRadius, targetMask);
 
         if (rangeChecks.Length != 0)
         {
             Transform target = rangeChecks[0].transform;
             Vector3 directionToTarget = (target.position - transform.position).normalized;
 
-            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2 && !Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
+            if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2 && !Physics.Raycast(transform.position, directionToTarget, fovRadius, obstructionMask))
             {
                 if (aggroValue <= 0) CallNearbyEnemy(rangeChecks[0].gameObject);
                 SetAggroTarget(rangeChecks[0].gameObject);

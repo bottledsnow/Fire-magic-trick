@@ -35,7 +35,7 @@ public class RangedShoot_Aimming : Action
 
     public override TaskStatus OnUpdate()
     {
-        LookAtTarget();
+        //LookAtTarget();
         if (Time.time - aimmingTimer <= aimmingDuaction - AimmingLineDisableDelay)
         {
             AimmingLineRunning();

@@ -3,57 +3,41 @@ using BehaviorDesigner.Runtime;
 using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine.AI;
 
-public class NavMovement : Action
+public class NavPatrol : Action
 {
    [Header("SharedVariable")]
-   [SerializeField] private SharedGameObject targetObject;
    [SerializeField] private SharedGameObject modelObject;
    
    [Header("Movement")]
-   [SerializeField] private float moveSpeed = 9;
-
-   [Header("ActEndDistance")]
-   [SerializeField] private float actEndDistance  = 3;
-
+   [SerializeField] private float moveSpeed = 6;
 
    private Animator animator;
    NavMeshAgent navMeshAgent;
+   EnemyPatrolSystem enemyPatrolSystem;
 
-   public override void OnStart()
+   public override void OnStart()   
    {
       navMeshAgent = GetComponent<NavMeshAgent>();
       navMeshAgent.speed = moveSpeed;
+
+      enemyPatrolSystem = GetComponent<EnemyPatrolSystem>();
+      enemyPatrolSystem.InitializationPatrol();
 
       AnimationStart();
    }
 
    public override TaskStatus OnUpdate()
    {
-      if(targetObject.Value != null && navMeshAgent != null)
+      if(navMeshAgent != null && enemyPatrolSystem != null)
       {
          Movement();
       }
-      else
-      {
-         navMeshAgent.ResetPath();
-         return TaskStatus.Failure;
-      }
-      if(NearbyTarget()) return TaskStatus.Success;
       return TaskStatus.Running;
    }
 
    private void Movement()
    {
-      navMeshAgent.SetDestination(targetObject.Value.transform.position);
-   }
-
-   bool NearbyTarget()
-   {
-      if(Vector3.Distance(transform.position, targetObject.Value.transform.position) < actEndDistance)
-      {
-         return true;
-      }
-      return false;
+      navMeshAgent.SetDestination(enemyPatrolSystem.currentWaypoint.position);
    }
 
    private void AnimationStart()
