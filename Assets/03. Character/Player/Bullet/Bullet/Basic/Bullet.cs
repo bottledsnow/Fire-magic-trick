@@ -48,6 +48,7 @@ public class Bullet : MonoBehaviour, IHitNotifier,ITriggerNotifier
             {
                 OnHit?.Invoke(collision);
                 OnHitEnemy();
+                crosshairUI.EnemyHitImpluse(this.transform.position);
                 GameObject enemyhit = Instantiate(hitEnemyPrefab, pos, rot);
                 Destroy(enemyhit, 1f);
             }
@@ -66,6 +67,7 @@ public class Bullet : MonoBehaviour, IHitNotifier,ITriggerNotifier
             {
                 OnTrigger?.Invoke(other);
                 OnHitEnemy();
+                crosshairUI.EnemyHitImpluse(this.transform.position);
                 GameObject enemyhit = Instantiate(hitEnemyPrefab,other.transform.position, Quaternion.identity);
                 Destroy(enemyhit, 1f);
             }

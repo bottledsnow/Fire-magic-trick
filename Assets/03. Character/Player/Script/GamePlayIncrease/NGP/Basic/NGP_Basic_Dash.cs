@@ -103,10 +103,9 @@ public class NGP_Basic_Dash : MonoBehaviour
         }
         if (dashType == DashType.DashBackward)
         {
-            direction = Camera.main.transform.forward * -1;
+            direction = Camera.main.transform.forward;
             dir = new Vector3(input.LeftStick.x, 0, input.LeftStick.y).normalized;
-            Debug.Log(dir);
-            playerState.TurnToNewDirection(-direction);
+            playerState.TurnToNewDirection(direction);
         }
         characterController.Move(dir * speed * Time.deltaTime);
     }

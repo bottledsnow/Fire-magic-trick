@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,10 @@ public class CrosshairUI : MonoBehaviour
     [SerializeField] private Color Check;
     private Material CrosshairMaterial;
     private Animator CrosshairAnimator;
+    [Header("Hit")]
+    [SerializeField] private float thresholdDistance;
+    [SerializeField] private MMF_Player hitNear;
+    [SerializeField] private MMF_Player hitFar;
 
     //interface
     private IHitNotifier hitNotifier;
@@ -32,5 +37,16 @@ public class CrosshairUI : MonoBehaviour
     public void CrosshairHit()
     {
         CrosshairAnimator.Play("CrossHairHit");
+    }
+    public void EnemyHitImpluse(Vector3 hitPosition)
+    {
+        float distance = Vector3.Distance(hitPosition, transform.position);
+        if(distance < thresholdDistance)
+        {
+            hitNear.PlayFeedbacks();
+        }else
+        {
+              hitFar.PlayFeedbacks();
+        }
     }
 }
