@@ -16,7 +16,7 @@ public class NGP_Basic_Dash : MonoBehaviour
 
     //Feedbacks
     private MMF_Player Feedbacks_Dash;
-
+    private MMF_Player Feedbacks_DashStop;
     //delegate
     public delegate void DashDelegateHandler();
     public event DashDelegateHandler OnDash;
@@ -52,6 +52,9 @@ public class NGP_Basic_Dash : MonoBehaviour
 
         //Feedbacks
         Feedbacks_Dash = GameManager.singleton.Feedbacks_List.Dash;
+        Feedbacks_DashStop = GameManager.singleton.Feedbacks_List.DashStop;
+
+
     }
     protected virtual void Update()
     {
@@ -101,8 +104,9 @@ public class NGP_Basic_Dash : MonoBehaviour
         if (dashType == DashType.DashBackward)
         {
             direction = Camera.main.transform.forward * -1;
-            dir = new Vector3(direction.x, 0, direction.z).normalized;
-            playerState.TurnToNewDirection(-dir);
+            dir = new Vector3(input.LeftStick.x, 0, input.LeftStick.y).normalized;
+            Debug.Log(dir);
+            playerState.TurnToNewDirection(-direction);
         }
         characterController.Move(dir * speed * Time.deltaTime);
     }
@@ -170,7 +174,7 @@ public class NGP_Basic_Dash : MonoBehaviour
         else
         {
 
-            Feedbacks_Dash.StopFeedbacks();
+            Feedbacks_DashStop.PlayFeedbacks();
             DashStop();
             CloseCrash();
         }
