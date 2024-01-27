@@ -19,11 +19,21 @@ public class NGP_CameraSystem : NGP_Basic_CameraSystem
     protected override void LockToTarget()
     {
         TurnCameraToTarget(superDashCameraCheck.Target);
-        
     }
     protected override void LookTarget()
     {
-        state.TurnToAimDirection();
+        Debug.Log(superDashCameraCheck.Target);
+        if (aimSupport.target != null)
+        {
+            if (superDashCameraCheck.Target == null)
+            {
+                setIsLookTarget(false);
+                ClearTarget();
+            }
+        }else
+        {
+            state.TurnToAimDirection();
+        }
     }
     protected override void LookForward()
     {

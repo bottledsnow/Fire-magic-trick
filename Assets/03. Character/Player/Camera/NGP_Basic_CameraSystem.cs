@@ -33,8 +33,11 @@ public class NGP_Basic_CameraSystem : MonoBehaviour
 
                 if (aimSupport.target != null)
                 {
-                    ClearTarget();
-                    setIsLookTarget(false);
+                    if (superDashCameraCheck.Target == null)
+                    {
+                        ClearTarget();
+                        setIsLookTarget(false);
+                    }
                 }
                 else if (superDashCameraCheck.Target != null)
                 {
@@ -63,5 +66,5 @@ public class NGP_Basic_CameraSystem : MonoBehaviour
     protected virtual void LookTarget() { }
     protected virtual void LookForward() { }
     private void setIsTriggerButton(bool value) { isTriggerButton = value; }
-    private void setIsLookTarget(bool value) { isLookTarget = value; }
+    protected void setIsLookTarget(bool value) { isLookTarget = value; }
 }
