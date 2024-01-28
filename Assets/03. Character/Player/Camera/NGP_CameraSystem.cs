@@ -22,7 +22,6 @@ public class NGP_CameraSystem : NGP_Basic_CameraSystem
     }
     protected override void LookTarget()
     {
-        Debug.Log(superDashCameraCheck.Target);
         if (aimSupport.target != null)
         {
             if (superDashCameraCheck.Target == null)
@@ -30,8 +29,7 @@ public class NGP_CameraSystem : NGP_Basic_CameraSystem
                 setIsLookTarget(false);
                 ClearTarget();
             }
-        }else
-        {
+
             state.TurnToAimDirection();
         }
     }

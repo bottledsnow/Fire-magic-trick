@@ -38,6 +38,8 @@ public class NGP_Basic_CameraSystem : MonoBehaviour
                         ClearTarget();
                         setIsLookTarget(false);
                     }
+                    ClearTarget();
+                    setIsLookTarget(false);
                 }
                 else if (superDashCameraCheck.Target != null)
                 {
