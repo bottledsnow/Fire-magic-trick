@@ -66,7 +66,7 @@ public class NGP_Basic_CameraSystem : MonoBehaviour
     protected virtual void ClearTarget() { }
     protected virtual void LockToTarget() { }
     protected virtual void LookTarget() { }
-    protected virtual void LookForward() { }
+    public virtual void LookForward() { }
     private void setIsTriggerButton(bool value) { isTriggerButton = value; }
     protected void setIsLookTarget(bool value) { isLookTarget = value; }
 }

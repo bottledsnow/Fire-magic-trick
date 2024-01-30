@@ -33,7 +33,7 @@ public class NGP_CameraSystem : NGP_Basic_CameraSystem
             state.TurnToAimDirection();
         }
     }
-    protected override void LookForward()
+    public override void LookForward()
     {
         TrunCameraToPlayerForward();
     }

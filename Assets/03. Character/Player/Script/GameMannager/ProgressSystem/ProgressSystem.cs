@@ -2,18 +2,23 @@ using UnityEngine;
 
 public class ProgressSystem : MonoBehaviour
 {
+    //Script
+    public Transform ProgressCheckPoint;
+    private NGP_CameraSystem cameraSystem;
+    private DeathSystem _deathSystem;
+    private Transform player;
+
+    //delegate
     public delegate void PlayerDeathHandler();
     public event PlayerDeathHandler OnPlayerDeath;
 
-    public Transform ProgressCheckPoint;
-
-    private DeathSystem _deathSystem;
-    private Transform player;
+    
 
     private void Start()
     {
         _deathSystem = GameManager.singleton.UISystem.GetComponent<DeathSystem>();
         player = GameManager.singleton.Player;
+        cameraSystem = GameManager.singleton.Player.GetComponent<NGP_CameraSystem>();
     }
     
     public void PlayerDeath()
@@ -21,6 +26,8 @@ public class ProgressSystem : MonoBehaviour
         if(ProgressCheckPoint != null)
         {
             player.transform.position = ProgressCheckPoint.position;
+            player.transform.rotation = ProgressCheckPoint.rotation;
+            cameraSystem.LookForward();
             OnPlayerDeath?.Invoke();
             PlayerRebirth();
         }
