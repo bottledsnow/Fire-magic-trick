@@ -1,9 +1,11 @@
 using MoreMountains.Feedbacks;
+using StarterAssets;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PauseSystem : MonoBehaviour
 {
+    //Script
+    private ThirdPersonController thirdPersonController;
     private ControllerInput _input;
     private MenuSystem menuSystem;
 
@@ -20,6 +22,7 @@ public class PauseSystem : MonoBehaviour
     {
         _input = GameManager.singleton._input;
         menuSystem = GameManager.singleton.GetComponent<MenuSystem>();
+        thirdPersonController = GameManager.singleton.Player.GetComponent<ThirdPersonController>();
     }
 
     private void Update()
@@ -42,32 +45,40 @@ public class PauseSystem : MonoBehaviour
                 {
                     isPause = false;
                     StopPause();
+                    pauseUI.SetActive(false);
                 }
                 else
                 {
                     isPause = true;
                     Pause();
+                    pauseUI.SetActive(true);
                 }
                 triggerButton = true;
             }
         }
     }
-    private void Pause()
+    public void Pause()
     {
         if(menuSystem.isStartGame)
         {
-            menuSystem.SetPlayMode(false);
+            if(menuSystem.enabled == true)
+            {
+                menuSystem.SetPlayMode(false);
+            }
             feedback_pause.PlayFeedbacks();
-            pauseUI.SetActive(true);
+            thirdPersonController.enabled = false;
         }
     }
-    private void StopPause()
+    public void StopPause()
     {
         if(menuSystem.isStartGame)
         {
-            menuSystem.SetPlayMode(true);
+            if(menuSystem.enabled == true)
+            {
+                menuSystem.SetPlayMode(true);
+            }
             feedback_keepGame.PlayFeedbacks();
-            pauseUI.SetActive(false);
+            thirdPersonController.enabled = true;
         }
     }
     private void Initialization()
