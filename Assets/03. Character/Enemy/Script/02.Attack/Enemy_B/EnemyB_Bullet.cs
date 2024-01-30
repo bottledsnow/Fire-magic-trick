@@ -36,7 +36,7 @@ public class EnemyB_Bullet : MonoBehaviour
     {
         if(collision.tag == "Player")
         {
-            CallCoordinatedAttack();
+            //CallCoordinatedAttack();
         }
         Explosion();
     }

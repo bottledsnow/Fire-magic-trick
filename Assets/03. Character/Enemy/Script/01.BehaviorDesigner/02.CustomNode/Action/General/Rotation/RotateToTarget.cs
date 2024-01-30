@@ -25,6 +25,11 @@ public class RotateToTarget : Action
 
     public override TaskStatus OnUpdate()
     {
+        if(targetObject.Value == null)
+        {
+            return TaskStatus.Failure;
+        }
+
         Rotation();
 
         if (isLookingAtPlayer())

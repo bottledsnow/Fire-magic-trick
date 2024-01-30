@@ -35,6 +35,10 @@ public class RangedShoot_Aimming : Action
 
     public override TaskStatus OnUpdate()
     {
+        if(targetObject.Value == null)
+        {
+            return TaskStatus.Failure;
+        }
         //LookAtTarget();
         if (Time.time - aimmingTimer <= aimmingDuaction - AimmingLineDisableDelay)
         {

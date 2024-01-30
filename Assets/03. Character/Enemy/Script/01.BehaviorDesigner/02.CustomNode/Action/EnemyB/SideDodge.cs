@@ -35,6 +35,11 @@ public class SideDodge : Action
 
     public override TaskStatus OnUpdate()
     {
+        if(targetObject.Value != null)
+        {
+           return TaskStatus.Success;
+        }
+
         LookAtTarget();
         SlowdownByTime();
 
