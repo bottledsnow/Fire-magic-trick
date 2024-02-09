@@ -24,9 +24,12 @@ public class EnemyAggroSystem : MonoBehaviour
 
     BehaviorTree behaviorTree;
 
-    void Start()
+    private void Awake()
     {
         behaviorTree = GetComponent<BehaviorTree>();
+    }
+    void Start()
+    {
     }
 
     void Update()

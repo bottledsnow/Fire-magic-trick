@@ -240,6 +240,13 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     }
     #endregion
     #region
+    public void Rebirth(Vector3 position, Quaternion rotation)
+    {
+        this.transform.position = position;
+        this.transform.rotation = rotation;
+        Initialization();
+        return;
+    }
     private void RebirthSelf()
     {
         if(this.transform.gameObject !=  null)
@@ -254,7 +261,6 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         {
             aggroSystem.CleanAggroTarget();
         }
-        
 
         this.gameObject.SetActive(true);
         isIgnite = false;
@@ -271,13 +277,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         feedbacks_FlyBoom.StopFeedbacks();
         health = StartHealth;
     }
-    public void Rebirth(Vector3 position,Quaternion rotation)
-    {
-        this.transform.position = position;
-        this.transform.rotation = rotation;
-        Initialization();
-        return;
-    }
+    
     private void RebirthScription()
     {
         if(isTeachEnemy==false)
