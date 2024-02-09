@@ -88,7 +88,7 @@ namespace StarterAssets
         {
             get { return useGravity; }
             set { useGravity = value;
-                Debug.Log("set use move To :"+ value); }
+                 }
         }
         public bool isFloat;
 

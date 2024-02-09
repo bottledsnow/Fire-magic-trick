@@ -95,7 +95,6 @@ public class PlayerState : MonoBehaviour
     {
         _controller.useGravity = true;
         _controller.useMove = true;
-        Debug.Log("Take Control");
     }
     public void OutControl()
     {

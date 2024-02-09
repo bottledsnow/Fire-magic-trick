@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Threading.Tasks;
+using System.Threading;
+
 public class SpawnPoint : MonoBehaviour
 {
     [Header("Spawn Point")]
@@ -9,24 +11,28 @@ public class SpawnPoint : MonoBehaviour
     [Header("Spawn Object")]
     [SerializeField] private GameObject[] enemys;
 
-    //Script
-    private EnemySpawn enemySpawn;
-
     [Header("VFX")]
     [SerializeField] private ParticleSystem vfx_Fog_keep;
     [SerializeField] private ParticleSystem vfx_Fog;
+
+    //Script
+    private EnemySpawn enemySpawn;
+    private CancellationTokenSource cancellationTokenSource;
+
 
     private void Start()
     {
         //Script
         enemySpawn = GetComponentInParent<EnemySpawn>();
+        cancellationTokenSource = new CancellationTokenSource();
 
         //event
-        enemySpawn.OnSpawn += spawn_delay;
+        enemySpawn.OnSpawn += () => spawn_delay();
         enemySpawn.OnDeath += hideEnemy;
     }
     private void hideEnemy()
     {
+        cancellationTokenSource?.Cancel();
         for (int i = 0; i < enemys.Length; i++)
         {
             enemys[i].SetActive(false);
@@ -49,10 +55,27 @@ public class SpawnPoint : MonoBehaviour
     }
     private async void spawn_delay()
     {
-        if(enemySpawn.isSpawned == true) { return; }
+        cancellationTokenSource = new CancellationTokenSource(); 
+
+        if (enemySpawn.isSpawned == true)
+        {
+            Debug.Log("Spawn Delay");
+            return;
+        }
 
         vfx_Fog_keep.Play();
-        await Task.Delay((int)(delay * 1000));
-        spawn();
+
+        try
+        {
+            await Task.Delay((int)(delay * 1000), cancellationTokenSource.Token);
+            spawn();
+        }
+        catch (TaskCanceledException)
+        {
+            // 在取消的情況下執行一些清理工作，如果需要的話
+            vfx_Fog_keep.Stop();
+            vfx_Fog.Stop();
+            Debug.Log("Spawn operation was canceled.");
+        }
     }
 }

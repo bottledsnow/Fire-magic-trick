@@ -4,10 +4,10 @@ using BehaviorDesigner.Runtime;
 
 public class EnemyHealthSystem : MonoBehaviour, IHealth
 {
-    public delegate void EnemyDeath();
-    public event EnemyDeath OnEnemyDeath;
+    
 
     [SerializeField] private bool isTeachEnemy;
+    [SerializeField] private bool isRebirthHide;
     [Header("State")]
     public bool isIgnite;
     public bool isHurt;
@@ -45,15 +45,21 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     public bool atCrash;
     [SerializeField] private float atCrashTime =3;
 
-    public delegate void ToPlayEnemyHit();
-    public event ToPlayEnemyHit OnEnemyHit;
-
+    //Script
     private BehaviorTree bt;
     private ProgressSystem _progress;
     private Transform startPosition;
     private EnemyFireSystem _fireSystem;
     private Vector3 StartPosition;
     private Quaternion StartRotation;
+
+    //event
+    public delegate void ToPlayEnemyHit();
+    public event ToPlayEnemyHit OnEnemyHit;
+    public delegate void EnemyDeath();
+    public event EnemyDeath OnEnemyDeath;
+
+    //variable
     private float atCrashTimer;
     private float hitTimer;
     private float coolingTimer;
@@ -262,7 +268,10 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
             aggroSystem.CleanAggroTarget();
         }
 
-        this.gameObject.SetActive(true);
+        if(!isRebirthHide)
+        {
+            this.gameObject.SetActive(true);
+        }
         isIgnite = false;
         isHurt = false;
         isSteam = false;
