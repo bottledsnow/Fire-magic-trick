@@ -3,7 +3,15 @@ using UnityEngine.InputSystem;
 
 public class ControllerInput : MonoBehaviour
 {
+    public enum InputMode
+    {
+        Keyboard,
+        Controller
+    }
     [Header("Game")]
+    public InputMode inputMode;
+    public bool mouseMode;
+    public bool anyKey;
     public bool SprintMode;
     public float PressedSensitivity;
     private bool TurnOn = false;
@@ -37,8 +45,89 @@ public class ControllerInput : MonoBehaviour
     [Header("Setting")]
     public bool Option;
     public bool Window;
-    public bool anyKey;
+    
+    //Script
+    private NGP_CameraSystem cameraSystem;
+    private AimSupportSystem aimSupportSystem;
+    private Shooting_XBoxCameraCheck shooting_XBoxCameraCheck;
 
+    private void Start()
+    {
+        cameraSystem = GetComponent<NGP_CameraSystem>();
+        aimSupportSystem = GetComponent<AimSupportSystem>();
+        shooting_XBoxCameraCheck = GetComponent<Shooting_XBoxCameraCheck>();
+    }
+    private void Update()
+    {
+        SwitchLSB();
+        TriggerLSB();
+        sprintToRunning();
+        StopSrint();
+        inputModeSystem();
+    }
+    private void mouseModeSetting()
+    {
+        cameraSystem.enabled = false;
+        aimSupportSystem.enabled = false;
+        shooting_XBoxCameraCheck.enabled = false;
+    }
+    private void controllerModeSetting()
+    {
+        cameraSystem.enabled = true;
+        aimSupportSystem.enabled = true;
+        shooting_XBoxCameraCheck.enabled = true;
+    }
+    private void inputModeSystem()
+    {
+        if(anyKey)
+        {
+            inputMode = InputMode.Controller;
+        }
+        if(mouseMode)
+        {
+            inputMode = InputMode.Keyboard;
+        }
+
+        if(inputMode == InputMode.Controller)
+        {
+            controllerModeSetting();
+        }
+        if (inputMode == InputMode.Keyboard)
+        {
+            mouseModeSetting();
+        }
+    }
+    private void SwitchLSB()
+    {
+        if(LSB && !trigger)
+        {
+            trigger = true;
+            if(TurnOn)
+            {
+                TurnOn = false;
+                SprintMode = false;
+            }else
+            {
+                TurnOn = true;
+                SprintMode = true;
+            }
+        }
+    }
+    private void sprintToRunning()
+    {
+         float strength = Mathf.Abs(LeftStick.x) + Mathf.Abs(LeftStick.y);
+    }
+    private void TriggerLSB()
+    {
+        if(!LSB) trigger = false;
+    }
+    private void StopSrint()
+    {
+        if(LeftStick.x == 0 && LeftStick.y == 0)
+        {
+            SprintMode = false;
+        }
+    }
     #region InputSystem_Input
     public void OnController_Stick_Left(InputValue value)
     {
@@ -116,6 +205,10 @@ public class ControllerInput : MonoBehaviour
     {
         AnyKey(value.isPressed);
     }
+    public void OnMouseMode(InputValue value)
+    {
+        MouseMode(value.isPressed);
+    }
     #endregion
     #region Button_Input
     public void Input_Button_A(bool newButtonState)
@@ -182,48 +275,13 @@ public class ControllerInput : MonoBehaviour
     {
         Window = newButtonState;
     }
+    public void MouseMode(bool newButtonState)
+    {
+        mouseMode = newButtonState;
+    }
     public void AnyKey(bool newButtonState)
     {
         anyKey = newButtonState;
     }
     #endregion
-
-    private void Update()
-    {
-        SwitchLSB();
-        TriggerLSB();
-        sprintToRunning();
-        StopSrint();
-    }
-    private void SwitchLSB()
-    {
-        if(LSB && !trigger)
-        {
-            trigger = true;
-            if(TurnOn)
-            {
-                TurnOn = false;
-                SprintMode = false;
-            }else
-            {
-                TurnOn = true;
-                SprintMode = true;
-            }
-        }
-    }
-    private void sprintToRunning()
-    {
-         float strength = Mathf.Abs(LeftStick.x) + Mathf.Abs(LeftStick.y);
-    }
-    private void TriggerLSB()
-    {
-        if(!LSB) trigger = false;
-    }
-    private void StopSrint()
-    {
-        if(LeftStick.x == 0 && LeftStick.y == 0)
-        {
-            SprintMode = false;
-        }
-    }
 }

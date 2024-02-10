@@ -6,18 +6,23 @@ public class FireDashCollider : MonoBehaviour
     [SerializeField] private FireDash _fireDash;
     [SerializeField] private MMF_Player HitFeedbacks;
 
+    //Script
+    private Basic_AimSupportSystem _aimSupportSystem;
+    private PlayerDamage _playerDamage;
+    private VibrationController vibrationController;
+
+    //value
     private float CrashForce;
+    private float CrashForceUp;
     private bool IsDash;
     private bool canTriggerDamage;
     private bool isTriggerDamage;
-    private float CrashForceUp;
-    private PlayerDamage _playerDamage;
-    private Basic_AimSupportSystem _aimSupportSystem;
     private void Start()
     {
         _fireDash = GameManager.singleton.EnergySystem.GetComponent<FireDash>();
         _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
         _playerDamage = GetComponent<PlayerDamage>();
+        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
 
         Initialization();
     }
@@ -44,6 +49,8 @@ public class FireDashCollider : MonoBehaviour
             {
                 if (other.CompareTag("Enemy"))
                 {
+                    vibrationController.Vibrate(0.5f, 0.25f);               
+
                     canTriggerDamage = false;
                     Vector3 playerposition = transform.parent.transform.position;
                     Vector3 EnemyPosition = other.transform.position;

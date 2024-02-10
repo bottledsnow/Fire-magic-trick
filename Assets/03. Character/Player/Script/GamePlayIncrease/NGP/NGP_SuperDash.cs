@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NGP_SuperDash : NGP_Basic_SuperDash
 {
+    private VibrationController vibrationController;
     protected override void Start()
     {
         base.Start();
+        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
     }
     protected override void Update()
     {
@@ -31,6 +31,7 @@ public class NGP_SuperDash : NGP_Basic_SuperDash
     {
         base.OnSuperDashHitStarKick();
 
+        vibrationController.Vibrate(0.5f, 0.25f);
         combo.UseSuperDashKick();
         superDash.DecreaseSuperDashTimer(3f);
         Debug.Log("Kick Star");
@@ -38,8 +39,8 @@ public class NGP_SuperDash : NGP_Basic_SuperDash
     protected override void OnSuperDashHitStarThrough()
     {
         base.OnSuperDashHitStarThrough();
+        vibrationController.Vibrate(0.5f, 0.25f);
     }
-
     protected override void OnSuperDashHitThrough()
     {
         base.OnSuperDashHitThrough();

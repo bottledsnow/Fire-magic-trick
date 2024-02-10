@@ -7,10 +7,12 @@ public class SuperJump : MonoBehaviour
 
     //Script
     private PlayerDamage playerDamage;
+    private VibrationController vibrationController;
 
     private void Start()
     {
         playerDamage = GetComponent<PlayerDamage>();
+        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
         Destroy(gameObject, 1f);
     }
     private void OnTriggerEnter(Collider other)
@@ -18,6 +20,7 @@ public class SuperJump : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             playerDamage.ToDamageEnemy(other);
+            vibrationController.Vibrate(0.5f, 0.25f);
 
             Vector3 dir = (other.transform.position - transform.position).normalized;
             Rigidbody rb = other.GetComponent<Rigidbody>();

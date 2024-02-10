@@ -4,9 +4,13 @@ using System.Threading.Tasks;
 public class SuperDashKickTrigger : MonoBehaviour
 {
     [SerializeField] private float TriggerTime;
-    private PlayerDamage _playerDamage;
-    private Basic_AimSupportSystem _aimSupportSystem;
 
+    //Script
+    private Basic_AimSupportSystem _aimSupportSystem;
+    private VibrationController vibrationController;
+    private PlayerDamage _playerDamage;
+
+    //value
     private float timer;
     private bool isKick;
     private void Awake()
@@ -16,6 +20,7 @@ public class SuperDashKickTrigger : MonoBehaviour
     private void Start()
     {
         _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
+        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
     }
     private void Update()
     {
@@ -27,6 +32,7 @@ public class SuperDashKickTrigger : MonoBehaviour
         {
             if(other.CompareTag("Enemy"))
             {
+                vibrationController.Vibrate(0.5f, 0.25f);
                 _playerDamage.ToDamageEnemy(other);
                 _aimSupportSystem.ToAimSupport(other.gameObject, _aimSupportSystem.aimSupportTime);
                 isKick = false;

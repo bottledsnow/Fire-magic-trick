@@ -4,21 +4,27 @@ using UnityEngine;
 public class SuperDashCollider : MonoBehaviour
 {
     [SerializeField] private MMF_Player HitFeedbacks;
-    private SuperDash _superDash;
-    private PlayerDamage _playerDamage;
+    
+    //Script
     private Basic_AimSupportSystem _aimSupportSystem;
+    private VibrationController vibrationController;
+    private PlayerDamage _playerDamage;
+    private SuperDash _superDash;
+
+    //value
+    public bool EnemyToClose;
     private float CrashForce;
     private float CrashForceUp;
     private bool IsSuperDash;
     private bool IsSuperDashKick;
     private bool canTrigger;
     private bool isTriggerDamage;
-    public bool EnemyToClose;
     private void Start()
     {
         _superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
         _playerDamage = GetComponent<PlayerDamage>();
         _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
+        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
         Initialization();
     }
     private void Initialization()
@@ -51,6 +57,8 @@ public class SuperDashCollider : MonoBehaviour
                 if (canTrigger)
                 {
                     canTrigger = false;
+
+                    vibrationController.Vibrate(0.5f, 0.25f);
 
                     if (!isTriggerDamage)
                     {

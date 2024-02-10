@@ -12,15 +12,19 @@ public class TPDashCollider : MonoBehaviour, ITriggerNotifier
 
     //Script
     private BulletTime BulletTime;
+    private VibrationController vibrationController;
 
     private void Start()
     {
         BulletTime = GameManager.singleton.GetComponent<BulletTime>();
+        vibrationController = GameManager.singleton.GetComponent<VibrationController>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Enemy"))
         {
+            vibrationController.Vibrate(0.5f, 0.25f);
+
             OnTrigger?.Invoke(other);
             HitEnemy.PlayFeedbacks();
             BulletTime.BulletTime_Slow(bulletTime);
