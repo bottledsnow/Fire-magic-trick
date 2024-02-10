@@ -45,11 +45,11 @@ public class NGP_ChargeShot : NGP_Basic_ChargeShot
             {
                 if(skillState.State == NGP_SkillState.SkillState.Fire)
                 {
-                    shot.SetShotType(NGP_Shot.ShotType.Fire);
+                    shot.SetShotType(NGP_Shot.ShotType.Money); //try fire and money rechage.
                 }
                 else
                 {
-                    shot.SetShotType(NGP_Shot.ShotType.Money);
+                    shot.SetShotType(NGP_Shot.ShotType.Fire);
                 }
                 scatterShot(1);
             }

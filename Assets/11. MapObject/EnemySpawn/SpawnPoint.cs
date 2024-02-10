@@ -29,6 +29,9 @@ public class SpawnPoint : MonoBehaviour
         //event
         enemySpawn.OnSpawn += () => spawn_delay();
         enemySpawn.OnDeath += hideEnemy;
+
+        //Init
+        hideEnemy();
     }
     private void hideEnemy()
     {
