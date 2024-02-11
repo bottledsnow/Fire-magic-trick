@@ -209,11 +209,4 @@ public class NGP_Basic_Dash : MonoBehaviour
     {
         isButton = value;
     }
-    private void OnDrawGizmos()
-    {
-        Vector3 direction = Vector3.forward;
-        Quaternion dir = Quaternion.Euler(0, thirdPersonController.PlayerRotation, 0);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawRay(transform.position, dir.eulerAngles * dashDistance);
-    }
 }
