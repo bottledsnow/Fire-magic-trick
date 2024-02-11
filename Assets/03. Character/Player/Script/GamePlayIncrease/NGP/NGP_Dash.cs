@@ -13,8 +13,7 @@ public class NGP_Dash : NGP_Basic_Dash
     [Header("Backward Dash")]
     [SerializeField] private float backwardDashSpeed;
     [SerializeField] private float backwardDashDistance;
-
-
+    
     [Header("Dash Combo")]
     [SerializeField] private float dashComboSpeed;
     [SerializeField] private float dashComboDistance;

@@ -6,7 +6,7 @@ public class Shooting_Check : MonoBehaviour
 {
     [Header("Shoot Check")]
     [SerializeField] private LayerMask aimColliderLayerMask = new LayerMask();
-    [SerializeField] private Transform debugTransform;
+    [SerializeField] public Transform debugTransform;
     [SerializeField] private float MaxShootDistance;
     [HideInInspector] public Vector3 mouseWorldPosition = Vector3.zero;
 

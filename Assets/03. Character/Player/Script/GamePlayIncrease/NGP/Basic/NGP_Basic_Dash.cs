@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 public class NGP_Basic_Dash : MonoBehaviour
 {
     //Script
+    protected ControllerInput input;
     protected PlayerState playerState;
     protected NGP_Combo combo;
+    protected Move_Our move_Our;
     private ThirdPersonController thirdPersonController;
     private CharacterController characterController;
     private FireDashCollider fireDashCollider;
-    protected ControllerInput input;
-    protected Move_Our move_Our;
+    private Shooting_Check shooting_Check;
 
     //Feedbacks
     private MMF_Player Feedbacks_Dash;
     private MMF_Player Feedbacks_DashStop;
+
     //delegate
     public delegate void DashDelegateHandler();
     public event DashDelegateHandler OnDash;
@@ -49,6 +51,7 @@ public class NGP_Basic_Dash : MonoBehaviour
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
         move_Our =GameManager.singleton.Player.GetComponent<Move_Our>();
         combo = GameManager.singleton.NewGamePlay.GetComponent<NGP_Combo>();
+        shooting_Check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
 
         //Feedbacks
         Feedbacks_Dash = GameManager.singleton.Feedbacks_List.Dash;
@@ -107,13 +110,16 @@ public class NGP_Basic_Dash : MonoBehaviour
             
             if(input.LeftStick != Vector2.zero)
             {
-                dir = new Vector3(input.LeftStick.x, 0, input.LeftStick.y).normalized;
-            }else
+                //dir = new Vector3(input.LeftStick.x, 0, input.LeftStick.y).normalized;
+
+                direction = Vector3.forward;
+                dir = Quaternion.Euler(0, thirdPersonController.PlayerRotation, 0) * direction;
+            }
+            else
             {
                 dir =  new Vector3(-direction.x,0, -direction.z);
             }
-
-            playerState.TurnToNewDirection(direction);
+            playerState.TurnToNewDirection(shooting_Check.debugTransform.transform.position);
         }
         characterController.Move(dir * speed * Time.deltaTime);
     }
@@ -147,10 +153,12 @@ public class NGP_Basic_Dash : MonoBehaviour
         CaculateDashTime();
         SetIsDash(true);
         SetIsCooling(true);
+        playerState.SetUseMove(false);
         move_Our.ToRun();
         OnDash?.Invoke();
         await Task.Delay((int)(dashTime * 1000));
         SetIsDash(false);
+        playerState.SetUseMove(true);
     }
     private void CaculateDashTime()
     {
@@ -200,5 +208,12 @@ public class NGP_Basic_Dash : MonoBehaviour
     private void SetIsButton(bool value)
     {
         isButton = value;
+    }
+    private void OnDrawGizmos()
+    {
+        Vector3 direction = Vector3.forward;
+        Quaternion dir = Quaternion.Euler(0, thirdPersonController.PlayerRotation, 0);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawRay(transform.position, dir.eulerAngles * dashDistance);
     }
 }
