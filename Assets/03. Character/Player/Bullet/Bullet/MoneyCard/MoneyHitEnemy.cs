@@ -7,9 +7,9 @@ public class MoneyHitEnemy : MonoBehaviour
     {
         Destroy(this.gameObject, 5f);
     }
-    private void OnParticleCollision(GameObject other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(!isHit)
+        if (!isHit)
         {
             if (other.gameObject.CompareTag("Enemy"))
             {
@@ -22,6 +22,5 @@ public class MoneyHitEnemy : MonoBehaviour
                 }
             }
         }
-        
     }
 }

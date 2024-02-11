@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
 {
@@ -45,14 +46,23 @@ public class NGP_ChargeSkill : NGP_Basic_ChargeSkill
         switch (power)
         {
             case 0:
-                Instantiate(circleCard, spawn.position, Quaternion.identity);
+                StartCoroutine(SpawnObjectWithDelay(circleCard,0));
                 break;
             case 1:
-                Instantiate(circleCardFloat, spawn.position, Quaternion.identity);
+                StartCoroutine(SpawnObjectWithDelay(circleCardFloat, 0));
+                StartCoroutine(SpawnObjectWithDelay(circleCardFloat, 0.25f));
                 break;
             case 2:
-                Instantiate(circleCardBoom, spawn.position, Quaternion.identity);
+                StartCoroutine(SpawnObjectWithDelay(circleCardBoom, 0));
+                StartCoroutine(SpawnObjectWithDelay(circleCardBoom, 0.25f));
+                StartCoroutine(SpawnObjectWithDelay(circleCardBoom, 0.50f));
                 break;
         }
+    }
+    IEnumerator SpawnObjectWithDelay(Transform objectToSpawn,float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+
+        Instantiate(objectToSpawn, spawn.position, Quaternion.identity);
     }
 }

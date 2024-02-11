@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3437000152458117264}
   - component: {fileID: 3437000152458117265}
   - component: {fileID: 3437000152458117278}
-  - component: {fileID: 3437000152458117279}
   m_Layer: 7
   m_Name: VFX_Money
   m_TagString: Untagged
@@ -4815,18 +4814,6 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!114 &3437000152458117279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3437000152458117276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2403c12d8b46564d92e9bd487cc4b5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3450928001734415469
 GameObject:
   m_ObjectHideFlags: 0
@@ -4838,7 +4825,7 @@ GameObject:
   - component: {fileID: 5378990438973420901}
   - component: {fileID: 1374978365795860218}
   - component: {fileID: 1287234152752296807}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9697,6 +9684,64 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &4489176580959196621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8837599447803615598}
+  - component: {fileID: 7555760374976590083}
+  - component: {fileID: 5265650965556458907}
+  m_Layer: 7
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8837599447803615598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489176580959196621}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.00000023841858, z: -3.0000005}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3821943361423043197}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7555760374976590083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489176580959196621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2403c12d8b46564d92e9bd487cc4b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &5265650965556458907
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4489176580959196621}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6168429708200089854
 GameObject:
   m_ObjectHideFlags: 0
@@ -9727,7 +9772,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8837599447803615598}
   m_Father: {fileID: 3437000152458117264}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -13541,7 +13587,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 2147483647
+      m_Bits: 513
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5
@@ -14591,8 +14637,7 @@ GameObject:
   - component: {fileID: 8935935117238679448}
   - component: {fileID: 4400826087912740069}
   - component: {fileID: 4803933125354872707}
-  - component: {fileID: 1133404904166452335}
-  m_Layer: 6
+  m_Layer: 23
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14664,19 +14709,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &1133404904166452335
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6589639467052784494}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8558922536835240182
 GameObject:
   m_ObjectHideFlags: 0
@@ -14689,7 +14721,7 @@ GameObject:
   - component: {fileID: 4919121432294421375}
   - component: {fileID: 2211027935269805528}
   - component: {fileID: 3156589908851657537}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
