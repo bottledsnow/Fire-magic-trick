@@ -24,6 +24,7 @@ public class SuperDash : MonoBehaviour
     [SerializeField] private MMF_Player Feedbacks_SuperDashCooling;
     [Header("Other")]
     [SerializeField] private GameObject Model;
+    [SerializeField] private Transform EndCircle;
 
     //Script
     private SuperDashCameraCheck _superDashCameraCheck;
@@ -343,6 +344,7 @@ public class SuperDash : MonoBehaviour
             _playerState.SetGravityToNormal();
             _playerAnimator.SuperDashEnd();
             FireDashEnd.PlayFeedbacks();
+            Instantiate(EndCircle, _playerState.transform.position, Quaternion.identity);
             superDashSpeed = 0;
             Target = null;
             _superDashKickDown.NullTarget();
