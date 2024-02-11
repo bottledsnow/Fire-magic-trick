@@ -39285,6 +39285,7 @@ GameObject:
   - component: {fileID: 1160720738}
   - component: {fileID: 289808737}
   - component: {fileID: 93287539795549730}
+  - component: {fileID: 662152585645553985}
   m_Layer: 14
   m_Name: Enemy_A
   m_TagString: Enemy
@@ -39403,6 +39404,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTeachEnemy: 0
+  isRebirthHide: 0
   isIgnite: 0
   isHurt: 0
   isSteam: 0
@@ -39557,17 +39559,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8032919127870789858}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 92845c69b2ac42345806179fca43c7a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   showPatrolEditor: 0
-  waypoints: []
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
   stoppingDistance: 0.2
   looping: 0
   currentWaypointIndex: 0
   currentWaypoint: {fileID: 0}
+--- !u!114 &662152585645553985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032919127870789858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c74fd4895ad89c41862b570b9d6f725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8032919128011008211
 GameObject:
   m_ObjectHideFlags: 0

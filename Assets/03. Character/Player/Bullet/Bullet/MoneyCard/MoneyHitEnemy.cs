@@ -18,7 +18,23 @@ public class MoneyHitEnemy : MonoBehaviour
                 if (enemyDebuff != null)
                 {
                     enemyDebuff.Hit(EnemyDebuff.DebuffType.Money);
-                    isHit = true;
+                    //isHit = true;
+                }
+            }
+        }
+    }
+    private void OnParticleCollision(GameObject other)
+    {
+        if (!isHit)
+        {
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                EnemyDebuff enemyDebuff = other.gameObject.GetComponent<EnemyDebuff>();
+
+                if (enemyDebuff != null)
+                {
+                    enemyDebuff.Hit(EnemyDebuff.DebuffType.Money);
+                    //isHit = true;
                 }
             }
         }
