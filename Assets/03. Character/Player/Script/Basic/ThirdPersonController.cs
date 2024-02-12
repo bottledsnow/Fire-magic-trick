@@ -84,6 +84,7 @@ namespace StarterAssets
         public float moveSpeedDebuff = 0;
         public bool isJump;
         public bool useGravity;
+        public bool useCameraRotate;
         public bool useMove
         {
             get { return useGravity; }
@@ -190,7 +191,10 @@ namespace StarterAssets
 
         private void LateUpdate()
         {
-            CameraRotation();
+            if(useCameraRotate)
+            {
+                CameraRotation();
+            }
         }
 
         private void AssignAnimationIDs()

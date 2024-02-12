@@ -189,6 +189,10 @@ public class PlayerState : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(direction, transform.up);
         transform.rotation = targetRotation;
     }
+    public void SetUseCameraRotate(bool active)
+    {
+        _controller.useCameraRotate = active;
+    }
     public async void DebuffPlay(float debuffTime)
     {
         OutControl();
