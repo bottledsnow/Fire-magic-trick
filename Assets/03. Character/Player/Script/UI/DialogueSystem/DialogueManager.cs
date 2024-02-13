@@ -2,18 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Threading.Tasks;
-using UnityEngine.Windows;
 using System.Collections;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
     //Script
+    public Image characterIcon;
     public TMP_Text nameText;
     public TMP_Text DialogueText;
     private PlayerState playerState;
     private HealthSystem healthSystem;
     private ControllerInput input;
-    private Queue<string> sentences;
+    private Queue<Dialogue_Content> contents;
     [SerializeField] private GameObject UI_dialogue;
 
     //variables
@@ -21,7 +22,7 @@ public class DialogueManager : MonoBehaviour
     private bool canNext = true;
     private void Start()
     {
-        sentences = new Queue<string>();
+        contents = new Queue<Dialogue_Content>();
         UI_dialogue.SetActive(false);
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
         healthSystem = GameManager.singleton.Player.GetComponent<HealthSystem>();
@@ -46,13 +47,15 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         InitiaDialogue();
-        nameText.text = dialogue.name;
 
-        sentences.Clear();
+        nameText.text = dialogue.contents[0].name;
+        characterIcon.sprite = dialogue.contents[0].CharacterIcon;
 
-        foreach (string sentence in dialogue.sentences)
+        contents.Clear();
+
+        foreach (Dialogue_Content content in dialogue.contents)
         {
-            sentences.Enqueue(sentence);
+            contents.Enqueue(content);
         }
 
         DisplayNextSentence();
@@ -61,14 +64,17 @@ public class DialogueManager : MonoBehaviour
     {
         ToNextTimerCooling();
 
-        if (sentences.Count ==0)
-        { 
+        if(contents.Count == 0)
+        {
             EndDialogue();
             return;
         }
-        string sentence = sentences.Dequeue();
+
+        Dialogue_Content content = contents.Dequeue();
+        nameText.text = content.name;
+        characterIcon.sprite = content.CharacterIcon;
         StopAllCoroutines();
-        StartCoroutine(TypeSentence(sentence));
+        StartCoroutine(TypeSentence(content.sentences));
     }
     IEnumerator TypeSentence(string sentence)
     {

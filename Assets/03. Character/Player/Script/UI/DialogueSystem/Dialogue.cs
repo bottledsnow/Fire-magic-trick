@@ -4,14 +4,14 @@ using UnityEngine.UI;
 [System.Serializable]
 public class Dialogue
 {
-    public string name;
-    [TextArea(3, 10)]
-    public string[] sentences;
+    public Dialogue_Content[] contents;
 }
+[System.Serializable]
 public class Dialogue_Content
 {
     public string name;
+    public Sprite CharacterIcon;
+    [TextArea(3, 10)]
     public string sentences;
-    public Image CharacterIcon;
 
 }
