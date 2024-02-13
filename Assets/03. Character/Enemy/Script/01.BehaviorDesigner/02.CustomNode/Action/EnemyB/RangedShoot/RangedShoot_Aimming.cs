@@ -39,7 +39,7 @@ public class RangedShoot_Aimming : Action
         {
             return TaskStatus.Failure;
         }
-        //LookAtTarget();
+        LookAtTarget();
         if (Time.time - aimmingTimer <= aimmingDuaction - AimmingLineDisableDelay)
         {
             AimmingLineRunning();
@@ -78,4 +78,9 @@ public class RangedShoot_Aimming : Action
         lineRenderer.enabled = false;
     }
     #endregion
+
+    public override void OnEnd()
+    {
+        AimmingLineDisable();
+    }
 }
