@@ -27,7 +27,7 @@ public class PlayerAnimator : MonoBehaviour
     }
     public void ToDialogue_Idel()
     {
-        _playerAnimator.SetTrigger("InStory(Idel)");
+        _playerAnimator.Play("InStory(Idel)");
     }
     public void EndDialogue()
     {

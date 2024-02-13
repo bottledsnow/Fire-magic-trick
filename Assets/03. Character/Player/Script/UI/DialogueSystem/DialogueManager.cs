@@ -3,6 +3,7 @@ using UnityEngine;
 using TMPro;
 using System.Threading.Tasks;
 using UnityEngine.Windows;
+using System.Collections;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -58,16 +59,27 @@ public class DialogueManager : MonoBehaviour
     }
     public void DisplayNextSentence()
     {
-        ToNextTimer();
+        ToNextTimerCooling();
+
         if (sentences.Count ==0)
         { 
             EndDialogue();
             return;
         }
         string sentence = sentences.Dequeue();
-        DialogueText.text = sentence;
+        StopAllCoroutines();
+        StartCoroutine(TypeSentence(sentence));
     }
-    private void ToNextTimer()
+    IEnumerator TypeSentence(string sentence)
+    {
+        DialogueText.text = "";
+        foreach (char letter in sentence.ToCharArray())
+        {
+            DialogueText.text += letter;
+            yield return null;
+        }
+    }
+    private void ToNextTimerCooling()
     {
         canNext = false;
         Task.Delay(250).ContinueWith(t => canNext = true);

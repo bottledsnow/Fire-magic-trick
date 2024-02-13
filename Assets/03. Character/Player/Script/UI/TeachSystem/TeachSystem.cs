@@ -26,6 +26,7 @@ public class TeachSystem : MonoBehaviour
 
     //variable
     private int index = 0;
+    private bool isTeach = false;
 
     private void Start()
     {
@@ -43,19 +44,23 @@ public class TeachSystem : MonoBehaviour
     {
         if(input !=null)
         {
-            if(input.ButtonA)
+            if(isTeach)
             {
-                //Continue
-            }
-            if(input.ButtonB)
-            {
-                pauseSystem.StopPause();
-                CloseTeach();
+                if (input.ButtonA)
+                {
+                    //Continue
+                }
+                if (input.ButtonB)
+                {
+                    pauseSystem.StopPause();
+                    CloseTeach();
+                }
             }
         }
     }
     public void OpenTeach(int index)
     {
+        SetIsTeach(true);   
         this.index = index;
         title.text = teachSystem_Content[index].title;
         content.text = teachSystem_Content[index].content;
@@ -65,6 +70,7 @@ public class TeachSystem : MonoBehaviour
     }
     public void CloseTeach()
     {
+        SetIsTeach(false);
         setTeachBar(false);
         setScriptActiv(true);
     }
@@ -79,6 +85,10 @@ public class TeachSystem : MonoBehaviour
         {
             Script[i].SetActive(active);
         }
+    }
+    private void SetIsTeach(bool active)
+    {
+        isTeach = active;
     }
     private void OnValidate()
     {
