@@ -10,9 +10,6 @@ public class EnemyB_Bullet : MonoBehaviour
     [Header("ExplosionPrefab")]
     [SerializeField] private GameObject explosionPrefab;
 
-    [Header("TargetMask")]
-    [SerializeField] private LayerMask ignoredLayer;
-
     [Header("CoordinatedAttack")]
     [SerializeField] float nearbyRange;
     [SerializeField] LayerMask enemyMask;
