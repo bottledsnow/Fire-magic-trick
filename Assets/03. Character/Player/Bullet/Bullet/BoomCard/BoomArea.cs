@@ -41,7 +41,6 @@ public class BoomArea : MonoBehaviour
         }
         if(other.CompareTag("Player"))
         {
-            Debug.Log("Boom Player");
             Vector3 direction = (other.transform.position - this.transform.position).normalized;
             Vector3 directionXZ = new Vector3(direction.x, 0, direction.z);
             Vector3 directionY = new Vector3(0, direction.y, 0);

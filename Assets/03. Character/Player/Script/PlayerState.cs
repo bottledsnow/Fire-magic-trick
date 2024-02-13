@@ -13,10 +13,13 @@ public class PlayerState : MonoBehaviour
     [SerializeField] private float gravityFire;
     [SerializeField] private float gravityFloat;
 
-    [Header("Model")]
+    [Header("Obj")]
     [SerializeField] private GameObject model;
+    [SerializeField] private GameObject[] Sctipts;
+
     //Script
     private Shooting_Check _shooting_check;
+    private PlayerAnimator playerAnimator;
 
     //variable
     private float gravityNormal;
@@ -38,6 +41,7 @@ public class PlayerState : MonoBehaviour
     {
         _shooting_check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
         _controller = GetComponent<ThirdPersonController>();
+        playerAnimator = GetComponent<PlayerAnimator>();
         gravityNormal = _controller.Gravity;
     }
     private void Update()
@@ -93,13 +97,28 @@ public class PlayerState : MonoBehaviour
     }
     public void TakeControl()
     {
+        Debug.Log("Tack Controll");
+        playerAnimator.EndDialogue();
+
+        for(int i = 0; i < Sctipts.Length; i++)
+        {
+            Sctipts[i].SetActive(true);
+        }
+
         _controller.useGravity = true;
         _controller.useMove = true;
     }
     public void OutControl()
     {
+        for (int i = 0; i < Sctipts.Length; i++)
+        {
+            Sctipts[i].SetActive(false);
+        }
+
+        playerAnimator.ToDialogue_Idel();
         _controller.useGravity = false;
         _controller.useMove = false;
+
     }
     public void SetUseGravity(bool value)
     {
@@ -108,7 +127,6 @@ public class PlayerState : MonoBehaviour
     public void SetUseMove(bool value)
     {
         _controller.useMove = value;
-        Debug.Log("use Move :" + value);
     }
     public void SetCollider(bool value)
     {

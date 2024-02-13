@@ -72,6 +72,10 @@ public class HealthSystem : MonoBehaviour
         await Task.Delay((int)(HitInvicibleTime*1000));
         SetInvincible(false);
     }
+    public void SetStoryInvincible(bool active)
+    {
+        Invincible = active;
+    }
     private void SetInvincible(bool Active)
     {
         Invincible = Active;

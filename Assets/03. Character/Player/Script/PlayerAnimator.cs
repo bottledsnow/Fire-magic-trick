@@ -1,3 +1,4 @@
+using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
@@ -23,6 +24,14 @@ public class PlayerAnimator : MonoBehaviour
     public void PlayAnimator(string name)
     {
         _playerAnimator.Play(name);
+    }
+    public void ToDialogue_Idel()
+    {
+        _playerAnimator.SetTrigger("InStory(Idel)");
+    }
+    public void EndDialogue()
+    {
+        _playerAnimator.SetTrigger("EndDialogue");
     }
 
 }

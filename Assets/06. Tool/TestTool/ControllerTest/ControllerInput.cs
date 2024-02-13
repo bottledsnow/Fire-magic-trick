@@ -45,13 +45,18 @@ public class ControllerInput : MonoBehaviour
     [Header("Setting")]
     public bool Option;
     public bool Window;
+
+    [Header("UI")]
+    public bool leftClick;
+    public bool cancel;
     
     //Script
     private NGP_CameraSystem cameraSystem;
     private AimSupportSystem aimSupportSystem;
     private Shooting_XBoxCameraCheck shooting_XBoxCameraCheck;
+    private PlayerInput playerInput;
 
-    private void Start()
+    private void Awake()
     {
         cameraSystem = GetComponent<NGP_CameraSystem>();
         aimSupportSystem = GetComponent<AimSupportSystem>();
@@ -209,6 +214,14 @@ public class ControllerInput : MonoBehaviour
     {
         MouseMode(value.isPressed);
     }
+    public void OnLeftClick(InputValue value)
+    {
+        LeftClick(value.isPressed);
+    }
+    public void OnCancel(InputValue value)
+    {
+        Cancel(value.isPressed);
+    }
     #endregion
     #region Button_Input
     public void Input_Button_A(bool newButtonState)
@@ -282,6 +295,14 @@ public class ControllerInput : MonoBehaviour
     public void AnyKey(bool newButtonState)
     {
         anyKey = newButtonState;
+    }
+    public void LeftClick(bool newButtonState)
+    {
+        leftClick = newButtonState;
+    }
+    public void Cancel(bool newButtonState)
+    {
+        cancel = newButtonState;
     }
     #endregion
 }
