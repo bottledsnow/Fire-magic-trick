@@ -28,11 +28,14 @@ public class EnemyPatrolSystem : MonoBehaviour
 
     private void Update()
     {
+        if(currentWaypoint == null)
+        {
+            return;
+        }
         if (waypoints.Length == 0)
         {
             return;
         }
-
         if (Vector3.Distance(transform.position, currentWaypoint.position) <= stoppingDistance)
         {
             // 到達目標路徑點，選擇下一個路徑點

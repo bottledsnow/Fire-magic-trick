@@ -43,10 +43,16 @@ public class NGP_Basic_UI : MonoBehaviour
         animator_State.SetBool("isWind", false);
 
         //VFX
-        VFX_UI_State_Fire.Stop();
-        VFX_UI_State_Fire.Clear();
-        VFX_UI_State_Wind.Stop();
-        VFX_UI_State_Wind.Clear();
+        if(VFX_UI_State_Fire !=null)
+        {
+            VFX_UI_State_Fire.Stop();
+            VFX_UI_State_Fire.Clear();
+        }
+        if(VFX_UI_State_Wind!=null)
+        {
+            VFX_UI_State_Wind.Stop();
+            VFX_UI_State_Wind.Clear();
+        }
     }
     public void ToFire()
     {

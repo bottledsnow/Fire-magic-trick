@@ -34,7 +34,8 @@ public class SuperDashKick : MonoBehaviour
     private bool isTimer;
     private bool isInputY;
     private bool isCheck;
-    private void Awake()
+    
+    private void Start()
     {
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
