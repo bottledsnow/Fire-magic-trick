@@ -31,10 +31,11 @@ public class EnemyB_Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if(collision.tag == "Player")
+        if (collision.tag == "Player")
         {
             //CallCoordinatedAttack();
         }
+        print("你媽炸啦: " + collision);
         Explosion();
     }
 
@@ -47,11 +48,11 @@ public class EnemyB_Bullet : MonoBehaviour
 
     void CallCoordinatedAttack()
     {
-        foreach(GameObject enemy in NearbyEnemy())
+        foreach (GameObject enemy in NearbyEnemy())
         {
             enemy.GetComponent<EnemyTeamSystem>().CoordinatedAttack();
         }
-        
+
     }
 
     GameObject[] NearbyEnemy()
