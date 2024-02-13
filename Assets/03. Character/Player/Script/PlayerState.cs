@@ -102,7 +102,6 @@ public class PlayerState : MonoBehaviour
     }
     public void TakeControl_Dialogue()
     {
-        Debug.Log("Tack Controll");
         playerAnimator.EndDialogue();
 
         for (int i = 0; i < Sctipts.Length; i++)

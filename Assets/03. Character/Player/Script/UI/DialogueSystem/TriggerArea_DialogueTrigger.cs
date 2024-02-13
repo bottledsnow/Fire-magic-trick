@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 public class TriggerArea_DialogueTrigger : MonoBehaviour
@@ -13,6 +14,9 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
     public bool triggerOnce;
     private bool canTrigger = true;
 
+    [Header("Additionals")]
+    public MMF_Player NeedFeedbacks;
+
     private void Start()
     {
         dialogueManager = GameManager.singleton.UISystem.GetComponent<DialogueManager>();
@@ -20,19 +24,23 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (triggerOnce)
-        {
-            triggerOnce = false;
-            canTrigger = false;
-        }
-
         if (other.CompareTag("Player"))
         {
             if (canTrigger)
             {
                 TriggerDialogue();
+                dialogueManager.OnDialogueEnd += DialogueEnd;
+            }
+            if (triggerOnce)
+            {
+                triggerOnce = false;
+                canTrigger = false;
             }
         }
+    }
+    private void DialogueEnd()
+    {
+        NeedFeedbacks.PlayFeedbacks();
     }
     public void TriggerDialogue()
     {

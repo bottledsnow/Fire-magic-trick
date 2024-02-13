@@ -28,7 +28,6 @@ public class TargetWithinRange : Conditional
         {
             if(targetObject.Value != null)
             {
-                Debug.Log("TargetObj:" + targetObject.Value.name);
                 distanceToTarget = Vector3.Distance(transform.position, targetObject.Value.transform.position);
             }
         }

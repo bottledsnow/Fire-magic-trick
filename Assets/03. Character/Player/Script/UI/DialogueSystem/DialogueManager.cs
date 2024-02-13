@@ -1,9 +1,9 @@
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using System.Threading.Tasks;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine;
+using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -16,6 +16,9 @@ public class DialogueManager : MonoBehaviour
     private ControllerInput input;
     private Queue<Dialogue_Content> contents;
     [SerializeField] private GameObject UI_dialogue;
+
+    //event
+    public event MyDelegates.OnHandler OnDialogueEnd;
 
     //variables
     private bool isDialogue;
@@ -66,6 +69,8 @@ public class DialogueManager : MonoBehaviour
 
         if(contents.Count == 0)
         {
+            OnDialogueEnd?.Invoke();
+            OnDialogueEnd = null;
             EndDialogue();
             return;
         }
@@ -107,9 +112,9 @@ public class DialogueManager : MonoBehaviour
         {
             UI_dialogue.SetActive(false);
         }
-        playerState.TakeControl_Dialogue();
         healthSystem.SetStoryInvincible(false);
         playerState.SetUseCameraRotate(true);
+        playerState.TakeControl_Dialogue();
         SetIsDialogue(false);
     }
     

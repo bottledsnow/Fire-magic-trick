@@ -24,4 +24,12 @@ public class TeachSystem_Child : MonoBehaviour
             }
         }
     }
+    public void TriggerThisTeach()
+    {
+        if (!isTrigger)
+        {
+            teachSystem.OpenTeach(index);
+            isTrigger = true;
+        }
+    }
 }
