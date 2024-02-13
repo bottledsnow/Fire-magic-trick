@@ -90,28 +90,29 @@ public class DialogueManager : MonoBehaviour
         canNext = false;
         Task.Delay(250).ContinueWith(t => canNext = true);
     }
-    private void EndDialogue()
-    {
-        if (UI_dialogue.activeSelf == true)
-        {
-            UI_dialogue.SetActive(false);
-        }
-        playerState.TakeControl();
-        healthSystem.SetStoryInvincible(false);
-        playerState.SetUseCameraRotate(true);
-        SetIsDialogue(false);
-    }
     private void InitiaDialogue()
     {
         if (UI_dialogue.activeSelf == false)
         {
             UI_dialogue.SetActive(true);
         }
-        playerState.OutControl();
+        playerState.OutControl_Dialogue();
         playerState.SetUseCameraRotate(false);
         healthSystem.SetStoryInvincible(true);
         SetIsDialogue(true);
     }
+    private void EndDialogue()
+    {
+        if (UI_dialogue.activeSelf == true)
+        {
+            UI_dialogue.SetActive(false);
+        }
+        playerState.TakeControl_Dialogue();
+        healthSystem.SetStoryInvincible(false);
+        playerState.SetUseCameraRotate(true);
+        SetIsDialogue(false);
+    }
+    
     private void SetIsDialogue(bool active)
     {
         isDialogue = active;

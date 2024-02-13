@@ -97,10 +97,15 @@ public class PlayerState : MonoBehaviour
     }
     public void TakeControl()
     {
+        _controller.useGravity = true;
+        _controller.useMove = true;
+    }
+    public void TakeControl_Dialogue()
+    {
         Debug.Log("Tack Controll");
         playerAnimator.EndDialogue();
 
-        for(int i = 0; i < Sctipts.Length; i++)
+        for (int i = 0; i < Sctipts.Length; i++)
         {
             Sctipts[i].SetActive(true);
         }
@@ -110,6 +115,11 @@ public class PlayerState : MonoBehaviour
     }
     public void OutControl()
     {
+        _controller.useGravity = false;
+        _controller.useMove = false;
+    }
+    public void OutControl_Dialogue()
+    {
         for (int i = 0; i < Sctipts.Length; i++)
         {
             Sctipts[i].SetActive(false);
@@ -118,7 +128,6 @@ public class PlayerState : MonoBehaviour
         playerAnimator.ToDialogue_Idel();
         _controller.useGravity = false;
         _controller.useMove = false;
-
     }
     public void SetUseGravity(bool value)
     {
