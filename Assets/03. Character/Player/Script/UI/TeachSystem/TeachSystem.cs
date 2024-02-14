@@ -3,7 +3,6 @@ using TMPro;
 using System.Threading.Tasks;
 using System.Collections;
 using UnityEngine.Video;
-using UnityEngine.Playables;
 
 [System.Serializable]
 public class TeachSystem_content
@@ -34,6 +33,7 @@ public class TeachSystem : MonoBehaviour
     private int index = 0;
     private int contentIndex = 0;
     private bool isTeach = false;
+    private bool canNext = true;
 
     private void Awake()
     {
@@ -60,7 +60,10 @@ public class TeachSystem : MonoBehaviour
             {
                 if (input.leftClick)
                 {
-                    //Continue
+                    if(canNext)
+                    {
+                        DisplayNextSentence();
+                    }
                 }
                 if (input.cancel)
                 {
@@ -74,6 +77,7 @@ public class TeachSystem : MonoBehaviour
     {
         SetIsTeach(true);
         this.index = index;
+        contentIndex = 0;
         
         playerState.OutControl_Dialogue();
         playerState.SetUseCameraRotate(false);
@@ -107,6 +111,27 @@ public class TeachSystem : MonoBehaviour
         playerState.SetUseCameraRotate(true);
         playerState.TakeControl_Dialogue();
     }
+    public void DisplayNextSentence()
+    {
+        if (teachSystem_Content[index].content.Length == contentIndex+1)
+        {
+            CloseTeach();
+            return;
+        }
+
+        ToNextTimerCooling();
+
+        contentIndex++;
+
+        StopAllCoroutines();
+        StartCoroutine(TypeWord(teachSystem_Content[index].content[contentIndex]));
+    }
+    
+    private void ToNextTimerCooling()
+    {
+        canNext = false;
+        Task.Delay(250).ContinueWith(t => canNext = true);
+    }
     IEnumerator TypeWord(string Content)
     {
         content.text = "";
@@ -138,7 +163,11 @@ public class TeachSystem : MonoBehaviour
         for(int i=0;i<teachSystem_Content.Length;i++)
         {
             debugText += teachSystem_Content[i].title;
-            debugText += teachSystem_Content[i].content;
+
+            for(int i2 = 0; i2 < teachSystem_Content[i].content.Length;i2++)
+            {
+                debugText += teachSystem_Content[i].content[i2];
+            }
         }
         this.debugText = debugText;
     }
