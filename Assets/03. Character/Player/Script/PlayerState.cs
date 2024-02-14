@@ -100,17 +100,21 @@ public class PlayerState : MonoBehaviour
         _controller.useGravity = true;
         _controller.useMove = true;
     }
-    public void TakeControl_Dialogue()
+    public async void TakeControl_Dialogue()
     {
         playerAnimator.EndDialogue();
+
+        
+
+        _controller.useGravity = true;
+        _controller.useMove = true;
+
+        await Task.Delay(250);
 
         for (int i = 0; i < Sctipts.Length; i++)
         {
             Sctipts[i].SetActive(true);
         }
-
-        _controller.useGravity = true;
-        _controller.useMove = true;
     }
     public void OutControl()
     {

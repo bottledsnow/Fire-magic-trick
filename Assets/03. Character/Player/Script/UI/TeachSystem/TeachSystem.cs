@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
 using TMPro;
 using System.Threading.Tasks;
+using System.Collections;
+using UnityEngine.Video;
+using UnityEngine.Playables;
 
 [System.Serializable]
 public class TeachSystem_content
 {
     public string title;
-    [TextArea(3,10)]public string content;
+    public VideoClip video;
+    [TextArea(3,10)]public string[] content;
 }
 public class TeachSystem : MonoBehaviour
 {
@@ -22,16 +26,24 @@ public class TeachSystem : MonoBehaviour
     //Script
     [SerializeField] private GameObject[] Script;
     private ControllerInput input;
-    private PauseSystem pauseSystem;
+    private PlayerState playerState;
+    private HealthSystem healthSystem;
+    private TeachVideo teachVideo;
 
     //variable
     private int index = 0;
+    private int contentIndex = 0;
     private bool isTeach = false;
 
+    private void Awake()
+    {
+        teachVideo = GetComponent<TeachVideo>();
+    }
     private void Start()
     {
-        pauseSystem = GameManager.singleton.GetComponent<PauseSystem>();
         input = GameManager.singleton._input;
+        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        healthSystem = GameManager.singleton.Player.GetComponent<HealthSystem>();
 
         //Initialization
         setTeachBar(false);
@@ -46,13 +58,13 @@ public class TeachSystem : MonoBehaviour
         {
             if(isTeach)
             {
-                if (input.ButtonA)
+                if (input.leftClick)
                 {
                     //Continue
                 }
-                if (input.ButtonB)
+                if (input.cancel)
                 {
-                    pauseSystem.StopPause();
+                    //pauseSystem.StopPause();
                     CloseTeach();
                 }
             }
@@ -60,19 +72,49 @@ public class TeachSystem : MonoBehaviour
     }
     public void OpenTeach(int index)
     {
-        SetIsTeach(true);   
+        SetIsTeach(true);
         this.index = index;
-        title.text = teachSystem_Content[index].title;
-        content.text = teachSystem_Content[index].content;
+        
+        playerState.OutControl_Dialogue();
+        playerState.SetUseCameraRotate(false);
+        healthSystem.SetStoryInvincible(true);
+
+        //UI
         setTeachBar(true);
         setScriptActiv(false);
-        pauseSystem.Pause();
+        //pauseSystem.Pause();
+
+        //title
+        title.text = teachSystem_Content[index].title;
+
+        // video
+        teachVideo.ChageVideoClip(teachSystem_Content[index].video);
+        teachVideo.videoPlayer.prepareCompleted += OnVideoPrepared;
+        teachVideo.videoPlayer.Prepare();
+        teachVideo.videoPlayer.Prepare();
+
+        //content
+        StopAllCoroutines();
+        StartCoroutine(TypeWord(teachSystem_Content[index].content[contentIndex]));
     }
     public void CloseTeach()
     {
         SetIsTeach(false);
         setTeachBar(false);
         setScriptActiv(true);
+
+        healthSystem.SetStoryInvincible(false);
+        playerState.SetUseCameraRotate(true);
+        playerState.TakeControl_Dialogue();
+    }
+    IEnumerator TypeWord(string Content)
+    {
+        content.text = "";
+        foreach (char letter in Content.ToCharArray())
+        {
+            content.text += letter;
+            yield return null;
+        }
     }
     private void setTeachBar(bool active)
     {
@@ -99,5 +141,10 @@ public class TeachSystem : MonoBehaviour
             debugText += teachSystem_Content[i].content;
         }
         this.debugText = debugText;
+    }
+    private void OnVideoPrepared(VideoPlayer source)
+    {
+        // Video prepared logic
+        source.Play(); // 使用 source.Play() 而不是 teachVideo.videoPlayer.Play()
     }
 }

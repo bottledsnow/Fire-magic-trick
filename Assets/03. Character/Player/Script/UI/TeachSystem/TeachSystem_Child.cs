@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TeachSystem_Child : MonoBehaviour
 {
+    public bool canTeachMutipleTimes = false;
     //Script
     private TeachSystem teachSystem;
 
@@ -20,7 +21,8 @@ public class TeachSystem_Child : MonoBehaviour
             if (!isTrigger)
             {
                 teachSystem.OpenTeach(index);
-                isTrigger = true;
+
+                if (!canTeachMutipleTimes) isTrigger = true;
             }
         }
     }
