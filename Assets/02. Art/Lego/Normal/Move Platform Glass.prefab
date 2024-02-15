@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6662801265019133211}
+  - component: {fileID: 3640524530302871146}
   m_Layer: 0
   m_Name: Move Platform Glass
   m_TagString: Untagged
@@ -34,6 +35,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!205 &3640524530302871146
+LODGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6662801265019133210}
+  serializedVersion: 2
+  m_LocalReferencePoint: {x: 0, y: 0.155, z: 0}
+  m_Size: 1
+  m_FadeMode: 0
+  m_AnimateCrossFading: 0
+  m_LastLODIsBillboard: 0
+  m_LODs:
+  - screenRelativeHeight: 0.20474574
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 0}
+  - screenRelativeHeight: 0.026176231
+    fadeTransitionWidth: 0
+    renderers:
+    - renderer: {fileID: 0}
+  - screenRelativeHeight: 0.0032649268
+    fadeTransitionWidth: 0
+    renderers: []
+  m_Enabled: 1
 --- !u!1 &6662801265229411383
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +211,9 @@ MonoBehaviour:
   DelayTime: 0
   speed: 5
   stopTime: 0
+  updateMove: {x: 0, y: 0, z: 0}
   isReturn: 0
+  isMove: 0
 --- !u!1 &6662801265611191119
 GameObject:
   m_ObjectHideFlags: 0
@@ -347,6 +376,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6662801265486180025}
     m_Modifications:
+    - target: {fileID: -2863175302216197763, guid: 2b4d8034fe7d58a47ac118be59e7c934, type: 3}
+      propertyPath: m_LocalReferencePoint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2863175302216197763, guid: 2b4d8034fe7d58a47ac118be59e7c934, type: 3}
+      propertyPath: m_LODs.Array.data[0].renderers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2863175302216197763, guid: 2b4d8034fe7d58a47ac118be59e7c934, type: 3}
+      propertyPath: m_LODs.Array.data[0].screenRelativeHeight
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: -2863175302216197763, guid: 2b4d8034fe7d58a47ac118be59e7c934, type: 3}
+      propertyPath: m_LODs.Array.data[1].renderers.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2863175302216197763, guid: 2b4d8034fe7d58a47ac118be59e7c934, type: 3}
+      propertyPath: m_LODs.Array.data[1].screenRelativeHeight
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: -2863175302216197763, guid: 2b4d8034fe7d58a47ac118be59e7c934, type: 3}
+      propertyPath: m_LODs.Array.data[2].screenRelativeHeight
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3091952252372877579, guid: 2b4d8034fe7d58a47ac118be59e7c934, type: 3}
       propertyPath: m_RootOrder
       value: 2

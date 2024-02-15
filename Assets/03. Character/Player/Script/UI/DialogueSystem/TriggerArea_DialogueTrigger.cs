@@ -3,19 +3,22 @@ using UnityEngine;
 
 public class TriggerArea_DialogueTrigger : MonoBehaviour
 {
+    [Header("Additionals")]
+    public MMF_Player NeedFeedbacks;
+
+    [Header("Auto")]
+    public bool useAuto;
+    public float OnceAutoTime;
+    //Variables
+    public bool triggerOnce;
+    private bool canTrigger = true;
+    
     [Header("Input To TMP")]
     [SerializeField][TextArea(5, 10)] public string debugText;
 
     //Script
     private DialogueManager dialogueManager;
     public Dialogue dialogue;
-
-    //Variables
-    public bool triggerOnce;
-    private bool canTrigger = true;
-
-    [Header("Additionals")]
-    public MMF_Player NeedFeedbacks;
 
     private void Start()
     {
@@ -28,23 +31,32 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
         {
             if (canTrigger)
             {
-                TriggerDialogue();
-                dialogueManager.OnDialogueEnd += DialogueEnd;
+                if(useAuto)
+                {
+                    dialogueManager.StartDialogue(dialogue,OnceAutoTime);
+                    dialogueManager.OnDialogueEnd += DialogueEnd;
+                }
+                else
+                {
+                    dialogueManager.StartDialogue(dialogue);
+                    dialogueManager.OnDialogueEnd += DialogueEnd;
+                }
+
+                if (triggerOnce)
+                {
+                    triggerOnce = false;
+                    canTrigger = false;
+                }
             }
-            if (triggerOnce)
-            {
-                triggerOnce = false;
-                canTrigger = false;
-            }
+            
         }
     }
     private void DialogueEnd()
     {
-        NeedFeedbacks.PlayFeedbacks();
-    }
-    public void TriggerDialogue()
-    {
-        dialogueManager.StartDialogue(dialogue);
+        if(NeedFeedbacks != null)
+        {
+            NeedFeedbacks.PlayFeedbacks();
+        }
     }
     private void OnValidate()
     {

@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEditor.Rendering;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class DialogueManager : MonoBehaviour
 
     //variables
     private bool isDialogue;
+    private bool isDialogueAuto;
     private bool canNext = true;
     private void Start()
     {
@@ -62,6 +64,28 @@ public class DialogueManager : MonoBehaviour
         }
 
         DisplayNextSentence();
+    }
+    public async void StartDialogue(Dialogue dialogue,float onceAutoTime)
+    {
+        InitialDialogueAuto();
+
+        nameText.text = dialogue.contents[0].name;
+        characterIcon.sprite = dialogue.contents[0].CharacterIcon;
+
+        contents.Clear();
+
+        foreach (Dialogue_Content content in dialogue.contents)
+        {
+            contents.Enqueue(content);
+        }
+
+        DisplayNextSentence();
+
+        for (int i = 0; i < contents.Count+2; i++)
+        {
+            await Task.Delay((int)(onceAutoTime*1000));
+            DisplayNextSentence();
+        }
     }
     public void DisplayNextSentence()
     {
@@ -106,6 +130,15 @@ public class DialogueManager : MonoBehaviour
         healthSystem.SetStoryInvincible(true);
         SetIsDialogue(true);
     }
+    private void InitialDialogueAuto()
+    {
+        if (UI_dialogue.activeSelf == false)
+        {
+            UI_dialogue.SetActive(true);
+        }
+        DialogueText.text = "";
+        SetIsDialogueAuto(true);
+    }
     private void EndDialogue()
     {
         if (UI_dialogue.activeSelf == true)
@@ -117,9 +150,12 @@ public class DialogueManager : MonoBehaviour
         playerState.TakeControl_Dialogue();
         SetIsDialogue(false);
     }
-    
     private void SetIsDialogue(bool active)
     {
         isDialogue = active;
+    }
+    private void SetIsDialogueAuto(bool active)
+    {
+        isDialogueAuto = active;
     }
 }
