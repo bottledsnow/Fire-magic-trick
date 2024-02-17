@@ -103,9 +103,6 @@ public class PlayerState : MonoBehaviour
     public async void TakeControl_Dialogue()
     {
         playerAnimator.EndDialogue();
-
-        
-
         _controller.useGravity = true;
         _controller.useMove = true;
 
@@ -118,7 +115,6 @@ public class PlayerState : MonoBehaviour
     }
     public void OutControl()
     {
-        _controller.useGravity = false;
         _controller.useMove = false;
     }
     public void OutControl_Dialogue()
@@ -129,7 +125,6 @@ public class PlayerState : MonoBehaviour
         }
 
         playerAnimator.ToDialogue_Idel();
-        _controller.useGravity = false;
         _controller.useMove = false;
     }
     public void SetUseGravity(bool value)

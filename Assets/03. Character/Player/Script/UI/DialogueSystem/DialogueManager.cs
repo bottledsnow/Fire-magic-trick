@@ -68,7 +68,7 @@ public class DialogueManager : MonoBehaviour
     public async void StartDialogue(Dialogue dialogue,float onceAutoTime)
     {
         InitialDialogueAuto();
-
+        SetIsDialogueAuto(true);
         nameText.text = dialogue.contents[0].name;
         characterIcon.sprite = dialogue.contents[0].CharacterIcon;
 
@@ -144,6 +144,11 @@ public class DialogueManager : MonoBehaviour
         if (UI_dialogue.activeSelf == true)
         {
             UI_dialogue.SetActive(false);
+        }
+        if(isDialogueAuto)
+        {
+            SetIsDialogueAuto(false);
+            return;
         }
         healthSystem.SetStoryInvincible(false);
         playerState.SetUseCameraRotate(true);

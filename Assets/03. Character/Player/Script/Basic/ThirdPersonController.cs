@@ -85,12 +85,7 @@ namespace StarterAssets
         public bool isJump;
         public bool useGravity;
         public bool useCameraRotate;
-        public bool useMove
-        {
-            get { return useGravity; }
-            set { useGravity = value;
-                 }
-        }
+        public bool useMove;
         public bool isFloat;
 
         private Move_Our _move_Our;
