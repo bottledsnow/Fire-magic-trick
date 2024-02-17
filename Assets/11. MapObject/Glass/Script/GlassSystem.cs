@@ -145,6 +145,7 @@ public class GlassSystem : MonoBehaviour
     private void SetIsBroken(bool active)
     {
         isBroken = active;
+        Debug.Log("isBroken : " + active);
     }
     private void SetCollider(bool active)
     {

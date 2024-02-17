@@ -19,6 +19,7 @@ public class SuperDashCollider : MonoBehaviour
     private bool IsSuperDashKick;
     private bool canTrigger;
     private bool isTriggerDamage;
+    private bool isCheckAgain;
     private void Start()
     {
         _superDash = GameManager.singleton.EnergySystem.GetComponent<SuperDash>();
@@ -26,6 +27,10 @@ public class SuperDashCollider : MonoBehaviour
         _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
         vibrationController = GameManager.singleton.GetComponent<VibrationController>();
         Initialization();
+    }
+    public void ToCloseCheckAgain()
+    {
+        SetIsCheckAgain(true);
     }
     private void Initialization()
     {
@@ -88,6 +93,16 @@ public class SuperDashCollider : MonoBehaviour
         {
             SetEnemyToClose(true);
         }
+        if(isCheckAgain)
+        {
+            if(other.CompareTag("Enemy"))
+            {
+                SetEnemyToClose(true);
+            }else
+            {
+                SetEnemyToClose(false);
+            }
+        }
     }
     public void SetIsSuperDash(bool value)
     {
@@ -110,5 +125,9 @@ public class SuperDashCollider : MonoBehaviour
     public void SetIsTriggerDamage(bool active)
     {
         isTriggerDamage = active;
+    }
+    public void SetIsCheckAgain(bool active)
+    {
+        isCheckAgain = active;
     }
 }

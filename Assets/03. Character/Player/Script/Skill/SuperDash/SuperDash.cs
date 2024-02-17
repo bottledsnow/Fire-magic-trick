@@ -156,7 +156,7 @@ public class SuperDash : MonoBehaviour
             {
                 if(_superDashCollider.EnemyToClose)
                 {
-                    Debug.Log("Enemy To Close");
+                    _superDashCollider.ToCloseCheckAgain();
                 }else
                 {
                     if(!TriggerStart)
