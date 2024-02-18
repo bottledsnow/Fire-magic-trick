@@ -4,6 +4,7 @@ using UnityEngine.Playables;
 public class TriggerArea_Timeline : MonoBehaviour
 {
     private PlayableDirector timelinePlayable;
+    private bool isTrigger = false;
 
     private void Start()
     {
@@ -14,7 +15,12 @@ public class TriggerArea_Timeline : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            timelinePlayable.Play();
+            if (!isTrigger)
+            {
+                isTrigger = true;
+                timelinePlayable.Play();
+                return;
+            }
         }
     }
 }
