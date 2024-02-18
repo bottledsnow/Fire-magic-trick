@@ -24,6 +24,8 @@ public class GlassSystem : MonoBehaviour
     [SerializeField] private bool canCrash;
     [Header("EnemyCrash")]
     [SerializeField] private bool canEnemyCrash;
+    [Header("SuperJump")]
+    [SerializeField] private bool canSuperJump;
 
 
     private ProgressSystem progressSystem;
@@ -60,7 +62,13 @@ public class GlassSystem : MonoBehaviour
             }
         }
     }
-    
+    public void BrokenCheck_SuperJump()
+    {
+        if(canSuperJump)
+        {
+            BrokenSuperFast();
+        }
+    }
     public void BrokenCheck_Crash()
     {
         if (canCrash)
@@ -154,5 +162,9 @@ public class GlassSystem : MonoBehaviour
     private void SetColliderRender(bool active)
     {
         glassRender.enabled = active;
+    }
+    private void SetCanSuperJump(bool active)
+    {
+        canSuperJump = active;
     }
 }

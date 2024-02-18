@@ -27,5 +27,9 @@ public class SuperJump : MonoBehaviour
 
             rb.AddForce(dir * Force, ForceMode.Impulse);
         }
+        if(other.CompareTag("Glass"))
+        {
+            other.GetComponent<GlassSystem>().BrokenCheck_SuperJump();
+        }
     }
 }

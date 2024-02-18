@@ -84,11 +84,12 @@ public class NGP_Basic_SuperJump : MonoBehaviour
                 {
                     buttonTrigger = true;
 
-                    ToHeavy();
                     if (isWindJump())
                     {
                         jump.OnSuperJump += VFX_superJump_wind;
                         jump.OnSuperJump -= VFX_superJump_fire;
+
+                        ToHeavy();
 
                         SuperJump_wind();
                         skillPower.UseWind();
@@ -98,6 +99,8 @@ public class NGP_Basic_SuperJump : MonoBehaviour
                     {
                         jump.OnSuperJump += VFX_superJump_fire;
                         jump.OnSuperJump -= VFX_superJump_wind;
+
+                        ToHeavy();
 
                         SuperJump_fire();
                         skillPower.UseFire();
