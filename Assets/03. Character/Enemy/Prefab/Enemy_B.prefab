@@ -5100,6 +5100,7 @@ GameObject:
   - component: {fileID: 5860017182296049022}
   - component: {fileID: 3516421921178200367}
   - component: {fileID: 1028269271}
+  - component: {fileID: 3579450611693673351}
   m_Layer: 14
   m_Name: Enemy_B
   m_TagString: Enemy
@@ -5412,6 +5413,24 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16384
   callingDelay: 0.05
+--- !u!114 &3579450611693673351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402972569165973743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92845c69b2ac42345806179fca43c7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showPatrolEditor: 0
+  waypoints: []
+  stoppingDistance: 0.2
+  looping: 0
+  currentWaypointIndex: 0
+  currentWaypoint: {fileID: 0}
 --- !u!1 &1402972569454198479
 GameObject:
   m_ObjectHideFlags: 0
