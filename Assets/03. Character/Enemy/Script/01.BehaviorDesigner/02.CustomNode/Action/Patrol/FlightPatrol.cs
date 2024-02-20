@@ -7,19 +7,20 @@ public class FlightPatrol : Action
 {
    [Header("SharedVariable")]
    [SerializeField] private SharedGameObject modelObject;
-   
+
    [Header("Movement")]
-   [SerializeField] private float moveSpeed = 6;
+   [SerializeField] private float moveSpeed = 2500;
+   [SerializeField] private float rotateSpeed = 2.5f;
 
    Animator animator;
    Rigidbody rigidbody;
    EnemyPatrolSystem enemyPatrolSystem;
 
-   public override void OnStart()   
+   public override void OnStart()
    {
       enemyPatrolSystem = GetComponent<EnemyPatrolSystem>();
       enemyPatrolSystem.InitializationPatrol();
-      
+
       rigidbody = GetComponent<Rigidbody>();
 
       AnimationStart();
@@ -27,7 +28,7 @@ public class FlightPatrol : Action
 
    public override TaskStatus OnUpdate()
    {
-      if(enemyPatrolSystem != null)
+      if(enemyPatrolSystem != null && enemyPatrolSystem.currentWaypoint != null)
       {
          Movement();
       }
@@ -38,8 +39,9 @@ public class FlightPatrol : Action
    {
       Vector3 movingTarget = enemyPatrolSystem.currentWaypoint.position;
       Vector3 direction = (movingTarget - transform.position).normalized;
-      Debug.Log(direction);
       rigidbody.AddForce(direction * moveSpeed * Time.deltaTime);
+
+      LookAtTarget(movingTarget);
    }
 
    private void AnimationStart()
@@ -56,6 +58,12 @@ public class FlightPatrol : Action
       {
          animator.SetBool("isMove", true);
       }
+   }
+
+   private void LookAtTarget(Vector3 lookingTarget)
+   {
+      Quaternion rotation = Quaternion.LookRotation(new Vector3(lookingTarget.x, transform.position.y, lookingTarget.z) - transform.position);
+      transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
    }
 
    public override void OnEnd()

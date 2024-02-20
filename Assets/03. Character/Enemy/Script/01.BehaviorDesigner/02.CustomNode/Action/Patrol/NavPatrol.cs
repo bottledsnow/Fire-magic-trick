@@ -28,7 +28,7 @@ public class NavPatrol : Action
 
    public override TaskStatus OnUpdate()
    {
-      if(navMeshAgent != null && enemyPatrolSystem != null)
+      if(navMeshAgent != null && enemyPatrolSystem != null && enemyPatrolSystem.currentWaypoint != null)
       {
          Movement();
       }
