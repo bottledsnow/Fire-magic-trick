@@ -29,6 +29,10 @@ public class LegSlash_Ready : Action
 
     public override TaskStatus OnUpdate()
     {
+        // if (targetObject.Value == null)
+        // {
+        //     return TaskStatus.Failure;
+        // }
         if (Time.time - readyTimer <= readyDuaction)
         {
             Rotation();

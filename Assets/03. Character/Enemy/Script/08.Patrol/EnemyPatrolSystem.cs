@@ -105,6 +105,10 @@ public class EnemyPatrolSystem : MonoBehaviour
 
     bool isWaypointCorrect()
     {
+        if(waypoints.Length == 0)
+        {
+            return false;
+        }
         foreach (Transform waypoint in waypoints)
         {
             if (waypoint == null)

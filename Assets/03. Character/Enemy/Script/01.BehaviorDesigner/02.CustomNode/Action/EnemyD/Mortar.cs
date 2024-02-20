@@ -60,6 +60,7 @@ public class Mortar : Action
 
     public override TaskStatus OnUpdate()
     {
+        if(targetObject.Value == null) return TaskStatus.Failure;
         if (Time.time - timer > duration) return TaskStatus.Success;
         return TaskStatus.Running;
     }

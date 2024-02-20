@@ -37,6 +37,10 @@ public class LegSlash_Dubble : Action
 
     public override TaskStatus OnUpdate()
     {
+        // if (targetObject.Value == null)
+        // {
+        //     return TaskStatus.Failure;
+        // }
         return TaskStatus.Success;
     }
 
