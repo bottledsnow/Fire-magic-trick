@@ -10559,7 +10559,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 896437692075161059}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 14.946668, y: 5.3462696, z: 3.5451097}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17465,10 +17465,10 @@ MonoBehaviour:
   isFire: 0
   isShock: 0
   Boom: 0
-  StartHealth: 5
-  health: 5
-  maxHealth: 5
-  ignitionPoint: 4
+  StartHealth: 1
+  health: 1
+  maxHealth: 1
+  ignitionPoint: 1
   coolingInterval: 2.5
   coolingTime: 3.5
   _eye: {fileID: 4198448368196951796}
@@ -19274,7 +19274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1049961587794509765
 Transform:
   m_ObjectHideFlags: 0
@@ -24112,7 +24112,7 @@ GameObject:
   - component: {fileID: 6218845701825162562}
   - component: {fileID: 1492276741824477896}
   - component: {fileID: 8631843991575179558}
-  m_Layer: 14
+  m_Layer: 15
   m_Name: TriggerArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24161,6 +24161,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 6081723060315774322}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   OnlyOnce: 0
   OnStartTrigger: 0
   OnStartTriggerEvent:
@@ -24186,6 +24198,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6081723060315774322}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!135 &8631843991575179558
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24194,10 +24218,10 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6834219541952792885}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 10
+  m_Radius: 15
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7183682284985058673
 GameObject:
