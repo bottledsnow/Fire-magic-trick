@@ -13,7 +13,7 @@ public class Barrier : MonoBehaviour
         //Event
         enemySpawn.OnSpawn += openBarrier;
         enemySpawn.OnDeath += closeBarrier;
-        enemySpawn.OnClear += closeBarrier;
+        enemySpawn.OnClearM += closeBarrier;
 
         //Function
         getBarrier();

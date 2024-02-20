@@ -51,6 +51,28 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
             
         }
     }
+    public void EventTrigger()
+    {
+        if (canTrigger)
+        {
+            if (useAuto)
+            {
+                dialogueManager.StartDialogue(dialogue, OnceAutoTime);
+                dialogueManager.OnDialogueEnd += DialogueEnd;
+            }
+            else
+            {
+                dialogueManager.StartDialogue(dialogue);
+                dialogueManager.OnDialogueEnd += DialogueEnd;
+            }
+
+            if (triggerOnce)
+            {
+                triggerOnce = false;
+                canTrigger = false;
+            }
+        }
+    }
     private void DialogueEnd()
     {
         if(NeedFeedbacks != null)

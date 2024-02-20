@@ -1,4 +1,6 @@
+using BehaviorDesigner.Runtime.Tasks.Unity.UnityParticleSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemySpawn : MonoBehaviour
 {
@@ -10,8 +12,9 @@ public class EnemySpawn : MonoBehaviour
     //event
     public event MyDelegates.OnHandler OnSpawn;
     public event MyDelegates.OnHandler OnDeath;
-    public event MyDelegates.OnHandler OnClear;
-
+    public event MyDelegates.OnHandler OnClearM;
+    public UnityEvent OnStart;
+    public UnityEvent OnClear;
     //variable
     public bool isClear;
     public bool isSpawned;
@@ -37,6 +40,7 @@ public class EnemySpawn : MonoBehaviour
         if(!isClear)
         {
             OnSpawn?.Invoke();
+            OnStart?.Invoke();
             setIsSpawned(true);
         }
     }
@@ -50,6 +54,7 @@ public class EnemySpawn : MonoBehaviour
     }
     public void ToClear()
     {
+        OnClearM?.Invoke();
         OnClear?.Invoke();
         setIsClear(true);
     }
