@@ -12,8 +12,6 @@ public class IdleType : Conditional
     public override TaskStatus OnUpdate()
     {
         idleActionType = GetComponent<EnemyAggroSystem>().idleActionType;
-        Debug.Log("敵人"+idleActionType);
-        Debug.Log("判斷"+targetAction);
         if (idleActionType == targetAction)
         {
             return TaskStatus.Success;
