@@ -41,6 +41,7 @@ public class Lazer_Shoot : Action
 
     public override TaskStatus OnUpdate()
     {
+        // 雷射特效結束時
         if (Time.time - timer > vfxDuration)
         {
             lazerCollider.SetActive(false);
@@ -52,14 +53,18 @@ public class Lazer_Shoot : Action
 
     void LazerRangeSetting()
     {
-        Ray ray = new Ray(transform.position, transform.forward);
-
+        // 射線偵測打中障礙物時
+        Ray ray = new Ray(aimmingLinePoint.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, maxLength, obstacleLayer))
         {
+            Debug.Log(hit.collider.gameObject);
+            // 計算擊中障礙物的點與發射位置距離
             Vector3 hitPoint = hit.point;
             float distanceToPoint = Vector3.Distance(aimmingLinePoint.position, hitPoint);
 
+            // 調整特效長度
             lazerVFX.SetFloat("Length", distanceToPoint);
+            // 調整碰撞體長度
             lazerCollider.transform.position = aimmingLinePoint.position + aimmingLinePoint.forward * distanceToPoint / 2;
             lazerCollider.transform.localScale = new Vector3(lazerCollider.transform.localScale.x, distanceToPoint, lazerCollider.transform.localScale.z);
         }
