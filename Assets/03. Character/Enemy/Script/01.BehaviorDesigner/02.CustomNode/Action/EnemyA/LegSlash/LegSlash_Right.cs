@@ -43,7 +43,10 @@ public class LegSlash_Right : Action
     public override TaskStatus OnUpdate()
     {
         Rotation();
-
+        // if (targetObject.Value == null)
+        // {
+        //     return TaskStatus.Failure;
+        // }
         if(Time.time - timer > duration) return TaskStatus.Success;
         return TaskStatus.Running;
     }

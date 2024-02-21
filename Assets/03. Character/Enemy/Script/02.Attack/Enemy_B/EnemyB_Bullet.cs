@@ -35,7 +35,7 @@ public class EnemyB_Bullet : MonoBehaviour
         {
             //CallCoordinatedAttack();
         }
-        print("你媽炸啦: " + collision);
+        // print("你媽炸啦: " + collision);
         Explosion();
     }
 

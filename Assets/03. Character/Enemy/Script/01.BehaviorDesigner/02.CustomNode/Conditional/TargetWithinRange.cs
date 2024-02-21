@@ -20,18 +20,17 @@ public class TargetWithinRange : Conditional
 
     public override void OnStart()
     {
-        if (isVector2)
+        if(targetObject.Value != null)
         {
-            distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetObject.Value.transform.position.x, 0, targetObject.Value.transform.position.z));
-        }
-        else
-        {
-            if(targetObject.Value != null)
+            if (isVector2)
+            {
+                distanceToTarget = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z), new Vector3(targetObject.Value.transform.position.x, 0, targetObject.Value.transform.position.z));
+            }
+            else
             {
                 distanceToTarget = Vector3.Distance(transform.position, targetObject.Value.transform.position);
             }
         }
-
     }
     public override TaskStatus OnUpdate()
     {

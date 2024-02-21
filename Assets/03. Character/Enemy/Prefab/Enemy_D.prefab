@@ -39284,6 +39284,7 @@ GameObject:
   - component: {fileID: 167774824}
   - component: {fileID: 1160720738}
   - component: {fileID: 289808737}
+  - component: {fileID: 569366671067393831}
   m_Layer: 14
   m_Name: Enemy_D
   m_TagString: Enemy
@@ -39402,6 +39403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isTeachEnemy: 0
+  isRebirthHide: 0
   isIgnite: 0
   isHurt: 0
   isSteam: 0
@@ -39450,7 +39452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad798dd4282c8d342b1fc0ba929d3724, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackingStyle: 0
+  enemyType: 0
 --- !u!114 &1549227355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39516,8 +39518,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAggro: 450
   aggroValue: 0
-  radius: 12
-  angle: 120
+  showFovEditor: 1
+  fovRadius: 20
+  fovAngle: 90
+  viewHeight: 0.92
   targetMask:
     serializedVersion: 2
     m_Bits: 64
@@ -39548,6 +39552,24 @@ MonoBehaviour:
   OnStartJump:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &569366671067393831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8032919127870789858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92845c69b2ac42345806179fca43c7a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showPatrolEditor: 0
+  waypoints: []
+  stoppingDistance: 0.2
+  looping: 0
+  currentWaypointIndex: 0
+  currentWaypoint: {fileID: 0}
 --- !u!1 &8032919128011008211
 GameObject:
   m_ObjectHideFlags: 0
@@ -41130,6 +41152,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8032919127870789881}
     m_Modifications:
+    - target: {fileID: 41208360461488560, guid: 8b3b580df66f0d64a88819dd7d5cf977, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 41208360461488565, guid: 8b3b580df66f0d64a88819dd7d5cf977, type: 3}
       propertyPath: m_Name
       value: XboxCameraTarget
@@ -41189,6 +41215,10 @@ PrefabInstance:
     - target: {fileID: 41208360461488566, guid: 8b3b580df66f0d64a88819dd7d5cf977, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 41208360461488567, guid: 8b3b580df66f0d64a88819dd7d5cf977, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 41208360461488567, guid: 8b3b580df66f0d64a88819dd7d5cf977, type: 3}
       propertyPath: m_IsTrigger

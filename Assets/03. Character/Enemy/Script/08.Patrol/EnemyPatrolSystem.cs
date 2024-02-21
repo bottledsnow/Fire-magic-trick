@@ -28,11 +28,7 @@ public class EnemyPatrolSystem : MonoBehaviour
 
     private void Update()
     {
-        if(currentWaypoint == null)
-        {
-            return;
-        }
-        if (waypoints.Length == 0)
+        if (currentWaypoint == null || waypoints.Length == 0)
         {
             return;
         }
@@ -60,8 +56,11 @@ public class EnemyPatrolSystem : MonoBehaviour
 
     public void InitializationPatrol()
     {
-        currentWaypointIndex = NearestWaypointIndex();
-        currentWaypoint = waypoints[currentWaypointIndex];
+        if (isWaypointCorrect())
+        {
+            currentWaypointIndex = NearestWaypointIndex();
+            currentWaypoint = waypoints[currentWaypointIndex];
+        }
     }
 
     #region SelectWayPoint
@@ -87,11 +86,6 @@ public class EnemyPatrolSystem : MonoBehaviour
 
     int NearestWaypointIndex()
     {
-        if (waypoints == null || waypoints.Length == 0)
-        {
-            return -1;
-        }
-
         int nearestWaypointIndex = -1;
         float shortestDistance = Mathf.Infinity;
         Vector3 currentPosition = transform.position;
@@ -106,7 +100,23 @@ public class EnemyPatrolSystem : MonoBehaviour
                 nearestWaypointIndex = i;
             }
         }
-
         return nearestWaypointIndex;
+    }
+
+    bool isWaypointCorrect()
+    {
+        if(waypoints.Length == 0)
+        {
+            return false;
+        }
+        foreach (Transform waypoint in waypoints)
+        {
+            if (waypoint == null)
+            {
+                Debug.Log(gameObject.name + " has waypoint error!");
+                return false;
+            }
+        }
+        return true;
     }
 }

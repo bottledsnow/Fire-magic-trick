@@ -24,7 +24,6 @@ public class UnityEventEnemy_B : MonoBehaviour
     }
     public void VFX_ShootingFinishWait()
     {
-        Debug.Log("Shooting Fishish Wait");
         OnShootingFinishWait.Invoke();
     }
     public void VFX_MoveStart()

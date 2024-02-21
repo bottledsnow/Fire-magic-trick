@@ -53,6 +53,6 @@ public class EnemyShield : MonoBehaviour,IHealth
 
     void OnTriggerEnter(Collider collider)
     {
-        print("護盾");
+        //print("護盾");
     }
 }

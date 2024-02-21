@@ -13,6 +13,7 @@ public class EnemyAggroSystem : MonoBehaviour
     [SerializeField] public bool showFovEditor;
     [SerializeField] public float fovRadius;
     [SerializeField] [Range(0, 360)] public float fovAngle;
+    [SerializeField] public float viewHeight;
     [SerializeField] LayerMask targetMask;
     [SerializeField] LayerMask obstructionMask;
 
@@ -23,13 +24,12 @@ public class EnemyAggroSystem : MonoBehaviour
     [SerializeField] [Range(0, 0.2f)] float callingDelay = 0.05f;
 
     BehaviorTree behaviorTree;
+    Vector3 viewPosition;
 
-    private void Awake()
-    {
-        behaviorTree = GetComponent<BehaviorTree>();
-    }
     void Start()
     {
+        behaviorTree = GetComponent<BehaviorTree>();
+        viewPosition = new Vector3(transform.position.x , transform.position.y + viewHeight , transform.position.z);
     }
 
     void Update()
@@ -39,14 +39,14 @@ public class EnemyAggroSystem : MonoBehaviour
 
     void FieldOfView()
     {
-        Collider[] rangeChecks = Physics.OverlapSphere(transform.position, fovRadius, targetMask);
+        Collider[] rangeChecks = Physics.OverlapSphere(viewPosition, fovRadius, targetMask);
 
         if (rangeChecks.Length != 0)
         {
             Transform target = rangeChecks[0].transform;
-            Vector3 directionToTarget = (target.position - transform.position).normalized;
+            Vector3 directionToTarget = (target.position - viewPosition).normalized;
 
-            if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2 && !Physics.Raycast(transform.position, directionToTarget, fovRadius, obstructionMask))
+            if (Vector3.Angle(transform.forward, directionToTarget) < fovAngle / 2 && !Physics.Raycast(viewPosition, directionToTarget, fovRadius, obstructionMask))
             {
                 if (aggroValue <= 0) CallNearbyEnemy(rangeChecks[0].gameObject);
                 SetAggroTarget(rangeChecks[0].gameObject);
