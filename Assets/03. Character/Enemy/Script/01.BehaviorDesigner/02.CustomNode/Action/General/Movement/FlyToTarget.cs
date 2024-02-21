@@ -11,6 +11,7 @@ public class FlyToTarget : Action
    [Header("Movement")]
    [SerializeField] private float moveSpeed = 850;
    [SerializeField] private float keepHeight = 2.5f;
+   [SerializeField] private float rotateSpeed = 2.5f;
 
    private Rigidbody rb;
    private UnityEventEnemy_B unityEvent;
@@ -34,6 +35,14 @@ public class FlyToTarget : Action
       Vector3 movingTarget = new Vector3(targetObject.Value.transform.position.x, targetObject.Value.transform.position.y + keepHeight,targetObject.Value.transform.position.z);
       Vector3 direction = (movingTarget - transform.position).normalized;
       rb.AddForce(direction * moveSpeed * Time.deltaTime);
+
+      LookAtTarget(movingTarget);
+   }
+
+   private void LookAtTarget(Vector3 lookingTarget)
+   {
+      Quaternion rotation = Quaternion.LookRotation(new Vector3(lookingTarget.x, transform.position.y, lookingTarget.z) - transform.position);
+      transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
    }
 
    private void SpeedControl()
