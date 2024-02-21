@@ -5,6 +5,13 @@ using BehaviorDesigner.Runtime;
 
 public class EnemyAggroSystem : MonoBehaviour
 {
+    [Header("IdleType")]
+    [SerializeField] public IdleActionType idleActionType;
+    public enum IdleActionType
+    {
+        Patrol, //巡邏
+        Construct //建築
+    }
     [Header("Aggro")]
     [SerializeField] float maxAggro;
     [SerializeField] float aggroValue;
