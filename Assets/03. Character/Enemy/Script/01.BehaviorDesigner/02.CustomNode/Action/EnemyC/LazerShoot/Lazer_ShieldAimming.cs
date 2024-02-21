@@ -35,7 +35,7 @@ public class Lazer_ShieldAimming : Action
         shield = behaviorObject.Value.Find("Shield").gameObject;
         aimmingTimer = Time.time;
         AimmingEnable();
-        ShieldEnable();
+        ShieldController(true);
 
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_C>();
         unityEvent.VFX_AimStart();
@@ -43,12 +43,12 @@ public class Lazer_ShieldAimming : Action
 
     public override TaskStatus OnUpdate()
     {
-        LimitedRotation();
+        LookAtTarget(targetObject.Value.transform.position);
         if (Time.time - aimmingTimer <= aimmingDuaction - AimmingEndDelay)
         {
             unityEvent.VFX_AimKeep();
             AimmingLineRunning();
-            ShieldEnable();
+            ShieldController(true);
             triggerEnd = false;
         }
         else
@@ -59,7 +59,7 @@ public class Lazer_ShieldAimming : Action
                 triggerEnd = true;
             }
             AimmingLineDisable();
-            ShieldDisable();
+            ShieldController(false);;
         }
         if (Time.time - aimmingTimer >= aimmingDuaction)
         {
@@ -68,22 +68,12 @@ public class Lazer_ShieldAimming : Action
         return TaskStatus.Running;
     }
 
-    private void LimitedRotation()
+    private void LookAtTarget(Vector3 lookingTarget)
     {
-        Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
-        Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
-
-        float angle = Quaternion.Angle(transform.rotation, rotation);
-
-        float maxRotationSpeed = rotateSpeed * Time.deltaTime;
-        if (angle > maxRotationSpeed)
-        {
-            float t = maxRotationSpeed / angle;
-            rotation = Quaternion.Slerp(transform.rotation, rotation, t);
-        }
-
-        transform.rotation = rotation;
+        Quaternion rotation = Quaternion.LookRotation(new Vector3(lookingTarget.x, transform.position.y, lookingTarget.z) - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
     }
+
     #region AimmingLine
     private void AimmingEnable()
     {
@@ -112,20 +102,21 @@ public class Lazer_ShieldAimming : Action
         lineRenderer.enabled = false;
     }
     #endregion
+
     #region Shield
-    private void ShieldEnable()
+    // 控制開關護盾
+    private void ShieldController(bool isEnable)
     {
         if(shield != null)
         {
-            shield.SetActive(true);
-        }
-    }
-    private void ShieldDisable()
-    {
-        if(shield != null)
-        {
-            shield.SetActive(false);
+            shield.SetActive(isEnable);
         }
     }
     #endregion
+
+    public override void OnEnd()
+    {
+        AimmingLineDisable();
+        ShieldController(false);
+    }
 }

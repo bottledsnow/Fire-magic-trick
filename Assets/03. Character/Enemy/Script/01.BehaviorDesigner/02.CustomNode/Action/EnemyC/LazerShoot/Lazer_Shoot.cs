@@ -44,7 +44,6 @@ public class Lazer_Shoot : Action
         // 雷射特效結束時
         if (Time.time - timer > vfxDuration)
         {
-            lazerCollider.SetActive(false);
             unityEvent.VFX_LazerStiff();
             return TaskStatus.Success;
         }
@@ -68,5 +67,10 @@ public class Lazer_Shoot : Action
             lazerCollider.transform.position = aimmingLinePoint.position + aimmingLinePoint.forward * distanceToPoint / 2;
             lazerCollider.transform.localScale = new Vector3(lazerCollider.transform.localScale.x, distanceToPoint, lazerCollider.transform.localScale.z);
         }
+    }
+    
+    public override void OnEnd()
+    {
+        lazerCollider.SetActive(false);
     }
 }
