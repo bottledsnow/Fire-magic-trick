@@ -28,6 +28,7 @@ public class Lazer_ShieldAimming : Action
     private float aimmingTimer;
     private LineRenderer lineRenderer;
     private UnityEventEnemy_C unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
     private bool triggerEnd;
     public override void OnStart()
     {
@@ -39,6 +40,9 @@ public class Lazer_ShieldAimming : Action
 
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_C>();
         unityEvent.VFX_AimStart();
+
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
@@ -118,5 +122,6 @@ public class Lazer_ShieldAimming : Action
     {
         AimmingLineDisable();
         ShieldController(false);
+        enemyAggroSystem.StopReducingController(false);
     }
 }

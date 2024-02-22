@@ -19,6 +19,7 @@ public class RangedShoot_Shoot : Action
 
     private Transform firePoint;
     private UnityEventEnemy_B unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
 
 
     public override void OnStart()
@@ -27,6 +28,9 @@ public class RangedShoot_Shoot : Action
 
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_B>();
         unityEvent.VFX_ShootingFinishWait();
+
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
@@ -43,5 +47,10 @@ public class RangedShoot_Shoot : Action
             }
         }
         return TaskStatus.Success;
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

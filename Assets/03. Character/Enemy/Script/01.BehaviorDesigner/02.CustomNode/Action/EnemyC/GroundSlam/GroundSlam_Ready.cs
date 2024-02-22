@@ -18,6 +18,7 @@ public class GroundSlam_Ready : Action
     private float readyTimer;
     private Rigidbody rb;
     private UnityEventEnemy_C unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
@@ -25,6 +26,9 @@ public class GroundSlam_Ready : Action
         
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_C>();
         unityEvent.VFX_ReadyGroundSlam();
+
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
@@ -44,5 +48,10 @@ public class GroundSlam_Ready : Action
     {
         Quaternion rotation = Quaternion.LookRotation(new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z) - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

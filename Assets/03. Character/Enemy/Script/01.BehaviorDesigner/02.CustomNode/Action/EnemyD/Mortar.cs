@@ -29,6 +29,7 @@ public class Mortar : Action
 
         for (int i = 0; i < 3; i++)
         {
+            // 設定並生成三個迫擊砲
             Vector3 positions;
             switch(i)
             {
@@ -46,16 +47,6 @@ public class Mortar : Action
                     break;
             }
         }
-
-
-        // 顯示選擇的位置
-        // foreach (Vector3 position in positions)
-        // {
-        //     InstantiateAttackObject(position);
-        // }
-
-        // unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_A>();
-        // unityEvent.VFX_LegSlash_B();
     }
 
     public override TaskStatus OnUpdate()
@@ -73,6 +64,7 @@ public class Mortar : Action
         Vector3 randomPosition = targetObject.Value.transform.position + randomDirection;
         bool foundValidPosition = false;
 
+        // 被屋頂擋住
         while (!foundValidPosition)
         {
             RaycastHit hit;

@@ -19,6 +19,7 @@ public class Rush_Attack : Action
     private Rigidbody rb;
     private float timer;
     NavMeshAgent navMeshAgent;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
@@ -29,6 +30,8 @@ public class Rush_Attack : Action
         rb = GetComponent<Rigidbody>();
         timer = Time.time;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
         Jump();
     }
 
@@ -69,5 +72,10 @@ public class Rush_Attack : Action
         {
             return false;
         }
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

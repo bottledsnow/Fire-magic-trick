@@ -22,6 +22,7 @@ public class RangedShoot_Aimming : Action
     private float aimmingTimer;
     private LineRenderer lineRenderer;
     private UnityEventEnemy_B unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
@@ -31,6 +32,9 @@ public class RangedShoot_Aimming : Action
         
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_B>();
         unityEvent.VFX_AimingStart();
+
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
@@ -82,5 +86,6 @@ public class RangedShoot_Aimming : Action
     public override void OnEnd()
     {
         AimmingLineDisable();
+        enemyAggroSystem.StopReducingController(false);
     }
 }

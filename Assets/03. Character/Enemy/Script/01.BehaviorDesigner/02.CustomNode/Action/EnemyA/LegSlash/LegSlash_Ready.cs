@@ -19,20 +19,19 @@ public class LegSlash_Ready : Action
     private float readyTimer;
     private Rigidbody rb;
     private UnityEventEnemy_A unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
         readyTimer = Time.time;
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_A>();
         unityEvent.VFX_LegSlashStart();
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
     {
-        // if (targetObject.Value == null)
-        // {
-        //     return TaskStatus.Failure;
-        // }
         if (Time.time - readyTimer <= readyDuaction)
         {
             Rotation();
@@ -58,5 +57,10 @@ public class LegSlash_Ready : Action
             rotation = Quaternion.Slerp(transform.rotation, rotation, t);
         }
         transform.rotation = rotation;
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

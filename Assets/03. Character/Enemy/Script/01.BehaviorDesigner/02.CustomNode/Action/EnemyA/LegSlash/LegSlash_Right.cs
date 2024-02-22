@@ -26,6 +26,7 @@ public class LegSlash_Right : Action
     private Transform legSlashPoint;
     private Rigidbody rb;
     private UnityEventEnemy_A unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
     private float timer;
 
     public override void OnStart()
@@ -38,15 +39,14 @@ public class LegSlash_Right : Action
         Movement();
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_A>();
         unityEvent.VFX_LegSlash_A();
+
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
     {
         Rotation();
-        // if (targetObject.Value == null)
-        // {
-        //     return TaskStatus.Failure;
-        // }
         if(Time.time - timer > duration) return TaskStatus.Success;
         return TaskStatus.Running;
     }
@@ -77,5 +77,10 @@ public class LegSlash_Right : Action
             rotation = Quaternion.Slerp(transform.rotation, rotation, t);
         }
         transform.rotation = rotation;
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

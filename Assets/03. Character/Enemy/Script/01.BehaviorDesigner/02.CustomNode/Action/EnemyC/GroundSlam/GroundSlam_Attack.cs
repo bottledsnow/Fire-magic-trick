@@ -18,6 +18,7 @@ public class GroundSlam_Attack : Action
     private Transform groundSlamPoint;
     private Rigidbody rb;
     private UnityEventEnemy_C unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
@@ -29,6 +30,9 @@ public class GroundSlam_Attack : Action
         
         unityEvent.VFX_GroundSlam();
         unityEvent.VFX_GroundSlamStiff();
+
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
@@ -45,5 +49,10 @@ public class GroundSlam_Attack : Action
     {
         rb.velocity = Vector3.zero;
         rb.AddForce(transform.forward * forwardForce, ForceMode.Impulse);
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

@@ -17,12 +17,15 @@ public class Rush_Ready : Action
     private float readyTimer;
     private Rigidbody rb;
     private UnityEventEnemy_A unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
         readyTimer = Time.time;
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_A>();
         unityEvent.VFX_RushReady();
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
@@ -42,5 +45,10 @@ public class Rush_Ready : Action
     {
         Quaternion rotation = Quaternion.LookRotation(new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z) - transform.position);
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+    }
+    
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

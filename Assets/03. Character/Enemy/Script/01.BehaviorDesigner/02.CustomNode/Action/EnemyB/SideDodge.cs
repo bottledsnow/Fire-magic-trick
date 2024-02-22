@@ -22,6 +22,7 @@ public class SideDodge : Action
     private Rigidbody rb;
     private float timer;
     private UnityEventEnemy_B unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
@@ -31,6 +32,9 @@ public class SideDodge : Action
 
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_B>();
         unityEvent.VFX_SideDodge();
+
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
@@ -73,5 +77,10 @@ public class SideDodge : Action
     private void SlowdownByTime()
     {
         rb.velocity *= 1.0f - slowdownRate * Time.deltaTime;
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

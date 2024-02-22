@@ -32,6 +32,7 @@ public class EnemyAggroSystem : MonoBehaviour
 
     BehaviorTree behaviorTree;
     Vector3 viewPosition;
+    bool stopReducing;
 
     void Start()
     {
@@ -82,6 +83,7 @@ public class EnemyAggroSystem : MonoBehaviour
 
     IEnumerator SetAggroWithDistanceDelay(GameObject target)
     {
+        // 根據距離延遲觸發
         foreach (GameObject enemy in NearbyEnemy())
         {
             float distanceToEnemy = Vector3.Distance(transform.position, enemy.transform.position);
@@ -101,18 +103,38 @@ public class EnemyAggroSystem : MonoBehaviour
 
     public void ReduceAggro()
     {
-        aggroValue--;
-
+        // 不在停止減少狀態
+        if(!stopReducing)
+        {
+            // 減少仇恨值
+            aggroValue--;
+        }
+        // 仇恨值歸零時
         if (aggroValue <= 0)
         {
+            // 消除仇恨目標
             CleanAggroTarget();
         }
     }
 
+    public void FillAggro()
+    {
+        // 若有目標填滿仇恨值
+        if(behaviorTree.GetVariable("targetObject") != null)
+        {
+            aggroValue = maxAggro;
+        }
+    }
+    
     public void CleanAggroTarget()
     {
         behaviorTree.SetVariableValue("targetObject", null);
         aggroValue = 0;
+    }
+
+    public void StopReducingController(bool isTrue)
+    {
+        stopReducing = isTrue;
     }
     #endregion
 

@@ -16,12 +16,15 @@ public class Rush_JumpBack : Action
 
     private Rigidbody rb;
     private float timer;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
         rb = GetComponent<Rigidbody>();
         timer = Time.time;
         JampBack();
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
@@ -52,5 +55,10 @@ public class Rush_JumpBack : Action
         {
             return false;
         }
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }

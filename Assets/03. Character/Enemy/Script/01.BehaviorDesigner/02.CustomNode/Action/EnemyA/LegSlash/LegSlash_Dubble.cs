@@ -17,10 +17,14 @@ public class LegSlash_Dubble : Action
     [Header("Movement")]
     [SerializeField] private float forwardForce;
     [SerializeField] private float maxRotateAngle = 30;
+    
+    [Header("Rotation")]
+    [SerializeField] private float rotateSpeed;
 
     private Transform legSlashPoint;
     private Rigidbody rb;
     private UnityEventEnemy_A unityEvent;
+    EnemyAggroSystem enemyAggroSystem;
 
     public override void OnStart()
     {
@@ -33,14 +37,13 @@ public class LegSlash_Dubble : Action
 
         unityEvent = UnityEventEnemy.Value.GetComponent<UnityEventEnemy_A>();
         unityEvent.VFX_LegSlash_C();
+
+        enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        enemyAggroSystem.StopReducingController(true);
     }
 
     public override TaskStatus OnUpdate()
     {
-        // if (targetObject.Value == null)
-        // {
-        //     return TaskStatus.Failure;
-        // }
         return TaskStatus.Success;
     }
 
@@ -60,23 +63,22 @@ public class LegSlash_Dubble : Action
 
     private void Rotation()
     {
-        // 获取敌人到玩家的方向
-        Vector3 directionToPlayer = targetObject.Value.transform.position - transform.position;
-        directionToPlayer.y = 0;
-        // 使用Quaternion.LookRotation直接设置敌人的朝向
-        Quaternion targetRotation = Quaternion.LookRotation(directionToPlayer, Vector3.up);
+        Vector3 targetPosition = new Vector3(targetObject.Value.transform.position.x, transform.position.y, targetObject.Value.transform.position.z);
+        Quaternion rotation = Quaternion.LookRotation(targetPosition - transform.position);
 
-        // 限制转动角度不超过15度
-        float angleDifference = Quaternion.Angle(transform.rotation, targetRotation);
-        if (angleDifference <= maxRotateAngle)
+        float angle = Quaternion.Angle(transform.rotation, rotation);
+
+        float maxRotationSpeed = rotateSpeed * Time.deltaTime;
+        if (angle > maxRotationSpeed)
         {
-            // 如果当前角度差在限定范围内，直接设置朝向
-            transform.rotation = targetRotation;
+            float t = maxRotationSpeed / angle;
+            rotation = Quaternion.Slerp(transform.rotation, rotation, t);
         }
-        else
-        {
-            // 如果超过限定范围，根据最大角度进行插值
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, maxRotateAngle / angleDifference);
-        }
+        transform.rotation = rotation;
+    }
+
+    public override void OnEnd()
+    {
+        enemyAggroSystem.StopReducingController(false);
     }
 }
