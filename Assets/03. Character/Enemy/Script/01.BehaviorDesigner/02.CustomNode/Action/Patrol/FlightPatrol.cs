@@ -30,12 +30,12 @@ public class FlightPatrol : Action
    {
       if(enemyPatrolSystem != null && enemyPatrolSystem.currentWaypoint != null)
       {
-         Movement();
+         Patrol();
       }
       return TaskStatus.Running;
    }
 
-   private void Movement()
+   private void Patrol()
    {
       Vector3 movingTarget = enemyPatrolSystem.currentWaypoint.position;
       LookAtTarget(movingTarget);

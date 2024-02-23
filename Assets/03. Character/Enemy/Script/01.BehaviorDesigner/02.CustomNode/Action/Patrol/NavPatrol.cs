@@ -10,6 +10,7 @@ public class NavPatrol : Action
    
    [Header("Movement")]
    [SerializeField] private float moveSpeed = 6;
+   [SerializeField] private float rotateSpeed = 2.5f;
 
    private Animator animator;
    NavMeshAgent navMeshAgent;
@@ -30,14 +31,46 @@ public class NavPatrol : Action
    {
       if(navMeshAgent != null && enemyPatrolSystem != null && enemyPatrolSystem.currentWaypoint != null)
       {
-         Movement();
+         Patrol();
       }
       return TaskStatus.Running;
    }
 
-   private void Movement()
+   private void Patrol()
    {
-      navMeshAgent.SetDestination(enemyPatrolSystem.currentWaypoint.position);
+      Vector3 movingTarget = enemyPatrolSystem.currentWaypoint.position;
+      LookAtTarget(movingTarget);
+
+      // 面向後再移動
+      if(isLookingAtTarget(movingTarget))
+      {
+         navMeshAgent.SetDestination(movingTarget);
+      }
+      else
+      {
+         navMeshAgent.ResetPath();
+      }
+   }
+
+   private void LookAtTarget(Vector3 lookingTarget)
+   {
+      Quaternion rotation = Quaternion.LookRotation(new Vector3(lookingTarget.x, transform.position.y, lookingTarget.z) - transform.position);
+      transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * rotateSpeed);
+   }
+
+   bool isLookingAtTarget(Vector3 target)
+   {
+      // 忽略Y軸
+      Vector3 selfPosition = new Vector3(transform.position.x, 0f, transform.position.z);
+      Vector3 targetPosition = new Vector3(target.x, 0f, target.z);
+
+      // 標準化後判斷角度
+      Vector3 directionToTarget = (targetPosition - selfPosition).normalized;
+      if (Vector3.Angle(transform.forward, directionToTarget) < 2.5f)
+      {
+         return true;
+      }
+      return false;
    }
 
    private void AnimationStart()
