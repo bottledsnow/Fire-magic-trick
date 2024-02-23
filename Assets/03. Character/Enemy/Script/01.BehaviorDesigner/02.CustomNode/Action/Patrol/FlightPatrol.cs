@@ -38,10 +38,19 @@ public class FlightPatrol : Action
    private void Movement()
    {
       Vector3 movingTarget = enemyPatrolSystem.currentWaypoint.position;
-      Vector3 direction = (movingTarget - transform.position).normalized;
-      rigidbody.AddForce(direction * moveSpeed * Time.deltaTime);
-
       LookAtTarget(movingTarget);
+
+      if(isLookingAtTarget(movingTarget))
+      {
+         MoveToNextWaypoint(movingTarget);
+      }
+   }
+
+   private void MoveToNextWaypoint(Vector3 target)
+   {
+      // 朝向下一個路徑點移動
+      Vector3 direction = (target - transform.position).normalized;
+      rigidbody.AddForce(direction * moveSpeed * Time.deltaTime);
    }
 
    private void AnimationStart()
@@ -72,5 +81,20 @@ public class FlightPatrol : Action
       {
          animator.SetBool("isMove",false);
       }
+   }
+
+   bool isLookingAtTarget(Vector3 target)
+   {
+      // 忽略Y軸
+      Vector3 selfPosition = new Vector3(transform.position.x, 0f, transform.position.z);
+      Vector3 targetPosition = new Vector3(target.x, 0f, target.z);
+
+      // 標準化後判斷角度
+      Vector3 directionToTarget = (targetPosition - selfPosition).normalized;
+      if (Vector3.Angle(transform.forward, directionToTarget) < 2.5f)
+      {
+         return true;
+      }
+      return false;
    }
 }
