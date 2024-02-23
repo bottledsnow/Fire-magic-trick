@@ -3,34 +3,37 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    private Animator _playerAnimator;
+    private Animator animator;
     private void Start()
     {
-        _playerAnimator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
     public void SuperDashStart()
     {
-        _playerAnimator.SetBool("isSuperDash", true);
+        animator.SetBool("isSuperDash", true);
     }
     public void SuperDashEnd()
     {
-        _playerAnimator.SetBool("isSuperDash", false);
+        animator.SetBool("isSuperDash", false);
     }
     public void InputY()
     {
-        _playerAnimator.SetTrigger("InputY");
+        animator.SetTrigger("InputY");
     }
     public void PlayAnimator(string name)
     {
-        _playerAnimator.Play(name);
+        animator.Play(name);
     }
     public void ToDialogue_Idel()
     {
-        _playerAnimator.Play("InStory(Idel)");
+        animator.Play("InStory(Idel)");
     }
     public void EndDialogue()
     {
-        _playerAnimator.SetTrigger("EndDialogue");
+        animator.SetTrigger("EndDialogue");
     }
-
+    public void Dash()
+    {
+        animator.SetTrigger("Dash");
+    }
 }

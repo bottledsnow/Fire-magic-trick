@@ -23,6 +23,9 @@ public class NGP_Dash : NGP_Basic_Dash
     public event DashDelegateHandler OnDashForward;
     public event DashDelegateHandler OnDashBackward;
     public event DashDelegateHandler OnDashCombo;
+
+    //Script
+    private PlayerAnimator animator;
     //feedbacks
     private MMF_Player Feedback_DashBack;
 
@@ -42,6 +45,7 @@ public class NGP_Dash : NGP_Basic_Dash
 
         //Script
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        animator = GameManager.singleton.Player.GetComponent<PlayerAnimator>();
 
         //feedbacks
         Feedback_DashBack = GameManager.singleton.Feedbacks_List.DashBack;
@@ -80,6 +84,9 @@ public class NGP_Dash : NGP_Basic_Dash
     {
         base.DashForwardSetting();
 
+        //animator
+        animator.Dash();
+
         //event
         OnDashForward?.Invoke();
         dashState = DashState.Fire;
@@ -92,6 +99,9 @@ public class NGP_Dash : NGP_Basic_Dash
     protected override void DashBackwardSetting()
     {
         base.DashBackwardSetting();
+
+        //animator
+        animator.Dash();
 
         //event
         OnDashBackward?.Invoke();
