@@ -7,7 +7,7 @@ public class SkillCooldown : Conditional
 	[Header("CooldownTime")]
 	[SerializeField] private float cooldown;
 
-	public float timer;
+	[HideInInspector]public float timer;
 
 	public override TaskStatus OnUpdate()
 	{

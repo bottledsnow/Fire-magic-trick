@@ -4,7 +4,7 @@ using BehaviorDesigner.Runtime.Tasks;
 
 public class CooldownStart : Action
 {
-	[Header("SharedVariable")]
+	[Header("SkillCooldownTask")]
     [SerializeField] private SkillCooldown skillCooldown;
 
 	public override TaskStatus OnUpdate()
