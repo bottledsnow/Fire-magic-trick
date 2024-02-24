@@ -1,3 +1,4 @@
+using MoreMountains.Tools;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ public class Pumber : MonoBehaviour
 
     //
     [SerializeField] private GameObject Trigger;
+    [SerializeField] private int State;
     [Header("Death")]
     public bool isDeathPumber;
     [Header("Bounce")]
@@ -18,6 +20,10 @@ public class Pumber : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Trigger.SetActive(false);
+    }
+    private void Start()
+    {
+        SetAnimatorState(State);
     }
     public void SetAnimatorState(int level)
     {
