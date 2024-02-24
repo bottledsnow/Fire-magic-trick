@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class FireDashCollider : MonoBehaviour
 {
-    [SerializeField] private FireDash _fireDash;
     [SerializeField] private MMF_Player HitFeedbacks;
 
     //Script
     private Basic_AimSupportSystem _aimSupportSystem;
     private PlayerDamage _playerDamage;
     private VibrationController vibrationController;
+    private NGP_Dash dash;
 
     //value
     private float CrashForce;
@@ -19,7 +19,7 @@ public class FireDashCollider : MonoBehaviour
     private bool isTriggerDamage;
     private void Start()
     {
-        _fireDash = GameManager.singleton.EnergySystem.GetComponent<FireDash>();
+        dash = GameManager.singleton.NewGamePlay.GetComponent<NGP_Dash>();
         _aimSupportSystem = GameManager.singleton.Player.GetComponent<Basic_AimSupportSystem>();
         _playerDamage = GetComponent<PlayerDamage>();
         vibrationController = GameManager.singleton.GetComponent<VibrationController>();
@@ -28,8 +28,8 @@ public class FireDashCollider : MonoBehaviour
     }
     private void Initialization()
     {
-        CrashForce = _fireDash.CrashForce;
-        CrashForceUp = _fireDash.CrashForceUp;
+        CrashForce = dash.CrashForce;
+        CrashForceUp = dash.CrashForceUp;
     }
     private void OnTriggerEnter(Collider other)
     {

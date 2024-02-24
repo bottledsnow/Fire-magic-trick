@@ -13,11 +13,17 @@ public class SuperJump : MonoBehaviour
     {
         playerDamage = GetComponent<PlayerDamage>();
         vibrationController = GameManager.singleton.GetComponent<VibrationController>();
-        Destroy(gameObject, 1f);
+        //Destroy(gameObject, 1f);
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Enemy"))
+        if (other.CompareTag("Glass"))
+        {
+            Debug.Log("Glass Broken Glass Broken Glass Broken Glass Broken");
+            other.GetComponent<GlassSystem>().BrokenCheck_SuperJump();
+        }
+
+        if (other.CompareTag("Enemy"))
         {
             playerDamage.ToDamageEnemy(other);
             vibrationController.Vibrate(0.5f, 0.25f);
@@ -27,9 +33,7 @@ public class SuperJump : MonoBehaviour
 
             rb.AddForce(dir * Force, ForceMode.Impulse);
         }
-        if(other.CompareTag("Glass"))
-        {
-            other.GetComponent<GlassSystem>().BrokenCheck_SuperJump();
-        }
+
+        Debug.Log("Hit:"+other.tag);
     }
 }
