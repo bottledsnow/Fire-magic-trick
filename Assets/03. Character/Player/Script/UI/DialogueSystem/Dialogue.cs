@@ -1,3 +1,4 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,5 +14,6 @@ public class Dialogue_Content
     public Sprite CharacterIcon;
     [TextArea(3, 10)]
     public string sentences;
-
+    [Header("Feedbacak¡]if so¡^")]
+    public MMF_Player feedback;
 }

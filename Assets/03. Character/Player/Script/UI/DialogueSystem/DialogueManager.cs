@@ -102,6 +102,7 @@ public class DialogueManager : MonoBehaviour
         Dialogue_Content content = contents.Dequeue();
         nameText.text = content.name;
         characterIcon.sprite = content.CharacterIcon;
+        if(content.feedback != null) content.feedback.PlayFeedbacks();
         StopAllCoroutines();
         StartCoroutine(TypeSentence(content.sentences));
     }
