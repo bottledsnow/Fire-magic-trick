@@ -7,7 +7,10 @@ public class SpawnPoint : MonoBehaviour
     [Header("Spawn Point")]
     [SerializeField] private float spawnForce;
     [SerializeField] private float delay;
-
+    [Space(10)]
+    [SerializeField] private bool useRandomPosition;
+    [SerializeField] private Vector3 min;
+    [SerializeField] private Vector3 max;
     [Header("Spawn Object")]
     [SerializeField] private GameObject[] enemys;
 
@@ -51,7 +54,16 @@ public class SpawnPoint : MonoBehaviour
         {
             enemys[i].SetActive(true);
             EnemyHealthSystem enemyHealthSystem = enemys[i].GetComponent<EnemyHealthSystem>();
-            enemyHealthSystem.Rebirth(this.transform.position, this.transform.rotation);
+            Vector3 position = this.transform.position;
+            if(useRandomPosition)
+            {
+                float x = Random.Range(min.x, max.x);
+                float y = Random.Range(min.y, max.y);
+                float z = Random.Range(min.z, max.z);
+                Vector3 offset = new Vector3(x, y, z);
+                position += offset;
+            }
+            enemyHealthSystem.Rebirth(position, this.transform.rotation);
             Rigidbody rb = enemys[i].GetComponent<Rigidbody>();
             rb.AddForce(this.transform.forward * spawnForce, ForceMode.Impulse);
         }

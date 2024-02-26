@@ -26,6 +26,7 @@ public class GlassSystem : MonoBehaviour
     [SerializeField] private bool canEnemyCrash;
     [Header("SuperJump")]
     [SerializeField] private bool canSuperJump;
+    [SerializeField] private bool jumpDelayMode;
 
 
     private ProgressSystem progressSystem;
@@ -66,7 +67,15 @@ public class GlassSystem : MonoBehaviour
     {
         if(canSuperJump)
         {
-            BrokenSuperFast();
+            if(jumpDelayMode)
+            {
+                delayMode();
+            }
+            else
+            {
+                BrokenSuperFast();
+
+            }
         }
     }
     public void BrokenCheck_Crash()
