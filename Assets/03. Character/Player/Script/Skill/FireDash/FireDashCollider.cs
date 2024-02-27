@@ -80,8 +80,12 @@ public class FireDashCollider : MonoBehaviour
             if (other.CompareTag("Glass"))
             {
                 GlassSystem glass = other.GetComponent<GlassSystem>();
-                HitFeedbacks.PlayFeedbacks();
-                glass.BrokenCheck_Crash();
+
+                if(glass.canCrash)
+                {
+                    HitFeedbacks.PlayFeedbacks();
+                    glass.BrokenCheck_Crash();
+                }
             }
         }
     }

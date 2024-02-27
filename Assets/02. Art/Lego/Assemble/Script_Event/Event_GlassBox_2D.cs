@@ -14,11 +14,13 @@ public class Event_GlassBox_2D : MonoBehaviour
     {
         for(int i = 0; i < rb.Length; i++)
         {
+            rb[i].isKinematic = false;
             rb[i].useGravity = true;
         }
-        for(int i = 0;i < colliders.Length; i++)
+        for (int i = 0;i < colliders.Length; i++)
         {
             colliders[i].enabled = false;
+            Destroy(colliders[i].gameObject,2);
         }
     }
 }

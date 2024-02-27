@@ -21,7 +21,7 @@ public class GlassSystem : MonoBehaviour
     [Header("Charge")]
     [SerializeField] private bool canCharge;
     [Header("Crash")]
-    [SerializeField] private bool canCrash;
+    [SerializeField] public bool canCrash;
     [Header("EnemyCrash")]
     [SerializeField] private bool canEnemyCrash;
     [Header("SuperJump")]

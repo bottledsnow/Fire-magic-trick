@@ -1,4 +1,3 @@
-using BehaviorDesigner.Runtime.Tasks.Unity.UnityParticleSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
