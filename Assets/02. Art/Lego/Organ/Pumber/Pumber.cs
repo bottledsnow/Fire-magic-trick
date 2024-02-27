@@ -1,4 +1,3 @@
-using MoreMountains.Tools;
 using System.Threading.Tasks;
 using UnityEngine;
 
@@ -19,7 +18,11 @@ public class Pumber : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
-        Trigger.SetActive(false);
+
+        if(!isDeathPumber)
+        {
+            Trigger.SetActive(false);
+        }
     }
     private void Start()
     {

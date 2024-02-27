@@ -29,8 +29,8 @@ public class TriggerArea_SuperPumber : MonoBehaviour
         {
             if(isDeathPumber)
             {
-                deathSystem.EnterDeathImage();
-            
+                deathSystem.EnterDeathImage_Fast();
+                return;
             }
 
             Vector3 direction = this.transform.up;
