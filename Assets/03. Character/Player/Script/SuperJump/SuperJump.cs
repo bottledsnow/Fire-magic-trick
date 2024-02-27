@@ -13,7 +13,7 @@ public class SuperJump : MonoBehaviour
     {
         playerDamage = GetComponent<PlayerDamage>();
         vibrationController = GameManager.singleton.GetComponent<VibrationController>();
-        //Destroy(gameObject, 1f);
+        Destroy(gameObject, 1f);
     }
     private void OnTriggerEnter(Collider other)
     {

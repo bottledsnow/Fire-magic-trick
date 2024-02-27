@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8596255727824709157}
+  - component: {fileID: 2695193487028491703}
   m_Layer: 0
   m_Name: GlassPlafrom
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2695193487028491703
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1225046967778355275}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.6179774, y: 0.2427141, z: 5.9941673}
+  m_Center: {x: 0.02908456, y: 0.032433692, z: -0.025445214}
 --- !u!1001 &6448682832756274429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -87,7 +101,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: big_glassplatform
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2753980622505837601, guid: 6c0be965aa3d30748a0cc0fe1fc17a9a, type: 3}
+    - {fileID: 3804498376378228339, guid: 6c0be965aa3d30748a0cc0fe1fc17a9a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 6c0be965aa3d30748a0cc0fe1fc17a9a, type: 3}
 --- !u!4 &2909439148421348719 stripped
 Transform:
