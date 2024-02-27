@@ -20,7 +20,11 @@ public class SuperJump : MonoBehaviour
         if (other.CompareTag("Glass"))
         {
             Debug.Log("Glass Broken Glass Broken Glass Broken Glass Broken");
-            other.GetComponent<GlassSystem>().BrokenCheck_SuperJump();
+            GlassSystem glass = other.GetComponent<GlassSystem>();
+            if(glass!=null)
+            {
+                glass.BrokenCheck_SuperJump();
+            }
         }
 
         if (other.CompareTag("Enemy"))

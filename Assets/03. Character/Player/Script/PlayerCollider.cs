@@ -25,7 +25,11 @@ public class PlayerCollider : MonoBehaviour
     {
         if(hit.collider.CompareTag("Glass"))
         {
-            hit.collider.GetComponent<GlassSystem>().Broken();
+            GlassSystem glass = hit.collider.GetComponent<GlassSystem>();
+            if(glass != null)
+            {
+                glass.Broken();
+            }
         }
     }
 }
