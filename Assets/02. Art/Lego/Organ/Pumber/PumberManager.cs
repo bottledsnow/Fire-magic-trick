@@ -4,6 +4,13 @@ public class PumberManager : MonoBehaviour
 {
     public Pumbers[] pumbers;
 
+    public void CloseAllPumbers()
+    {
+        for(int i=0;i<pumbers.Length;i++)
+        {
+            pumbers[i].SetPumbersState(0);
+        }
+    }
     public void SetPumbersState(int id,int state)
     {
         pumbers[id].SetPumbersState(state);

@@ -10,13 +10,25 @@ public class Barrier : MonoBehaviour
         //Script
         enemySpawn = GetComponentInParent<EnemySpawn>();
 
-        //Event
-        enemySpawn.OnSpawn += openBarrier;
-        enemySpawn.OnDeath += closeBarrier;
-        enemySpawn.OnClearM += closeBarrier;
+        if(enemySpawn != null )
+        {
+            //Event
+            enemySpawn.OnSpawn += openBarrier;
+            enemySpawn.OnDeath += closeBarrier;
+            enemySpawn.OnClearM += closeBarrier;
 
+            
+        }
         //Function
         getBarrier();
+        closeBarrier();
+    }
+    public void Open()
+    {
+        openBarrier();
+    }
+    public void Close()
+    {
         closeBarrier();
     }
     private void openBarrier()

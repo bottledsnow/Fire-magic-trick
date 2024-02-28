@@ -64,7 +64,10 @@ public class FireDashCollider : MonoBehaviour
                     }
 
                     EnemyHealthSystem enemy = other.GetComponent<EnemyHealthSystem>();
-                    enemy.SetAtCrash(true);
+                    if(enemy != null)
+                    {
+                        enemy.SetAtCrash(true);
+                    }
 
                     _aimSupportSystem.ToAimSupport(other.gameObject, _aimSupportSystem.aimSupportTime);
                     HitFeedbacks.PlayFeedbacks();
