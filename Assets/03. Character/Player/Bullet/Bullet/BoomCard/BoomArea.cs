@@ -29,7 +29,11 @@ public class BoomArea : MonoBehaviour
     private async void delayBoom()
     {
         await Task.Delay((int)(delay * 1000));
-        coli.enabled = true;
+        if(coli != null)
+        {
+            coli.enabled = true;
+
+        }
     }
     private void OnTriggerEnter(Collider other)
     {

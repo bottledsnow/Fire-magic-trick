@@ -5,9 +5,14 @@ using UnityEngine;
 public class Pumbers : MonoBehaviour
 {
     public bool toGetComponent;
+    public bool noAuto;
     public Pumber[] pumbers;
     private void OnValidate()
     {
+        if(noAuto)
+        {
+            return;
+        }
         // 獲取當前物體的直接子物體數量
         int childCount = transform.childCount;
         pumbers = new Pumber[childCount];
