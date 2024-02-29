@@ -19,15 +19,11 @@ public class TriggerDemoEnd : MonoBehaviour
         if(!trigger)
         {
             trigger = true;
-            BlackImage.Play("Enter");
-            await Task.Delay(2000);
-            Text.SetActive(true);
+            BlackImage.SetTrigger("Enter");
             await Task.Delay(3000);
-            Text.SetActive(false);
+            BlackImage.SetTrigger("Exit");
             player.transform.position = StartPosition.position;
-            BlackImage.Play("Exit");
             trigger = false;
         }
-        
     }
 }
