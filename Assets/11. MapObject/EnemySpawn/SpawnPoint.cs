@@ -30,8 +30,11 @@ public class SpawnPoint : MonoBehaviour
         cancellationTokenSource = new CancellationTokenSource();
 
         //event
-        enemySpawn.OnSpawn += () => spawn_delay();
-        enemySpawn.OnDeath += hideEnemy;
+        if(enemySpawn != null )
+        {
+            enemySpawn.OnSpawn += () => spawn_delay();
+            enemySpawn.OnDeath += hideEnemy;
+        }
 
         //Init
         hideEnemy();
@@ -43,6 +46,16 @@ public class SpawnPoint : MonoBehaviour
         {
             enemys[i].SetActive(false);
             Debug.Log(enemys[i].name + " is hidden");
+        }
+    }
+    public void Spawn()
+    {
+        for (int i = 0; i < enemys.Length; i++)
+        {
+            if (enemys[i].activeSelf == false)
+            {
+                spawn();
+            }
         }
     }
     private void spawn()

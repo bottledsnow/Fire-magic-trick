@@ -17,7 +17,10 @@ public class DeathArea : MonoBehaviour
         if(other.CompareTag("Enemy"))
         {
             EnemyHealthSystem enemyHealthSystem = other.GetComponent<EnemyHealthSystem>();
-            enemyHealthSystem.EnemyDeathRightNow();
+            if(enemyHealthSystem != null )
+            {
+                enemyHealthSystem.EnemyDeathRightNow();
+            }
         }
     }
 }

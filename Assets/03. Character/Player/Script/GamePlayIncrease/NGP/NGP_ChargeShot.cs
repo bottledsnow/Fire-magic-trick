@@ -54,6 +54,7 @@ public class NGP_ChargeShot : NGP_Basic_ChargeShot
                 else if(skillState.State == NGP_SkillState.SkillState.None)
                 {
                     //None.
+                    Debug.Log("None");
                 }
                 scatterShot(1);
             }

@@ -18,5 +18,6 @@ public class NewGamePlay_Kick : NewGamePlay_Basic_Kick
     {
         base.Onkick();
         bulletTime.BulletTime_Slow(bulletKeepTime);
+        Debug.Log("Kick Kick Kick");
     }
 }

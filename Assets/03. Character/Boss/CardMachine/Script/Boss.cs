@@ -18,13 +18,17 @@ public class Boss : MonoBehaviour, IHealth
     public UnityEvent OnBossDeath;
     private Boss_System system;
     public int iHealth { get; set; }
-    private void Awake()
+    protected virtual void Awake()
     {
         system = GetComponent<Boss_System>();
     }
-    private void Start()
+    protected virtual void Start()
     {
         health = MaxHealth;
+    }
+    protected virtual void Update()
+    {
+
     }
     public void TakeDamage(int damage, PlayerDamage.DamageType damageType)
     {

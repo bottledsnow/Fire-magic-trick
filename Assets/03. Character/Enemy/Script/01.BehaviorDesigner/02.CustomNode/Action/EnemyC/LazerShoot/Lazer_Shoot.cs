@@ -56,7 +56,7 @@ public class Lazer_Shoot : Action
         Ray ray = new Ray(aimmingLinePoint.position, transform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, maxLength, obstacleLayer))
         {
-            Debug.Log(hit.collider.gameObject);
+            //Debug.Log(hit.collider.gameObject);
             // 計算擊中障礙物的點與發射位置距離
             Vector3 hitPoint = hit.point;
             float distanceToPoint = Vector3.Distance(aimmingLinePoint.position, hitPoint);

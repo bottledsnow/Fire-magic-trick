@@ -37,7 +37,5 @@ public class SuperJump : MonoBehaviour
 
             rb.AddForce(dir * Force, ForceMode.Impulse);
         }
-
-        Debug.Log("Hit:"+other.tag);
     }
 }

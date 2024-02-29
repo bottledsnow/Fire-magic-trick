@@ -72,6 +72,7 @@ public class NGP_Basic_Combo : MonoBehaviour
     {
         setCanSuperDashShot(true);
         setCanComboShot(true);
+        Debug.Log("Kickkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
     }
     private void dashComboTimer()
     {
