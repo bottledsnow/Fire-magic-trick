@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAnimator_A : MonoBehaviour
@@ -15,6 +13,9 @@ public class EnemyAnimator_A : MonoBehaviour
 
     private void AnimatorHurt()
     {
-          animator.SetTrigger("Hurt");
+        if(animator != null)
+        {
+            animator.SetTrigger("Hurt");
+        }
     }
 }
