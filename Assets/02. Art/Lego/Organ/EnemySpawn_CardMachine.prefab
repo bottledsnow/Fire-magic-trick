@@ -34165,9 +34165,13 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   Enemy_A: {fileID: 0}
+  spawnDelay_A: 0
   Enemy_B: {fileID: 0}
+  spawnDelay_B: 0
   Enemy_C: {fileID: 0}
-  Entry: {fileID: 0}
+  spawnDelay_C: 0
+  spawnPoint_entry: {fileID: 0}
+  spawnPoint_sky: []
 --- !u!114 &1412013174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34182,6 +34186,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UI: {fileID: 0}
   barrier: {fileID: 0}
+  OnStartFight:
+    m_PersistentCalls:
+      m_Calls: []
   boss_name: "\u767C\u724C\u6A5F"
   boss_littleTitle: "\u64B2\u514B\u8ECD\u5718"
   boss: {fileID: 1412013173}
@@ -42557,37 +42564,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: card machine
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2146676463368882535, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3313129906905474393, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3605409371921459855, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 2920987029910899438, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 1797983335923927918, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3804307007278729165, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4531137809720174238, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4473458922840227055, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 2070494523360185637, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4055378079128214552, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4580796267526674509, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3330404472580737836, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4096135030281954864, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 2652269946442585718, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 8630404546076199730, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3430758890761614507, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3653441351556781506, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4294866581690324651, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4394138091608117133, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 2741148982078162316, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 2896476166895237950, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 7857252698066277822, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 2588506087327481461, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3054565570488215434, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4422212497779374389, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 2009014624211163850, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3594119002014015712, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 6888366367531591682, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 4537235508583803950, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
-    - {fileID: 3916703552400451734, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1b9413b78593b74982884719dcb69e8, type: 3}
 --- !u!4 &7115730625086290810 stripped
 Transform:
