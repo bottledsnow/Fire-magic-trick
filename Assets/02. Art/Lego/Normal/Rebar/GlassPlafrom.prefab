@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8596255727824709157}
-  - component: {fileID: 2695193487028491703}
   m_Layer: 9
   m_Name: GlassPlafrom
   m_TagString: Untagged
@@ -29,23 +28,108 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2163742576716105413}
   - {fileID: 2909439148421348719}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2695193487028491703
+--- !u!1 &2507864474582916780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2163742576716105413}
+  - component: {fileID: 1856744491139446188}
+  - component: {fileID: 6837738073915349243}
+  - component: {fileID: 6361072423146186203}
+  m_Layer: 9
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2163742576716105413
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507864474582916780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.37, z: -0}
+  m_LocalScale: {x: 3.8065, y: 1, z: 6.2547}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8596255727824709157}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1856744491139446188
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507864474582916780}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6837738073915349243
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507864474582916780}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f4fe9e29074a0c842835ed54e9ad1782, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6361072423146186203
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1225046967778355275}
+  m_GameObject: {fileID: 2507864474582916780}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.6179774, y: 0.2427141, z: 5.9941673}
-  m_Center: {x: 0.02908456, y: 0.032433692, z: -0.025445214}
+  m_Size: {x: 1.0000011, y: 1, z: 1.0000011}
+  m_Center: {x: -0.0000267029, y: 4.4311627e-18, z: -0.000015258804}
 --- !u!1001 &6448682832756274429
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83,7 +167,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8151011350636398994, guid: 6c0be965aa3d30748a0cc0fe1fc17a9a, type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8151011350636398994, guid: 6c0be965aa3d30748a0cc0fe1fc17a9a, type: 3}
       propertyPath: m_LocalPosition.x

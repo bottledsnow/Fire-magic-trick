@@ -3,8 +3,13 @@ using UnityEngine;
 public class TriggerArea_ProgressCheckPointArea : MonoBehaviour
 {
     private ProgressSystem _progressSystem;
+    private Animator animator;
     private bool Trigger;
 
+    private void Awake()
+    {
+        animator = GetComponentInParent<Animator>();
+    }
     private void Start()
     {
         _progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
@@ -15,6 +20,10 @@ public class TriggerArea_ProgressCheckPointArea : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _progressSystem.ProgressCheckPoint = transform;
+            if(animator!=null)
+            {
+                animator.SetTrigger("Active");
+            }
             Trigger = true;
         }
     }
@@ -25,6 +34,10 @@ public class TriggerArea_ProgressCheckPointArea : MonoBehaviour
             if (other.CompareTag("Player"))
             {
                 _progressSystem.ProgressCheckPoint = transform;
+                if (animator != null)
+                {
+                    animator.SetTrigger("Active");
+                }
             }
             Trigger = true;
         }
