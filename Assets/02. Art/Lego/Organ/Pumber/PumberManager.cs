@@ -1,15 +1,18 @@
 using UnityEngine;
 [System.Serializable]
-public struct BoolParir
+public class ArrayLayout
 {
-    public bool bool1;
-    public bool bool2;
+    [System.Serializable]
+    public struct rowData
+    {
+        public bool[] row;
+    }
+    public rowData[] rows = new rowData[9]; 
 }
 public class PumberManager : MonoBehaviour
 {
     public Pumbers[] pumbers;
-    public BoolParir boolPair1;
-    public BoolParir boolPair2;
+    public ArrayLayout layout;
     public void CloseAllPumbers()
     {
         for(int i=0;i<pumbers.Length;i++)
