@@ -134,7 +134,11 @@ public class EnemyAggroSystem : MonoBehaviour
     public void GiveAggroTarget(GameObject player)
     {
         behaviorTree.SetVariableValue("targetObject", player);
-        aggroValue = maxAggro;
+
+        if (behaviorTree.GetVariable("targetObject") != null)
+        {
+            aggroValue = maxAggro;
+        }
     }
 
     public void StopReducingController(bool isTrue)
