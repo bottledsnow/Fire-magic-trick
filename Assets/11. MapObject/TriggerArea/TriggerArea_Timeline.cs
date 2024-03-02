@@ -31,6 +31,10 @@ public class TriggerArea_Timeline : MonoBehaviour
             }
         }
     }
+    public void readyPlay()
+    {
+        SetIsReady(true);
+    }
     private async void TriggerEvent()
     {
         await Task.Delay(250);
