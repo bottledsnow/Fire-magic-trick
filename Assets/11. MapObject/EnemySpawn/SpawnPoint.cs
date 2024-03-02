@@ -67,6 +67,7 @@ public class SpawnPoint : MonoBehaviour
         {
             enemys[i].SetActive(true);
             EnemyHealthSystem enemyHealthSystem = enemys[i].GetComponent<EnemyHealthSystem>();
+            enemyHealthSystem.giveTargetPlayer();
             Vector3 position = this.transform.position;
             if(useRandomPosition)
             {

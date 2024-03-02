@@ -95,6 +95,12 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         EnemyCoolingCheck();
         atCrashTimerSystem();
     }
+    public void giveTargetPlayer()
+    {
+        GameObject player = GameManager.singleton.Player.gameObject;
+        EnemyAggroSystem enemyAggroSystem = GetComponent<EnemyAggroSystem>();
+        if (enemyAggroSystem != null) enemyAggroSystem.GiveAggroTarget(player);
+    }
     private void atCrashTimerSystem()
     {
         if(atCrash)
