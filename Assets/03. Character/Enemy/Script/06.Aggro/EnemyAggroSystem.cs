@@ -34,9 +34,12 @@ public class EnemyAggroSystem : MonoBehaviour
     Vector3 viewPosition;
     bool stopReducing;
 
-    void Start()
+    private void Awake()
     {
         behaviorTree = GetComponent<BehaviorTree>();
+    }
+    void Start()
+    {
         viewPosition = new Vector3(transform.position.x , transform.position.y + viewHeight , transform.position.z);
     }
 
