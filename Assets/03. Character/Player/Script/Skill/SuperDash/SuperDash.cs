@@ -359,7 +359,10 @@ public class SuperDash : MonoBehaviour
         if(_playerCollider.hit != null)
         {
             EnemyHealthSystem enemyHealthSystem = _playerCollider.hit.collider.GetComponent<EnemyHealthSystem>();
-            enemyHealthSystem.EnemyDeathRightNow();
+            if(enemyHealthSystem != null)
+            {
+                enemyHealthSystem.EnemyDeathRightNow();
+            }
             _playerCollider.hit.collider.gameObject.SetActive(false);
         }
        
