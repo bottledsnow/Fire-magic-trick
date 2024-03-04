@@ -14,6 +14,7 @@ public class Boss : MonoBehaviour, IHealth
     public float MaxHealth;
     public float health;
     public bool invincible;
+    public bool isWin;
     public BossStage[] stages;
     public UnityEvent OnBossDeath;
     private Boss_System system;
@@ -28,7 +29,20 @@ public class Boss : MonoBehaviour, IHealth
     }
     protected virtual void Update()
     {
-
+        CheckActive();
+    }
+    private void CheckActive()
+    {
+        if(health >0)
+        {
+            if(!isWin)
+            {
+                if(this.gameObject.activeSelf==false)
+                {
+                    this.gameObject.SetActive(true);
+                }
+            }
+        }
     }
     public virtual void ResetBossFight()
     {
@@ -52,6 +66,7 @@ public class Boss : MonoBehaviour, IHealth
     {
         system.EndBossFight();
         OnBossDeath?.Invoke();
+        isWin = true;
     }
     private void StateCheck()
     {

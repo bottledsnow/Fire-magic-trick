@@ -41,10 +41,14 @@ public class Boss_System : MonoBehaviour
     public void StartBossFight()
     {
         if (isWin) return;
-        if (!isBoss) isBoss = true;
-        UI.Boss_Enter(boss_name, boss_littleTitle);
-        barrier.Open();
-        OnStartFight?.Invoke();
+        if (!isBoss)
+        {
+            isBoss = true;
+
+            UI.Boss_Enter(boss_name, boss_littleTitle);
+            barrier.Open();
+            OnStartFight?.Invoke();
+        }
     }
     public void EndBossFight()
     {
