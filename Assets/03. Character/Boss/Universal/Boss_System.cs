@@ -7,14 +7,29 @@ public class Boss_System : MonoBehaviour
     public Boss_UI UI;
     public Barrier barrier;
     public UnityEvent OnStartFight;
+    public UnityEvent OnResetFight;
     [Header("Boss")]
     [SerializeField] private string boss_name;
     [SerializeField] private string boss_littleTitle;
     [Space(10)]
     [SerializeField] private Boss boss;
 
+    private ProgressSystem progress;
+
     private bool isWin;
-    
+
+    private void Start()
+    {
+        progress = GameManager.singleton.GetComponent<ProgressSystem>();
+
+        progress.OnPlayerDeath += ResetBoss;
+    }
+    public void ResetBoss()
+    {
+        UI.Boss_Exit();
+        barrier.Close();
+        boss.ResetBossFight();
+    }
     public void StartBossFight()
     {
         if (isWin) return;

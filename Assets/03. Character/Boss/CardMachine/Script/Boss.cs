@@ -30,6 +30,11 @@ public class Boss : MonoBehaviour, IHealth
     {
 
     }
+    public virtual void ResetBossFight()
+    {
+        health = MaxHealth;
+        system.SetHealth(healthPersentage(health));
+    }
     public void TakeDamage(int damage, PlayerDamage.DamageType damageType)
     {
         health -= damage;

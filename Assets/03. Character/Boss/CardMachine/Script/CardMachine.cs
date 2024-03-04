@@ -15,6 +15,8 @@ public class CardMachine : Boss
     [Header("Spawn Point")]
     [SerializeField] private SpawnPoint spawnPoint_entry;
     [SerializeField] private SpawnPoint[] spawnPoint_sky;
+    [Header("Reset")]
+    [SerializeField] private PawSystem pawSystem;
 
 
     protected override void Awake()
@@ -29,6 +31,12 @@ public class CardMachine : Boss
     {
         base.Update();
     }
+    public override void ResetBossFight()
+    {
+        base.ResetBossFight();
+        pawSystem.StopSystem();
+    }
+
     public void OnBossFight()
     {
         StartCoroutine(TimerCoroutine_Entry());
