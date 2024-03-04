@@ -12,6 +12,16 @@ public class EnemyStoreHouse : MonoBehaviour
             enemys[i].gameObject.SetActive(false);
         }
     }
+    public void CloseAllEnemy()
+    {
+        for (int i = 0; i < enemys.Length; i++)
+        {
+            if (enemys[i] != null)
+            {
+                enemys[i].gameObject.SetActive(false);
+            }
+        }
+    }
     public EnemyHealthSystem GetEnemy()
     {
         for(int i=0;i<enemys.Length;i++)

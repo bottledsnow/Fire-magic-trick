@@ -46,6 +46,8 @@ public class PumberManager : MonoBehaviour
     {
         if(Bounce_duration_Ramdon==0) Bounce_duration_Ramdon = 0.25f;
         if (Bounce_duration == 0) Bounce_duration = 5;
+
+        
     }
     public void BossFight_PumbersEvent(ArrayLayout eventlayout,int state)
     {
@@ -70,37 +72,44 @@ public class PumberManager : MonoBehaviour
     }
     IEnumerator RamdomBounce()
     {
-        int i = Random.Range(0, pumbersLayout.rows.Length);
-        int j = Random.Range(0, pumbersLayout.rows[i].row.Length);
+        int i;
+        int j;
 
         while (true)
         {
+            i = Random.Range(0, pumbersLayout.rows.Length);
+            j = Random.Range(0, pumbersLayout.rows[i].row.Length);
+
             pumbersLayout.rows[i].row[j].SuperBounce();
             yield return new WaitForSeconds(Bounce_duration_Ramdon);
         }
     }
     public void Boss_140()
     {
+        CloseAllPumbers();
         BossFight_PumbersEvent(Event_140, state_140);
     }
     public void Boss_110()
     {
+        CloseAllPumbers();
         BossFight_PumbersEvent(Event_140, state_140 - 1);
         BossFight_PumbersEvent(Event_110,state_110);
     }
     public void Boss_70()
     {
-        BossFight_PumbersEvent(Event_140, state_140 - 1 - 1);
-        BossFight_PumbersEvent(Event_110, state_110 - 1);
+        CloseAllPumbers();
         BossFight_PumbersEvent(Event_70, state_70);
-        StartCoroutine(BounceDuration(1,1));
-        StartCoroutine(BounceDuration(1,7));
-        StartCoroutine(BounceDuration(7,1));
-        StartCoroutine(BounceDuration(7,7));
+
+        StartCoroutine(BounceDuration(1, 1));
+        StartCoroutine(BounceDuration(1, 7));
+        StartCoroutine(BounceDuration(7, 1));
+        StartCoroutine(BounceDuration(7, 7));
     }
     public void Boss_30()
     {
         CloseAllPumbers();
+        StartCoroutine(RamdomBounce());
+        StartCoroutine(RamdomBounce());
         StartCoroutine(RamdomBounce());
         StartCoroutine(RamdomBounce());
         StartCoroutine(RamdomBounce());
