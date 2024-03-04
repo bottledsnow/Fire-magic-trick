@@ -35,6 +35,7 @@ public class CardMachine : Boss
     {
         base.ResetBossFight();
         pawSystem.StopSystem();
+        StopAllCoroutines();
     }
 
     public void OnBossFight()

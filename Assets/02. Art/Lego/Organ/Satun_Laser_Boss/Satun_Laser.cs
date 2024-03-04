@@ -35,15 +35,16 @@ public class Satun_Laser : MonoBehaviour
     }
     public void active(bool state)
     {
+        ActiveParticle(state);
+
         if(state)
         {
             animator.SetTrigger("Start");
-            ActiveParticle(true);
         }
         else
         {
             animator.SetTrigger("End");
-            ActiveParticle(false);
+            animator.Play("Idel");
         }
     }
     private async void Laser()

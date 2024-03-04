@@ -95,6 +95,9 @@ public class NavPatrol : Action
       {
          animator.SetBool("isMove",false);
       }
-      navMeshAgent.ResetPath();
-   }
+        if (navMeshAgent != null)
+        {
+            navMeshAgent.ResetPath();
+        }
+    }
 }

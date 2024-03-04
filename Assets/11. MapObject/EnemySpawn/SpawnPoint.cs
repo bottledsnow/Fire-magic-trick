@@ -39,6 +39,10 @@ public class SpawnPoint : MonoBehaviour
         //Init
         hideEnemy();
     }
+    public void ResetEnemy()
+    {
+        hideEnemy();
+    }
     private void hideEnemy()
     {
         cancellationTokenSource?.Cancel();

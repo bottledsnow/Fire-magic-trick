@@ -16,6 +16,7 @@ public class Boss_System : MonoBehaviour
 
     private ProgressSystem progress;
 
+    private bool isBoss;
     private bool isWin;
 
     private void Start()
@@ -26,22 +27,35 @@ public class Boss_System : MonoBehaviour
     }
     public void ResetBoss()
     {
-        UI.Boss_Exit();
-        barrier.Close();
-        boss.ResetBossFight();
+        if (isBoss)
+        {
+            isBoss = false;
+
+            UI.Boss_Exit();
+            barrier.Close();
+            boss.ResetBossFight();
+            OnResetFight?.Invoke();
+            Debug.Log("Boss Fight Reset");
+        }
     }
     public void StartBossFight()
     {
         if (isWin) return;
+        if (!isBoss) isBoss = true;
         UI.Boss_Enter(boss_name, boss_littleTitle);
         barrier.Open();
         OnStartFight?.Invoke();
     }
     public void EndBossFight()
     {
-        UI.Boss_Exit();
-        barrier.Close();
-        boss.gameObject.SetActive(false);
+        if(isBoss)
+        {
+            isBoss = false;
+
+            UI.Boss_Exit();
+            barrier.Close();
+            boss.gameObject.SetActive(false);
+        }
     }
     public void SetHealth(float newHealthpersen)
     {

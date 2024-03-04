@@ -23,6 +23,7 @@ public class PawSystem : MonoBehaviour
     public void StopSystem()
     {
         GiveNewTarget(-1);
+        animator.Play("Point_0_Up");
         enemyStoreHouse.CloseAllEnemy();
     }
     public void Catch()
