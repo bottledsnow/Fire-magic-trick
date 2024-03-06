@@ -44,6 +44,15 @@ public class Boss : MonoBehaviour, IHealth
             }
         }
     }
+    public void CheckBoosEndAgain()
+    {
+        if(health>0)
+        {
+            health = 0;
+            OnBossDeath?.Invoke();
+            this.gameObject.SetActive(false);
+        }
+    }
     public virtual void ResetBossFight()
     {
         health = MaxHealth;

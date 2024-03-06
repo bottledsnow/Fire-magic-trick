@@ -1,9 +1,11 @@
+using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 
 public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
 {
     [Header("TPDash")]
+    [SerializeField] private MMF_Player feedbacks_TPDash;
     [SerializeField] TPDashCollider tpCollider;
     [SerializeField] private float TPDashSpeed;
     [SerializeField] private float newHitCountAddY;
@@ -42,6 +44,7 @@ public class NGP_FireSkill_BeaconTPDash : NGP_Basic_FireSkill_BeaconTPDash
         state.setModel(false);
         VFX_TPDash.Clear();
         VFX_TPDash.Play();
+        feedbacks_TPDash.PlayFeedbacks();
         speed = TPDashSpeed;
         NewPosition = Vector3.zero;
         setIsToNewPosition(false);
