@@ -1,5 +1,8 @@
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.Playables;
+using UnityEngine.UI;
 
 public class MenuSystem : MonoBehaviour
 {
@@ -10,22 +13,28 @@ public class MenuSystem : MonoBehaviour
     [SerializeField] private GameObject Script;
     [SerializeField] private GameObject UI;
     [SerializeField] private GameObject CameraPakage;
+    [Header("Opening")]
+    [SerializeField] private PlayableDirector Opening;
     private ThirdPersonController thirdPersonController;
     private EnergySystem energySystem;
     private GameObject MainCamera;
     private GameManager gameManager;
-
+    private GameObject Player;
+    private PlayerState state;
+    private StarterAssetsInputs starterAssets;
     private void Awake()
     {
         NullFatherObj(CameraPakage);
     }
     private void Start()
     {
+        starterAssets = GameManager.singleton.Player.GetComponent<StarterAssetsInputs>();
         gameManager = GameManager.singleton;
         thirdPersonController = GameManager.singleton.Player.GetComponent<ThirdPersonController>();
         energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
         MainCamera = Camera.main.gameObject;
-
+        Player = GameManager.singleton.Player.gameObject;
+        state = GameManager.singleton.Player.GetComponent<PlayerState>();
         Initialization();
     }
     #region For test
@@ -39,12 +48,20 @@ public class MenuSystem : MonoBehaviour
         NullFatherObj(gameManager.gameObject);
         NullFatherObj(MainCamera.gameObject);
         NullFatherObj(MenuUI);
-        NullFatherObj(PauseUI);
+        //NullFatherObj(PauseUI);
         NullFatherObj(UI);
         NullFatherObj(CameraPakage);
 
         SetPlayMode(false);
         SetMenuInterface(true);
+
+        if(state != null)
+        {
+            thirdPersonController.useCameraRotate= false;
+            state.OutControl();
+        }
+        starterAssets.cursorLocked = false;
+        starterAssets.cursorInputForLook = false;
     }
     private void NullFatherObj(GameObject obj)
     {
@@ -73,10 +90,18 @@ public class MenuSystem : MonoBehaviour
         SetMenuInterface(false);
         SetPlayMode(true);
         SetisStartGame(true);
+
+        //Opening
+        Player.transform.position = new Vector3(0, 0, 0);
+        Opening.Play();
+        starterAssets.cursorLocked = true;
+        starterAssets.cursorInputForLook = true;
+        Cursor.lockState = CursorLockMode.Locked;
+
     }
     public void GameSetting()
     {
-
+        
     }
     public void Credit()
     {

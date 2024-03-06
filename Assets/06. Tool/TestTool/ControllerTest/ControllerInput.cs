@@ -1,3 +1,4 @@
+using StarterAssets;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -55,12 +56,14 @@ public class ControllerInput : MonoBehaviour
     private AimSupportSystem aimSupportSystem;
     private Shooting_XBoxCameraCheck shooting_XBoxCameraCheck;
     private PlayerInput playerInput;
+    private StarterAssetsInputs starterInput;
 
     private void Awake()
     {
         cameraSystem = GetComponent<NGP_CameraSystem>();
         aimSupportSystem = GetComponent<AimSupportSystem>();
         shooting_XBoxCameraCheck = GetComponent<Shooting_XBoxCameraCheck>();
+        starterInput = GetComponent<StarterAssetsInputs>();
     }
     private void Update()
     {

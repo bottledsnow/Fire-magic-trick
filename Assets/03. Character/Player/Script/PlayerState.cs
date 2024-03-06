@@ -37,11 +37,14 @@ public class PlayerState : MonoBehaviour
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player Feedbacks_Debuff;
 
+    private void Awake()
+    {
+        _controller = GetComponent<ThirdPersonController>();
+        playerAnimator = GetComponent<PlayerAnimator>();
+    }
     private void Start()
     {
         _shooting_check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
-        _controller = GetComponent<ThirdPersonController>();
-        playerAnimator = GetComponent<PlayerAnimator>();
         gravityNormal = _controller.Gravity;
     }
     private void Update()
