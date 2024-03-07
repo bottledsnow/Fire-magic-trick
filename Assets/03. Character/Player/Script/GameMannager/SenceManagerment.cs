@@ -15,11 +15,15 @@ public class SenceManagerment : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Alpha5))
         {
-            SceneManager.LoadScene(0);
-            input.cursorInputForLook = false;
-            input.cursorLocked = false;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true ;
+            ReStartGame();
         }
+    }
+    public void ReStartGame()
+    {
+        SceneManager.LoadScene(0);
+        input.cursorInputForLook = false;
+        input.cursorLocked = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }

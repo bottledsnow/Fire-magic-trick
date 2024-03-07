@@ -27,6 +27,7 @@ public class Boss_System : MonoBehaviour
     }
     public void ResetBoss()
     {
+        if (isWin) return;
         if (isBoss)
         {
             isBoss = false;
@@ -64,6 +65,10 @@ public class Boss_System : MonoBehaviour
     public void SetHealth(float newHealthpersen)
     {
         UI.SetValue(newHealthpersen);
+    }
+    public void SetIsWind(bool active)
+    {
+        isWin = active;
     }
     public void DebugTest(string word)
     {

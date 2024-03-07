@@ -3,16 +3,17 @@ using System.Threading.Tasks;
 
 public class TriggerDemoEnd : MonoBehaviour
 {
+    //Script
     [SerializeField] private Animator BlackImage;
     [SerializeField] private GameObject Text;
     [SerializeField] private Transform StartPosition;
+    private SenceManagerment senceManagerment;
 
+    //variable
     private bool trigger;
-    private Transform player;
-
     private void Start()
     {
-        player = GameManager.singleton.Player;
+        senceManagerment = GameManager.singleton.GetComponent<SenceManagerment>();
     }
     public async void DemoEnd()
     {
@@ -21,9 +22,7 @@ public class TriggerDemoEnd : MonoBehaviour
             trigger = true;
             BlackImage.SetTrigger("Enter");
             await Task.Delay(3000);
-            BlackImage.SetTrigger("Exit");
-            player.transform.position = StartPosition.position;
-            trigger = false;
+            senceManagerment.ReStartGame();
         }
     }
 }
