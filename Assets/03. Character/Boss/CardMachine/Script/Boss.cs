@@ -57,6 +57,14 @@ public class Boss : MonoBehaviour, IHealth
     {
         health = MaxHealth;
         system.SetHealth(healthPersentage(health));
+
+        for (int i = 0; i < stages.Length; i++)
+        {
+            if (stages[i].isTrigger)
+            {
+                stages[i].isTrigger = false;
+            }
+        }
     }
     public void TakeDamage(int damage, PlayerDamage.DamageType damageType)
     {
@@ -66,6 +74,13 @@ public class Boss : MonoBehaviour, IHealth
         {
             Death();
             return;
+        }
+        if(health >0)
+        {
+            if(this.gameObject.activeSelf == false)
+            {
+                this.gameObject.SetActive(true);
+            }
         }
 
         system.SetHealth(healthPersentage(health));

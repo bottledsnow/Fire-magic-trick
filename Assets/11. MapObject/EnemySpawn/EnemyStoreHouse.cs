@@ -18,7 +18,11 @@ public class EnemyStoreHouse : MonoBehaviour
         {
             if (enemys[i] != null)
             {
-                enemys[i].gameObject.SetActive(false);
+                if (enemys[i].gameObject.activeSelf == true)
+                {
+                    enemys[i].GetComponent<EnemyHealthSystem>().EnemyDeathRightNow();
+                    enemys[i].gameObject.SetActive(false);
+                }
             }
         }
     }

@@ -1,4 +1,3 @@
-using BehaviorDesigner.Runtime;
 using UnityEngine;
 
 public class PawSystem : MonoBehaviour
@@ -18,6 +17,7 @@ public class PawSystem : MonoBehaviour
     }
     public void StartPawSystem()
     {
+        enemyStoreHouse.CloseAllEnemy();
         GiveNewTarget(0);
     }
     public void StopSystem()
@@ -35,6 +35,7 @@ public class PawSystem : MonoBehaviour
 
         //Enemy spawn
         enemy = enemyStoreHouse.GetEnemy();
+
         if(enemy !=null)
         {
             enemy.gameObject.SetActive(true);
@@ -44,6 +45,9 @@ public class PawSystem : MonoBehaviour
             //Enemy active
             enemyactive = enemy.GetComponent<Enemy_ActiveSystem>();
             enemyactive.stopEnemyAll();
+        }else
+        {
+            Debug.Log("NoEnemy");
         }
     }
     public void Freed()

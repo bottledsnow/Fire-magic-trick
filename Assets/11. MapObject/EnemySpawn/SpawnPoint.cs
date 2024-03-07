@@ -49,7 +49,6 @@ public class SpawnPoint : MonoBehaviour
         for (int i = 0; i < enemys.Length; i++)
         {
             enemys[i].SetActive(false);
-            Debug.Log(enemys[i].name + " is hidden");
         }
     }
     public void Spawn()

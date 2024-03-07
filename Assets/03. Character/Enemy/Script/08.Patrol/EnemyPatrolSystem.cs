@@ -113,7 +113,6 @@ public class EnemyPatrolSystem : MonoBehaviour
         {
             if (waypoint == null)
             {
-                Debug.Log(gameObject.name + " has waypoint error!");
                 return false;
             }
         }

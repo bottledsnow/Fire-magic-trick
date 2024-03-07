@@ -95,9 +95,13 @@ public class NavPatrol : Action
       {
          animator.SetBool("isMove",false);
       }
-        if (navMeshAgent != null)
+        if (navMeshAgent.isOnNavMesh)
         {
             navMeshAgent.ResetPath();
+        }
+        else
+        {
+            // 代理未被放置在導航網格上，可能需要進行初始化或放置
         }
     }
 }

@@ -40,6 +40,10 @@ public class CardMachine : Boss
 
     public void OnBossFight()
     {
+        if(this.gameObject.activeSelf == false)
+        {
+            this.gameObject.SetActive(true);
+        }
         StartCoroutine(TimerCoroutine_Entry());
         StartCoroutine(TimerCoroutine_Sky());
     }

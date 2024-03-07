@@ -46,8 +46,6 @@ public class PumberManager : MonoBehaviour
     {
         if(Bounce_duration_Ramdon==0) Bounce_duration_Ramdon = 0.25f;
         if (Bounce_duration == 0) Bounce_duration = 5;
-
-        
     }
     public void BossFight_PumbersEvent(ArrayLayout eventlayout,int state)
     {
@@ -113,8 +111,8 @@ public class PumberManager : MonoBehaviour
     }
     public void CloseAllPumbers()
     {
-        Debug.Log("Close");
-        for(int i=0;i<pumbers.Length;i++)
+        StopAllCoroutines();
+        for (int i=0;i<pumbers.Length;i++)
         {
             pumbers[i].SetPumbersState(0);
         }

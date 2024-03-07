@@ -44,7 +44,16 @@ public class NavMovement : Action
 
    private void Movement()
    {
-      navMeshAgent.SetDestination(targetObject.Value.transform.position);
+        if(navMeshAgent.gameObject != null || navMeshAgent.gameObject.activeSelf !=false)
+        {
+            if(navMeshAgent != null || navMeshAgent.enabled != false)
+            {
+                if(navMeshAgent.isOnNavMesh)
+                {
+                    navMeshAgent.SetDestination(targetObject.Value.transform.position);
+                }
+            }
+        }
    }
 
    bool NearbyTarget()
@@ -78,6 +87,19 @@ public class NavMovement : Action
       {
          animator.SetBool("isMove",false);
       }
-      navMeshAgent.ResetPath();
+        if (navMeshAgent.enabled)
+        {
+            if(navMeshAgent.gameObject != null || navMeshAgent.gameObject.activeSelf != false)
+            {
+                if(navMeshAgent.isOnNavMesh)
+                {
+                    navMeshAgent.ResetPath();
+                }
+            }
+        }
+        else
+        {
+            // 代理未處於活動狀態，可能需要進行初始化或啟用
+        }
    }
 }
