@@ -22,11 +22,15 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
     public Dialogue dialogue;
     private DialogueManager dialogueManager;
     private PlayerState playerState;
+    private ProgressSystem progressSystem;
+
 
     private void Start()
     {
         dialogueManager = GameManager.singleton.UISystem.GetComponent<DialogueManager>();
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        progressSystem = GameManager.singleton.GetComponent<ProgressSystem>();
+        progressSystem.OnPlayerDeath += ResetCanTrigger;
         canTrigger = true;
     }
     private void Update()
@@ -72,6 +76,10 @@ public class TriggerArea_DialogueTrigger : MonoBehaviour
                 canTrigger = false;
             }
         }
+    }
+    private void ResetCanTrigger()
+    {
+        canTrigger = true;
     }
     private void DialogueEnd()
     {

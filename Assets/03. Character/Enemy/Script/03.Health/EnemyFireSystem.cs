@@ -83,7 +83,10 @@ public class EnemyFireSystem : MonoBehaviour
     }
     private void SetDashFire(bool active)
     {
-        DashFire.SetActive(active);
+        if(DashFire!=null)
+        {
+            DashFire.SetActive(active);
+        }
     }
     private void SetSuperDashFire(bool active)
     {
