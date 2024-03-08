@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TestTool_Teleport : MonoBehaviour
@@ -34,6 +35,10 @@ public class TestTool_Teleport : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha6))
             {
                 TeleportToPoint(point[4].transform);
+            }
+            if(Input.GetKeyDown (KeyCode.Alpha4))
+            {
+                TeleportToPoint(point[5].transform);
             }
         }
     }

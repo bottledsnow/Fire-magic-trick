@@ -25,6 +25,16 @@ public class Boss_System : MonoBehaviour
 
         progress.OnPlayerDeath += ResetBoss;
     }
+    private void Update()
+    {
+        if(isBoss && !isWin)
+        {
+            if(this.gameObject.activeSelf==false)
+            {
+                this.gameObject.SetActive(true);
+            }
+        }
+    }
     public void ResetBoss()
     {
         if (isWin) return;
