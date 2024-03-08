@@ -75,14 +75,14 @@ public class ControllerInput : MonoBehaviour
     }
     private void mouseModeSetting()
     {
-        cameraSystem.enabled = false;
-        aimSupportSystem.enabled = false;
+        cameraSystem.setIsMouse(true);
+        aimSupportSystem.setIsMouse(true);
         shooting_XBoxCameraCheck.enabled = false;
     }
     private void controllerModeSetting()
     {
-        cameraSystem.enabled = true;
-        aimSupportSystem.enabled = true;
+        cameraSystem.setIsMouse(false);
+        aimSupportSystem.setIsMouse(false);
         shooting_XBoxCameraCheck.enabled = true;
     }
     private void inputModeSystem()

@@ -50,6 +50,9 @@ public class Basic_AimSupportSystem : MonoBehaviour
     private bool isToClose;
     protected bool isLocckTarget;
 
+    //set
+    private bool isMouse;
+
 
     protected virtual void Start()
     {
@@ -68,8 +71,13 @@ public class Basic_AimSupportSystem : MonoBehaviour
             ToLookTargetCheck();
         }
     }
+    public void setIsMouse(bool active)
+    {
+        isMouse = active;
+    }
     public virtual void ToAimSupport(GameObject Target)
     {
+        if (isMouse) return;
         if (Target == null)
         {
             SetisLockTaget(false);
@@ -86,6 +94,7 @@ public class Basic_AimSupportSystem : MonoBehaviour
     }
     public virtual async void ToAimSupport(GameObject Target, float time)
     {
+        if (isMouse) return;
         SetIsDelay(true);
         SetTarget(Target);
         SetIsAimSupport(true);

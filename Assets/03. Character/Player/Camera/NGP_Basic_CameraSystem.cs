@@ -11,6 +11,7 @@ public class NGP_Basic_CameraSystem : MonoBehaviour
     //variable
     protected bool isTriggerButton;
     protected bool isLookTarget;
+    protected bool isMouse;
 
     protected virtual void Start()
     {
@@ -21,11 +22,12 @@ public class NGP_Basic_CameraSystem : MonoBehaviour
     }
     protected virtual void Update()
     {
+        if (isMouse) return;
         LockEnemy();
     }
     private void LockEnemy()
     {
-        if(!isTriggerButton)
+        if(!isTriggerButton )
         {
             if(input.RSB)
             {
@@ -69,4 +71,5 @@ public class NGP_Basic_CameraSystem : MonoBehaviour
     public virtual void LookForward() { }
     private void setIsTriggerButton(bool value) { isTriggerButton = value; }
     protected void setIsLookTarget(bool value) { isLookTarget = value; }
+    public void setIsMouse(bool value) { isMouse = value; }
 }
