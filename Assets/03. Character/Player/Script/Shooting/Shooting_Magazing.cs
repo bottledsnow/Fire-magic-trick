@@ -56,6 +56,18 @@ public class Shooting_Magazing : MonoBehaviour
             return;
         }
     }
+    public void UseBullet(int number)
+    {
+        if(Bullet<=0) UseBullet();
+
+        for(int i=0; i < number; i++)
+        {
+            if(Bullet >0)
+            {
+                UseBullet();
+            }
+        }
+    }
     public async void ReloadSystem()
     {
         for (int i = 0; i < MaxBullet; i++)
