@@ -15,7 +15,7 @@ public class Shooting_Magazing : MonoBehaviour
     [SerializeField] private int startBulletNumber;
     public int Bullet;
     private int MaxBullet = 14;
-    private bool isReloading = false;
+    private bool isReload = false;
 
     protected virtual void Awake()
     {
@@ -32,26 +32,35 @@ public class Shooting_Magazing : MonoBehaviour
     }
     protected virtual void Update()
     {
-        if (input.ButtonX && !isReloading)
+        if (input.ButtonX && !isReload)
         {
             UseReload();
         }
     }
+    public void UseReload()
+    {
+        Reload();
+    }
     public void UseBullet()
     {
-        if (Bullet < 0)
+        if (isReload) return;
+
+        if (Bullet > 0)
         {
+            Bullet -= 1;
+            magazingUI.UpdateBulletsNumber(Bullet);
+        }else
+        if (Bullet <= 0)
+        {
+            Reload();
             return;
         }
-
-        Bullet -= 1;
-        magazingUI.UpdateBulletsNumber(Bullet);
     }
-    public async void Reloading()
+    public async void ReloadSystem()
     {
         for (int i = 0; i < MaxBullet; i++)
         {
-            if (Bullet >= 13)
+            if (Bullet > 13)
             {
                 Bullet = 14;
                 SetCanShooting(true);
@@ -62,6 +71,9 @@ public class Shooting_Magazing : MonoBehaviour
             magazingUI.UpdateBulletsNumber(Bullet);
             await Task.Delay(100);
         }
+        Bullet = 14;
+        SetCanShooting(true);
+        SetIsReload(false);
     }
     public void ClearBullet()
     {
@@ -73,7 +85,7 @@ public class Shooting_Magazing : MonoBehaviour
         Bullet = startBulletNumber;
         magazingUI.UpdateBulletsNumber(startBulletNumber);
     }
-    private void UseReload()
+    private void Reload()
     {
         SetIsReload(true);
         CheckBulletBumber();
@@ -86,7 +98,7 @@ public class Shooting_Magazing : MonoBehaviour
         }else
         {
             //don't need reload.
-            isReloading = false;
+            isReload = false;
             return;
         }
     }
@@ -95,10 +107,10 @@ public class Shooting_Magazing : MonoBehaviour
         if(CanReload())
         {
             SetCanShooting(false);
-            Reloading();
+            ReloadSystem();
         }else
         {
-            isReloading = false;
+            isReload = false;
             //no energy;
         }
     }
@@ -110,6 +122,6 @@ public class Shooting_Magazing : MonoBehaviour
     }
     protected void SetIsReload(bool value)
     {
-        isReloading = value;
+        isReload = value;
     }
 }

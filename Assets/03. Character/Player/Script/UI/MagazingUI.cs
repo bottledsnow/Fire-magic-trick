@@ -14,7 +14,7 @@ public class MagazingUI : MonoBehaviour
     public void UpdateBulletsNumber(int BulletNumber)
     {
         Initialization();
-        for (int i = 0; i <= BulletNumber; i++)
+        for (int i = 0; i < BulletNumber; i++)
         {
             bullets[i].SetActive(true);
         }
