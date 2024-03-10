@@ -3,91 +3,38 @@ using System.Threading.Tasks;
 
 public class Shooting_Magazing : MonoBehaviour
 {
-    private ControllerInput _input;
-    private EnergySystem _energySystem;
-    private MagazingUI _magazingUI;
-    private Shooting_Normal _shooting_Normal;
-    private Shooting _shooting;
+    //Script
+    protected Shooting_Normal shooting_Normal;
+    protected ControllerInput input;
+    protected EnergySystem energySystem;
+    protected MagazingUI magazingUI;
+    protected Shooting shooting;
+
+    //variable
     [Range(0,14)]
-    public int Bullet;
-
     [SerializeField] private int startBulletNumber;
-
+    public int Bullet;
     private int MaxBullet = 14;
     private bool isReloading = false;
 
-    private void Start()
+    protected virtual void Awake()
     {
-        _energySystem = GameManager.singleton._playerState.GetComponent<EnergySystem>();
-        _magazingUI = GameManager.singleton.UISystem.GetComponent<MagazingUI>();
-        _magazingUI.UpdateBulletsNumber(startBulletNumber);
-        _input = GameManager.singleton._input;
-        _shooting_Normal = GetComponent<Shooting_Normal>();
-        _shooting = GetComponent<Shooting>();
+        shooting_Normal = GetComponent<Shooting_Normal>();
+        shooting = GetComponent<Shooting>();
+    }
+    protected virtual void Start()
+    {
+        energySystem = GameManager.singleton._playerState.GetComponent<EnergySystem>();
+        magazingUI = GameManager.singleton.UISystem.GetComponent<MagazingUI>();
+        input = GameManager.singleton._input;
 
         Initialization();  
     }
-    private void Update()
+    protected virtual void Update()
     {
-        UseReload();
-    }
-    private void Initialization()
-    {
-        Bullet = startBulletNumber;
-    }
-    private void UseReload()
-    {
-        if(_input.ButtonX && !isReloading)
+        if (input.ButtonX && !isReloading)
         {
-            isReloading = true;
-            CheckBulletBumber();
-        }
-    }
-    private void CheckBulletBumber()
-    {
-        if(Bullet >=13)
-        {
-            isReloading = false;
-            return;
-        }else
-        {
-            CheckEnergy();
-        }
-    }
-    private void CheckEnergy()
-    {
-        bool CanUse;
-        _energySystem.UseReload(out CanUse);
-
-        if (CanUse)
-        {
-            SetShootingLimit(false);
-            Reloading();
-        }else
-        {
-            isReloading = false;
-            //no energy;
-        }
-    }
-    private void SetShootingLimit(bool Active)
-    {
-        _shooting.enabled = Active;
-        _shooting_Normal.enabled = Active;
-    }
-    public async void Reloading()
-    {
-        for(int i = 0; i < MaxBullet; i++)
-        {
-            if (Bullet >= 13)
-            {
-                Bullet = 14;
-                SetShootingLimit(true);
-                isReloading = false;
-                return;
-            }
-            Bullet += 1;
-            _magazingUI.UpdateBulletsNumber(Bullet);
-            await Task.Delay(100);
+            UseReload();
         }
     }
     public void UseBullet()
@@ -98,12 +45,71 @@ public class Shooting_Magazing : MonoBehaviour
         }
 
         Bullet -= 1;
-
-        _magazingUI.UpdateBulletsNumber(Bullet);
+        magazingUI.UpdateBulletsNumber(Bullet);
+    }
+    public async void Reloading()
+    {
+        for (int i = 0; i < MaxBullet; i++)
+        {
+            if (Bullet >= 13)
+            {
+                Bullet = 14;
+                SetCanShooting(true);
+                SetIsReload(false);
+                return;
+            }
+            Bullet += 1;
+            magazingUI.UpdateBulletsNumber(Bullet);
+            await Task.Delay(100);
+        }
     }
     public void ClearBullet()
     {
         Bullet = 0;
-        _magazingUI.UpdateBulletsNumber(Bullet);
+        magazingUI.UpdateBulletsNumber(Bullet);
+    }
+    private void Initialization()
+    {
+        Bullet = startBulletNumber;
+        magazingUI.UpdateBulletsNumber(startBulletNumber);
+    }
+    private void UseReload()
+    {
+        SetIsReload(true);
+        CheckBulletBumber();
+    }
+    private void CheckBulletBumber()
+    {
+        if(Bullet < 14)
+        {
+            CheckEnergy();
+        }else
+        {
+            //don't need reload.
+            isReloading = false;
+            return;
+        }
+    }
+    protected void CheckEnergy()
+    {
+        if(CanReload())
+        {
+            SetCanShooting(false);
+            Reloading();
+        }else
+        {
+            isReloading = false;
+            //no energy;
+        }
+    }
+    protected virtual bool CanReload() { return true; }
+    private void SetCanShooting(bool value)
+    {
+        shooting.enabled = value;
+        shooting_Normal.enabled = value;
+    }
+    protected void SetIsReload(bool value)
+    {
+        isReloading = value;
     }
 }
