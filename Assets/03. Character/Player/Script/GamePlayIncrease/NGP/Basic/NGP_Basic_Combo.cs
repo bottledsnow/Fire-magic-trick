@@ -5,11 +5,16 @@ public class NGP_Basic_Combo : MonoBehaviour
     [Header("Combo")]
     [SerializeField] private bool canComboShot;
     [SerializeField] private bool canComboDash;
+    [SerializeField] private bool canSuperDashKickShot;
 
     [Header("ComboTime")]
     [SerializeField] private float dashComboTime;
 
     //variable
+    public bool CanSuperDashKickShot
+    {
+        get { return canSuperDashKickShot; }
+    }
     public bool CanComboShot
     {
         get { return canComboShot; }
@@ -67,6 +72,12 @@ public class NGP_Basic_Combo : MonoBehaviour
             timer_DashCombo = dashComboTime;
             dash.CoolingStopRightNow();
         }
+    }
+    public void UseSuperDashKick_Ani()
+    {
+        setCanSuperDashShot(true);
+        setCanComboShot(true);
+        Debug.Log("Kickkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
     }
     public virtual void UseSuperDashKick() 
     {

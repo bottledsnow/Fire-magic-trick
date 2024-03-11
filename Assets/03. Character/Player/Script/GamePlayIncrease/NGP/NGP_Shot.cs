@@ -1,3 +1,4 @@
+using MagicaCloth2;
 using UnityEngine;
 
 public class NGP_Shot : NGP_Basic_Shot
@@ -16,6 +17,7 @@ public class NGP_Shot : NGP_Basic_Shot
     //Script
     private Shooting_Normal shooting_Normal;
     private NewGamePlay_Combo combo;
+    private Shooting_Magazing magazing;
 
     //Variable
     private bool isShot;
@@ -29,11 +31,15 @@ public class NGP_Shot : NGP_Basic_Shot
         Money
     }
     public ShotType shotType;
+    private void Awake()
+    {
+        combo = GetComponent<NewGamePlay_Combo>();
+    }
     public override void Start()
     {
         base.Start();
         shooting_Normal = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Normal>();
-        combo = GetComponent<NewGamePlay_Combo>();
+        magazing = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Magazing>();
     }
     public override void Update()
     {
@@ -65,41 +71,80 @@ public class NGP_Shot : NGP_Basic_Shot
             //is Coolling.
         }
     }
+    private bool canShot()
+    {
+        if (magazing.isReload || magazing.Bullet == 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
     public void Shot()
     {
+        if (canShot())
+        {
+            return;
+        }
         Shot(normalCard);
         shooting_Normal.PlayShootFeedbacks();
     }
     public void Shot(ShotType shotType)
     {
+        if (canShot())
+        {
+            return;
+        }
         Transform preferb = ChooseBullet(shotType);
         Shot(preferb);
         shooting_Normal.PlayShootFeedbacks();
     }
     public void Shot(float rotate_x)
     {
+        if (canShot())
+        {
+            return;
+        }
         Shot(normalCard, rotate_x);
         shooting_Normal.PlayShootFeedbacks();
     }
     public void Shot(float rotate_x, ShotType shotType)
     {
+        if (canShot())
+        {
+            return;
+        }
         Transform preferb = ChooseBullet(shotType);
         Shot(preferb, rotate_x);
         shooting_Normal.PlayShootFeedbacks();
     }
     public void Shot(float rotate_x, float rotate_y)
     {
+        if (canShot())
+        {
+            return;
+        }
         Shot(normalCard, rotate_x, rotate_y);
         shooting_Normal.PlayShootFeedbacks();
     }
     public void Shot(float rotate_x, float rotate_y, ShotType shotType)
     {
+        if (canShot())
+        {
+            return;
+        }
         Transform preferb = ChooseBullet(shotType);
         Shot(preferb, rotate_x, rotate_y);
         shooting_Normal.PlayShootFeedbacks();
     }
     public void Shot(Vector3 positionOffset, float rotate_x, float rotate_y, ShotType shotType)
     {
+        if (canShot())
+        {
+            return;
+        }
         Transform preferb = ChooseBullet(shotType);
         Shot(preferb, positionOffset, rotate_x, rotate_y);
         shooting_Normal.PlayShootFeedbacks();

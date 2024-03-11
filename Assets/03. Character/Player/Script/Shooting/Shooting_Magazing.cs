@@ -15,7 +15,7 @@ public class Shooting_Magazing : MonoBehaviour
     [SerializeField] private int startBulletNumber;
     public int Bullet;
     private int MaxBullet = 14;
-    private bool isReload = false;
+    public bool isReload = false;
 
     protected virtual void Awake()
     {

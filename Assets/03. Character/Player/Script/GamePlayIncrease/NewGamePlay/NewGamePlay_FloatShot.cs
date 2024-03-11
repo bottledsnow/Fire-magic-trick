@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
 {
-    private NewGamePlay_Shot shot;
+    private NGP_Shot shot;
     private BulletTime bulletTime;
     [SerializeField] private AudioSource S_floatShot;
     [Space(10)]
@@ -14,7 +14,7 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     {
         base.Start();
 
-        shot = GetComponent<NewGamePlay_Shot>();
+        shot = GetComponent<NGP_Shot>();
         bulletTime = GameManager.singleton.GetComponent<BulletTime>();
     }
     protected override void Update()

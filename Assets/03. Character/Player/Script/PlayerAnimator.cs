@@ -1,12 +1,17 @@
-using BehaviorDesigner.Runtime.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerAnimator : MonoBehaviour
 {
     private Animator animator;
+    public UnityEvent SuperDashKickEvent;
     private void Start()
     {
         animator = GetComponent<Animator>();
+    }
+    public void SuperDashKick()
+    {
+        SuperDashKickEvent?.Invoke();
     }
     public void SuperDashStart()
     {
