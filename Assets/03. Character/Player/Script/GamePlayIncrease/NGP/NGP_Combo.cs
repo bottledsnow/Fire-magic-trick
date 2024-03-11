@@ -30,5 +30,4 @@ public class NGP_Combo : NGP_Basic_Combo
     {
         base.UseSuperDashKick();
     }
-    
 }

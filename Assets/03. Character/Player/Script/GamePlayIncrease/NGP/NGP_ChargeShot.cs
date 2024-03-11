@@ -2,22 +2,25 @@ using UnityEngine;
 
 public class NGP_ChargeShot : NGP_Basic_ChargeShot
 {
+    //variable
+    private int comboShotCount = 3;
+    
     protected override void Update()
     {
         base.Update();
     }
-    //variable
-    private int comboShotCount = 3;
     protected override void ChargeShot_Normal(int power)
     {
         shot.SetShotType(NGP_Shot.ShotType.Normal);
         if(power>0)
         {
             NormalShot(power + 1);
+            magazing.UseBullet(power + 1);
         }
         else
         {
             shot.Normal_Shot();
+            magazing.UseBullet(1);
         }
         
     }
@@ -25,11 +28,13 @@ public class NGP_ChargeShot : NGP_Basic_ChargeShot
     {
         shot.SetShotType(NGP_Shot.ShotType.Wind);
         TripleShot(power + 1);
+        magazing.UseBullet(power + 1);
     }
     protected override void ChargeShot_Fire(int power)
     {
         shot.SetShotType(NGP_Shot.ShotType.Boom);
         scatterShot(power + 1);
+        magazing.UseBullet(power + 1);
     }
     protected override bool isCombo()
     { 

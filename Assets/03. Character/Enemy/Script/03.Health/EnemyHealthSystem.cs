@@ -33,6 +33,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     [SerializeField] private MMF_Player feedbacks_Shock;
     [SerializeField] private MMF_Player feedbacks_Boom;
     [SerializeField] private MMF_Player feedbacks_FlyBoom;
+    [SerializeField] private GameObject VFX_Death;
 
     [Header("KickBack")]
     public float kickBackRatio;
@@ -65,6 +66,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
     private float coolingTimer;
     private bool isCooling;
     private bool isInterval;
+    private bool isTriggerDeath;
 
     public int iHealth
     {
@@ -243,12 +245,25 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         }
         if (health == 0 || health<0)
         {
-            feedbacks_Boom.PlayFeedbacks();
-            feedbacks_Fire.StopFeedbacks();
-            feedbacks_Shock.StopFeedbacks();
-            feedbacks_Steam.StopFeedbacks();
-            OnEnemyDeath?.Invoke();
+            if(!isTriggerDeath)
+            {
+                SetIsTriggerDeath(true);
+                
+                feedbacks_Boom.PlayFeedbacks();
+                BoomBody();
+                feedbacks_Fire.StopFeedbacks();
+                feedbacks_Shock.StopFeedbacks();
+                feedbacks_Steam.StopFeedbacks();
+                OnEnemyDeath?.Invoke();
+            }
         }
+    }
+    private void BoomBody()
+    {
+        if (VFX_Death == null) return;
+        Vector3 offset = new Vector3(0, 1, 0);
+        GameObject VFX = Instantiate(VFX_Death, this.transform.position+ offset, Quaternion.identity);
+        Destroy(VFX, 3.5f);
     }
     #endregion
     #region
@@ -291,6 +306,7 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         feedbacks_Boom.StopFeedbacks();
         feedbacks_FlyBoom.StopFeedbacks();
         health = StartHealth;
+        SetIsTriggerDeath(false);
     }
     
     private void RebirthScription()
@@ -329,5 +345,9 @@ public class EnemyHealthSystem : MonoBehaviour, IHealth
         feedbacks_Shock.StopFeedbacks();
         feedbacks_Steam.StopFeedbacks();
         OnEnemyDeath?.Invoke();
+    }
+    private void SetIsTriggerDeath(bool value)
+    {
+        isTriggerDeath = value;
     }
 }

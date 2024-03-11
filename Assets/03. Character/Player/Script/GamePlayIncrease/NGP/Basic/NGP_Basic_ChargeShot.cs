@@ -22,6 +22,7 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
     protected NGP_Shot shot;
     protected NGP_SkillState skillState;
     protected NGP_Combo combo;
+    protected Shooting_Magazing magazing;
 
     protected override void Start()
     {
@@ -32,6 +33,8 @@ public class NGP_Basic_ChargeShot : NGP_Basic_Charge
         skillState = GetComponent<NGP_SkillState>();
         shot = GetComponent<NGP_Shot>();
         combo = GetComponent<NGP_Combo>();
+        magazing = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Magazing>();
+
 
         chargeType = ChargeType.Shot;
     }

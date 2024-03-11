@@ -3,7 +3,10 @@ using UnityEngine;
 
 public class EnergySystem : MonoBehaviour
 {
+    //Script
     private EnergySystemUI _energySystemUI;
+
+    //Variable
     [Header("Energy")]
     public float Energy;
     [SerializeField] private float StartEnergy;
@@ -12,8 +15,6 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] private float recoverTime;
     [SerializeField] private float recover;
     [Header("GetEnergy")]
-    [SerializeField] private MMF_Player Feedback_GetEnergy;
-
     private float timer;
     private bool isRecover;
 
@@ -27,11 +28,8 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] private float KickCost = 10;
     [Header("Feedbacks")]
     [SerializeField] private MMF_Player Feedbacks_NoEnegy;
+    [SerializeField] private MMF_Player Feedback_GetEnergy;
 
-    //[Header("Get")]
-    //[SerializeField] private float LampGet = 40;
-    //[SerializeField] private float KillGet = 10;
-    //[SerializeField] private float SuperKillGet = 10;
 
     private void Start()
     {
@@ -65,10 +63,8 @@ public class EnergySystem : MonoBehaviour
 
         if(Energy>100)
         {
-            Debug.Log("Increase Energy is over 100");
             Energy = 100;
         }
-
         UpdateUI(Energy);
     }
     private void Decrease(float energy)
@@ -77,10 +73,8 @@ public class EnergySystem : MonoBehaviour
 
         if (Energy <0)
         {
-            Debug.Log("Decrease Energy is over 100");
             Energy = 0;
         }
-
         UpdateUI(Energy);
     }
     private void UpdateUI(float Value)
@@ -93,6 +87,10 @@ public class EnergySystem : MonoBehaviour
     }
     #endregion
     #region use Skill
+    public void UseEnegy(int value)
+    {
+        Decrease(value);
+    }
     public void UseDash(out bool CanUse)
     {
         CanUse = CheckEnergyCanUse(DashCost);
@@ -234,6 +232,10 @@ public class EnergySystem : MonoBehaviour
     }
     #endregion
     #region TakeDamage
+    public void TakeDamage(int Damage)
+    {
+
+    }
     public void DecreaseEnergy(int Energy)
     {
         Decrease(Energy);
