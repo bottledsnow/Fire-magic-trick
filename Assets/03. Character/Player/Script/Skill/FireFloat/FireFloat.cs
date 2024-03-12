@@ -67,7 +67,6 @@ public class FireFloat : MonoBehaviour
                 if (energySystem.canUseEnegy(EnergySystem.SkillType.Float))
                 {
                     floatStart();
-                    Debug.Log("Float Start");
                 }
             }
         }

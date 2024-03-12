@@ -5,7 +5,7 @@ public class NewGamePlay_Basic_FloatShot : MonoBehaviour
     private FireFloat fireFloat;
     private ControllerInput input;
 
-    private bool isFloat = false;
+    public bool isFloat = false;
     private bool isShot = false;
     private bool isFloatShot = false;
 

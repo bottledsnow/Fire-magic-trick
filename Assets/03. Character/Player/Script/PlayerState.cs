@@ -160,6 +160,7 @@ public class PlayerState : MonoBehaviour
     public void setModel(bool active) { model.SetActive(active); }
     public void SetGravityToNormal()
     {
+        Debug.Log("Set Gravity:" + gravityNormal);
         _controller.Gravity = gravityNormal;
         isFire = false;
         isFloat = false;
@@ -170,17 +171,20 @@ public class PlayerState : MonoBehaviour
     }
     public void SetGravityToFire()
     {
+        Debug.Log("Set Gravity:" + gravityFire);
         _controller.Gravity = gravityFire;
         isFire = true;
     }
     public void SetGravityToFloat()
     {
+        Debug.Log("Set Gravity:" + gravityFloat);
         _controller.Gravity = gravityFloat;
         isFloat = true;
     }
     public void SetGravity(float value)
     {
         _controller.Gravity = value;
+        Debug.Log("Set Gravity:" + value);
     }
     private void getIsGround()
     {

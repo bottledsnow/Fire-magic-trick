@@ -3,6 +3,8 @@ using System.Threading.Tasks;
 
 public class NewGamePlay_Basic_Hover : MonoBehaviour
 {
+    //Script
+    private NewGamePlay_FloatShot floatShot;
     private CharacterController characterController;
     private PlayerState playerState;
 
@@ -20,6 +22,7 @@ public class NewGamePlay_Basic_Hover : MonoBehaviour
     {
         characterController = GameManager.singleton.Player.GetComponent<CharacterController>();
         playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
+        floatShot = GameManager.singleton.NewGamePlay.GetComponent<NewGamePlay_FloatShot>();
     }
     protected virtual void Update()
     {
@@ -42,9 +45,15 @@ public class NewGamePlay_Basic_Hover : MonoBehaviour
     public async void ToHover()
     {
         SetIsHover(true);
-        playerState.SetGravity(0);
+        if (!floatShot.isFloat)
+        {
+            playerState.SetGravityToNormal();
+        }
         await Task.Delay((int)(hoverTime * 1000));
-        playerState.SetGravityToNormal();
+        if(!floatShot.isFloat)
+        {
+            playerState.SetGravityToNormal();
+        }
         SetIsHover(false);
     }
     private void SetIsHover(bool value)

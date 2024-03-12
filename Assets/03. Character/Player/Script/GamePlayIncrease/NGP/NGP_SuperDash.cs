@@ -25,7 +25,6 @@ public class NGP_SuperDash : NGP_Basic_SuperDash
         base.OnSuperDashHitKick();
 
         combo.UseSuperDashKick();
-        Debug.Log("Kick Enemy");
     }
     protected override void OnSuperDashHitStarKick()
     {

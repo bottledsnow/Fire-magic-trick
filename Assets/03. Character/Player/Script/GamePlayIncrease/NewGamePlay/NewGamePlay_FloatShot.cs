@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
 {
@@ -6,6 +7,7 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     private NGP_SuperJump superJump;
     private NGP_Shot shot;
     private BulletTime bulletTime;
+    private PlayerState playerState;
     [SerializeField] private AudioSource S_floatShot;
     [Space(10)]
     [SerializeField] private int eachShotCount;
@@ -22,6 +24,7 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     {
         base.Start();
         bulletTime = GameManager.singleton.GetComponent<BulletTime>();
+        playerState = GameManager.singleton.Player.GetComponent<PlayerState>();
     }
     protected override void Update()
     {
@@ -37,11 +40,6 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
         {
             shot.Shot(x, y);
         }
-        cancelHeavy();
-    }
-    private void cancelHeavy()
-    {
-        superJump.CancelHeavy();
     }
     protected override void OnFloatShotStart()
     {
@@ -53,7 +51,7 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     protected override void OnFloatEnd()
     {
         base.OnFloatEnd();
-
+        playerState.SetGravityToNormal();
         bulletTime.BulletTime_Normal();
         S_floatShot.Stop();
     }
