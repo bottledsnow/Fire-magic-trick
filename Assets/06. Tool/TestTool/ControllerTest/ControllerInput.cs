@@ -24,7 +24,10 @@ public class ControllerInput : MonoBehaviour
     [Header("Controller Input Buttons")]
     public bool ButtonY;
     public bool ButtonX;
-    public bool ButtonA;
+    public bool ButtonA
+    {
+        set;get;
+    }
     public bool ButtonB;
 
     [Header("D-Pad")]

@@ -33,7 +33,6 @@ public class NGP_SuperDash : NGP_Basic_SuperDash
         vibrationController.Vibrate(0.5f, 0.25f);
         combo.UseSuperDashKick();
         superDash.DecreaseSuperDashTimer(3f);
-        Debug.Log("Kick Star");
     }
     protected override void OnSuperDashHitStarThrough()
     {

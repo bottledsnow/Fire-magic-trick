@@ -70,7 +70,10 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     }
     protected override void heavy()
     {
-        state.SetGravity(heavyPressureGravity);
+        if(input.ButtonY)
+        {
+            state.SetGravity(heavyPressureGravity);
+        }
     }
     protected override void heavyEnd()
     {

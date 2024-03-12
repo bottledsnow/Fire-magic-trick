@@ -18,21 +18,10 @@ public class NewGamePlay_Basic_WindSkill : NewGamePlay_Basic_Charge
     protected override void Update()
     {
         base.Update();
-
-        if(wind.isWind)
-        {
-            if(input.ButtonA || input.ButtonY)
-            {
-                SuperJump();
-                wind.UseWind();
-            }
-        }
     }
     protected override void ChargeStart()
     {
         base.ChargeStart();
-
-        
     }
     protected override void ChargeStop()
     {

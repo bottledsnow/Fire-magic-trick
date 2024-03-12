@@ -2,6 +2,7 @@ using StarterAssets;
 using UnityEngine;
 using System.Threading.Tasks;
 using MoreMountains.Feedbacks;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PlayerState : MonoBehaviour
 {
@@ -167,6 +168,8 @@ public class PlayerState : MonoBehaviour
     }
     public void ResetVerticalvelocity()
     {
+        Debug.Log("Set Vertical:" + 0);
+
         _controller.SetVerticalVelocity(0);
     }
     public void SetGravityToFire()
@@ -196,10 +199,12 @@ public class PlayerState : MonoBehaviour
     }
     public void SetVerticalVelocity(float value)
     {
+        Debug.Log("Set Vertical:" + value);
         _controller.SetVerticalVelocity(value);
     }
     public void AddVerticalVelocity(float Value)
     {
+        Debug.Log("Set Vertical:" + Value);
         _controller.AddVerticalVelocity(Value);
     }
     public void TurnToAimDirection()

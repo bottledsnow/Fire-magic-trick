@@ -124,6 +124,7 @@ namespace StarterAssets
         private StarterAssetsInputs _input;
         private ControllerInput _controllerInput;
         private GameObject _mainCamera;
+        private NGP_SuperJump superJump;
         private bool _rotateOnMove = true;
         private bool isFireFloatTrigger;
 
@@ -162,6 +163,7 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
             _controllerInput = GetComponent<ControllerInput>();
             _move_Our = GetComponent<Move_Our>();
+            superJump = GameManager.singleton.NewGamePlay.GetComponent<NGP_SuperJump>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
 #else
@@ -410,7 +412,7 @@ namespace StarterAssets
                 _verticalVelocity = Gravity*3;
             }
 
-            if(isFloat)
+            if (isFloat)
             {
                 _verticalVelocity = Gravity;
 
@@ -420,6 +422,10 @@ namespace StarterAssets
                 }
             }else
             {
+                if(superJump.isHeavy)
+                {
+                    _verticalVelocity = Gravity;
+                }
                 if (isFireFloatTrigger)
                 {
                     SetIsFireFloatTrigger(false);
@@ -524,7 +530,9 @@ namespace StarterAssets
         }
         public void SetVerticalVelocity(float value)
         {
-            _verticalVelocity = value;
+            
+                _verticalVelocity = value;
+            
         }
         public void AddVerticalVelocity(float value)
         {

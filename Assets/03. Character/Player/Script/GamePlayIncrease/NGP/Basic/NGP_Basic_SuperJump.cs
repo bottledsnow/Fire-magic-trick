@@ -20,7 +20,7 @@ public class NGP_Basic_SuperJump : MonoBehaviour
     private float timer;
     private bool buttonTrigger;
     protected bool isHeavyPrepare;
-    protected bool isHeavy;
+    public bool isHeavy;
     protected virtual void Start()
     {
         skillPower = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillPower>();
@@ -45,7 +45,7 @@ public class NGP_Basic_SuperJump : MonoBehaviour
             heavy();
         }
 
-        if(state.isGround &&isHeavy)
+        if(state.isGround && isHeavy)
         {
             setIsHeavy(false);
             heavyEnd();

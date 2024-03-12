@@ -13,10 +13,11 @@ public class FireFloat : MonoBehaviour
     public event OnFloatEndHandler OnFloatEnd;
 
     //script
-    private ControllerInput _input;
+    private ControllerInput input;
     private EnergySystem energySystem;
-    private PlayerState _playerState;
+    private PlayerState playerState;
     private ParticleSystem vfx_float;
+    private NGP_SuperJump superJump;
 
     //variable
     private float timer;
@@ -27,10 +28,11 @@ public class FireFloat : MonoBehaviour
 
     private void Start()
     {
-        _playerState = GameManager.singleton._playerState;
-        _input = GameManager.singleton._input;
+        playerState = GameManager.singleton._playerState;
+        input = GameManager.singleton._input;
         vfx_float = GameManager.singleton.VFX_List.VFX_Float;
-        energySystem = _playerState.GetComponent<EnergySystem>();
+        energySystem = playerState.GetComponent<EnergySystem>();
+        superJump = GameManager.singleton.NewGamePlay.GetComponent<NGP_SuperJump>();
     }
     private void Update()
     {
@@ -40,16 +42,16 @@ public class FireFloat : MonoBehaviour
     }
     private void FloatSystem()
     {
-        if(_input.ButtonA && _playerState.canFloat)
+        if(input.ButtonA && playerState.canFloat)
         {
-            if(!_playerState.nearGround)
+            if(!playerState.nearGround)
             {
                 EnergyCheck();
             }
         }
         else
         {
-            if (_playerState.isGround || !_input.ButtonA)
+            if (playerState.isGround || !input.ButtonA)
             {
                 floatEnd();
             }
@@ -78,26 +80,29 @@ public class FireFloat : MonoBehaviour
     }
     private void floatStart()
     {
-        
-            isTrigger = true;
-            isTimer = true;
-            _playerState.SetGravityToFloat();
-            _playerState.SetIsFloat(true);
-            vfx_float.Play();
-            OnFloatStart?.Invoke();
-        
+
+        isTrigger = true;
+        isTimer = true;
+        playerState.SetGravityToFloat();
+        playerState.SetIsFloat(true);
+        vfx_float.Play();
+        OnFloatStart?.Invoke();
+
     }
     private void floatEnd()
     {
-        if(isTimer)
+        if (!superJump.isHeavy)
         {
-            isTimer = false;
-            timer = 0;
-            _playerState.SetGravityToNormal();
-            _playerState.SetIsFloat(false);
-            vfx_float.Stop();
-            isCheck = false;
-            OnFloatEnd?.Invoke();
+            if (isTimer)
+            {
+                isTimer = false;
+                timer = 0;
+                playerState.SetGravityToNormal();
+                playerState.SetIsFloat(false);
+                vfx_float.Stop();
+                isCheck = false;
+                OnFloatEnd?.Invoke();
+            }
         }
     }
     private void floatTimer()
@@ -118,7 +123,7 @@ public class FireFloat : MonoBehaviour
     }
     private void InitializeTrigger()
     {
-        if(_playerState.nearGround && needInitialize)
+        if(playerState.nearGround && needInitialize)
         {
             needInitialize = false;
             isTrigger = false;
