@@ -10,6 +10,7 @@ public class NGP_Basic_Dash : MonoBehaviour
     protected PlayerState playerState;
     protected NGP_Combo combo;
     protected Move_Our move_Our;
+    private EnergySystem energySystem;
     private ThirdPersonController thirdPersonController;
     private CharacterController characterController;
     private FireDashCollider fireDashCollider;
@@ -52,6 +53,7 @@ public class NGP_Basic_Dash : MonoBehaviour
         move_Our =GameManager.singleton.Player.GetComponent<Move_Our>();
         combo = GameManager.singleton.NewGamePlay.GetComponent<NGP_Combo>();
         shooting_Check = GameManager.singleton.ShootingSystem.GetComponent<Shooting_Check>();
+        energySystem = GameManager.singleton.Player.GetComponent<EnergySystem>();
 
         //Feedbacks
         Feedbacks_Dash = GameManager.singleton.Feedbacks_List.Dash;
@@ -72,12 +74,15 @@ public class NGP_Basic_Dash : MonoBehaviour
 
             if (!isCooling && !isDash)
             {
-                if (WindButton()) SetIsDashType(DashType.DashBackward);
-                if (FireButton()) SetIsDashType(DashType.DashForward);
-                if (CanCombo()) DashComboSetting();
+                if(energySystem.canUseEnegy(EnergySystem.SkillType.Dash))
+                {
+                    if (WindButton()) SetIsDashType(DashType.DashBackward);
+                    if (FireButton()) SetIsDashType(DashType.DashForward);
+                    if (CanCombo()) DashComboSetting();
 
-                SetIsDash(true);
-                ToDash();
+                    SetIsDash(true);
+                    ToDash();
+                }
             }
         }
         else

@@ -3,6 +3,14 @@ using UnityEngine;
 
 public class EnergySystem : MonoBehaviour
 {
+    public enum SkillType
+    {
+        Reload,
+        Dash,
+        SuperDash,
+        Kick,
+        Float
+    }
     //Script
     private EnergySystemUI _energySystemUI;
 
@@ -22,7 +30,6 @@ public class EnergySystem : MonoBehaviour
     [SerializeField] private bool isTestMode;
     [SerializeField] private float SuperDashCost = 10;
     [SerializeField] private float ReloadCost = 10;
-    [SerializeField] private float ChargeCost = 10;
     [SerializeField] private float FloatCost = 10;
     [SerializeField] private float DashCost = 10;
     [SerializeField] private float KickCost = 10;
@@ -35,13 +42,44 @@ public class EnergySystem : MonoBehaviour
     {
         _energySystemUI = GameManager.singleton.UISystem.GetComponent<EnergySystemUI>();
 
-        //SetEnegy(StartEnergy);
+        SetEnegy(StartEnergy);
     }
     private void Update()
     {
         RecoverSystem();
     }
-    #region Set
+    public bool canUseEnegy(SkillType type)
+    {
+        float need =0;
+        switch (type)
+        {
+            case SkillType.Reload:
+                need = ReloadCost;
+                break;
+            case SkillType.Dash:
+                need = DashCost;
+                break;
+            case SkillType.SuperDash:
+                need = SuperDashCost;
+                break;
+            case SkillType.Kick:
+                need = KickCost;
+                break;
+            case SkillType.Float:
+                need = FloatCost;
+                break;
+        }
+
+        if(Energy > need)
+        {
+            Energy -= need;
+            return true;
+        }else
+        {
+            return false;
+        }
+    }
+    #region Set-UI
     public void SetEnegy(float value)
     {
         Energy = value;
@@ -91,108 +129,16 @@ public class EnergySystem : MonoBehaviour
     {
         Decrease(value);
     }
-    public void UseDash(out bool CanUse)
-    {
-        CanUse = CheckEnergyCanUse(DashCost);
-
-        if(CanUse)
-        {
-            Decrease(DashCost);
-        } else
-        {
-            noEnegyFeedbacks();
-            Debug.Log("Energy is not enough");
-        }
-    }
-    public void UseSuperDash(out bool CanUse)
-    {
-        CanUse = CheckEnergyCanUse(SuperDashCost);
-
-        if(CanUse)
-        {
-            Decrease(SuperDashCost);
-        } else
-        {
-            noEnegyFeedbacks();
-        }
-    }
-    public void UseKick(out bool CanUse)
-    {
-        CanUse = CheckEnergyCanUse(KickCost);
-
-        if (CanUse)
-        {
-            Decrease(KickCost);
-        }else
-        {
-            noEnegyFeedbacks();
-            Debug.Log("Energy is not enough");
-        }
-    }
-    public void UseFloat(out bool CanUse)
-    {
-        CanUse = CheckEnergyCanUse(FloatCost);
-
-        if (CanUse)
-        {
-            Decrease(FloatCost);
-        }
-        else
-        {
-            noEnegyFeedbacks();
-            Debug.Log("Energy is not enough");
-        }
-    }
-    public void UseReload(out bool CanUse)
-    {
-        CanUse = CheckEnergyCanUse(ReloadCost);
-
-        if (CanUse)
-        {
-            Decrease(ReloadCost);
-        }
-        else
-        {
-            noEnegyFeedbacks();
-            Debug.Log("Energy is not enough");
-        }
-    }
-    public void UseCharge(out bool CanUse)
-    {
-        CanUse = CheckEnergyCanUse(ChargeCost);
-
-        if (CanUse)
-        {
-            Decrease(ChargeCost);
-        }
-        else
-        {
-            noEnegyFeedbacks();
-            Debug.Log("Energy is not enough");
-        }
-    }
-    private bool CheckEnergyCanUse(float value)
-    {
-        if(isTestMode)
-        {
-            return true;
-        }
-
-        float energy = Energy - value;
-
-        if(energy<0)
-        {
-            return false;
-        }else
-        {
-            return true;
-        }
-    }
-    private void noEnegyFeedbacks()
-    {
-        Feedbacks_NoEnegy.PlayFeedbacks();
-    }
     #endregion
+    public void GetEnergy(float value)
+    {
+        Feedback_GetEnergy.PlayFeedbacks();
+        Increase(value);
+    }
+    public void DecreaseEnergy(int Energy)
+    {
+        Decrease(Energy);
+    }
     #region Recover
     private void RecoverSystem()
     {
@@ -217,28 +163,5 @@ public class EnergySystem : MonoBehaviour
             }
         }
     }
-    public void FullEnergy()
-    {
-        float value = 100-Energy;
-        Debug.Log(value);
-        Increase(value);
-    }
     #endregion
-    #region GetEnergy
-    public void GetEnergy(float value)
-    {
-        Feedback_GetEnergy.PlayFeedbacks();
-        Increase(value);
-    }
-    #endregion
-    #region TakeDamage
-    public void TakeDamage(int Damage)
-    {
-
-    }
-    public void DecreaseEnergy(int Energy)
-    {
-        Decrease(Energy);
-    }
-    #endregion 
 }

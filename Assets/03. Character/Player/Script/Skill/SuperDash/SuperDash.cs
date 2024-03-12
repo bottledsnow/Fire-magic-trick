@@ -34,7 +34,7 @@ public class SuperDash : MonoBehaviour
     private PlayerAnimator _playerAnimator;
     private PlayerCollider _playerCollider;
     private SuperDashKick _superDashKick;
-    private EnergySystem _energySystem;
+    private EnergySystem energySystem;
     private PlayerState _playerState;
     private GameObject player;
 
@@ -78,7 +78,7 @@ public class SuperDash : MonoBehaviour
         _characterController = _playerState.GetComponent<CharacterController>();
         _playerCollider = GameManager.singleton.Player.GetComponent<PlayerCollider>();
         _playerAnimator = _playerState.GetComponent<PlayerAnimator>();
-        _energySystem = _playerState.GetComponent<EnergySystem>();
+        energySystem = _playerState.GetComponent<EnergySystem>();
         player = _playerState.gameObject;
 
         if (Model.activeSelf == false)
@@ -172,10 +172,7 @@ public class SuperDash : MonoBehaviour
     }
     private void EnergyCheck()
     {
-        bool CanUse;
-        _energySystem.UseSuperDash(out CanUse);
-
-        if(CanUse)
+        if(energySystem.canUseEnegy(EnergySystem.SkillType.SuperDash))
         {
             SuperDashColling();
             superDashStart();

@@ -14,7 +14,7 @@ public class FireFloat : MonoBehaviour
 
     //script
     private ControllerInput _input;
-    private EnergySystem _energySystem;
+    private EnergySystem energySystem;
     private PlayerState _playerState;
     private ParticleSystem vfx_float;
 
@@ -29,8 +29,8 @@ public class FireFloat : MonoBehaviour
     {
         _playerState = GameManager.singleton._playerState;
         _input = GameManager.singleton._input;
-        _energySystem = _playerState.GetComponent<EnergySystem>();
         vfx_float = GameManager.singleton.VFX_List.VFX_Float;
+        energySystem = _playerState.GetComponent<EnergySystem>();
     }
     private void Update()
     {
@@ -57,17 +57,18 @@ public class FireFloat : MonoBehaviour
     }
     private void EnergyCheck()
     {
-        if(!isCheck)
+        if (!isTimer && !isTrigger)
         {
-            isCheck = true;
-            cancelChaeck();
-
-            bool CanUse = false;
-            _energySystem.UseFloat(out CanUse);
-
-            if (CanUse)
+            if (!isCheck)
             {
-                floatStart();
+                isCheck = true;
+                cancelChaeck();
+
+                if (energySystem.canUseEnegy(EnergySystem.SkillType.Float))
+                {
+                    floatStart();
+                    Debug.Log("Float Start");
+                }
             }
         }
     }
@@ -78,15 +79,14 @@ public class FireFloat : MonoBehaviour
     }
     private void floatStart()
     {
-        if(!isTimer && !isTrigger)
-        {
+        
             isTrigger = true;
             isTimer = true;
             _playerState.SetGravityToFloat();
             _playerState.SetIsFloat(true);
             vfx_float.Play();
             OnFloatStart?.Invoke();
-        }
+        
     }
     private void floatEnd()
     {

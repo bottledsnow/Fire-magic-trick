@@ -19,7 +19,7 @@ public class SuperDashKick : MonoBehaviour
     //Script
     private ThirdPersonController _thirdPersonController;
     private ControllerInput _input;
-    private EnergySystem _energySystem;
+    private EnergySystem energySystem;
     private PlayerState _playerState;
     private SuperDash _superDash;
     private FireFloat _fireFloat;
@@ -43,7 +43,7 @@ public class SuperDashKick : MonoBehaviour
         _fireFloat = GetComponent<FireFloat>();
         _thirdPersonController = _playerState.GetComponent<ThirdPersonController>();
         _playerAnimator = _playerState.GetComponent<Animator>();
-        _energySystem = _playerState.GetComponent<EnergySystem>();
+        energySystem = _playerState.GetComponent<EnergySystem>();
     }
     private void Update()
     {
@@ -66,10 +66,8 @@ public class SuperDashKick : MonoBehaviour
         if(!isCheck)
         {
             isCheck = true;
-            bool CanUse = false;
-            _energySystem.UseKick(out CanUse);
 
-            if (CanUse)
+            if (energySystem.canUseEnegy(EnergySystem.SkillType.Kick))
             {
                 KickStart();
             }

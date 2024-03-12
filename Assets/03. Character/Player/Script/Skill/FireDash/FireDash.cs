@@ -60,8 +60,8 @@ public class FireDash : MonoBehaviour
     }
     private void useDash()
     {
-        bool CanUse;
-        _energySystem.UseDash(out CanUse);
+        bool CanUse = false;
+        //_energySystem.UseDash(out CanUse);
 
         if (CanUse)
         {
