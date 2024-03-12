@@ -14,7 +14,8 @@ public class MoneyCard : Bullet
     }
     private void OnDestroy()
     {
-        Instantiate(Money, this.transform.position, Quaternion.identity);
+        GameObject money = Instantiate(Money, this.transform.position, Quaternion.identity).gameObject;
+        Destroy(money, 5);
     }
     protected override void OnHitEnemy()
     {

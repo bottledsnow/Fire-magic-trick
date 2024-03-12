@@ -38,7 +38,6 @@ public class Shooting_Aim : MonoBehaviour
             {
                 SetisAiming(true);
                 aimOpen();
-                Debug.Log("Aim Open");
             }
         }
         else
@@ -47,7 +46,6 @@ public class Shooting_Aim : MonoBehaviour
             {
                 SetisAiming(false);
                 aimClose();
-                Debug.Log("Aim Close");
             }
         }
     }

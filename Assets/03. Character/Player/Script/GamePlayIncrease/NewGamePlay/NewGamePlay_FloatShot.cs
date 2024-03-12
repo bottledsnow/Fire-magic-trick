@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
 {
+    //Script
+    private NGP_SuperJump superJump;
     private NGP_Shot shot;
     private BulletTime bulletTime;
     [SerializeField] private AudioSource S_floatShot;
@@ -10,11 +12,15 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
     [SerializeField] private float angle_X;
     [SerializeField] private float angle_Y;
     [SerializeField] private float bulletTime_time;
+
+    private void Awake()
+    {
+        shot = GetComponent<NGP_Shot>();
+        superJump = GetComponent<NGP_SuperJump>();
+    }
     protected override void Start()
     {
         base.Start();
-
-        shot = GetComponent<NGP_Shot>();
         bulletTime = GameManager.singleton.GetComponent<BulletTime>();
     }
     protected override void Update()
@@ -31,6 +37,11 @@ public class NewGamePlay_FloatShot : NewGamePlay_Basic_FloatShot
         {
             shot.Shot(x, y);
         }
+        cancelHeavy();
+    }
+    private void cancelHeavy()
+    {
+        superJump.CancelHeavy();
     }
     protected override void OnFloatShotStart()
     {

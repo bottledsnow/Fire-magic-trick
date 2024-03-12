@@ -4892,7 +4892,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 43df10ede039ace44a0f592c591e204a, type: 2}
+  - {fileID: 2100000, guid: a02b0b216914a5a419381ee90a2c0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4984,7 +4984,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3450928001734415469}
   serializedVersion: 8
-  lengthInSec: 10
+  lengthInSec: 5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -9762,7 +9762,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 43df10ede039ace44a0f592c591e204a, type: 2}
+  - {fileID: 2100000, guid: a02b0b216914a5a419381ee90a2c0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14692,7 +14692,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 43df10ede039ace44a0f592c591e204a, type: 2}
+  - {fileID: 2100000, guid: a02b0b216914a5a419381ee90a2c0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14849,7 +14849,7 @@ GameObject:
   - component: {fileID: 7293074779122907027}
   - component: {fileID: 4919121432294421375}
   - component: {fileID: 2211027935269805528}
-  - component: {fileID: 3156589908851657537}
+  - component: {fileID: 1903576531107869401}
   m_Layer: 23
   m_Name: Sphere
   m_TagString: Untagged
@@ -14867,7 +14867,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5378990438973420901}
   - {fileID: 8935935117238679448}
@@ -14924,8 +14924,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3156589908851657537
-SphereCollider:
+--- !u!65 &1903576531107869401
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -14935,5 +14935,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 0.7, y: 0.25, z: 0.7}
   m_Center: {x: 0, y: 0, z: 0}

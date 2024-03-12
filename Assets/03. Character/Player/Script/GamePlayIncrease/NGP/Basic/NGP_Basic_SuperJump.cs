@@ -19,8 +19,8 @@ public class NGP_Basic_SuperJump : MonoBehaviour
     //variable
     private float timer;
     private bool buttonTrigger;
-    private bool isHeavyPrepare;
-    private bool isHeavy;
+    protected bool isHeavyPrepare;
+    protected bool isHeavy;
     protected virtual void Start()
     {
         skillPower = GameManager.singleton.NewGamePlay.GetComponent<NGP_SkillPower>();

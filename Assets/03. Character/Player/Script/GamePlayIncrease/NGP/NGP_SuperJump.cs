@@ -5,7 +5,7 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     [SerializeField] private float heavyPressureGravity = 1f;
     [SerializeField] private Transform VFX_SuperDashJump_Wind;
     [SerializeField] private Transform VFX_SuperDashJump_Fire;
-
+    ¡@
     //VFX
     private ParticleSystem VFX_FireCircle;
     private ParticleSystem VFX_WindCricle;
@@ -85,5 +85,11 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
             VFX_WindCricle.Play();
             Instantiate(VFX_SuperDashJump_Wind, transform.position, Quaternion.identity);
         }
+    }
+    public void CancelHeavy()
+    {
+        state.SetGravityToNormal();
+        if(isHeavy) isHeavy = false;
+        if(isHeavyPrepare) isHeavyPrepare = false;
     }
 }
