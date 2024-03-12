@@ -70,12 +70,16 @@ public class Bullet : MonoBehaviour, IHitNotifier,ITriggerNotifier
                 GameObject enemyhit = Instantiate(hitEnemyPrefab,other.transform.position, Quaternion.identity);
                 Destroy(enemyhit, 1f);
             }
-            OnHitSomething();
-
-            newHit(other.transform.position, Quaternion.identity);
+            if(needHitFeedback())
+            {
+                OnHitSomething();
+                newHit(other.transform.position, Quaternion.identity);
+            }
+           
             CroshairFeedback();
         }
     }
+    protected virtual bool needHitFeedback() { return true; }
     protected virtual void OnHitEnemy() { }
     protected virtual void OnHitSomething() { }
     private void newHit(Vector3 pos, Quaternion rot)

@@ -94,6 +94,7 @@ public class PlayerJump : MonoBehaviour
     public async void SuperJump(float jumheight)
     {
         await Task.Delay((int)(JumpTimeout * 1000f));
+        _thirdPersonController.SetVerticalVelocity(0);
         _thirdPersonController.Jump(jumheight);
 
         OnSuperJump?.Invoke(); //super jump;

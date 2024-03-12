@@ -36,7 +36,10 @@ public class WindCard : Bullet
         base.OnHitEnemy();
         Instantiate(WindCardReturn, transform.position, Quaternion.identity);
     }
-
+    protected override bool needHitFeedback()
+    {
+        return false;
+    }
     protected override void OnHitSomething()
     {
         base.OnHitSomething();
