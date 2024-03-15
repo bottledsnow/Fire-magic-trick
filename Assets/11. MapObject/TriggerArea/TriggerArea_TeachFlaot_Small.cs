@@ -3,34 +3,30 @@ using UnityEngine;
 public class TriggerArea_TeachFlaot_Small : MonoBehaviour
 {
     //Script
-    private ControllerInput input;
+    [SerializeField] private TeachFloat teachFloat;
 
     //variable
     [Header("Button Number")]
     protected bool once;
+    private bool isTrigger;
 
     private void Start()
     {
-        input = GameManager.singleton.Player.GetComponent<ControllerInput>();
-    }
-    private void Update()
-    {
-        
+        teachFloat = GameManager.singleton.Player.GetComponent<TeachFloat>();
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-
+            if(!isTrigger)
+            {
+                if (once) SetIsTrigger(true);
+                teachFloat.Open_Small();
+            }
         }
     }
-    protected virtual void Open()
+    private void SetIsTrigger(bool active)
     {
-
+        isTrigger = active;
     }
-    protected virtual void Close()
-    {
-
-    }
-
 }
