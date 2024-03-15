@@ -5,7 +5,6 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     [SerializeField] private float heavyPressureGravity = 1f;
     [SerializeField] private Transform VFX_SuperDashJump_Wind;
     [SerializeField] private Transform VFX_SuperDashJump_Fire;
-    ¡@
     //VFX
     private ParticleSystem VFX_FireCircle;
     private ParticleSystem VFX_WindCricle;
