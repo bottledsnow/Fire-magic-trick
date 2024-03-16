@@ -7,7 +7,8 @@ public class TriggerArea_TeachFlaot_Small : MonoBehaviour
 
     //variable
     [Header("Button Number")]
-    protected bool once;
+    public bool once;
+    [SerializeField] private int index;
     private bool isTrigger;
 
     private void Start()
@@ -21,7 +22,7 @@ public class TriggerArea_TeachFlaot_Small : MonoBehaviour
             if(!isTrigger)
             {
                 if (once) SetIsTrigger(true);
-                teachFloat.Open_Small();
+                teachFloat.Open_Small(index);
             }
         }
     }
