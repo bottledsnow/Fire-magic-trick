@@ -1,12 +1,13 @@
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.Playables;
-using UnityEngine.UI;
 
 public class MenuSystem : MonoBehaviour
 {
     public bool isStartGame;
+    public bool useMenu;
+    [Header("Opening")]
+    [SerializeField] private GameObject OpeningObj;
     [Header("UI")]
     [SerializeField] private GameObject MenuUI;
     [SerializeField] private GameObject PauseUI;
@@ -35,12 +36,34 @@ public class MenuSystem : MonoBehaviour
         MainCamera = Camera.main.gameObject;
         Player = GameManager.singleton.Player.gameObject;
         state = GameManager.singleton.Player.GetComponent<PlayerState>();
-        Initialization();
+
+        if(useMenu)
+        {
+            Initialization();
+            OpeningObj.SetActive(true);
+            Player.transform.parent = OpeningObj.gameObject.transform;
+        }
+        else
+        {
+            OpeningObj.SetActive(false);
+            Player.transform.parent = null;
+        }
     }
     #region For test
     public void Test_SetMenuInterface(bool active)
     {
         SetMenuInterface(active);
+    }
+    public void CheckMenuUse()
+    {
+        if(useMenu)
+        {
+            MenuUI.SetActive(true);
+        }
+        else
+        {
+            MenuUI.SetActive(false);
+        }
     }
     #endregion
     private void Initialization()
@@ -113,4 +136,8 @@ public class MenuSystem : MonoBehaviour
         Application.Quit();
     }
     #endregion
+    private void OnValidate()
+    {
+        CheckMenuUse();
+    }
 }
