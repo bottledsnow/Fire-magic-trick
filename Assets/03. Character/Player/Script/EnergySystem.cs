@@ -42,7 +42,7 @@ public class EnergySystem : MonoBehaviour
     {
         _energySystemUI = GameManager.singleton.UISystem.GetComponent<EnergySystemUI>();
 
-        SetEnegy(StartEnergy);
+        //SetEnegy(StartEnergy);
     }
     private void Update()
     {
