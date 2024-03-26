@@ -15617,6 +15617,7 @@ MonoBehaviour:
   feedbacks_Shock: {fileID: 1411434448290044371}
   feedbacks_Boom: {fileID: 3140464918404443898}
   feedbacks_FlyBoom: {fileID: 2769156386842757999}
+  VFX_Death: {fileID: 0}
   kickBackRatio: 0.4
   kickBackGuard: 0
   spreadArea: {fileID: 1655516724492818754}
@@ -26460,6 +26461,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1823166617986923528}
     m_Modifications:
+    - target: {fileID: 313949537477626421, guid: 353941b780616054cb9de79fc7789ae4, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 313949537477626426, guid: 353941b780616054cb9de79fc7789ae4, type: 3}
       propertyPath: m_Name
       value: Burning_Boom
@@ -26509,8 +26514,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 425450220076922999, guid: 353941b780616054cb9de79fc7789ae4, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 425450220076922999, guid: 353941b780616054cb9de79fc7789ae4, type: 3}
       propertyPath: moveWithTransform
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 859218958158902057, guid: 353941b780616054cb9de79fc7789ae4, type: 3}
+      propertyPath: playOnAwake
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 859218958158902057, guid: 353941b780616054cb9de79fc7789ae4, type: 3}
       propertyPath: moveWithTransform
