@@ -1,50 +1,53 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class TeachFloat_Small
-{
-    public string word;
-    public Image ButtonUI;
-}
-[System.Serializable]
-public class TeachFloat_Big
-{
-    public string Title;
-    public string content;
-}
 public class TeachFloat : MonoBehaviour
 {
-    [Header("Content")]
-    public TeachFloat_Small[] Smalls;
-    public TeachFloat_Big[] Bigs;
+    [SerializeField] private GameObject UI_SuperJump;
+    [SerializeField] private GameObject DashState;
 
-    //Script
-    private ControllerInput input;
-    
-    //Variable
-    [SerializeField] private GameObject TeachBarFloat;
-    [SerializeField] private Image Small;
-    [SerializeField] private Image Big;
-    
-    private void Awake()
-    {
-        TeachBarFloat.SetActive(false);
-    }
     private void Start()
     {
-        input = GameManager.singleton.Player.GetComponent<ControllerInput>();
+        UI_SuperJump.SetActive(false);
+        DashState.SetActive(false);
     }
-    public void Open_Small(int index)
+    public enum types
     {
-
+        SuperJump,
+        DashState,
+        FireSkill,
+        WindSkill
     }
-    public void Close_Big(int index)
+    public void Open(types type)
     {
+        GameObject obj = null;
 
+        switch (type)
+        {
+            case types.SuperJump:
+                obj = UI_SuperJump;
+                break;
+            case types.DashState:
+                obj = DashState;
+                break;
+        }
+
+        obj.SetActive(true);
     }
-    private void ChangeSmall()
+    public void Close(types type)
     {
+        GameObject obj = null;
 
+        switch (type)
+        {
+            case types.SuperJump:
+                obj = UI_SuperJump;
+                break;
+            case types.DashState:
+                obj = DashState;
+                break;
+        }
+
+        obj.SetActive(false);
     }
 }

@@ -11,6 +11,7 @@ public class NGP_Basic_SuperJump : MonoBehaviour
     protected NGP_SkillPower skillPower;
     protected ControllerInput input;
     protected PlayerState state;
+    protected NGP_Dash dash;
 
     //vfx
     private ParticleSystem VFX_SuperJump_Wind;
@@ -27,6 +28,7 @@ public class NGP_Basic_SuperJump : MonoBehaviour
         input = GameManager.singleton._input;
         jump = GameManager.singleton.Player.GetComponent<PlayerJump>();
         state = GameManager.singleton.Player.GetComponent<PlayerState>();
+        dash =GameManager.singleton.NewGamePlay.GetComponent<NGP_Dash>();
 
         //vfx
         VFX_SuperJump_Wind = GameManager.singleton.VFX_List.VFX_SuperJump_Wind;
@@ -84,6 +86,7 @@ public class NGP_Basic_SuperJump : MonoBehaviour
                 {
                     buttonTrigger = true;
 
+                    if (dash.IsDash()) return;
                     if (isWindJump())
                     {
                         jump.OnSuperJump += VFX_superJump_wind;

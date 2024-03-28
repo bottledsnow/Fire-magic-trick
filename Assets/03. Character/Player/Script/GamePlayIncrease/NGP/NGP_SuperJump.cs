@@ -57,12 +57,14 @@ public class NGP_SuperJump : NGP_Basic_SuperJump
     }
     protected override void SuperJump_wind()
     {
+        state.SetGravityToNormal();
         jump.SuperJump(SuperJumpHeight);
         Instantiate(VFX_SuperDashJump_Wind, transform.position, Quaternion.identity);
         isWind = true;
     }
     protected override void SuperJump_fire()
     {
+        state.SetGravityToNormal();
         jump.SuperJump(SuperJumpHeight);
         Instantiate(VFX_SuperDashJump_Fire, transform.position, Quaternion.identity);
         isFire = true;

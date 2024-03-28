@@ -66,6 +66,10 @@ public class NGP_Basic_Dash : MonoBehaviour
         button();
         system();
     }
+    public bool IsDash()
+    {
+        return isDash;
+    }
     private void button()
     {
         if (input.ButtonB && !isButton)
