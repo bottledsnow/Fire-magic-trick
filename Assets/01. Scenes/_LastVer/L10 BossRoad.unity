@@ -91538,6 +91538,7 @@ GameObject:
   - component: {fileID: 1244301756}
   - component: {fileID: 1244301755}
   - component: {fileID: 1244301754}
+  - component: {fileID: 1244301757}
   m_Layer: 6
   m_Name: Credit
   m_TagString: Untagged
@@ -91607,7 +91608,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u7099\u71D2\u5E03\u4E01\u99AC\u9234\u85AF\n\u611F\u8B1D\n\n\u904A\u6232\u4F01\u5283\n\u674E\u5EA0\u9716 
     LEE, HSIANG-LIN\n\u9673\u5EF7\u4F51  Chen, Ting-Yu\n\nDemo\u7248 \u4E3B\u7A0B\u5F0F\n\u674E\u5EA0\u9716 
-    LEE, HSIANG-LIN\n\nSteam\u7248 \u73A9\u5BB6\u7A0B\u5F0F\nUI\u7CFB\u7D71\u3001Scene\u7BA1\u7406\u3001\u5B58\u6A94\u7CFB\u7D71\u3001\u6700\u4F73\u5316\n\u8B1D\u6E05\u83EF
+    LEE, HSIANG-LIN\n\nSteam\u7248 \u4E3B\u7A0B\u5F0F\n\u73A9\u5BB6\u63A7\u5236\u5668\u3001UI\u7CFB\u7D71\u3001Scene\u7BA1\u7406\u3001\u5B58\u6A94\u7CFB\u7D71\u3001\u6700\u4F73\u5316\n\u8B1D\u6E05\u83EF
     HSIEH, CHING - HUA\n\nSteam\u7248\u3001Demo\u7248 \u6575\u4EBA\u7A0B\u5F0F\n\u5F35\u9038\u8A22 
     Zhang, Yi-Xin\r\n\n\u904A\u6232\u7279\u6548\n\u674E\u5EA0\u9716  LEE, HSIANG-LIN\n\u5F35\u9038\u8A22 
     Zhang, Yi-Xin\r\n\n\uFF12\uFF24\u7F8E\u8853\n\u9673\u5EF7\u4F51  Chen, Ting-Yu\n\n\uFF13\uFF24\u7F8E\u8853\n\r\u9673\u88D4\u7D18 
@@ -91689,6 +91690,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1244301752}
   m_CullTransparentMesh: 1
+--- !u!114 &1244301757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1244301752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:492c11a75c7a1b34a8247ea9d9d59b83
+    m_TableEntryReference:
+      m_KeyId: 13634310654664704
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1244301755}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1249362632
 GameObject:
   m_ObjectHideFlags: 0

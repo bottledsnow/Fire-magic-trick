@@ -2,7 +2,7 @@ using MoreMountains.Feedbacks;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Boss_System : DataPersistMapObjBase
+public class Boss_System : MonoBehaviour
 {
     [Header("Setting")]
     public Barrier barrier;
@@ -22,9 +22,8 @@ public class Boss_System : DataPersistMapObjBase
 
     private bool isBoss;
 
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
         GameManager.Instance.OnPlayerReborn += ResetBoss;
     }
 
@@ -34,7 +33,7 @@ public class Boss_System : DataPersistMapObjBase
     }
     private void Update()
     {
-        if(isBoss && !isActivated)
+        if(isBoss)
         {
             if (this.gameObject.activeSelf == false) 
             {
@@ -44,7 +43,6 @@ public class Boss_System : DataPersistMapObjBase
     }
     public void ResetBoss()
     {
-        if (isActivated) return;
         if (isBoss)
         {
             isBoss = false;
@@ -58,7 +56,6 @@ public class Boss_System : DataPersistMapObjBase
     }
     public void StartBossFight()
     {
-        if (isActivated) return;
         if (!isBoss)
         {
             isBoss = true;
@@ -78,7 +75,6 @@ public class Boss_System : DataPersistMapObjBase
             isBoss = false;
 
             onEndFight?.Invoke();
-            isActivated = true;
             UIManager.Instance.HudUI.CloseBossUI();
             DataPersistenceManager.Instance.SaveGame();
             barrier.Close();
@@ -90,7 +86,7 @@ public class Boss_System : DataPersistMapObjBase
     }
     public void SetIsWind(bool active)
     {
-        isActivated = active;
+        isBoss = active;
     }
     public void DebugTest(string word)
     {
