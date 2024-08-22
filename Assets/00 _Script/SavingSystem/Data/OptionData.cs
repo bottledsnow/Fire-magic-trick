@@ -16,9 +16,9 @@ public class OptionData
     public OptionData(int lanIndex = 2)
     {
         languageIndex = lanIndex;
-        masterVolume = 1f;
-        musicVolume = 1f;
-        sfxVolume = 1f;
+        masterVolume = 0.5f;
+        musicVolume = 0.5f;
+        sfxVolume = 0.5f;
         voiceVolume = 1f;
         uiVolume = 1f;
     }
