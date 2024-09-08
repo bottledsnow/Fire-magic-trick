@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
         pauseUI.gameObject.SetActive(false);
         deathUI.gameObject.SetActive(false);
         HudUI.gameObject.SetActive(true);
+        teachUI.gameObject.SetActive(false);
     }
 
     private void Update()
