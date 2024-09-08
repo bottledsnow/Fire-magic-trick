@@ -76,7 +76,7 @@ public class PlayerGroundedState : PlayerFSMBaseState
             }
             else if (player.InputHandler.SkillInput && player.CardSystem.CheckCardEnergy(playerData.altEnergyCost))
             {
-                if(player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind)
+                if(player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind && EnemyDetection(playerData.longRangeDetectRadius).Count > 0)
                 {
                     // TODO: 現在範圍沒有目標也能開
                     stateMachine.ChangeState(player.WindAltState);

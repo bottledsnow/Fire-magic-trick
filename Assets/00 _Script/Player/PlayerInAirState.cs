@@ -151,7 +151,7 @@ public class PlayerInAirState : PlayerFSMBaseState
         }
         else if (player.InputHandler.SkillInput && player.CardSystem.CheckCardEnergy(playerData.altEnergyCost))
         {
-            if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind && SphereDetection(playerData.longRangeDetectRadius).Count > 0)
+            if (player.CardSystem.CurrentEquipedCard == CardSystem.CardType.Wind && EnemyDetection(playerData.longRangeDetectRadius).Count > 0)
             {
                 stateMachine.ChangeState(player.WindAltState);
             }

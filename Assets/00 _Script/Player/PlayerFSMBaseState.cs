@@ -195,7 +195,27 @@ public class PlayerFSMBaseState
             player.CardSystem.Shoot();
         }
     }
-    protected List<GameObject> SphereDetection(float detectRadius)
+
+    protected List<GameObject> EnemyDetection(float detectRadius)
+    {
+        List<GameObject> objs = new();
+        foreach (var col in Physics.OverlapSphere(player.transform.position, detectRadius, playerData.whatIsEnemy))
+        {
+            if (col.gameObject == player.gameObject)
+            {
+                continue;
+            }
+
+            if (objs.Contains(col.gameObject))
+            {
+                continue;
+            }
+
+            objs.Add(col.gameObject);
+        }
+        return objs;
+    }
+protected List<GameObject> SphereDetection(float detectRadius)
     {
         List<GameObject> objs = new();
         foreach(var col in Physics.OverlapSphere(player.transform.position, detectRadius, playerData.whatIsCombatDetectable))

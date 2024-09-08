@@ -34,6 +34,7 @@ public class PlayerData : ScriptableObject
     [Header("---------§N«o»P²¾°Ê---------")]
     [Header("Basic")]
     public LayerMask whatIsCombatDetectable;
+    public LayerMask whatIsEnemy;
     public float rotationSpeed = 15f;
     public float rotateSmoothTime = 0.1f;
     public float zeroRangeDetectRadius = 1f;

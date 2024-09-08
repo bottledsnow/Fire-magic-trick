@@ -309,7 +309,7 @@ public class CardSystem : MonoBehaviour
 
     public void FireAltShoot()
     {
-        impulseSource.GenerateImpulse(2f);
+        impulseSource.GenerateImpulse(1.5f);
         Transform target = fireAltSpawnPos[UnityEngine.Random.Range(0, fireAltSpawnPos.Length)];
         Vector3 aimDir = ((target.position + new Vector3(UnityEngine.Random.Range(-0.25f, 0.25f), 0f, UnityEngine.Random.Range(-0.25f, 0.25f))) - transform.position).normalized;
 

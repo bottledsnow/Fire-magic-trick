@@ -10,6 +10,10 @@ public class BoomArea : MonoBehaviour
     [SerializeField] private float forceToEnemy = 30;
     [SerializeField] private float forceToPlayer = 90;
 
+    [SerializeField] private GameObject energyPrefab;
+
+    private bool canGetEnergy;
+
     private Collider col;
     private float startTime;
 
@@ -23,6 +27,7 @@ public class BoomArea : MonoBehaviour
         col.enabled = false;
         DelayExplode();
         startTime = Time.time;
+        canGetEnergy = true;
     }
 
     private void Update()
@@ -46,6 +51,12 @@ public class BoomArea : MonoBehaviour
         {
             other.TryGetComponent(out IDamageable damageable);
             damageable?.Damage(damage, transform.position);
+
+            if (canGetEnergy)
+            {
+                canGetEnergy = false;
+                ObjectPoolManager.SpawnObject(energyPrefab, transform.position, Quaternion.identity);
+            }
         }
 
         other.TryGetComponent(out IKnockbackable knockbackable);

@@ -10,9 +10,13 @@ public class FireCard : Bullet
     //variable
     private float timer;
 
+    private bool isTriggered;
+
     protected override void Start()
     {
         base.Start();
+
+        isTriggered = false;
     }
     protected override void Update()
     {
@@ -40,7 +44,12 @@ public class FireCard : Bullet
     {
         base.OnHitSomething();
 
-        ObjectPoolManager.SpawnObject(fireBallPrefab, transform.position, Quaternion.identity);
+        if (!isTriggered)
+        {
+            isTriggered = true;
+            ObjectPoolManager.SpawnObject(fireBallPrefab, transform.position, Quaternion.identity);
+        }
+
     }
     private void ToStop()
     {
