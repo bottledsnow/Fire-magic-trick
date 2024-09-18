@@ -7,6 +7,7 @@ public class MainMenu : MainMenuUIBase
     [SerializeField] private SaveSlotMenu saveSlotMenu;
     [SerializeField] private OptionUI optionUI;
     [SerializeField] private ConfirmUI confirmStartUI;
+    [SerializeField] private CreditUI creditUI;
 
     [SerializeField] private Button continueGameButton;
     [SerializeField] private Button loadButton;
@@ -23,6 +24,7 @@ public class MainMenu : MainMenuUIBase
         saveSlotMenu.gameObject.SetActive(false);
         optionUI.gameObject.SetActive(false);
         confirmStartUI.gameObject.SetActive(false);
+        creditUI.gameObject.SetActive(false);
 
         optionUI.OnDeactivate += OptionUI_OnDeactivate;
     }
@@ -72,7 +74,9 @@ public class MainMenu : MainMenuUIBase
 
     public void OnCreditsClick()
     {
+        Deactivate();
 
+        creditUI.Activate();
     }
 
     public void OnLoadClick()
