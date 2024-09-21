@@ -65,17 +65,22 @@ public class EnemySpawn : MonoBehaviour
     }
     private void clearCheck()
     {
-        for(int i = 0; i < Enemys.Length; i++)
+        int activeCount = 0;
+        for (int i = 0; i < Enemys.Length; i++)
         {
             if (Enemys[i] != null)
             {
                 if(Enemys[i].activeSelf == true)
                 {
-                    return;
+                    activeCount++;
                 }
             }
         }
-        ToClear();
+
+        if(activeCount <= 2)
+        {
+            ToClear();
+        }
     }
     private void setIsClear(bool value)
     {

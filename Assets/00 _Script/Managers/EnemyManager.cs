@@ -111,14 +111,3 @@ public class EnemyManager : MonoBehaviour
         }
     }
 }
-public class TempData
-{
-    public Dictionary<string, bool> defeatedObjects;
-    public Dictionary<string, bool> activatedMapObjects;
-
-    public TempData()
-    {
-        defeatedObjects = new();
-        activatedMapObjects = new();
-    }
-}
