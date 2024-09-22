@@ -18,6 +18,7 @@ public class PlayerDashState : PlayerAbilityState
         base.Enter();
 
         player.InputHandler.UseDashInput();
+        player.VFXController.SetDashVFX(true);
         stats.SetInvincible(true);
 
         damagedObjs = new();
@@ -37,6 +38,7 @@ public class PlayerDashState : PlayerAbilityState
     {
         base.Exit();
 
+        player.VFXController.SetDashVFX(false);
         movement.SetGravityOrginal();
         stats.SetInvincible(false);
     }
