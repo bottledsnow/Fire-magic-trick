@@ -9,8 +9,8 @@ public class PlayerVFXController : MonoBehaviour
     [SerializeField] private GameObject windFeetCardVFX;
     [SerializeField] private GameObject superDashVFX;
     [SerializeField] private GameObject canComboVFX;
-    [SerializeField] private GameObject dashVFX;
 
+    [SerializeField] private ParticleSystem dashVFX;
     [SerializeField] private ParticleSystem burningVFX;
     [SerializeField] private ParticleSystem fireCountVFX;
     [SerializeField] private ParticleSystem windCountVFX;
@@ -48,7 +48,6 @@ public class PlayerVFXController : MonoBehaviour
         floatVFX.SetActive(false);
         windFeetCardVFX.SetActive(false);
         canComboVFX.SetActive(false);
-        dashVFX.SetActive(false);
 
         burningVFX.gameObject.SetActive(true);
         windMaxStar.gameObject.SetActive(true);
@@ -62,6 +61,7 @@ public class PlayerVFXController : MonoBehaviour
         windSuperJump.gameObject.SetActive(true);
         fireSuperJump.gameObject.SetActive(true);
 
+        dashVFX.Stop();
         burningVFX.Stop();
         superDashHit.Stop();
         fireExplode.Stop();
@@ -200,7 +200,14 @@ public class PlayerVFXController : MonoBehaviour
 
     public void SetDashVFX(bool value)
     {
-        dashVFX.SetActive(value);
+        if (value)
+        {
+            dashVFX.Play();
+        }
+        else
+        {
+            dashVFX.Stop();
+        }
     }
 
     public void SetBurningVFX(float value)

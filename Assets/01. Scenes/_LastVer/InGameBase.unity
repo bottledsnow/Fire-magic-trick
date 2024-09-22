@@ -71402,8 +71402,8 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 1
-  playOnAwake: 1
+  prewarm: 0
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -73599,7 +73599,7 @@ ParticleSystem:
     y:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
+      scalar: 0.13
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -73702,7 +73702,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
     randomizePerFrame: 0
   ExternalForcesModule:
     serializedVersion: 2
@@ -163737,8 +163737,8 @@ Transform:
   - {fileID: 1226203886}
   - {fileID: 267327841239434575}
   - {fileID: 325459998073018317}
-  - {fileID: 529899944}
   - {fileID: 1994124143}
+  - {fileID: 529899944}
   - {fileID: 1865816566}
   - {fileID: 5168717577370016156}
   - {fileID: 749061104}
@@ -308452,7 +308452,7 @@ MonoBehaviour:
   windFeetCardVFX: {fileID: 8883479538396061599}
   superDashVFX: {fileID: 1829511581}
   canComboVFX: {fileID: 4202776638634837296}
-  dashVFX: {fileID: 529899943}
+  dashVFX: {fileID: 529899946}
   burningVFX: {fileID: 1865816568}
   fireCountVFX: {fileID: 271658308}
   windCountVFX: {fileID: 749061106}
